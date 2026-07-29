@@ -37,6 +37,29 @@ module you run exists to fill those files.
 
 ---
 
+## Producing the deliverables
+
+Copy each template from `framework/deliverables/templates/` into
+`projects/<slug>/deliverables/` and fill it. Do not invent a structure — the templates
+encode the acceptance criteria.
+
+Three conventions inside every template:
+
+| Marker | Meaning |
+| --- | --- |
+| `<!-- fill: ... -->` | Guidance written for you. **Remove before delivery.** |
+| `«placeholder»` | A value to replace. None may survive into the final artifact. |
+| `<!-- ACCEPTANCE -->` | The artifact's own checklist. Verify, then remove. |
+
+Write `12-Build-Handoff.md` **last**, and `00-Executive-Summary.md` last of all — the
+summary may contain nothing that is not established in a supporting artifact.
+
+A template section you cannot fill is a finding, not an inconvenience. Say what is missing
+and why. Never delete a section to hide a gap, and never write filler to occupy one — an
+empty-but-present section hides the gap more effectively than an absent one.
+
+---
+
 ## Per-module loop
 
 For each module in run order:

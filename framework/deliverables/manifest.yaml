@@ -9,6 +9,15 @@
 version: 1
 
 output_dir: projects/<slug>/deliverables/
+templates_dir: framework/deliverables/templates/
+
+# Each artifact's template is templates_dir + its `file` value.
+# Templates carry three conventions:
+#   <!-- fill: ... -->   agent-only guidance. MUST be removed before delivery.
+#   «placeholder»        a value to replace.
+#   <!-- ACCEPTANCE -->  the artifact's own checklist. Removed before delivery.
+#
+# 13 artifacts are required. 3 are emitted only when the run's scope calls for them.
 
 artifacts:
 
