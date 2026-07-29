@@ -1,30 +1,30 @@
 ---
 Title: Related Modules
-Module: 00-AI-Constitution
+Module: 00-constitution
 Section: learn
-Category: Foundation
-Version: 1.0.0
+Category: Orientation
+Version: 2.0.0
 Status: Approved
 Owner: Product Intelligence OS
 Review Cycle: Every 6 Months
-Purpose: Define how every module within Product Intelligence OS connects with other modules to create one unified research framework.
+Purpose: Explain how the fourteen modules relate to one another and why the sequence is ordered as it is.
 Audience:
-  - AI Agents
   - Product Managers
-  - Researchers
+  - Founders
   - Contributors
+  - Students
 Prerequisites:
-  - All Core Constitution Documents
+  - constitution/core/00-Purpose.md
 Outputs:
-  - Module relationships
-  - Knowledge map
-  - Navigation guide
+  - Understanding of the module sequence and its dependencies
 Related Modules:
-  - All Modules
+  - 01-idea
+  - 02-market
+  - 03-user
 Tags:
-  - Architecture
-  - Knowledge Graph
-  - Navigation
+  - Orientation
+  - Modules
+  - Sequence
 ---
 
 # Related Modules
@@ -33,703 +33,333 @@ Tags:
 
 # Overview
 
-Product Intelligence OS is designed as an interconnected knowledge system.
+Product Intelligence OS is fourteen modules governed by one constitution.
 
-No document should exist in isolation.
+The modules are not chapters that can be read in any order. Each one consumes what the
+previous ones established. The sequence is the method.
 
-Every module builds upon previous knowledge and contributes to future stages of product research.
-
-Understanding these relationships helps AI agents navigate the framework correctly and prevents fragmented thinking.
-
----
-
-# Knowledge Flow
-
-Every research project follows a continuous flow.
-
-```
-AI Constitution
-
-↓
-
-Idea
-
-↓
-
-Market
-
-↓
-
-Users
-
-↓
-
-Problems
-
-↓
-
-Competitors
-
-↓
-
-Business
-
-↓
-
-Product
-
-↓
-
-Technology
-
-↓
-
-Architecture
-
-↓
-
-Validation
-
-↓
-
-Final Deliverables
-
-↓
-
-Continuous Learning
-```
-
-Each module contributes knowledge to the next.
+> **Note on scope.** This document is written for humans learning the framework. The
+> authoritative, machine-readable version of every relationship lives in each module's
+> `module.yaml` — `depends_on`, `consumes`, `produces`. If this document and a
+> `module.yaml` disagree, the `module.yaml` is correct.
 
 ---
 
-# Core Constitution
-
-The Constitution defines **how AI should think**.
+# The Sequence
 
 ```
-00-AI-Constitution
+                  constitution
+                       │
+                       ▼
+   FRAME          01-idea
+                       │
+                  ⏸ human checkpoint
+                       │
+                       ▼
+   RESEARCH       02-market ──┐
+                              ├──► 05-competition
+                  03-user ────┤
+                       │      │
+                  04-problem ─┘
+                       │
+                       ▼
+   DECIDE         06-business
+                       │
+                  07-strategy
+                       │
+                  ⏸ human checkpoint
+                       │
+                       ▼
+   SPECIFY        08-product
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+        09-technology     14-ai-systems
+              │
+              ▼
+   OPERATE    10-execution
+                       │
+              ┌────────┼────────┐
+              ▼        ▼        ▼
+         11-growth 12-metrics 13-operations
+                       │
+                  ⏸ human checkpoint
+                       │
+                       ▼
+                  deliverables
 ```
-
-Provides:
-
-- Principles
-- Methodology
-- Workflow
-- Quality Standards
-- Best Practices
-- Evaluation Rules
-
-Every other module depends on this foundation.
 
 ---
 
-# Idea Module
+# The Five Stages
 
-```
-01-Idea
-```
-
-Depends On
-
-- AI Constitution
-
-Provides
-
-- Product Vision
-- Goals
-- Scope
-- Initial Assumptions
-
-Feeds Into
-
-- Market
-- Users
-- Business
+| Stage | Modules | Establishes |
+| --- | --- | --- |
+| **Frame** | 01 | What is actually being proposed |
+| **Research** | 02, 03, 04, 05 | The evidence base |
+| **Decide** | 06, 07 | A committed direction |
+| **Specify** | 08, 09, 14 | Something precise enough to build |
+| **Operate** | 10, 11, 12, 13 | Something executable, measurable and runnable |
 
 ---
 
-# Market Module
+# Module by Module
 
-```
-02-Market
-```
+## 01 — Idea
 
-Depends On
+**Establishes:** what the operator is actually proposing, and what only they can answer.
 
-- Idea
+Takes a loosely described idea, separates the problem from the proposed solution, fixes
+the context (jurisdiction, segment, buyer), surfaces assumptions, and asks the questions
+that cannot be researched.
 
-Provides
+| | |
+| --- | --- |
+| Needs | nothing — this module runs first |
+| Feeds | 02, 03 |
 
-- Industry Analysis
-- Market Size
-- Trends
-- Opportunities
-
-Feeds Into
-
-- Competitors
-- Business
-- Product Strategy
+Every later module depends on this one being precise. A vague brief here produces
+confident research pointed at the wrong target.
 
 ---
 
-# Competitor Module
+## 02 — Market
 
-```
-03-Competitors
-```
+**Establishes:** the boundary of the market, its size, its direction, and the law that
+governs it.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 01 — the problem statement and the jurisdiction |
+| Feeds | 05, 06 |
 
-- Market
-
-Provides
-
-- Competitive Landscape
-- Feature Analysis
-- Pricing Analysis
-- Market Positioning
-
-Feeds Into
-
-- Product
-- Strategy
-- Business
+The regulatory landscape found here is not background reading. It reappears in 09 as
+structural constraints on the data model and architecture.
 
 ---
 
-# User Module
+## 03 — User
 
-```
-04-Users
-```
+**Establishes:** who is served, what job they are trying to get done, and what they use today.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 01, 02 |
+| Feeds | 04, 05, 08, 10 |
 
-- Idea
-- Market
-
-Provides
-
-- Personas
-- User Goals
-- Pain Points
-- Workflows
-
-Feeds Into
-
-- Problem Discovery
-- UX
-- Features
+The "what they use today" finding matters more than it looks — it names the real
+competitor, which is usually the status quo rather than a product.
 
 ---
 
-# Problem Module
+## 04 — Problem
 
-```
-05-Problems
-```
+**Establishes:** which problems are real and evidenced, and which are merely assumed.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 03 |
+| Feeds | 05, 07, 08 |
 
-- Users
-- Market
-- Competitors
-
-Provides
-
-- Root Causes
-- Pain Points
-- Opportunity Areas
-
-Feeds Into
-
-- Solution Design
+This is the honesty checkpoint of the run. Every requirement in module 08 must trace
+back to a problem ranked here. A feature with no problem behind it is scope creep.
 
 ---
 
-# Solution Module
+## 05 — Competition
 
-```
-06-Solutions
-```
+**Establishes:** who already solves this, how well, and where the opening is.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 02, 03, 04 |
+| Feeds | 06, 07 |
 
-- Problems
-
-Provides
-
-- Solution Options
-- Trade-offs
-- Recommendations
-
-Feeds Into
-
-- Product Design
+Requires all three upstream modules because a competitor can only be judged against a
+defined market, a named segment, and a real problem.
 
 ---
 
-# Business Module
+## 06 — Business
 
-```
-07-Business
-```
+**Establishes:** whether a viable business exists around the solution.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 02, 05 |
+| Feeds | 07, 11 |
 
-- Market
-- Users
-- Competitors
-
-Provides
-
-- Business Model
-- Revenue Strategy
-- Pricing
-- Financial Considerations
-
-Feeds Into
-
-- Product Strategy
+Separates the payer from the user. Where they differ, every later module carries two
+audiences.
 
 ---
 
-# Product Module
+## 07 — Strategy
 
-```
-08-Product
-```
+**Establishes:** what to build, in what order, and what deliberately not to build.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 04, 05, 06 |
+| Feeds | 08, 09, 10 |
 
-- Business
-- Users
-- Problems
-- Solutions
-
-Provides
-
-- Features
-- Product Strategy
-- Roadmap
-- MVP
-
-Feeds Into
-
-- UX
-- Engineering
+Generates several options before choosing one, draws the MVP line, and registers the
+risks. Ends at a human checkpoint — the MVP cut is a commercial commitment, not a
+research finding.
 
 ---
 
-# UX Module
+## 08 — Product
 
-```
-10-UX
-```
+**Establishes:** the product specification.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 07 |
+| Feeds | 09, 10, 11, 12, 14 |
 
-- Users
-- Product
-
-Provides
-
-- User Journey
-- Information Architecture
-- Wireframes
-- Experience Design
-
-Feeds Into
-
-- Engineering
+The hinge of the run. Everything before it is research; everything after it is
+construction.
 
 ---
 
-# AI Module
+## 09 — Technology
 
-```
-11-AI
-```
+**Establishes:** the data model, interfaces, architecture and security model.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 08 |
+| Feeds | 10, 14 |
 
-- Product
-- Technology
-
-Provides
-
-- AI Opportunities
-- Model Selection
-- AI Workflows
-
-Feeds Into
-
-- Architecture
+Absorbs what were once five separate concerns — architecture, database, API, security
+and scalability — because in practice they are decided together and constrain each other.
 
 ---
 
-# Technology Module
+## 10 — Execution
 
-```
-12-Technology
-```
+**Establishes:** how the specification becomes work a team or agent can start today.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 08, 09 |
+| Feeds | 13, and the Build Handoff |
 
-- Product
-
-Provides
-
-- Technology Decisions
-- Platform Selection
-- Infrastructure Planning
-
-Feeds Into
-
-- Architecture
+Produces the UX flows and the build handoff — the artifact that makes the whole run
+actionable.
 
 ---
 
-# Architecture Module
+## 11 — Growth
 
-```
-13-Architecture
-```
+**Establishes:** how the product reaches, converts and retains users.
 
-Depends On
-
-- Product
-- Technology
-- AI
-
-Provides
-
-- System Design
-- Component Architecture
-- Service Design
-
-Feeds Into
-
-- Database
-- APIs
+| | |
+| --- | --- |
+| Needs | 06, 08 |
+| Feeds | 12 |
 
 ---
 
-# Database Module
+## 12 — Metrics
 
-```
-14-Database
-```
+**Establishes:** what success means, measurably, and how it will be observed.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 08, 11 |
+| Feeds | the Build Handoff |
 
-- Architecture
-
-Provides
-
-- Data Models
-- Relationships
-- Storage Strategy
-
-Feeds Into
-
-- APIs
+Instrumentation defined here must be built alongside the features. Retrofitted analytics
+rarely happen, and the product ships blind.
 
 ---
 
-# API Module
+## 13 — Operations
 
-```
-15-API
-```
+**Establishes:** how the product is run, supported and kept compliant after launch.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 10 |
+| Feeds | the Operations Plan |
 
-- Architecture
-- Database
-
-Provides
-
-- API Specifications
-- Contracts
-- Integrations
-
-Feeds Into
-
-- Implementation
+The module most frameworks omit, which is why so many products become unmaintainable in
+month three.
 
 ---
 
-# Security Module
+## 14 — AI Systems
 
-```
-16-Security
-```
+**Establishes:** where AI genuinely improves the product, and how it will be evaluated.
 
-Depends On
+| | |
+| --- | --- |
+| Needs | 08, 09 |
+| Feeds | the Build Handoff |
 
-- Architecture
-- Database
-- API
-
-Provides
-
-- Authentication
-- Authorization
-- Privacy
-- Compliance
-
-Feeds Into
-
-- Implementation
-
----
-
-# Scalability Module
-
-```
-17-Scalability
-```
-
-Depends On
-
-- Architecture
-
-Provides
-
-- Growth Strategy
-- Performance Planning
-- Infrastructure Scaling
-
-Feeds Into
-
-- Deployment
-
----
-
-# Pricing Module
-
-```
-18-Pricing
-```
-
-Depends On
-
-- Business
-- Product
-
-Provides
-
-- Pricing Strategy
-- Revenue Models
-
-Feeds Into
-
-- Product Launch
-
----
-
-# Roadmap Module
-
-```
-19-Roadmap
-```
-
-Depends On
-
-- Product
-- Business
-
-Provides
-
-- Milestones
-- Release Planning
-- Prioritization
-
-Feeds Into
-
-- Execution
-
----
-
-# Risks Module
-
-```
-20-Risks
-```
-
-Depends On
-
-Every module.
-
-Provides
-
-- Risk Register
-- Mitigation Plans
-
-Feeds Into
-
-- Validation
-
----
-
-# Validation Module
-
-```
-21-Validation
-```
-
-Depends On
-
-Every previous module.
-
-Provides
-
-- Evidence Review
-- Assumption Validation
-- Readiness Assessment
-
-Feeds Into
-
-- Final Deliverables
-
----
-
-# Final Deliverables Module
-
-```
-27-Final-Deliverables
-```
-
-Depends On
-
-All previous modules.
-
-Provides
-
-- PRD
-- Technical Documentation
-- Architecture
-- Implementation Guide
-- Executive Summary
-
-This is the final output of Product Intelligence OS.
-
----
-
-# Relationship Principles
-
-Every module should:
-
-- Build upon previous knowledge.
-- Reuse existing research.
-- Avoid duplication.
-- Reference related modules.
-- Improve overall consistency.
-
-Knowledge should flow forward, not become isolated.
+Runs after the product is specified, deliberately. AI decided before the product is
+understood becomes decoration.
 
 ---
 
 # Dependency Rules
 
-A module should never:
-
-- Ignore prerequisite knowledge.
-- Contradict validated research.
-- Duplicate existing documentation.
-- Replace another module's responsibility.
-
-Each module has a clearly defined purpose.
+1. A module may not begin until every module in its `depends_on` has passed its gate.
+2. A failed gate follows that module's `on_fail` target. The run does not proceed.
+3. Re-entering a module appends to the evidence log. It never overwrites earlier findings.
+4. A module never reads another module's prose. It reads `state.yaml`.
 
 ---
 
-# Navigation Guidelines
+# Why the Order Is What It Is
 
-When working inside any module:
-
-1. Read prerequisite modules first.
-2. Understand related outputs.
-3. Produce only the knowledge owned by that module.
-4. Reference—not duplicate—information from other modules.
-5. Pass structured outputs to downstream modules.
-
-This keeps Product Intelligence OS modular and maintainable.
+| Ordering choice | Reason |
+| --- | --- |
+| User before Problem | You cannot rank a problem without knowing whose it is |
+| Problem before Competition | A competitor is only relevant to a problem someone has |
+| Competition before Business | Pricing without competitor pricing is guesswork |
+| Strategy before Product | Deciding what to build precedes specifying it |
+| Product before Technology | Architecture serves requirements, not the reverse |
+| Product before AI | AI chosen before the product is understood becomes decoration |
+| Metrics after Growth | Retention mechanics determine which metrics matter |
 
 ---
 
-# Knowledge Graph
+# Where Modules Feed the Deliverables
 
-```
-Constitution
-      │
-      ▼
-Idea
-      │
-      ▼
-Market
- ┌────┼────┐
- ▼    ▼    ▼
-Users Competitors Business
-  │      │      │
-  └──┬───┴───┬──┘
-     ▼
- Problems
-     ▼
- Solutions
-     ▼
- Product
- ┌───┼────┐
- ▼   ▼    ▼
-UX   AI Technology
-      │
-      ▼
- Architecture
- ┌────┼────┐
- ▼    ▼    ▼
-DB   API Security
-      │
-      ▼
-Scalability
-      ▼
-Validation
-      ▼
-Final Deliverables
-```
+| Deliverable | Fed by |
+| --- | --- |
+| Executive Summary | 01, 02, 05, 06, 07 |
+| Research Dossier | 02, 03, 04, 05 |
+| Problem Validation | 04 |
+| PRD | 07, 08, 12 |
+| Feature Spec | 07, 08 |
+| Data Model | 09 |
+| API Contract | 09 |
+| Architecture | 09, 10 |
+| UX Flows | 03, 10 |
+| Roadmap | 07, 10 |
+| Risks and Assumptions | 07, and every module's assumptions |
+| Success Metrics | 12 |
+| Build Handoff | 08, 09, 10, 12 |
+
+The full specification is `framework/deliverables/manifest.yaml`.
 
 ---
 
 # Self Assessment
 
-Before completing work in any module, ask:
-
-- Have I used the outputs from prerequisite modules?
-- Am I duplicating knowledge that belongs elsewhere?
-- Have I referenced related modules where appropriate?
-- Will downstream modules have everything they need?
-- Does my work strengthen the overall framework?
-
-If any answer is **No**, revise the module.
-
----
-
-# Future Improvements
-
-Future versions may include:
-
-- Interactive dependency maps
-- AI-powered module navigation
-- Automatic cross-referencing
-- Knowledge graph visualization
-- Impact analysis between modules
-- Semantic linking across the repository
+- Can I explain why 04 comes after 03?
+- Do I know which module owns the regulatory landscape, and which module consumes it?
+- Do I know where a failed gate sends the run?
+- Can I name what module 08 needs before it can start?
 
 ---
 
 > **Relationship Principle**
-
-> Product Intelligence OS is not a collection of independent documents.
-
-> It is a connected knowledge ecosystem where every module contributes to a larger system of structured product intelligence. Understanding the relationships between modules is essential for producing consistent, reusable, and implementation-ready research.
+>
+> The modules are not a table of contents.
+>
+> They are a dependency chain, and the order is the argument.
