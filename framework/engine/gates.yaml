@@ -37,6 +37,31 @@ evaluation:
     A gate is failed by default when its status cannot be determined.
     Uncertainty is a fail, not a pass. A gate that never fails is not a gate.
 
+declared_shortfall:
+  # A narrow, deliberate exception. Some criteria require evidence an agent may be
+  # unable to obtain — most often primary research. Demanding it unconditionally
+  # would not produce evidence; it would produce fabricated evidence.
+  #
+  # A criterion may be marked declared_shortfall ONLY when all of the following hold.
+  allowed_when:
+    - The criterion requires evidence the agent has no means of obtaining.
+    - The actual position is stated plainly in the module output, not implied.
+    - Confidence is lowered accordingly.
+    - The shortfall is recorded in the gate verdict as `shortfall_declared: true`.
+    - A validation task that would close the gap is added to state.open_questions.
+  prohibited_when:
+    - The evidence was obtainable and the agent did not look.
+    - The shortfall is concealed, softened, or buried below other findings.
+    - It is used to bypass a criterion about rigor rather than about evidence access.
+  consequence: >
+    A run carrying any declared shortfall must surface it in the Executive Summary
+    and in Risks-and-Assumptions. Where the shortfall concerns problem validation,
+    the Roadmap must open with a Milestone Zero that validates before building.
+  currently_permitted_for:
+    - module: 04-problem
+      criterion: ">= 3 problems carrying [verified] evidence"
+      reason: Verification may be impossible without primary user research.
+
 loop_protection:
   max_attempts_per_module: 3
   on_exhaustion: >
