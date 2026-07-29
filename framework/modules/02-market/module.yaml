@@ -1,0 +1,13 @@
+id: 02-market
+name: Market
+purpose: Size and characterise the market the idea would enter.
+depends_on: [01-idea]
+consumes: [idea_brief, scope_boundaries]
+produces: [market_definition, tam_sam_som, trends, regulatory_landscape, market_gaps]
+feeds_deliverables: [research-dossier, executive-summary]
+gate:
+  - Market defined by boundary, not by adjective
+  - TAM / SAM / SOM each sourced or explicitly marked [assumption]
+  - >= 3 trends with direction and evidence
+  - Regulatory constraints for the named jurisdiction identified
+on_fail: return to 01-idea

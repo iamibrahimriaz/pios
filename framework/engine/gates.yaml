@@ -1,0 +1,64 @@
+# Product Intelligence OS — Gate Policy
+#
+# Per-module gate criteria live in each module's module.yaml.
+# This file defines how gates are evaluated, and the universal gates that apply
+# to every module regardless of domain.
+
+version: 1
+
+# Applied to every module, in addition to its own gate list.
+universal:
+  - id: U1
+    rule: Every factual claim carries exactly one evidence tag.
+    reference: engine/evidence-policy.md
+  - id: U2
+    rule: Every output named in the module's `produces` list exists in state.outputs.
+  - id: U3
+    rule: No claim contradicts an earlier entry in state.evidence_log without explicitly superseding it.
+  - id: U4
+    rule: Every decision records the alternatives it rejected.
+  - id: U5
+    rule: Assumptions introduced by this module are appended to state.assumptions with a validation method.
+  - id: U6
+    rule: Output is written for a reader with no access to this conversation.
+
+evaluation:
+  method: self_review_then_gate
+  steps:
+    - Produce the module output.
+    - Run the module's own review loop (engine/review-loop.md).
+    - Evaluate universal gates U1–U6.
+    - Evaluate the module's gate list from module.yaml.
+    - Record pass or fail in state.run.
+  verdict:
+    pass: All universal and module gates satisfied.
+    fail: Any gate unsatisfied. Follow module.on_fail.
+  honesty_rule: >
+    A gate is failed by default when its status cannot be determined.
+    Uncertainty is a fail, not a pass. A gate that never fails is not a gate.
+
+loop_protection:
+  max_attempts_per_module: 3
+  on_exhaustion: >
+    Halt the run. Write the reason to state.run.failed_gates and escalate to the
+    human operator with a specific question. Do not proceed with a failed gate.
+
+human_checkpoints:
+  # Stages where the run pauses for operator confirmation before continuing.
+  - stage: frame
+    reason: Clarifying questions must be answered by a human before research begins.
+  - stage: decide
+    reason: The MVP cut line is a commercial commitment, not a research finding.
+  - stage: deliver
+    reason: Final artifacts are reviewed before handoff.
+
+degraded_mode:
+  # When the agent has no retrieval capability.
+  allowed: true
+  conditions:
+    - All unverifiable claims tagged [assumption: needs validation].
+    - state.run.confidence set to low.
+    - Executive Summary opens with the confidence level and what would raise it.
+  prohibited:
+    - Presenting an unverified figure as verified.
+    - Omitting a required section because it could not be researched.

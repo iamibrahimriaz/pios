@@ -1,0 +1,13 @@
+id: 04-problem
+name: Problem
+purpose: Separate real, painful, frequent problems from assumed ones.
+depends_on: [03-user]
+consumes: [personas, jobs_to_be_done, current_workflow]
+produces: [problem_inventory, ranked_problems, evidence_log, validation_plan]
+feeds_deliverables: [research-dossier, problem-validation, prd]
+gate:
+  - Each problem scored on frequency, severity and current workaround
+  - >= 3 problems carrying [verified] evidence, not inference
+  - The single sharpest problem identified and defended
+  - Unvalidated problems explicitly listed as such
+on_fail: return to 03-user

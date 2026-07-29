@@ -1,0 +1,13 @@
+id: 08-product
+name: Product
+purpose: Specify the product precisely enough to be built.
+depends_on: [07-strategy]
+consumes: [mvp_definition, chosen_approach, personas, jobs_to_be_done]
+produces: [prd_body, feature_spec, acceptance_criteria, prioritisation, edge_cases]
+feeds_deliverables: [prd, feature-spec]
+gate:
+  - Every feature traces to a ranked problem
+  - Acceptance criteria testable, not aspirational
+  - Edge cases and failure states specified
+  - Anything out of MVP scope moved to roadmap, not dropped silently
+on_fail: return to 07-strategy

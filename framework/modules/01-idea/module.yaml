@@ -1,0 +1,14 @@
+id: 01-idea
+name: Idea
+purpose: Turn a vague idea into a precise, testable premise.
+depends_on: []
+consumes: [state.raw_idea]
+produces: [idea_brief, clarifying_questions, initial_assumptions, scope_boundaries]
+feeds_deliverables: [research-dossier, prd, executive-summary]
+gate:
+  - Raw idea restated in one unambiguous sentence
+  - Geography / market and regulatory jurisdiction named
+  - Buyer and user distinguished (may be the same, must be stated)
+  - >= 5 clarifying questions asked and answered or explicitly deferred
+  - All initial assumptions tagged per engine/evidence-policy.md
+on_fail: halt and request input from the human operator
