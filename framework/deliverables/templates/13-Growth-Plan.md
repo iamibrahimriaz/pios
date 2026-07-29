@@ -103,7 +103,7 @@ Required: false
 | «e.g. accumulated patient history» | «why leaving becomes costly» | «high/med/low» |
 
 **Expected churn:** «figure» [tag]
-**Churn trigger to watch:** «the behaviour that precedes leaving»
+**Churn trigger to watch:** «the behavior that precedes leaving»
 
 ---
 

@@ -1,13 +1,11 @@
 ---
 Title: Quality Standards
 Module: 00-AI-Constitution
-Section: 01-Knowledge
+Section: knowledge
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the quality standards that every research activity, analysis, recommendation, and deliverable within Product Intelligence OS must satisfy.
 Audience:
@@ -241,7 +239,7 @@ High-quality work typically demonstrates:
 - Identified risks.
 - Structured documentation.
 
-These characteristics should appear consistently throughout Product Intelligence OS.
+These characteriztics should appear consistently throughout Product Intelligence OS.
 
 ---
 

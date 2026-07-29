@@ -1,13 +1,11 @@
 ---
 Title: Knowledge Module
 Module: 00-AI-Constitution
-Section: 01-Knowledge
+Section: knowledge
 Category: Module Overview
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Introduce the Knowledge module, explain its purpose, structure, learning objectives, and how each document contributes to building AI's foundational knowledge and reasoning capabilities.
 Audience:

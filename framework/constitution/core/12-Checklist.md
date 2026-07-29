@@ -1,13 +1,11 @@
 ---
 Title: Research Checklist
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: core
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Provide a standardized checklist to verify that every product research project is complete, consistent, and implementation-ready before delivery.
 Audience:

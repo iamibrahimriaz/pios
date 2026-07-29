@@ -39,7 +39,7 @@ Required: false
 | | |
 | --- | --- |
 | Job served | J«n» |
-| User-visible behaviour | «what the user experiences» |
+| User-visible behavior | «what the user experiences» |
 | Autonomy level | «suggests / drafts / acts with confirmation / acts autonomously» |
 | Non-AI fallback | «what happens when it is unavailable or wrong» |
 
@@ -113,7 +113,7 @@ must be a domain expert, not the build team»
 | --- | --- | --- | --- | --- | --- |
 | F1 | «specific failure» | «h/m/l» | «what it costs the user» | «how it is caught» | «guardrail» |
 
-**Worst realistic outcome:** «state it plainly»
+**Worst realiztic outcome:** «state it plainly»
 
 **Human fallback:** «what the user does when the AI is wrong, and how they notice»
 

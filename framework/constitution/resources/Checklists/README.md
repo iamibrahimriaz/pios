@@ -1,13 +1,11 @@
 ---
 Title: Checklists Library
 Module: 00-AI-Constitution
-Section: 02-Resources
+Section: resources
 Category: Resource Library
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Maintain a centralized collection of reusable checklists that ensure consistency, completeness, and quality throughout the Product Intelligence lifecycle.
 Audience:

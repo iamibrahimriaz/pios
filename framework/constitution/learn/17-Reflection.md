@@ -1,13 +1,11 @@
 ---
 Title: Reflection
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: learn
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Establish a structured reflection process that enables AI agents and researchers to learn from every completed project and continuously improve Product Intelligence OS.
 Audience:
@@ -153,7 +151,7 @@ Ask:
 Ask:
 
 - Did recommendations support business goals?
-- Was the pricing strategy realistic?
+- Was the pricing strategy realiztic?
 - Were market opportunities correctly identified?
 - Were business risks underestimated?
 

@@ -6,14 +6,14 @@ Date: «ISO date»
 Modules: [08-product, 07-strategy]
 ---
 
-<!-- fill: Where the MVP line gets drawn and defended. The prioritisation reasoning
+<!-- fill: Where the MVP line gets drawn and defended. The prioritization reasoning
      matters as much as the list — a reader must understand WHY the cut fell here.
      Nothing is silently dropped: everything below the line goes to 09-Roadmap.md.
      Remove every <!-- fill --> comment before delivery. -->
 
 # Feature Specification — «Product Name»
 
-## 1. Prioritisation Method
+## 1. Prioritization Method
 
 <!-- fill: State the method and apply it consistently. Suggested scoring:
        Problem weight  — how highly ranked is the problem it serves (1-5)
@@ -78,7 +78,7 @@ features above the line? «yes/no — if no, the cut is wrong»
 | Effort | «S/M/L» |
 | Depends on | «F«n» or none» |
 
-**Behaviour**
+**Behavior**
 
 «What it does, from the user's point of view. Enough that a designer and an engineer
 would build the same thing.»
@@ -89,9 +89,9 @@ would build the same thing.»
 
 **Edge cases**
 
-| Case | Expected behaviour |
+| Case | Expected behavior |
 | --- | --- |
-| «case» | «behaviour» |
+| «case» | «behavior» |
 
 **Out of scope for this feature**
 
@@ -152,10 +152,10 @@ graph LR
 ---
 
 <!-- ACCEPTANCE — remove before delivery
-- [ ] Prioritisation method stated and applied consistently across all features
+- [ ] Prioritization method stated and applied consistently across all features
 - [ ] MVP cut line drawn with the reasoning recorded
 - [ ] The end-to-end test passes: primary persona can complete the core job with MVP only
-- [ ] Each feature has behaviour, acceptance criteria and dependencies
+- [ ] Each feature has behavior, acceptance criteria and dependencies
 - [ ] Post-MVP scope carried to Deferred or Fast-follow — nothing dropped silently
 - [ ] Rejected features recorded with reasons
 - [ ] Dependency graph present

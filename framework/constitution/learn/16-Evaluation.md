@@ -1,13 +1,11 @@
 ---
 Title: Evaluation
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: learn
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define a standardized framework for evaluating the quality, completeness, reliability, and implementation readiness of product research.
 Audience:

@@ -1,13 +1,11 @@
 ---
 Title: Mental Models
 Module: 01-Idea
-Section: 00-Core
+Section: core
 Category: Thinking Framework
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the mental models AI should use to generate, analyze, refine, and evaluate product ideas objectively.
 Audience:

@@ -1,13 +1,11 @@
 ---
 Title: Core Principles of Product Intelligence OS
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: core
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the permanent principles that govern every AI agent, every research activity, and every deliverable produced within Product Intelligence OS.
 Audience:

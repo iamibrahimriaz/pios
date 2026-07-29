@@ -54,7 +54,7 @@ Content-Type: application/json
 
 **Token lifetime:** «duration»
 **Refresh:** «mechanism»
-**On expiry:** «401 with what body; client behaviour expected»
+**On expiry:** «401 with what body; client behavior expected»
 
 ---
 
@@ -186,7 +186,7 @@ Content-Type: application/json
 | 500 | `internal_error` | Unhandled |
 
 <!-- fill: Note the 404 wording — returning 404 rather than 403 for records the caller
-     may not see prevents existence disclosure. State the chosen behaviour explicitly. -->
+     may not see prevents existence disclosure. State the chosen behavior explicitly. -->
 
 ---
 

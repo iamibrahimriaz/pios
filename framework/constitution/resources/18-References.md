@@ -1,13 +1,11 @@
 ---
 Title: References
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: resources
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the reference standards, trusted knowledge sources, and citation principles used throughout Product Intelligence OS.
 Audience:

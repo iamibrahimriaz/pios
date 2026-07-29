@@ -1,13 +1,11 @@
 ---
 Title: Critical Thinking
 Module: 00-AI-Constitution
-Section: 01-Knowledge
+Section: knowledge
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the critical thinking principles and reasoning process that AI should apply when conducting research, evaluating evidence, and making recommendations.
 Audience:

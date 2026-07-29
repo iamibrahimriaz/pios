@@ -94,7 +94,7 @@ Overall confidence: **«high | medium | low»**
 
 ## 2.2 Personas
 
-<!-- fill: One per prioritised segment. Grounded in the research, not invented.
+<!-- fill: One per prioritized segment. Grounded in the research, not invented.
      A persona that could describe anyone describes no one. -->
 
 ### «Persona name» — «role»
@@ -168,7 +168,7 @@ Overall confidence: **«high | medium | low»**
 
 | Competitor | Model | Entry price | Notes |
 | --- | --- | --- | --- |
-| «name» | «subscription/usage/licence» | «figure» [tag] | «what is included» |
+| «name» | «subscription/usage/license» | «figure» [tag] | «what is included» |
 
 ## 3.4 Gap Analysis
 
@@ -216,7 +216,7 @@ Overall confidence: **«high | medium | low»**
 - [ ] TAM/SAM/SOM each sourced or explicitly marked assumption
 - [ ] >= 3 trends with direction and evidence
 - [ ] Regulatory constraints for the named jurisdiction identified
-- [ ] >= 2 segments with a stated reason for prioritising one
+- [ ] >= 2 segments with a stated reason for prioritizing one
 - [ ] Jobs stated as jobs, not features
 - [ ] Current workflow documented including tools being replaced
 - [ ] >= 5 competitors including status quo

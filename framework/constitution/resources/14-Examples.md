@@ -1,13 +1,11 @@
 ---
 Title: Examples
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: resources
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Demonstrate what high-quality product research looks like by providing practical examples that follow the standards of Product Intelligence OS.
 Audience:
@@ -252,7 +250,7 @@ There are no significant risks.
 
 Problems:
 
-- Unrealistic.
+- Unrealiztic.
 - Ignores uncertainty.
 
 ---

@@ -1,13 +1,11 @@
 ---
 Title: Resources Module
 Module: 00-AI-Constitution
-Section: 02-Resources
+Section: resources
 Category: Module Overview
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Provide reusable resources, references, templates, examples, tools, and supporting materials that help AI and humans produce consistent, high-quality product intelligence.
 Audience:
@@ -101,7 +99,7 @@ Purpose:
 
 ## Case Studies
 
-Contains detailed analyses of real products, companies, successes, failures, and strategic decisions.
+Contains detailed analyzes of real products, companies, successes, failures, and strategic decisions.
 
 Purpose:
 
