@@ -177,7 +177,7 @@ Deciding is a separate act, made with the business model in hand.
 | --- | --- |
 | Category search only | Misses substitutes, status quo, non-consumption |
 | Status quo listed but unscored | Understates the hardest competitor |
-| Feature table as the main artifact | Catalogues instead of concluding |
+| Feature table as the main artifact | Catalogs instead of concluding |
 | Homepage claims in capability columns | Marketing mistaken for evidence |
 | Undated pricing | Unusable within months |
 | Silent price estimates | A guess becomes a revenue model |
