@@ -1,6 +1,6 @@
 id: 02-market
 name: Market
-purpose: Size and characterise the market the idea would enter.
+purpose: Size and characterize the market the idea would enter.
 depends_on: [01-idea]
 consumes: [idea_brief, scope_boundaries]
 produces: [market_definition, tam_sam_som, trends, regulatory_landscape, market_gaps]

@@ -115,13 +115,13 @@ are guided out of it»
 <!-- fill: The situations that break naive implementations. Draw from the persona's
      real context — interruptions, poor connectivity, shared devices, concurrent users. -->
 
-| Case | Expected behaviour |
+| Case | Expected behavior |
 | --- | --- |
 | Interrupted mid-flow | «what is preserved and how they resume» |
-| Offline or poor connection | «behaviour» |
+| Offline or poor connection | «behavior» |
 | Concurrent edit by another user | «resolution» |
-| Very large data volume | «behaviour» |
-| First use with no data | «behaviour» |
+| Very large data volume | «behavior» |
+| First use with no data | «behavior» |
 
 ---
 

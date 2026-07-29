@@ -1,13 +1,11 @@
 ---
 Title: Best Practices
 Module: 01-Idea
-Section: 00-Core
+Section: core
 Category: Guidance
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the best practices AI should consistently follow when generating, evaluating, and refining product ideas.
 Audience:

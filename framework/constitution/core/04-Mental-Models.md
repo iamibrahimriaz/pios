@@ -1,13 +1,11 @@
 ---
 Title: Mental Models for Product Intelligence OS
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: core
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the mental models that every AI agent should use when performing product research, analysis, and decision making.
 Audience:

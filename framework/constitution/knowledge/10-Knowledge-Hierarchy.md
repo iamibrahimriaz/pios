@@ -1,13 +1,11 @@
 ---
 Title: Knowledge Hierarchy
 Module: 00-AI-Constitution
-Section: 01-Knowledge
+Section: knowledge
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define how Product Intelligence OS organizes knowledge from raw information to actionable product intelligence, ensuring structured reasoning and reusable knowledge.
 Audience:

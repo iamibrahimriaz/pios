@@ -32,8 +32,8 @@ Modules: [12-metrics]
 | Target | «figure by date» |
 | Review cadence | «weekly / monthly» |
 
-**What it would look like if we were gaming it:** «the degenerate behaviour this metric
-could incentivise, and what guards against it»
+**What it would look like if we were gaming it:** «the degenerate behavior this metric
+could incentivize, and what guards against it»
 
 ---
 
@@ -85,7 +85,7 @@ could incentivise, and what guards against it»
 ## 5. Counter-Metrics
 
 <!-- fill: What must NOT get worse while the primary metrics improve.
-     Without these, a team optimises the north star into a worse product. -->
+     Without these, a team optimizes the north star into a worse product. -->
 
 | Metric | Must not exceed / fall below | Why it matters |
 | --- | --- | --- |

@@ -5,8 +5,6 @@ Category: Module Overview
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Teach AI how to transform raw ideas into structured, research-ready product opportunities through systematic thinking, validation, and refinement.
 Audience:

@@ -1,13 +1,11 @@
 ---
 Title: Why It Matters
 Module: 01-Idea
-Section: 00-Core
+Section: learn
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Explain why structured idea discovery is essential for successful products and why investing time in refining ideas significantly improves product outcomes.
 Audience:

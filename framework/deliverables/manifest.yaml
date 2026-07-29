@@ -74,8 +74,8 @@ artifacts:
     audience: engineering, delivery agent
     fed_by: [08-product, 07-strategy]
     acceptance:
-      - Features prioritised with the MVP cut line drawn and reasoned
-      - Each feature has behaviour, acceptance criteria and dependencies
+      - Features prioritized with the MVP cut line drawn and reasoned
+      - Each feature has behavior, acceptance criteria and dependencies
       - Post-MVP scope moved to roadmap, not silently dropped
 
   - id: data-model

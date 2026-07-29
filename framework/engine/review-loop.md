@@ -48,7 +48,7 @@ The most valuable pass. Argue against the module's own conclusion:
 - What would have to be true for this to fail?
 - What is the strongest case for the opposite conclusion?
 - Which competitor or incumbent already tried this, and what happened?
-- What is being assumed about user behaviour that has never been observed?
+- What is being assumed about user behavior that has never been observed?
 - If this recommendation is wrong, which claim was the weak link?
 
 If the adversarial pass produces nothing, it was not performed honestly. Every real

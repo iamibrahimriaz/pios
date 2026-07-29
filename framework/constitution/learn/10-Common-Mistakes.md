@@ -1,13 +1,11 @@
 ---
 Title: Common Mistakes
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: learn
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Identify the most common mistakes made during product research and define how Product Intelligence OS prevents them.
 Audience:
@@ -211,7 +209,7 @@ Consider:
 - Security
 - Maintenance
 
-Recommendations should be realistic.
+Recommendations should be realiztic.
 
 ---
 

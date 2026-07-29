@@ -186,7 +186,7 @@ stateDiagram-v2
 
 <!-- ACCEPTANCE — remove before delivery
 - [ ] Every entity has columns with types, nullability and defaults
-- [ ] Every relationship states cardinality and on-delete behaviour
+- [ ] Every relationship states cardinality and on-delete behavior
 - [ ] Constraints and indexes present with the reason for each
 - [ ] ERD included and matches the entity definitions
 - [ ] State machines specified where entities have a lifecycle

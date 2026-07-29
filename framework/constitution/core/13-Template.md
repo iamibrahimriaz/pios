@@ -1,13 +1,11 @@
 ---
 Title: Research Template
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: core
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the standard template for creating consistent, high-quality, implementation-ready research documents across Product Intelligence OS.
 Audience:

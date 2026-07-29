@@ -1,13 +1,11 @@
 ---
 Title: Future Improvements
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: learn
 Category: Foundation
 Version: 1.0.0
 Status: Living Document
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define how Product Intelligence OS should continuously evolve while maintaining stability, backward compatibility, and high quality.
 Audience:

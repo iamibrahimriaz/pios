@@ -22,7 +22,7 @@ Modules: [07-strategy, 08-product, 12-metrics]
 
 ## 2. The Problem
 
-<!-- fill: Carried from 02-Problem-Validation. Do not restate it more optimistically
+<!-- fill: Carried from 02-Problem-Validation. Do not restate it more optimiztically
      than that document does. If the problem is assumed rather than validated, say so here. -->
 
 «The sharpest problem, restated in one paragraph.» [tag]
@@ -37,7 +37,7 @@ Modules: [07-strategy, 08-product, 12-metrics]
 | --- | --- | --- | --- |
 | «name» | «segment» | «J«n» from the dossier» | «their outcome» |
 
-**Primary persona:** «name» — everything below optimises for this person.
+**Primary persona:** «name» — everything below optimizes for this person.
 
 **Buyer, if different:** «who signs off, and what they need to see»
 
@@ -94,7 +94,7 @@ reading the requirement list.»
 | Traces to | P«n», J«n» |
 | Persona | «name» |
 
-**Behaviour:** «what the system does, in plain language»
+**Behavior:** «what the system does, in plain language»
 
 **Acceptance criteria:**
 - [ ] «testable condition»
@@ -102,7 +102,7 @@ reading the requirement list.»
 - [ ] «testable condition»
 
 **Edge cases:**
-- «case» → «expected behaviour»
+- «case» → «expected behavior»
 
 **Failure states:**
 - «what goes wrong» → «what the user sees» → «how they recover»

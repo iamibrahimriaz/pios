@@ -1,13 +1,11 @@
 ---
 Title: Quality Gate
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: core
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the quality standards that every research project must satisfy before it is considered complete.
 Audience:
@@ -201,7 +199,7 @@ If readers do not know what to do next, the research is incomplete.
 
 # Gate 7 — Feasibility
 
-Recommendations should be realistic.
+Recommendations should be realiztic.
 
 Evaluate:
 
@@ -335,7 +333,7 @@ Suggested scale:
 | Low        | Limited evidence; treat as exploratory.                       |
 | Unknown    | Insufficient information to make a reliable recommendation.   |
 
-Confidence should reflect evidence, not optimism.
+Confidence should reflect evidence, not optimizm.
 
 ---
 

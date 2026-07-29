@@ -1,13 +1,11 @@
 ---
 Title: Case Studies Library
 Module: 00-AI-Constitution
-Section: 02-Resources
+Section: resources
 Category: Resource Library
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Maintain a structured collection of real-world product case studies that help AI learn from successful and unsuccessful product decisions, strategies, and implementations.
 Audience:
@@ -275,7 +273,7 @@ Together they create practical product intelligence.
 
 Using this library should help AI:
 
-- Produce more realistic recommendations.
+- Produce more realiztic recommendations.
 - Recognize successful product patterns.
 - Avoid repeating historical mistakes.
 - Strengthen strategic thinking.
@@ -291,7 +289,7 @@ Future versions may include:
 
 - Industry-specific case studies.
 - Startup case studies.
-- Enterprise product analyses.
+- Enterprise product analyzes.
 - Interactive timelines.
 - Decision trees.
 - Cross-linked lessons.

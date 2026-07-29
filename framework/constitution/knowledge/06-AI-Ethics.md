@@ -1,13 +1,11 @@
 ---
 Title: AI Ethics
 Module: 00-AI-Constitution
-Section: 01-Knowledge
+Section: knowledge
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the ethical principles that govern AI behavior within Product Intelligence OS, ensuring trustworthy, transparent, fair, and responsible product intelligence.
 Audience:
@@ -356,7 +354,7 @@ Following these ethical principles should produce AI that is:
 - Trustworthy.
 - Human-centered.
 
-These characteristics strengthen long-term collaboration between AI and humans.
+These characteriztics strengthen long-term collaboration between AI and humans.
 
 ---
 

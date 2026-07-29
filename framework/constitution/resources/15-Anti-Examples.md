@@ -1,13 +1,11 @@
 ---
 Title: Anti-Examples
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: resources
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Demonstrate common poor research patterns, weak reasoning, and low-quality documentation so they can be recognized and avoided.
 Audience:
@@ -200,7 +198,7 @@ Everything looks good.
 
 Problems
 
-- Unrealistic.
+- Unrealiztic.
 - No risk assessment.
 - No contingency planning.
 

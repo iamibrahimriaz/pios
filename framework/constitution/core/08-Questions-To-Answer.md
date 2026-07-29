@@ -1,13 +1,11 @@
 ---
 Title: Questions to Answer
 Module: 00-AI-Constitution
-Section: 00-Core
+Section: core
 Category: Foundation
 Version: 1.0.0
 Status: Approved
 Owner: Product Intelligence OS
-Created: YYYY-MM-DD
-Last Updated: YYYY-MM-DD
 Review Cycle: Every 6 Months
 Purpose: Define the essential questions every AI agent must answer before considering any product research complete.
 Audience:
@@ -263,7 +261,7 @@ Answer:
 - Can engineering begin?
 - Are requirements clear?
 - Are priorities defined?
-- Is the roadmap realistic?
+- Is the roadmap realiztic?
 - Are dependencies documented?
 
 ---
