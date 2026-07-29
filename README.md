@@ -168,85 +168,84 @@ Everything required before development begins.
 # Repository Structure
 
 ```
-Product-Intelligence-Framework/
+product-intelligence-os/
 
-00-AI-Constitution/
+AGENTS.md                 how an agent executes a run — start here
 
-01-Idea/
+framework/                ships to users; read-only during a run
 
-02-Market/
+  constitution/           governing principles — how to think
 
-03-Competitors/
+  engine/                 how a run executes
+    run-order.yaml          module sequence and stages
+    gates.yaml              how a module passes or fails
+    evidence-policy.md      verified / inferred / assumption
+    state-schema.yaml       the carry-forward project state
+    review-loop.md          the four-pass self review
 
-04-Users/
+  deliverables/           THE OUTPUT SPECIFICATION
+    manifest.yaml           15 artifacts with acceptance criteria
 
-05-Problems/
+  modules/                the 14 lifecycle domains
+    01-idea/  02-market/  03-user/  04-problem/  05-competition/
+    06-business/  07-strategy/  08-product/  09-technology/
+    10-execution/  11-growth/  12-metrics/  13-operations/
+    14-ai-systems/
 
-06-Solutions/
+  packs/                  optional vertical knowledge (healthcare, fintech, ...)
 
-07-Business/
+projects/<slug>/          one run — state.yaml, research/, deliverables/
 
-08-Product/
-
-09-Features/
-
-10-UX/
-
-11-AI/
-
-12-Technology/
-
-13-Architecture/
-
-14-Database/
-
-15-API/
-
-16-Security/
-
-17-Scalability/
-
-18-Pricing/
-
-19-Roadmap/
-
-20-Risks/
-
-21-Validation/
-
-22-Research-Quality/
-
-23-Templates/
-
-24-Examples/
-
-25-Checklists/
-
-26-Playbooks/
-
-27-Final-Deliverables/
+examples/                 completed reference runs
 ```
 
-Each module is a complete learning system.
+Each module contains four layers:
 
-Every module contains:
+| Layer | Teaches | Read by |
+| --- | --- | --- |
+| `core/` | How to think — frameworks, workflow, questions, quality gates | the agent |
+| `knowledge/` | What to know — concepts, terminology, methods | the agent |
+| `resources/` | Templates, examples, anti-examples | the agent |
+| `learn/` | Curriculum — why it matters, objectives, reflection | humans |
 
-- Purpose
-- Why it matters
-- Learning objectives
-- Core principles
-- Mental models
-- Best practices
-- Research methodology
-- Workflow
-- Questions
-- Common mistakes
-- Quality gates
-- Evaluation
-- Reflection
-- References
-- Templates
-- Examples
+Every module also carries a `module.yaml` — its machine-readable contract:
+what it depends on, what it consumes, what it produces, and the gate it must
+pass before the run continues.
+
+---
+
+# Running It
+
+An agent is pointed at this repository and given one idea. It reads
+`AGENTS.md`, works through the modules in the order defined by
+`framework/engine/run-order.yaml`, and emits the artifact set specified in
+`framework/deliverables/manifest.yaml`.
+
+```
+Input:   one idea, loosely described
+Process: 14 modules, gated, evidence-bound
+Output:  a build-ready blueprint in projects/<slug>/deliverables/
+```
+
+The run produces, among others: a Research Dossier, Problem Validation, a full
+PRD, Feature Spec, Data Model, API Contract, Architecture, UX Flows, Roadmap,
+Risks and Assumptions, Success Metrics, and a **Build Handoff** — a standalone
+file an engineering team or coding agent can start building from with no other
+context.
+
+---
+
+# The Evidence Rule
+
+Every factual claim in every output carries exactly one tag:
+
+- `[verified: <source>]` — checked against a named, retrievable source
+- `[inferred: <basis>]` — reasoned from something verified
+- `[assumption: needs validation]` — believed, not established
+
+**An assumption is never smoothed into a fact.** A blueprint that openly states
+what it assumed is useful. One that silently asserts it is a liability. See
+`framework/engine/evidence-policy.md`.
 
 ---
 
