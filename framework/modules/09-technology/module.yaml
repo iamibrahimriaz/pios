@@ -1,0 +1,13 @@
+id: 09-technology
+name: Technology
+purpose: Define the technical shape — data, interfaces, architecture, security.
+depends_on: [08-product]
+consumes: [feature_spec, acceptance_criteria, regulatory_landscape]
+produces: [data_model, api_contract, architecture, security_model, scalability_plan, tech_stack]
+feeds_deliverables: [data-model, api-contract, architecture, build-handoff]
+gate:
+  - Entities, relationships and constraints complete enough to generate a schema
+  - Every product capability has a supporting endpoint or interface
+  - Regulatory requirements from 02-market reflected in the security model
+  - Stack choice justified with trade-offs stated, not asserted
+on_fail: return to 08-product

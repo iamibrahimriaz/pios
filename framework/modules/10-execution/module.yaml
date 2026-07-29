@@ -1,0 +1,13 @@
+id: 10-execution
+name: Execution
+purpose: Convert the specification into something a team or agent can start building today.
+depends_on: [08-product, 09-technology]
+consumes: [prd_body, data_model, api_contract, architecture]
+produces: [ux_flows, delivery_plan, milestones, build_handoff, qa_strategy]
+feeds_deliverables: [ux-flows, build-handoff, roadmap]
+gate:
+  - Critical user paths mapped end to end
+  - Work broken into sequenced, independently shippable milestones
+  - Build handoff readable by an agent with no prior context
+  - Definition of done stated per milestone
+on_fail: return to 09-technology

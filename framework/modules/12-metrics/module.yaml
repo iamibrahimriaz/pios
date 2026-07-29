@@ -1,0 +1,13 @@
+id: 12-metrics
+name: Metrics
+purpose: Define measurable success and how it will be observed.
+depends_on: [08-product, 11-growth]
+consumes: [feature_spec, growth_loops, retention_model]
+produces: [north_star_metric, success_metrics, leading_indicators, instrumentation_plan, targets]
+feeds_deliverables: [success-metrics, prd, build-handoff]
+gate:
+  - Exactly one north star metric, with the reasoning for it
+  - Every metric has a definition, source and target
+  - Leading indicators distinguished from lagging ones
+  - Instrumentation specified at event level for the build handoff
+on_fail: return to 08-product

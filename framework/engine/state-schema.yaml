@@ -1,0 +1,63 @@
+# Product Intelligence OS — Project State Schema
+#
+# One file per run, at projects/<slug>/state.yaml.
+# This is the framework's memory. Every module reads it before starting and
+# writes to it before its gate is evaluated. Without it, each module reasons in
+# isolation and the deliverables contradict each other.
+
+version: 1
+
+project:
+  slug: ""                      # kebab-case, used as the directory name
+  raw_idea: ""                  # the operator's original words, never rewritten
+  created: ""                   # ISO date, supplied by the operator
+  jurisdiction: ""              # drives regulatory research — must be set in 01-idea
+  language: en
+
+run:
+  current_stage: frame
+  completed_modules: []
+  failed_gates: []              # [{module, attempt, reason, at}]
+  confidence: unknown           # high | medium | low | unknown
+
+# Populated by modules. Keys match the `produces` list in each module.yaml.
+outputs: {}
+
+# Every claim the run depends on, tagged per engine/evidence-policy.md.
+evidence_log:
+  # - claim: "Global EMR market was USD 29.8B in 2023"
+  #   tag: verified
+  #   source: "Grand View Research, 2024"
+  #   module: 02-market
+  #   load_bearing: true
+
+# Things believed but not established. Carried into the final deliverables.
+assumptions:
+  # - id: A1
+  #   statement: "Solo practitioners will pay USD 40/month"
+  #   module: 06-business
+  #   impact: "Sets the entire pricing model"
+  #   validation: "Price-sensitivity interviews with 10 solo GPs"
+  #   status: open        # open | validated | invalidated
+
+# Questions the agent could not answer alone.
+open_questions:
+  # - question: "Is this replacing an EMR or sitting alongside one?"
+  #   raised_by: 01-idea
+  #   blocking: true
+  #   answer: null
+
+# Decisions made, with the reasoning preserved. This is what makes the output auditable.
+decisions:
+  # - id: D1
+  #   decision: "Wedge on ambient capture, not records management"
+  #   module: 07-strategy
+  #   rationale: "Ranked problem P1 is consultation-time data entry, not retrieval"
+  #   alternatives_rejected: ["Full EMR replacement", "Billing-first"]
+  #   reversible: true
+
+rules:
+  - raw_idea is immutable. Refinements go to outputs.idea_brief.
+  - A module appends to evidence_log. It never rewrites another module's entries.
+  - A blocking open_question halts the run at the next human_checkpoint.
+  - Every decision records the alternatives it rejected, or it is not a decision.

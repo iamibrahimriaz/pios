@@ -1,0 +1,14 @@
+id: 07-strategy
+name: Strategy
+purpose: Choose what to build, in what order, and what deliberately not to build.
+depends_on: [04-problem, 05-competition, 06-business]
+consumes: [ranked_problems, gap_analysis, business_model]
+produces: [solution_options, chosen_approach, mvp_definition, non_goals, risk_register, roadmap]
+feeds_deliverables: [prd, roadmap, risks-and-assumptions, executive-summary]
+gate:
+  - >= 3 solution options generated before one is chosen
+  - Choice justified against the ranked problems, not preference
+  - MVP cut line drawn with the reasoning recorded
+  - Explicit non-goals listed
+  - Risks registered with likelihood, impact and mitigation
+on_fail: return to 04-problem

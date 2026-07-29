@@ -1,0 +1,190 @@
+# Product Intelligence OS — Deliverables Manifest
+#
+# THIS IS THE PRODUCT. Everything else in the framework exists to fill these files.
+#
+# A run is complete when every `required` artifact below exists in
+# projects/<slug>/deliverables/, passes its acceptance criteria, and carries
+# compliant evidence tags.
+
+version: 1
+
+output_dir: projects/<slug>/deliverables/
+
+artifacts:
+
+  - id: executive-summary
+    file: 00-Executive-Summary.md
+    required: true
+    audience: founder, investor, decision maker
+    fed_by: [01-idea, 02-market, 05-competition, 06-business, 07-strategy]
+    acceptance:
+      - Opens with the recommendation — build, adjust, or do not build
+      - States overall confidence and what would raise it
+      - Readable in under five minutes
+      - Lists the three assumptions that most threaten the conclusion
+      - No claim appears here that is not established in a supporting artifact
+
+  - id: research-dossier
+    file: 01-Research-Dossier.md
+    required: true
+    audience: product, strategy, anyone auditing the reasoning
+    fed_by: [02-market, 03-user, 04-problem, 05-competition]
+    acceptance:
+      - Market definition, sizing, trends, regulatory landscape
+      - Segments, personas, jobs to be done, current workflow
+      - Competitor matrix including status quo as a competitor
+      - Every claim tagged per engine/evidence-policy.md
+      - Sources listed and retrievable
+
+  - id: problem-validation
+    file: 02-Problem-Validation.md
+    required: true
+    audience: product, founder
+    fed_by: [04-problem]
+    acceptance:
+      - Problems ranked by frequency, severity and current workaround
+      - The sharpest problem identified and defended
+      - Validated problems separated from assumed ones — visually, not just in prose
+      - Validation plan for everything still unproven
+
+  - id: prd
+    file: 03-PRD.md
+    required: true
+    audience: engineering, design, delivery agent
+    fed_by: [07-strategy, 08-product, 12-metrics]
+    acceptance:
+      - Problem, users, jobs, scope, and explicit non-goals
+      - Every requirement traces to a ranked problem
+      - Acceptance criteria testable, not aspirational
+      - Edge cases and failure states specified
+      - Success metrics defined with targets
+
+  - id: feature-spec
+    file: 04-Feature-Spec.md
+    required: true
+    audience: engineering, delivery agent
+    fed_by: [08-product, 07-strategy]
+    acceptance:
+      - Features prioritised with the MVP cut line drawn and reasoned
+      - Each feature has behaviour, acceptance criteria and dependencies
+      - Post-MVP scope moved to roadmap, not silently dropped
+
+  - id: data-model
+    file: 05-Data-Model.md
+    required: true
+    audience: engineering, delivery agent
+    fed_by: [09-technology]
+    acceptance:
+      - Entities, attributes, types, relationships, cardinality
+      - Constraints, indexes and audit requirements
+      - ERD included (mermaid)
+      - Complete enough to generate a schema without further questions
+      - Compliance requirements from 02-market reflected (retention, PII, audit trail)
+
+  - id: api-contract
+    file: 06-API-Contract.md
+    required: true
+    audience: engineering, delivery agent
+    fed_by: [09-technology]
+    acceptance:
+      - Endpoints, methods, request and response shapes
+      - Auth and authorisation model
+      - Error taxonomy
+      - Every product capability has a supporting endpoint
+
+  - id: architecture
+    file: 07-Architecture.md
+    required: true
+    audience: engineering, technical founder
+    fed_by: [09-technology, 10-execution]
+    acceptance:
+      - System diagram (mermaid) with boundaries and integrations
+      - Stack choices with trade-offs stated, not asserted
+      - Security model and threat considerations
+      - Scalability path from launch to stated target
+
+  - id: ux-flows
+    file: 08-UX-Flows.md
+    required: true
+    audience: design, engineering
+    fed_by: [03-user, 10-execution]
+    acceptance:
+      - Critical paths mapped end to end
+      - The primary job completable in a stated number of steps
+      - Empty, error and edge states specified
+      - Time to first value stated in minutes
+
+  - id: roadmap
+    file: 09-Roadmap.md
+    required: true
+    audience: founder, delivery
+    fed_by: [07-strategy, 10-execution]
+    acceptance:
+      - Sequenced milestones with dependencies
+      - Each milestone independently shippable
+      - Definition of done per milestone
+      - Post-MVP scope carried forward explicitly
+
+  - id: risks-and-assumptions
+    file: 10-Risks-and-Assumptions.md
+    required: true
+    audience: founder, investor
+    fed_by: [07-strategy, all]
+    acceptance:
+      - Every open assumption from state.assumptions listed
+      - Risks with likelihood, impact and mitigation
+      - The assumptions that would invalidate the product identified first
+      - Cheapest next validation step named
+
+  - id: success-metrics
+    file: 11-Success-Metrics.md
+    required: true
+    audience: founder, product, engineering
+    fed_by: [12-metrics]
+    acceptance:
+      - One north star metric with reasoning
+      - Leading and lagging indicators distinguished
+      - Every metric has definition, source and target
+      - Event-level instrumentation specified
+
+  - id: build-handoff
+    file: 12-Build-Handoff.md
+    required: true
+    audience: a coding agent or engineering team with no prior context
+    fed_by: [08-product, 09-technology, 10-execution, 12-metrics]
+    critical: true
+    acceptance:
+      - Readable standalone — assumes no access to the research conversation
+      - States what to build first and why
+      - References the data model, API contract and acceptance criteria directly
+      - Names the stack, the repo layout and the first milestone
+      - Contains no unresolved [assumption] in a build-blocking position
+      - "An agent could open this file and start writing code today"
+
+  # Optional — emitted when the run's scope calls for them.
+
+  - id: growth-plan
+    file: 13-Growth-Plan.md
+    required: false
+    fed_by: [11-growth]
+
+  - id: operations-plan
+    file: 14-Operations-Plan.md
+    required: false
+    fed_by: [13-operations]
+
+  - id: ai-strategy
+    file: 15-AI-Strategy.md
+    required: false
+    fed_by: [14-ai-systems]
+    acceptance:
+      - Each AI capability justified against a non-AI alternative
+      - Evaluation method defined before commitment
+      - Failure modes and human fallback specified
+
+final_gate:
+  - Every required artifact exists and meets its acceptance criteria
+  - No artifact contradicts another
+  - Overall confidence recorded in the Executive Summary
+  - Every open assumption appears in Risks-and-Assumptions
+  - Build-Handoff passes the standalone test

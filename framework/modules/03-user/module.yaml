@@ -1,0 +1,13 @@
+id: 03-user
+name: User
+purpose: Identify who is served, what they are trying to get done, and what they do today.
+depends_on: [01-idea, 02-market]
+consumes: [idea_brief, market_definition]
+produces: [segments, personas, jobs_to_be_done, current_workflow, switching_cost]
+feeds_deliverables: [research-dossier, prd, ux-flows]
+gate:
+  - >= 2 segments with a stated reason for prioritising one
+  - Jobs stated as jobs, not features
+  - Current workflow documented including the tools being replaced
+  - Cost of switching named
+on_fail: return to 02-market

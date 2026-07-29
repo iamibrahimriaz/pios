@@ -1,0 +1,46 @@
+# Product Intelligence OS — Run Order
+#
+# The sequence an agent executes for a single project run.
+# Modules are grouped into stages. Everything in a stage may run in any order,
+# but a stage may not begin until the previous stage has passed its gates.
+
+version: 1
+
+stages:
+  - id: frame
+    purpose: Understand what is actually being proposed before researching anything.
+    modules: [01-idea]
+    human_checkpoint: true          # clarifying questions go back to the operator
+
+  - id: research
+    purpose: Establish the evidence base.
+    modules: [02-market, 03-user, 04-problem, 05-competition]
+    notes: >
+      03-user and 04-problem are sequential; 02-market may run alongside them.
+      05-competition requires all three.
+
+  - id: decide
+    purpose: Convert evidence into a committed direction.
+    modules: [06-business, 07-strategy]
+    human_checkpoint: true          # the MVP cut is the operator's call to confirm
+
+  - id: specify
+    purpose: Make the direction precise enough to build.
+    modules: [08-product, 09-technology, 14-ai-systems]
+
+  - id: operationalise
+    purpose: Make it executable, measurable and runnable.
+    modules: [10-execution, 11-growth, 12-metrics, 13-operations]
+
+  - id: deliver
+    purpose: Assemble, review and emit the final artifact set.
+    modules: []
+    action: framework/deliverables/manifest.yaml
+    human_checkpoint: true
+
+rules:
+  - A module may not start until every id in its depends_on has passed its gate.
+  - A module writes its outputs to projects/<slug>/state.yaml before its gate is evaluated.
+  - A failed gate follows the module's on_fail target. Never proceed on a failed gate.
+  - A module may be re-entered. Re-entry appends to the evidence log, it does not overwrite it.
+  - Loop protection: if a module fails its gate three times, halt and escalate to the operator.

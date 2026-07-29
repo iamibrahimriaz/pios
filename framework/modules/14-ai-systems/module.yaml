@@ -1,0 +1,13 @@
+id: 14-ai-systems
+name: AI Systems
+purpose: Decide where AI genuinely improves the product, and how it will be evaluated.
+depends_on: [08-product, 09-technology]
+consumes: [feature_spec, data_model, jobs_to_be_done]
+produces: [ai_opportunities, model_strategy, data_requirements, evaluation_plan, failure_modes]
+feeds_deliverables: [ai-strategy, prd, build-handoff]
+gate:
+  - Each AI capability justified against a non-AI alternative
+  - Training / grounding data availability confirmed, not assumed
+  - Evaluation method defined before the capability is committed to
+  - Failure modes and human fallback specified
+on_fail: return to 08-product

@@ -1,3 +1,4 @@
-projects/
+projects/*
+!projects/README.md
 .DS_Store
 node_modules/

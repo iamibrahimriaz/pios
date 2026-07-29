@@ -1,0 +1,13 @@
+id: 13-operations
+name: Operations
+purpose: Plan how the product is run, supported and kept compliant after launch.
+depends_on: [10-execution]
+consumes: [delivery_plan, security_model, regulatory_landscape]
+produces: [support_model, runbooks, incident_process, compliance_operations, cost_model]
+feeds_deliverables: [operations-plan, build-handoff]
+gate:
+  - Support channel and response expectation defined
+  - Incident and escalation path documented
+  - Ongoing compliance obligations mapped to an owner and a cadence
+  - Running cost estimated at launch scale
+on_fail: return to 10-execution
