@@ -122,7 +122,7 @@ graph LR
 **Longest chain:** «M0 → M1 → M2 → Launch»
 **Total to launch:** «duration» [tag]
 
-**What could compress it:** «the parallelisable work, and what it would cost»
+**What could compress it:** «the parallelizable work, and what it would cost»
 
 ---
 
