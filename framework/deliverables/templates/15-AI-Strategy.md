@@ -113,7 +113,7 @@ must be a domain expert, not the build team»
 | --- | --- | --- | --- | --- | --- |
 | F1 | «specific failure» | «h/m/l» | «what it costs the user» | «how it is caught» | «guardrail» |
 
-**Worst realiztic outcome:** «state it plainly»
+**Worst realistic outcome:** «state it plainly»
 
 **Human fallback:** «what the user does when the AI is wrong, and how they notice»
 
