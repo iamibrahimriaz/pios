@@ -71,7 +71,7 @@ Modules: [04-problem]
 # 3. Assumed Problems
 
 <!-- fill: Problems that are plausible but not evidenced. These are NOT lesser problems —
-     they may be the most important ones. They are simply unproven, and must be labelled
+     they may be the most important ones. They are simply unproven, and must be labeled
      as such so nobody builds on them by accident. -->
 
 > ⚠️ These problems are believed but **not established**. Do not build on them without validation.

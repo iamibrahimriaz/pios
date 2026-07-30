@@ -135,7 +135,7 @@ this is usually mandatory»
 | | |
 | --- | --- |
 | Is AI involvement disclosed to the user? | «yes/no — and how» |
-| Is AI-generated content labelled? | «yes/no — and how» |
+| Is AI-generated content labeled? | «yes/no — and how» |
 | Can the user see why a suggestion was made? | «yes/no» |
 | Regulatory disclosure requirement | «regime and obligation» [tag] |
 
