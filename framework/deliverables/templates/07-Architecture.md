@@ -105,7 +105,7 @@ degenerating into a ball of mud»
 | Concern | Control | Regime driving it |
 | --- | --- | --- |
 | Authentication | «mechanism» | — |
-| Authorisation | «mechanism, enforcement point» | — |
+| Authorization | «mechanism, enforcement point» | — |
 | Data in transit | «TLS version, cert management» | «regime» |
 | Data at rest | «encryption, key management» | «regime» |
 | Secrets | «where stored, how rotated» | — |
@@ -157,7 +157,7 @@ degenerating into a ball of mud»
 | Environment | Purpose | Data | Access |
 | --- | --- | --- | --- |
 | Local | Development | Seeded | Developers |
-| Staging | Pre-release verification | Anonymised | Team |
+| Staging | Pre-release verification | Anonymized | Team |
 | Production | Live | Real | Restricted |
 
 ---

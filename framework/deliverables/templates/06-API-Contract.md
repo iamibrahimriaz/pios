@@ -58,7 +58,7 @@ Content-Type: application/json
 
 ---
 
-## 3. Authorisation Model
+## 3. Authorization Model
 
 <!-- fill: Who can do what. This is where IDOR and privilege-escalation bugs are
      prevented or created. Be explicit about record-level access, not just roles. -->
@@ -239,7 +239,7 @@ Content-Type: application/json
 
 <!-- ACCEPTANCE — remove before delivery
 - [ ] Endpoints, methods, request and response shapes are concrete JSON, not descriptions
-- [ ] Auth and authorisation model specified including record-level rules
+- [ ] Auth and authorization model specified including record-level rules
 - [ ] Consistent error taxonomy defined
 - [ ] Every MVP feature maps to an endpoint in the coverage check
 - [ ] Validation rules stated per writable field

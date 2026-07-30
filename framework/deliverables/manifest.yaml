@@ -97,7 +97,7 @@ artifacts:
     fed_by: [09-technology]
     acceptance:
       - Endpoints, methods, request and response shapes
-      - Auth and authorisation model
+      - Auth and authorization model
       - Error taxonomy
       - Every product capability has a supporting endpoint
 

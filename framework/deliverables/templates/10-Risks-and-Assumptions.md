@@ -45,7 +45,7 @@ Modules: [07-strategy, all]
 | --- | --- | --- | --- | --- |
 | A«n» | «statement» | «consequence» | «method» | open |
 
-### Product and Behaviour
+### Product and Behavior
 
 | # | Assumption | Impact if wrong | Validation | Status |
 | --- | --- | --- | --- | --- |
