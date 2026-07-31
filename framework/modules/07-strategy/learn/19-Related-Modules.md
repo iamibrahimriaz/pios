@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 07-strategy/README.md
+  - 07-strategy/core/00-Purpose.md
 Outputs:
   - Understanding of the strategy stage's position in the chain
 Related Modules:

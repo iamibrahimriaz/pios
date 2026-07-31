@@ -13,7 +13,7 @@ Audience:
   - Product Managers
   - Founders
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 07-strategy gate passed and checkpoint approved
 Outputs:
   - Shared understanding of what this module establishes

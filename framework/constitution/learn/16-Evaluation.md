@@ -1,6 +1,6 @@
 ---
 Title: Evaluation
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -16,13 +16,13 @@ Audience:
   - Product Owners
   - Reviewers
 Prerequisites:
-  - 09-Research-Methodology.md
+  - core/09-Research-Methodology.md
   - 10-Common-Mistakes.md
-  - 11-Quality-Gate.md
-  - 12-Checklist.md
-  - 13-Template.md
-  - 14-Examples.md
-  - 15-Anti-Examples.md
+  - core/11-Quality-Gate.md
+  - core/12-Checklist.md
+  - core/13-Template.md
+  - resources/14-Examples.md
+  - resources/15-Anti-Examples.md
 Outputs:
   - Research quality score
   - Evaluation report

@@ -13,7 +13,7 @@ Audience:
   - Product Managers
   - Founders
 Prerequisites:
-  - 00-AI-Constitution/resources/18-References.md
+  - ../constitution/resources/18-References.md
 Outputs:
   - Input routes for strategic decisions
 Related Modules:

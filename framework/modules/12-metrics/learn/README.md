@@ -14,7 +14,7 @@ Audience:
   - Analysts
 Prerequisites:
   - 11-growth/learn/README.md
-  - 12-metrics/README.md
+  - 12-metrics/core/00-Purpose.md
 Outputs:
   - A reading path through the Metrics module
 Related Modules:

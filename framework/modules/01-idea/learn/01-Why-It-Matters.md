@@ -1,6 +1,6 @@
 ---
 Title: Why It Matters
-Module: 01-Idea
+Module: 01-idea
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -15,9 +15,9 @@ Audience:
   - Researchers
   - Business Analysts
 Prerequisites:
-  - 00-AI-Constitution
-  - 01-Idea/README.md
-  - 00-Purpose.md
+  - ../constitution/core/00-Purpose.md
+  - 01-idea/README.md
+  - 01-idea/core/00-Purpose.md
 Outputs:
   - Understanding of idea importance
   - Product discovery mindset

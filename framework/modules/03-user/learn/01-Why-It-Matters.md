@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 03-user/README.md
+  - 03-user/core/00-Purpose.md
 Outputs:
   - Understanding of why the user stage exists
 Related Modules:

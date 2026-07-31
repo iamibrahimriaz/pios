@@ -20,7 +20,7 @@ Related Modules:
   - 12-metrics
 Tags:
   - Execution
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

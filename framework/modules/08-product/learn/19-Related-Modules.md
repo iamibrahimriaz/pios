@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 08-product/README.md
+  - 08-product/core/00-Purpose.md
 Outputs:
   - Understanding of the product stage's position in the chain
 Related Modules:

@@ -1,6 +1,6 @@
 ---
 Title: AI Identity
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -13,10 +13,10 @@ Audience:
   - Contributors
   - Product Teams
 Prerequisites:
-  - Mission.md
-  - Vision.md
-  - Product-Philosophy.md
-  - Research-Philosophy.md
+  - knowledge/00-Mission.md
+  - knowledge/01-Vision.md
+  - knowledge/02-Product-Philosophy.md
+  - knowledge/03-Research-Philosophy.md
 Outputs:
   - AI identity definition
   - Role boundaries

@@ -1,6 +1,6 @@
 ---
 Title: Common Mistakes
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -15,12 +15,12 @@ Audience:
   - Business Analysts
   - Product Owners
 Prerequisites:
-  - 03-Core-Principles.md
-  - 04-Mental-Models.md
-  - 05-Best-Practices.md
-  - 06-Framework.md
-  - 07-Workflow.md
-  - 09-Research-Methodology.md
+  - core/03-Core-Principles.md
+  - core/04-Mental-Models.md
+  - core/05-Best-Practices.md
+  - core/06-Framework.md
+  - core/07-Workflow.md
+  - core/09-Research-Methodology.md
 Outputs:
   - Better research quality
   - Fewer incorrect assumptions

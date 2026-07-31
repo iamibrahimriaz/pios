@@ -14,7 +14,7 @@ Audience:
   - Researchers
 Prerequisites:
   - 04-problem/learn/README.md
-  - 05-competition/README.md
+  - 05-competition/core/00-Purpose.md
 Outputs:
   - A reading path through the Competition module
 Related Modules:

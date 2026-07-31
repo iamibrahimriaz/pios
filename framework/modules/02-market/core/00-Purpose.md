@@ -14,7 +14,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 01-idea gate passed
 Outputs:
   - Shared understanding of what this module establishes

@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 00-AI-Constitution/README.md
+  - ../constitution/core/00-Purpose.md
   - 01-idea/README.md
 Outputs:
   - A reading path through the Idea module

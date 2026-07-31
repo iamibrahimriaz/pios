@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 08-product/README.md
+  - 08-product/core/00-Purpose.md
 Outputs:
   - Understanding of why the product stage exists
 Related Modules:

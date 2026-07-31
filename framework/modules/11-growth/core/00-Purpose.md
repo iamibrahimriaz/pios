@@ -12,7 +12,7 @@ Audience:
   - AI Agents
   - Founders
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 06-business and 08-product gates passed
 Outputs:
   - Shared understanding of what this module establishes

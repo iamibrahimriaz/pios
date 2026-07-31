@@ -14,7 +14,7 @@ Audience:
   - Researchers
 Prerequisites:
   - 06-business/learn/README.md
-  - 07-strategy/README.md
+  - 07-strategy/core/00-Purpose.md
 Outputs:
   - A reading path through the Strategy module
 Related Modules:

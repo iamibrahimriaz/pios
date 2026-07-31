@@ -37,7 +37,7 @@ artifacts:
     file: 01-Research-Dossier.md
     required: true
     audience: product, strategy, anyone auditing the reasoning
-    fed_by: [02-market, 03-user, 04-problem, 05-competition]
+    fed_by: [01-idea, 02-market, 03-user, 04-problem, 05-competition, 06-business]
     acceptance:
       - Market definition, sizing, trends, regulatory landscape
       - Segments, personas, jobs to be done, current workflow
@@ -60,7 +60,7 @@ artifacts:
     file: 03-PRD.md
     required: true
     audience: engineering, design, delivery agent
-    fed_by: [07-strategy, 08-product, 12-metrics]
+    fed_by: [01-idea, 03-user, 04-problem, 05-competition, 06-business, 07-strategy, 08-product, 12-metrics, 14-ai-systems]
     acceptance:
       - Problem, users, jobs, scope, and explicit non-goals
       - Every requirement traces to a ranked problem
@@ -72,7 +72,7 @@ artifacts:
     file: 04-Feature-Spec.md
     required: true
     audience: engineering, delivery agent
-    fed_by: [08-product, 07-strategy]
+    fed_by: [07-strategy, 08-product]
     acceptance:
       - Features prioritized with the MVP cut line drawn and reasoned
       - Each feature has behavior, acceptance criteria and dependencies
@@ -127,7 +127,7 @@ artifacts:
     file: 09-Roadmap.md
     required: true
     audience: founder, delivery
-    fed_by: [07-strategy, 10-execution]
+    fed_by: [07-strategy, 10-execution, 11-growth]
     acceptance:
       - Sequenced milestones with dependencies
       - Each milestone independently shippable
@@ -160,7 +160,7 @@ artifacts:
     file: 12-Build-Handoff.md
     required: true
     audience: a coding agent or engineering team with no prior context
-    fed_by: [08-product, 09-technology, 10-execution, 12-metrics]
+    fed_by: [08-product, 09-technology, 10-execution, 12-metrics, 13-operations, 14-ai-systems]
     critical: true
     acceptance:
       - Readable standalone — assumes no access to the research conversation

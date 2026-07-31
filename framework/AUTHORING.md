@@ -233,7 +233,15 @@ Rules:
 - `Section` is the directory name: `core`, `learn`.
 - Omit `Created` / `Last Updated` rather than leaving `YYYY-MM-DD` placeholders. Git
   records dates; a placeholder date is worse than no date.
-- `Prerequisites` are real paths, checkable by a script.
+- `Prerequisites` are real paths, checkable by a script. Paths resolve against
+  `framework/modules/`, `framework/constitution/`, `framework/`, or the citing file's own
+  directory — in that order. The one permitted non-path form is a semantic precondition
+  reading `<module> gate passed` (or `<a> and <b> gates passed`); anything else is a
+  defect. Run `python3 framework/engine/validate.py` to check.
+- **Gate criteria that begin with `>=` must be quoted** in `module.yaml`. Unquoted, YAML
+  reads `>` as a folded block scalar and the file fails to parse — silently, because
+  nothing reads these files until an agent does. The same applies to any criterion
+  starting with a quote character.
 
 ---
 
@@ -287,6 +295,7 @@ principles that do not connect to anything the engine consumes.
 - [ ] No empty directories
 - [ ] American spelling throughout
 - [ ] Nothing in `learn/` that an agent needs to execute correctly
+- [ ] `python3 framework/engine/validate.py` exits 0
 
 ---
 

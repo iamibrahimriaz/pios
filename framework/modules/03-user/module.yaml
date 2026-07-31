@@ -6,7 +6,7 @@ consumes: [idea_brief, market_definition]
 produces: [segments, personas, jobs_to_be_done, current_workflow, switching_cost]
 feeds_deliverables: [research-dossier, prd, ux-flows]
 gate:
-  - >= 2 segments with a stated reason for prioritizing one
+  - ">= 2 segments with a stated reason for prioritizing one"
   - Jobs stated as jobs, not features
   - Current workflow documented including the tools being replaced
   - Cost of switching named

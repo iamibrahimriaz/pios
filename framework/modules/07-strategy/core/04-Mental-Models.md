@@ -20,7 +20,7 @@ Related Modules:
   - 08-product
 Tags:
   - Strategy
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

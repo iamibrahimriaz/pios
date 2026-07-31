@@ -20,7 +20,7 @@ Related Modules:
   - 10-execution
 Tags:
   - Technology
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

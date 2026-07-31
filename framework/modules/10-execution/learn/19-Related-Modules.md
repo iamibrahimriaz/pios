@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Engineers
 Prerequisites:
-  - 10-execution/README.md
+  - 10-execution/core/00-Purpose.md
 Outputs:
   - Understanding of the execution stage's position in the chain
 Related Modules:

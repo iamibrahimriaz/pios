@@ -1,6 +1,6 @@
 ---
 Title: Research Methodology
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: core
 Category: Foundation
 Version: 1.0.0

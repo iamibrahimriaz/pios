@@ -1,6 +1,6 @@
 ---
 Title: AI Responsibilities
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -13,11 +13,11 @@ Audience:
   - Contributors
   - Product Teams
 Prerequisites:
-  - Mission.md
-  - Vision.md
-  - Product-Philosophy.md
-  - Research-Philosophy.md
-  - AI-Identity.md
+  - knowledge/00-Mission.md
+  - knowledge/01-Vision.md
+  - knowledge/02-Product-Philosophy.md
+  - knowledge/03-Research-Philosophy.md
+  - knowledge/04-AI-Identity.md
 Outputs:
   - AI responsibility framework
   - Operational expectations

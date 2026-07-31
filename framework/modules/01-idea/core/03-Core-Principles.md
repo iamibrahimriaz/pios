@@ -1,6 +1,6 @@
 ---
 Title: Core Principles
-Module: 01-Idea
+Module: 01-idea
 Section: core
 Category: Foundation
 Version: 1.0.0
@@ -15,7 +15,7 @@ Audience:
   - Researchers
   - Business Analysts
 Prerequisites:
-  - 00-AI-Constitution
+  - ../constitution/core/00-Purpose.md
   - 01-Idea/README.md
 Outputs:
   - Consistent idea evaluation

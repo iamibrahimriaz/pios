@@ -9,6 +9,6 @@ gate:
   - Raw idea restated in one unambiguous sentence
   - Geography / market and regulatory jurisdiction named
   - Buyer and user distinguished (may be the same, must be stated)
-  - >= 5 clarifying questions asked and answered or explicitly deferred
+  - ">= 5 clarifying questions asked and answered or explicitly deferred"
   - All initial assumptions tagged per engine/evidence-policy.md
 on_fail: halt and request input from the human operator

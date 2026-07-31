@@ -1,6 +1,6 @@
 ---
 Title: Mental Models for Product Intelligence OS
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: core
 Category: Foundation
 Version: 1.0.0
@@ -15,8 +15,8 @@ Audience:
   - Contributors
 Prerequisites:
   - 00-Purpose.md
-  - 01-Why-It-Matters.md
-  - 02-Learning-Objectives.md
+  - learn/01-Why-It-Matters.md
+  - learn/02-Learning-Objectives.md
   - 03-Core-Principles.md
 Outputs:
   - Shared reasoning framework
@@ -25,7 +25,7 @@ Related Modules:
   - 06-Decision-Rules.md
   - 10-Research-Standards.md
 Tags:
-  - Mental Models
+  - core/04-Mental-Models.md
   - Thinking
   - Reasoning
 ---

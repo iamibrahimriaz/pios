@@ -20,7 +20,7 @@ Related Modules:
   - 07-strategy
 Tags:
   - Problem
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

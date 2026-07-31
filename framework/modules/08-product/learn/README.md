@@ -14,7 +14,7 @@ Audience:
   - Researchers
 Prerequisites:
   - 07-strategy/learn/README.md
-  - 08-product/README.md
+  - 08-product/core/00-Purpose.md
 Outputs:
   - A reading path through the Product module
 Related Modules:

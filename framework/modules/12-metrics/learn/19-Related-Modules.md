@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Analysts
 Prerequisites:
-  - 12-metrics/README.md
+  - 12-metrics/core/00-Purpose.md
 Outputs:
   - Understanding of the metrics stage's position in the chain
 Related Modules:

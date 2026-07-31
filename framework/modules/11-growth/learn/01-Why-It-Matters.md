@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Marketers
 Prerequisites:
-  - 11-growth/README.md
+  - 11-growth/core/00-Purpose.md
 Outputs:
   - Understanding of why the growth stage exists
 Related Modules:

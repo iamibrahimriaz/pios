@@ -13,7 +13,7 @@ Audience:
   - Product Managers
   - Founders
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - engine/evidence-policy.md
   - 01-idea/core/03-Core-Principles.md
 Outputs:

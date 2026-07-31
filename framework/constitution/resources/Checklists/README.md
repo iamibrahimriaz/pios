@@ -1,6 +1,6 @@
 ---
 Title: Checklists Library
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: resources
 Category: Resource Library
 Version: 1.0.0
@@ -16,8 +16,8 @@ Audience:
   - Designers
   - Contributors
 Prerequisites:
-  - 00-Core
-  - 01-Knowledge
+  - core/00-Purpose.md
+  - knowledge/README.md
 Outputs:
   - Standardized review checklists
   - Quality assurance resources

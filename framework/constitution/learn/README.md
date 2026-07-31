@@ -1,4 +1,4 @@
-# 00-Core
+# `constitution/core`
 
 > The foundational constitution of Product Intelligence OS.
 
@@ -51,7 +51,7 @@ After completing this module, a researcher or AI agent should be able to:
 # Module Structure
 
 ```
-00-Core
+`constitution/core`
 │
 ├── 00-Purpose.md
 ├── 01-Why-It-Matters.md
@@ -232,7 +232,7 @@ After completing the Core module, every research project should produce:
 The Core module is the foundation for every other module.
 
 ```
-00-AI-Constitution
+framework/constitution
         │
         ▼
 01-Idea

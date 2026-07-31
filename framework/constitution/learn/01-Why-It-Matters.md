@@ -1,6 +1,6 @@
 ---
 Title: Why the AI Constitution Matters
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -14,11 +14,11 @@ Audience:
   - Researchers
   - Contributors
 Prerequisites:
-  - 00-Purpose.md
+  - core/00-Purpose.md
 Outputs:
   - Understanding of the importance of constitutional thinking
 Related Modules:
-  - 00-Purpose.md
+  - core/00-Purpose.md
   - 02-Learning-Objectives.md
   - 03-Core-Principles.md
 Tags:

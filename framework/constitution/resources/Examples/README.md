@@ -1,6 +1,6 @@
 ---
 Title: Communities Library
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: resources
 Category: Resource Library
 Version: 1.0.0
@@ -17,8 +17,8 @@ Audience:
   - Developers
   - Contributors
 Prerequisites:
-  - 00-Core
-  - 01-Knowledge
+  - core/00-Purpose.md
+  - knowledge/README.md
 Outputs:
   - Community directory
   - Learning resources

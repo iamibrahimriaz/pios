@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Engineers
 Prerequisites:
-  - 09-technology/README.md
+  - 09-technology/core/00-Purpose.md
 Outputs:
   - Understanding of the technology stage's position in the chain
 Related Modules:

@@ -1,6 +1,6 @@
 ---
 Title: Knowledge Hierarchy
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -15,11 +15,11 @@ Audience:
   - Business Analysts
   - Contributors
 Prerequisites:
-  - Product-Philosophy.md
-  - Research-Philosophy.md
-  - Critical-Thinking.md
-  - Decision-Rules.md
-  - Quality-Standards.md
+  - knowledge/02-Product-Philosophy.md
+  - knowledge/03-Research-Philosophy.md
+  - knowledge/07-Critical-Thinking.md
+  - knowledge/08-Decision-Rules.md
+  - knowledge/09-Quality-Standards.md
 Outputs:
   - Structured knowledge model
   - Knowledge organization principles

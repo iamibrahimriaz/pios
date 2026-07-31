@@ -21,7 +21,7 @@ Related Modules:
   - 11-growth
 Tags:
   - Business
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

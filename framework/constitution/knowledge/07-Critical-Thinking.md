@@ -1,6 +1,6 @@
 ---
 Title: Critical Thinking
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -15,11 +15,11 @@ Audience:
   - Researchers
   - Contributors
 Prerequisites:
-  - Product-Philosophy.md
-  - Research-Philosophy.md
-  - AI-Identity.md
-  - AI-Responsibilities.md
-  - AI-Ethics.md
+  - knowledge/02-Product-Philosophy.md
+  - knowledge/03-Research-Philosophy.md
+  - knowledge/04-AI-Identity.md
+  - knowledge/05-AI-Responsibilities.md
+  - knowledge/06-AI-Ethics.md
 Outputs:
   - Structured reasoning
   - Better decision-making

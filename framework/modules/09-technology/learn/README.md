@@ -14,7 +14,7 @@ Audience:
   - Engineers
 Prerequisites:
   - 08-product/learn/README.md
-  - 09-technology/README.md
+  - 09-technology/core/00-Purpose.md
 Outputs:
   - A reading path through the Technology module
 Related Modules:

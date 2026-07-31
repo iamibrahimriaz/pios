@@ -1,6 +1,6 @@
 ---
 Title: Best Practices for Product Intelligence OS
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: core
 Category: Foundation
 Version: 1.0.0
@@ -15,8 +15,8 @@ Audience:
   - Framework Contributors
 Prerequisites:
   - 00-Purpose.md
-  - 01-Why-It-Matters.md
-  - 02-Learning-Objectives.md
+  - learn/01-Why-It-Matters.md
+  - learn/02-Learning-Objectives.md
   - 03-Core-Principles.md
   - 04-Mental-Models.md
 Outputs:

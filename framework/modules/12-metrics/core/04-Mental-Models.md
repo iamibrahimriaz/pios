@@ -20,7 +20,7 @@ Related Modules:
   - 13-operations
 Tags:
   - Metrics
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

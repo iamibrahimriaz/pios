@@ -6,8 +6,8 @@ consumes: [market_definition, market_gaps, trends, segments, ranked_problems]
 produces: [competitor_matrix, feature_comparison, pricing_comparison, gap_analysis, positioning]
 feeds_deliverables: [research-dossier, executive-summary, prd]
 gate:
-  - >= 5 competitors, direct and indirect, with sources
+  - ">= 5 competitors, direct and indirect, with sources"
   - Pricing captured or explicitly marked unavailable
-  - "Do nothing / status quo" evaluated as a competitor
-  - >= 1 defensible gap articulated with reasoning
+  - '"Do nothing / status quo" evaluated as a competitor'
+  - ">= 1 defensible gap articulated with reasoning"
 on_fail: return to 02-market

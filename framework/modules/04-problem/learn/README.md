@@ -14,7 +14,7 @@ Audience:
   - Researchers
 Prerequisites:
   - 03-user/learn/README.md
-  - 04-problem/README.md
+  - 04-problem/core/00-Purpose.md
 Outputs:
   - A reading path through the Problem module
 Related Modules:

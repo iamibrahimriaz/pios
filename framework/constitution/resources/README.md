@@ -1,6 +1,6 @@
 ---
 Title: Resources Module
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: resources
 Category: Module Overview
 Version: 1.0.0
@@ -15,15 +15,15 @@ Audience:
   - Business Analysts
   - Contributors
 Prerequisites:
-  - 00-Core
-  - 01-Knowledge
+  - core/00-Purpose.md
+  - knowledge/README.md
 Outputs:
   - Reusable resources
   - Standardized workflows
   - Consistent documentation
 Related Modules:
-  - 00-Core
-  - 01-Knowledge
+  - core/00-Purpose.md
+  - knowledge/README.md
   - Future Research Modules
 Tags:
   - Resources
