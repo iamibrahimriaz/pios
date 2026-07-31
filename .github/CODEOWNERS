@@ -1,0 +1,7 @@
+# Every change to this repository is reviewed by the maintainer.
+#
+# Combined with a branch protection rule requiring code owner review on `main`,
+# this is what makes "anyone can propose, one person merges" enforceable rather
+# than a convention.
+
+*   @iamibrahimriaz

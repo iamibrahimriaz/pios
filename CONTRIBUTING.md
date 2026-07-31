@@ -133,6 +133,19 @@ advice that would apply to any framework.
 
 ---
 
+## How changes get in
+
+**Every change arrives as a pull request, including the maintainer's.** `main` is
+protected: no direct pushes, review required, and the validator must pass before
+merge is available. Nothing bypasses that, which is the point — a rule the owner
+can step around is not a rule.
+
+You do not need write access to contribute, and you will not be given it. Fork the
+repository, branch, and open a pull request. Merging is the maintainer's, and only
+the maintainer's.
+
+---
+
 ## Pull requests
 
 State which limitation you are addressing, and what it would break. A change to
