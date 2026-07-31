@@ -141,6 +141,25 @@ Stop and hand control back to the operator at:
 
 ---
 
+## Validating your work
+
+Two scripts. Neither replaces the review loop; both catch what discipline misses.
+
+```
+python3 framework/engine/validate.py              # the framework is sound
+python3 framework/engine/validate-run.py projects/<slug>   # your run is deliverable
+```
+
+The run validator checks what a tired agent stops doing: tags dropped, `«placeholder»`
+left in a delivered artifact, an empty evidence log, an assumption with no validation
+method, confidence still `unknown`. It also checks the two chains — a declared shortfall
+that changed a weighting, and a cost breach that produced a regress.
+
+**Run it before you tell the operator you are finished.** A non-zero exit means the run is
+not deliverable.
+
+---
+
 ## When you are done
 
 A run is complete when every `required` artifact in the manifest exists, meets its

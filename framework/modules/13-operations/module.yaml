@@ -10,4 +10,5 @@ gate:
   - Incident and escalation path documented
   - Ongoing compliance obligations mapped to an owner and a cadence
   - Running cost estimated at launch scale
+  - A cost ceiling breach is resolved by a recorded change to 06-business price or 07-strategy scope, never by revising the forecast
 on_fail: return to 10-execution

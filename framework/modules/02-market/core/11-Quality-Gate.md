@@ -60,7 +60,7 @@ the boundary is not drawn.
 
 ---
 
-# Criterion 2 — TAM / SAM / SOM each sourced or explicitly marked as an assumption
+# Criterion 2 — TAM / SAM / SOM each sourced or explicitly marked [assumption]
 
 **Passes when:** all three figures exist, each shows its derivation, and every input in
 that derivation carries a tag.
@@ -80,7 +80,7 @@ boundary in Criterion 1? An unchecked external figure is measuring a different m
 
 ---
 
-# Criterion 3 — At least three trends with direction and evidence
+# Criterion 3 — >= 3 trends with direction and evidence
 
 **Passes when:** three or more trends exist, each states a direction (growing / declining),
 each carries evidence, each states an implication — **and at least one works against the
@@ -107,6 +107,19 @@ compliant data model? If it says "HIPAA applies" and nothing more, no.
 **Also required:** an explicit answer to *does regulation exclude a segment named in the
 idea brief?* Silence fails the criterion — that question can end the run early and must
 be answered rather than skipped.
+
+---
+
+# Criterion 5 — Every regulatory and pricing claim carries the date it was checked
+
+**Passes when:** each citation carries the date it was verified.
+
+**Fails when:** a regulation or price appears without one, including when it is correct —
+an undated fact cannot be revalidated, and this module's findings are consumed by four
+later modules.
+
+**Why it matters here.** A run reused in a year carries regulatory findings forward with no
+signal that they are stale.
 
 ---
 

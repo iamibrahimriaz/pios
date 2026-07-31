@@ -45,7 +45,7 @@ starts committing to a direction.
 
 ---
 
-# Criterion 1 — At least five competitors, direct and indirect, with sources
+# Criterion 1 — >= 5 competitors, direct and indirect, with sources
 
 **Passes when:** five or more entries exist, they span at least three of the five types
 (direct, indirect, substitute, status quo, non-consumption), and each carries a source.
@@ -97,7 +97,7 @@ addressable opportunity.
 
 ---
 
-# Criterion 4 — At least one defensible gap articulated with reasoning
+# Criterion 4 — >= 1 defensible gap articulated with reasoning
 
 **Passes when:** a gap is identified, it maps to a ranked problem from module 04, the
 reason it exists is stated, **and the six-month question is answered.**

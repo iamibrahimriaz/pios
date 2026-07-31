@@ -180,6 +180,20 @@ prohibits for the same reason.
 
 ---
 
+# Criterion 5 — Every metric states what someone optimizing it without caring about the outcome would do
+
+**Passes when:** each metric carries its gamed behavior, and metrics whose gamed behavior is
+harmful either changed or acquired a guardrail with a threshold.
+
+**Fails when:** metrics are justified only by what they mean.
+
+**Why meaning is not enough.** Most metric gaming is honest. People are told a number
+matters and they move it — by shortening notes, closing tickets faster, prompting more
+often. The damage arrives as a side effect of exactly the behavior that was asked for, and
+the responsibility sits with whoever chose the number.
+
+---
+
 # Module-Specific Checks
 
 ## The Confidence Separation Check

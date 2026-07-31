@@ -10,4 +10,5 @@ gate:
   - Every metric has a definition, source and target
   - Leading indicators distinguished from lagging ones
   - Instrumentation specified at event level for the build handoff
+  - Every metric states what someone optimizing it without caring about the outcome would do
 on_fail: return to 08-product

@@ -62,7 +62,7 @@ different products? Then it is ambiguous.
 
 ---
 
-# Criterion 2 — Geography and regulatory jurisdiction named
+# Criterion 2 — Geography / market and regulatory jurisdiction named
 
 **Passes when:** `state.project.jurisdiction` is set from an operator answer, or the
 idea itself states it unambiguously.
@@ -75,7 +75,7 @@ time, and nothing downstream will catch it.
 
 ---
 
-# Criterion 3 — Buyer and user distinguished
+# Criterion 3 — Buyer and user distinguished (may be the same, must be stated)
 
 **Passes when:** the brief states who uses the product and who pays for it, even where
 they are the same person. Saying "the same person" explicitly is a pass. Silence is not.
@@ -86,7 +86,7 @@ module 06 means re-running 03 and 04.
 
 ---
 
-# Criterion 4 — At least five clarifying questions asked and answered or explicitly deferred
+# Criterion 4 — >= 5 clarifying questions asked and answered or explicitly deferred
 
 **Passes when:** five or more questions exist, each satisfies the asking test in
 `08-Questions-To-Answer.md`, and each has either an operator answer or a recorded
@@ -105,7 +105,7 @@ five with cosmetic questions has failed this criterion while appearing to satisf
 
 ---
 
-# Criterion 5 — All initial assumptions tagged per the evidence policy
+# Criterion 5 — All initial assumptions tagged per engine/evidence-policy.md
 
 **Passes when:** every factual claim in the brief carries exactly one tag, every
 assumption appears in `state.assumptions` with a validation method, and no hedging
@@ -114,6 +114,33 @@ language stands in for a tag.
 **Common failure:** the brief reads confidently because the assumptions were written as
 statements. Search the brief for sentences that assert something about users, demand, or
 willingness to pay. Each one needs a tag.
+
+---
+
+# Criterion 6 — The single load-bearing assumption named among those tagged
+
+**Passes when:** one assumption is marked as the one the premise rests on, and removing it
+would change what the run is about.
+
+**Fails when:** every assumption is tagged and none is distinguished. Module 07 then has to
+rediscover which one mattered, usually by finding out the hard way.
+
+**The removal test.** Delete the named assumption. If the idea still stands, it was not the
+load-bearing one.
+
+---
+
+# Criterion 7 — A pre-mortem recorded — what would make this idea not worth doing — before research begins
+
+**Passes when:** a short list exists, written before module 02 starts, of the conditions
+under which this idea should not be pursued.
+
+**Fails when:** it is written after the research, or contains only conditions the operator
+already believes to be false.
+
+**Why before.** Compared afterward against what modules 02–06 actually found, this list is
+the cheapest calibration available. Written afterward it is a summary, and calibrates
+nothing.
 
 ---
 

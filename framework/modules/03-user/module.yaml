@@ -10,4 +10,6 @@ gate:
   - Jobs stated as jobs, not features
   - Current workflow documented including the tools being replaced
   - Cost of switching named
+  - Each user finding marked observed or reported
+  - Switching cost broken into its five components, not carried as one figure
 on_fail: return to 02-market

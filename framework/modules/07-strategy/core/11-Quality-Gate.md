@@ -45,7 +45,7 @@ authorizes **asking**.
 
 ---
 
-# Criterion 1 — At least three solution options generated before one is chosen
+# Criterion 1 — >= 3 solution options generated before one is chosen
 
 **Passes when:** three or more options exist, each states what would be built first, and
 those first builds differ.
@@ -134,6 +134,41 @@ thought through. This field is what makes the register operational.
 | Sharpest problem assumed | "The product rests on an untested belief" |
 | Gap not defensible | A risk with a timescale |
 | Viability conditional | Module 06's conditions as risks or stop conditions |
+
+---
+
+# Criterion 6 — The expected winner recorded before scoring begins
+
+**Passes when:** the option the author expected to win is written down before any score is
+assigned.
+
+**Fails when:** it is added afterward.
+
+**What this is for.** Confidence laundering cannot be detected in a single document — the
+laundered and honest versions are identical. It can be detected across runs. If the
+expected winner always wins, the comparison is recording a decision rather than making
+one, and this field is what makes that pattern visible.
+
+A pre-registered expectation that turns out wrong is the strongest evidence available that
+the comparison did real work.
+
+---
+
+# Criterion 7 — If 04-problem declared a shortfall, the weight it changed is named, and whether the winner would differ without it
+
+**Passes when:** the specific criterion whose weight changed is named, and the counterfactual
+is stated — would the same option have won without the shortfall.
+
+**Fails when:** a shortfall was declared upstream and the comparison is identical to what it
+would have been otherwise, with no explanation.
+
+**Not applicable** when module 04 declared no shortfall. Say so explicitly rather than
+leaving the criterion unaddressed.
+
+**Why this criterion exists.** `declared_shortfall` is the framework's most distinctive
+mechanism and its value depends entirely on something happening here. A shortfall declared
+and then ignored is worse than one never declared — it produces documentation of rigor
+without the rigor.
 
 ---
 
