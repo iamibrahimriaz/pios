@@ -304,9 +304,13 @@ and use `/pios-author`.
 
 ## A note on where this stands
 
-The framework is complete and structurally validated — 21 checks, all passing — and
-**has not yet been run end to end by anyone.** No reference run exists in
-[`examples/`](examples/) yet.
+The framework is complete and structurally validated — 22 checks, all passing — and
+**has not yet been proven by a published run.**
 
-If you use it, the most valuable thing you can contribute is what broke. See
-[CONTRIBUTING.md](CONTRIBUTING.md).
+**Your runs stay yours.** Nothing under `projects/` or `examples/` is ever
+committed — `.gitignore` excludes it and a structural check fails the build if
+anything slips through. The framework is open source; the research you put through
+it is not, and no run of yours will appear in this repository or anyone else's.
+
+If you use it, the most valuable thing you can contribute is what broke — the
+defect, not the project. See [CONTRIBUTING.md](CONTRIBUTING.md).

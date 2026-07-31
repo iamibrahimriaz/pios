@@ -14,10 +14,10 @@ python3 framework/engine/validate.py
 ```
 
 It must exit 0 before you change anything, and again before you open a pull
-request. Twenty-one checks: YAML parses, required files exist, the dependency graph
+request. Twenty-two checks: YAML parses, required files exist, the dependency graph
 is complete and acyclic, gate criteria match their documentation, the manifest
 and the modules agree, prerequisites resolve, skills are valid and do not
-self-modify, spelling is American.
+self-modify, no run content is tracked, spelling is American.
 
 If you use Claude Code, the `/pios-author` skill loads the authoring rules for
 you. Otherwise read [`framework/AUTHORING.md`](framework/AUTHORING.md) — it is
@@ -29,11 +29,30 @@ the specification, and this file does not repeat it.
 
 | Contribution | Why it is wanted |
 | --- | --- |
-| **A completed run** in `examples/` | The single most valuable thing right now. A worked run proves more than any amount of method |
+| **A defect found by running it** | The single most valuable thing right now. Especially a gate you could not pass honestly, or a template you could not fill |
 | **A vertical pack** in `framework/packs/` | Domain knowledge — regulatory landscape, incumbents, standard entities — that specializes a run |
 | **A gate criterion that closes a real gap** | Each module's `learn/20-Future-Improvements.md` lists its own known limitations. Start there |
-| **An anti-example** | A filled-in artifact that looks plausible and is wrong. These teach more than correct examples |
-| **A defect report from using it** | Especially a gate you could not pass honestly, or a template you could not fill |
+| **An anti-example** | A filled-in artifact that looks plausible and is wrong. These teach more than correct examples. Write it from scratch — never harvest one from a real run |
+
+---
+
+## Runs are never contributed
+
+**Do not attach a completed run to an issue or a pull request.** Nothing under
+`projects/` or `examples/` is tracked by git, and a structural check fails the
+build if any of it appears. This is not a formality — a run carries real market
+research, named customers, pricing and unreleased strategy, and none of it is
+this project's to publish.
+
+What crosses back into the framework is the defect, stated so it stands on its own:
+
+| Not this | This |
+| --- | --- |
+| "In my run, the pricing gate failed" | "The pricing gate cannot be passed when the buyer and the user are different people" |
+| "Module 05 missed the obvious incumbent" | "05-competition's gate does not force the incumbent platform to be named" |
+
+If the reasoning only makes sense with your run in front of you, it is not a
+framework change yet. Nothing needs to be redacted, because nothing is sent.
 
 ---
 

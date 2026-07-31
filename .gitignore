@@ -1,4 +1,14 @@
+# Runs are private. The framework is open; what people put through it is not.
+#
+# A run carries real market research, named customers, pricing, and someone's
+# unreleased product strategy. None of that is ours to publish. Only the README
+# in each directory is tracked, so the directory survives a clone while its
+# contents never leave the machine.
 projects/*
 !projects/README.md
+examples/*
+!examples/README.md
+
 .DS_Store
 node_modules/
+__pycache__/

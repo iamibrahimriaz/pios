@@ -198,7 +198,7 @@ framework/                ships to users; read-only during a run
 scripts/install-skill.sh  install /pios globally, for use from other projects
 projects/<slug>/          one run — state.yaml, research/, deliverables/
 
-examples/                 completed reference runs — none yet; see examples/README.md
+examples/                 your own finished runs — local only, never committed
 ```
 
 Each module contains four layers:
@@ -223,17 +223,22 @@ pass before the run continues.
 | | |
 | --- | --- |
 | Framework | Complete — 14 modules, 4 layers each, 15 required deliverables |
-| Structural checks | 21, all passing (`framework/engine/validate.py`) |
-| Reference runs | **None yet.** The framework has not been run end to end |
+| Structural checks | 22, all passing (`framework/engine/validate.py`) |
+| Reference runs | **Not published.** Runs are private — see [`examples/`](examples/) |
 | Vertical packs | Planned, not built |
 
 The honest position: every claim about *structure* in this README is verified.
-No claim about *outcomes* has been tested, because nobody has completed a run.
-A reference run is the next piece of work, and it will be published in
-[`examples/`](examples/) together with whatever it exposes about the framework.
+No claim about *outcomes* has been tested by a published run.
 
-Use it with that in mind. If you run it, [tell us what broke](CONTRIBUTING.md) —
-that is currently the most valuable contribution available.
+**Completed runs are not published here, and will not be.** A run carries real
+market research, named customers, pricing and unreleased strategy — the framework
+is open, but what people put through it is theirs. Runs stay on the machine that
+produced them; `.gitignore` enforces it and so does a structural check.
+
+What crosses back into the framework is the *defect*, never the project. If you
+run it and something broke, [describe the defect](CONTRIBUTING.md) — a gate you
+could not pass honestly, a template you could not fill. That is the most valuable
+contribution available, and it needs none of your research to be useful.
 
 ---
 

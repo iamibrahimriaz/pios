@@ -16,6 +16,7 @@ import os
 import re
 import sys
 import glob
+import subprocess
 
 try:
     import yaml
@@ -229,6 +230,21 @@ for sf in skills:
         if SELF_MOD.search(line):
             self_mod.append(f"{sf}:{n}: {line.strip()[:70]}")
 check("no self-modification instructions in skills", not self_mod, self_mod[:10])
+
+# Runs are private. The framework is open; the research people put through it is
+# not. .gitignore excludes projects/ and examples/, but a `git add -f`, a merge,
+# or a file committed before the ignore rule existed all bypass it silently — and
+# the leak is someone's unreleased strategy, not a stray build artifact.
+tracked_runs = []
+try:
+    out = subprocess.run(["git", "ls-files", "projects", "examples"],
+                         cwd="..", capture_output=True, text=True, timeout=20)
+    if out.returncode == 0:
+        tracked_runs = [f for f in out.stdout.split()
+                        if os.path.basename(f) != "README.md"]
+except Exception:
+    pass  # not a git checkout, or git unavailable — nothing to leak from
+check("no run content tracked by git", not tracked_runs, tracked_runs[:10])
 
 placeholders = [f for f in glob.glob("**/*.md", recursive=True)
                 if re.search(r"^(Created|Last Updated):\s*YYYY-MM-DD", open(f, encoding="utf8").read(), re.M)]

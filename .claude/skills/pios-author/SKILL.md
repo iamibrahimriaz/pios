@@ -41,7 +41,7 @@ pip3 install -r requirements.txt
 python3 framework/engine/validate.py
 ```
 
-It must exit 0 before you start and again before you finish. Twenty-one checks. Read
+It must exit 0 before you start and again before you finish. Twenty-two checks. Read
 `framework/AUTHORING.md` — it is the specification, and this file does not repeat it.
 
 ---
@@ -138,13 +138,38 @@ to prevent.
 python3 framework/engine/validate.py
 ```
 
-It must exit 0. Twenty-one checks: YAML parses, required files exist, dependency graph is
+It must exit 0. Twenty-two checks: YAML parses, required files exist, dependency graph is
 complete and acyclic, gate parity holds, manifest and modules agree, prerequisites
 resolve, no stale identifiers, skills carry no self-modification
-instruction, American spelling.
+instruction, no run content is tracked, American spelling.
 
 Then walk `AUTHORING.md`'s submission checklist. The item most often missed is the last
 one: **nothing in `learn/` that an agent needs to execute correctly.**
+
+---
+
+## Folding a lesson from a run back into the framework
+
+Runs are where the framework's real defects surface. Runs are also private —
+`projects/` and `examples/` are gitignored, and a structural check fails the build
+if any run content is tracked. Both things are true at once, so the lesson crosses
+the boundary and the project never does.
+
+**State the defect so it stands on its own.** If the reasoning only makes sense
+with the run in front of you, it is not a framework change yet.
+
+| Not this | This |
+| --- | --- |
+| "In the Acme run, the pricing gate failed" | "The pricing gate cannot be passed when the buyer and the user are different people" |
+| "Module 05 missed the incumbent" | "05-competition's gate does not force the incumbent platform to be named" |
+
+**Never carry across** a client or company name, a real price, a named customer, a
+market size figure, or a sentence lifted from a deliverable. Anti-examples in
+`resources/` are written from scratch. A harvested one is a leak wearing a
+teaching costume, and it is the most likely way this repository ever publishes
+something it should not have.
+
+The commit message explains the defect, not the project that revealed it.
 
 ---
 

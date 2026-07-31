@@ -1,8 +1,28 @@
 # Examples
 
-Completed reference runs. Each is a real end-to-end pass through the framework —
-the same fifteen artifacts a run produces for you, with the evidence tags,
-open assumptions and gate verdicts left intact.
+**This directory is local. Nothing in it is ever committed or published.**
+
+`.gitignore` excludes everything here except this file. That is deliberate and it
+is not going to change.
+
+---
+
+## Why runs stay private
+
+A completed run is not a demo. It carries the market research someone paid for,
+the customers they named, the price they intend to charge, and the strategy they
+have not announced yet. It is the most sensitive document the framework produces,
+which is exactly why it is the one people are most tempted to publish.
+
+The framework is open. **What people put through it is theirs.**
+
+This holds for your own runs too. A private project of yours is still a private
+project, and the moment one run gets published "just as an example", the boundary
+stops meaning anything.
+
+---
+
+## What this directory is for
 
 ```
 examples/<slug>/
@@ -11,52 +31,36 @@ examples/<slug>/
   NOTES.md          what the run exposed about the framework itself
 ```
 
----
+Keep finished runs here to learn from, compare against each other, and calibrate.
+Reading three of your own runs side by side is what surfaces the patterns a single
+run cannot show — that your market sizing is always optimistic, or that module 09
+is where every run stalls.
 
-## Status: none yet
-
-This directory is empty on purpose rather than by oversight, and the honest
-position is worth stating plainly: **the framework has not yet been run end to
-end.** Everything in this repository has been verified structurally — 21 checks
-in `framework/engine/validate.py`, all passing — and nothing has been verified
-by use.
-
-A reference run is the next piece of work. When it lands here it will include
-its failures: gates that were hard to pass, templates that were awkward to fill,
-and any point where the method needed changing. A reference run that shows only
-success would be the least useful artifact this project could publish.
+`NOTES.md` is the part that matters most. Write it while the run is fresh: which
+gate was hard to pass honestly, which template was awkward to fill, where you
+worked around the method instead of following it.
 
 ---
 
-## What an example is for
+## How a run improves the framework
 
-**To see the output before committing hours to a run.** Fifteen artifacts is a
-large promise. Reading one real set answers "is this worth my time" faster than
-any description.
+Runs teach; runs do not ship. The lesson crosses the boundary, the run never does.
 
-**To calibrate.** The artifacts show what "enough evidence" looks like in
-practice, how much an honest `[assumption]` density is, and what a run reporting
-low confidence reads like.
+**Extract the defect, discard the project.** A framework change must stand on its
+own for someone in an unrelated domain. If the reasoning only makes sense with the
+run in front of you, it is not a framework change yet.
 
-**To prove the framework can say no.** The most valuable example is one where
-the run recommends *do not build* — or where a cost check fails and the run
-regresses. Those are the outcomes that distinguish this from a document
-generator, and they are the ones worth publishing first.
+| Do not write | Write |
+| --- | --- |
+| "In the Acme run, the pricing gate failed" | "The pricing gate cannot be passed when the buyer and the user are different people" |
+| "Module 05 missed Shopify" | "05-competition's gate does not force the incumbent platform to be named" |
 
----
+**Never carry across:** a client or company name, a real price, a named customer,
+a market size figure, a screenshot, or a sentence lifted from a deliverable.
+Anti-examples in `resources/` are written from scratch, not harvested from someone
+else's run.
 
-## Contributing a run
+Then make the change deliberately with `/pios-author`, and let the commit message
+explain the defect — not the project that revealed it.
 
-If you complete a run and are willing to share it, it is welcome — especially in
-a domain unlike the ones already here.
-
-Before opening a pull request:
-
-- Remove anything confidential. Real market research often is
-- Keep the evidence tags, the open assumptions and the gate verdicts intact.
-  A cleaned-up run teaches nothing
-- Add `NOTES.md` saying what the framework got wrong, where you had to work
-  around it, and which module cost the most effort
-- Run `python3 framework/engine/validate-run.py examples/<slug>`
-
-See [CONTRIBUTING.md](../CONTRIBUTING.md).
+> **Learn from every run. Publish none of them.**

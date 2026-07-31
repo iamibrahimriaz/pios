@@ -118,7 +118,7 @@ framework/            ships to users — treat as read-only
 
 .claude/skills/       /pios (run a session) · /pios-author (extend the framework)
 projects/<slug>/      this run — state.yaml, research/, deliverables/
-examples/             completed reference runs — none yet
+examples/             finished runs kept locally — gitignored, never published
 ```
 
 Each module contains:
