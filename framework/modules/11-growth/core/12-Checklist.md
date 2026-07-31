@@ -186,7 +186,7 @@ Per candidate loop:
 - [ ] Growth laundering check
 - [ ] Sequence check — spend gated on validation
 - [ ] Referral coherence check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] `compounding` recorded as loop, funnel or none
 - [ ] Verdict recorded in `state.run`
 

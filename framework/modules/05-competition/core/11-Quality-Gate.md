@@ -135,7 +135,7 @@ description of something nobody does.
 
 # Universal Gates
 
-U1–U6 apply. Most often missed here:
+U1–U7 apply. Most often missed here:
 
 | | |
 | --- | --- |
@@ -150,7 +150,7 @@ U1–U6 apply. Most often missed here:
 1. Run the four passes of `engine/review-loop.md`.
 2. Verify every competitor and price resolves to a source.
 3. Verify the gap maps to a ranked problem.
-4. Evaluate universal gates U1–U6.
+4. Evaluate universal gates U1–U7.
 5. Evaluate criteria 1–4.
 6. Record the verdict.
 

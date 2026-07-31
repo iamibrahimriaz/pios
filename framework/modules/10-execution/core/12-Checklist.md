@@ -203,7 +203,7 @@ Per milestone:
 - [ ] Verification coverage check
 - [ ] Invented-step check
 - [ ] Deferred-scope check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Milestone Zero status recorded
 - [ ] Verdict recorded in `state.run`
 

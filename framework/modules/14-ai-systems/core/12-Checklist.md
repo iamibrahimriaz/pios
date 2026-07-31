@@ -229,7 +229,7 @@ Per capability:
 - [ ] Cost ratio check
 - [ ] Version pin check
 - [ ] Fallback-is-scope check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] `proposed` and `kept` counts recorded
 - [ ] Verdict recorded in `state.run`
 

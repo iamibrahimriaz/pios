@@ -299,7 +299,7 @@ responses with one part-time person is a contradiction, not an aspiration.
 
 # Step 14 — Gate
 
-Evaluate against `11-Quality-Gate.md` and universal gates U1–U6.
+Evaluate against `11-Quality-Gate.md` and universal gates U1–U7.
 
 | Verdict | Action |
 | --- | --- |

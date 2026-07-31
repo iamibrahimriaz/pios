@@ -171,7 +171,7 @@ as competitors who do not actually compete.
 
 # Step 8 — Gate
 
-Evaluate against `11-Quality-Gate.md` and universal gates U1–U6.
+Evaluate against `11-Quality-Gate.md` and universal gates U1–U7.
 
 | Verdict | Action |
 | --- | --- |

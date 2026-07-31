@@ -244,7 +244,7 @@ Coverage:
 - [ ] Untested-assumption check
 - [ ] Owner reality check
 - [ ] Cost check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] `restore_tested`, `rollback_tested` and `runbooks_walked` recorded
 - [ ] Verdict recorded in `state.run`
 

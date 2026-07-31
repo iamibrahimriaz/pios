@@ -172,7 +172,7 @@ Tags:
 - [ ] Criterion 3 — status quo evaluated, not just listed
 - [ ] Criterion 4 — gap articulated with the six-month question answered
 - [ ] Cross-module coherence checks
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

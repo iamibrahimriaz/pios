@@ -172,7 +172,7 @@ Tags:
 - [ ] Criterion 5 — risks rated, mitigated, with early warnings
 - [ ] Milestone Zero check
 - [ ] Confidence laundering check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

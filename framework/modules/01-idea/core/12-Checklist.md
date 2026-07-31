@@ -173,7 +173,7 @@ If the adversarial pass produced nothing, it was not performed honestly. Re-run 
 - [ ] Criterion 3 — buyer and user distinguished
 - [ ] Criterion 4 — five qualifying questions
 - [ ] Criterion 5 — assumptions tagged
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

@@ -170,12 +170,14 @@ For every MUST requirement:
 - [ ] Criterion 2 — acceptance criteria testable
 - [ ] Criterion 3 — edge and failure states complete
 - [ ] Criterion 4 — nothing dropped silently
+- [ ] Criterion 5 — every state-changing requirement states reversibility
+- [ ] Criterion 6 — every derived figure names what it includes and excludes
 - [ ] Boundary check — no scope laundering
 - [ ] Two-builder check
 - [ ] Confidence check
 - [ ] Invented-number check
 - [ ] Implementation-leak check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

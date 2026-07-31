@@ -203,7 +203,7 @@ than they were, the gate fails.
 
 # Universal Gates
 
-U1–U6 apply. Most relevant here:
+U1–U7 apply. Most relevant here:
 
 | | |
 | --- | --- |

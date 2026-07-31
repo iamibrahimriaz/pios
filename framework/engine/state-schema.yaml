@@ -61,11 +61,31 @@ assumptions:
   #   status: open        # open | validated | invalidated
 
 # Questions the agent could not answer alone.
+#
+# `answered_at` matters as much as `answer`. A blocking question answered after the
+# module that raised it has passed means every module since ran on a substitute
+# assumption — see engine/gates.yaml `late_answer_rederivation`.
 open_questions:
   # - question: "Is this replacing an EMR or sitting alongside one?"
   #   raised_by: 01-idea
   #   blocking: true
   #   answer: null
+  #   answered_at: null       # ISO date. Later than raised_by's gate = re-derivation owed
+  #   substitute_assumption: null   # the assumption id modules used in its place
+
+# Written when a blocking question is answered late and the run re-derives rather than
+# find-and-replaces. Absent when nothing was answered late — which is the normal case.
+rederivations:
+  # - at: ""
+  #   trigger: "Q8 (team size) answered at the delivery checkpoint"
+  #   premise_change: {was: "", now: ""}
+  #   conclusions_retested:
+  #     - conclusion: ""
+  #       verdict: survived   # survived | changed | withdrawn
+  #       same_reason: false  # a survivor that survives for a new reason has changed
+  #   superseded_assumptions: []
+  #   deliverables_reissued: []
+  #   unchanged_and_why: []
 
 # Decisions made, with the reasoning preserved. This is what makes the output auditable.
 decisions:
@@ -94,4 +114,6 @@ rules:
   - A pre_registration entry is written before the work it predicts, and never edited after.
   - A module appends to evidence_log. It never rewrites another module's entries.
   - A blocking open_question halts the run at the next human_checkpoint.
+  - A blocking open_question answered after its module passed forces a re-derivation, not a
+    find-and-replace. Record it in rederivations.
   - Every decision records the alternatives it rejected, or it is not a decision.

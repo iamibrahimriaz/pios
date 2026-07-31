@@ -127,7 +127,7 @@ channel categories to fill the section is not.
 
 # Universal Gates
 
-U1–U6 apply. Most often missed here:
+U1–U7 apply. Most often missed here:
 
 | | |
 | --- | --- |
@@ -142,7 +142,7 @@ U1–U6 apply. Most often missed here:
 1. Run the four passes of `engine/review-loop.md`.
 2. Count sourced vs assumed inputs; check confidence matches.
 3. Verify the price fits the segment's plausible budget.
-4. Evaluate universal gates U1–U6.
+4. Evaluate universal gates U1–U7.
 5. Evaluate criteria 1–4.
 6. Record the verdict.
 

@@ -159,6 +159,41 @@ a user discovers the rule by breaking it.
 
 ---
 
+# Criterion 6 — Every derived or aggregated figure states which records it includes and excludes
+
+**Passes when** every total, count, percentage, balance and status computed from more than
+one record names its population — what is counted, and what is deliberately left out.
+
+**Fails when** a figure is defined only by the words that name it. "Revenue this quarter"
+and "open tickets" are labels, not definitions, and two builders will implement them
+differently.
+
+**Where it bites hardest: records the product itself can reverse.** A specification that
+adds a void, a refund, a cancellation, a correcting entry or a soft-archive has created a
+record that exists and should usually not be counted — and the requirement that introduces
+the reversal almost never says so, because it is written from the point of view of the
+person doing the reversing.
+
+| Figure | Not a definition | A definition |
+| --- | --- | --- |
+| Revenue this quarter | "the sum of invoices" | "the sum of issued invoices dated in the quarter, less credit notes against them; excludes drafts and disputed lines" |
+| Open tickets | "tickets not closed" | "tickets in `new` or `in_progress`, including those reopened after closure; excludes merged duplicates" |
+| Active members | "members who logged in" | "distinct accounts with at least one session in the window; excludes invited-but-never-accepted and suspended accounts" |
+
+**How to evaluate.** List every figure the interface displays that is not a single stored
+field. For each, ask the three questions the reversal case makes concrete: *does a
+reversed, cancelled or superseded record count? does an archived parent still appear?
+does a record spanning two periods land in one, both, or neither?* An unanswerable
+question is a fail.
+
+**The cost of skipping it.** These figures are usually the product's payoff screen — the
+one thing the buyer opens. A wrong total is worse than a missing one, because the reader
+cannot tell it is wrong and acts on it. The defect is also invisible to Criterion 2: an
+acceptance criterion reading *"then the view shows a total equal to the sum of the
+records"* is perfectly testable and still does not say whether the reversed one is in it.
+
+---
+
 # Module-Specific Checks
 
 These are not in `module.yaml`. They fail the gate independently, because each is a known
@@ -224,6 +259,7 @@ makes them has taken them.
 | U4 | Every design decision records the alternative it rejected |
 | U5 | Every load-bearing design decision is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 U6 carries unusual weight here. This module's output is read by a builder who cannot ask
 anything. Every sentence requiring context that exists only in the run is a defect.
@@ -246,7 +282,7 @@ gate:
     confidence_not_promoted: pass | fail
     no_invented_numbers: pass | fail
     no_implementation_leak: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   verdict: pass | fail
   regressed_to_07: true | false
   notes: «what failed and what was done»

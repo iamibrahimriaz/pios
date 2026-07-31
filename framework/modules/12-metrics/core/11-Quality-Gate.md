@@ -238,6 +238,7 @@ and it is routinely omitted from a cost model that was otherwise carefully check
 | U4 | The north star choice records the alternatives it rejected |
 | U5 | Every target without a baseline is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 ---
 
@@ -257,7 +258,7 @@ gate:
     counter_metrics_present: pass | fail
     decision_points_answerable: pass | fail
     measurement_cost_within_model: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   events_specified: «count, all assigned to milestones»
   baseline_available: yes | no
   verdict: pass | fail

@@ -170,7 +170,7 @@ Tags:
 - [ ] Criterion 2 — price justified three ways
 - [ ] Criterion 3 — economics with assumptions surfaced
 - [ ] Criterion 4 — path to first 10 customers
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

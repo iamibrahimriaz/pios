@@ -169,6 +169,90 @@ if breach:
 else:
     notes.append("No cost ceiling breach in this run — the 13→06/07 regress does not apply.")
 
+# ------------------------------------------------------------------ identifiers
+# Every name a code block operates on must be a name some code block creates. A schema
+# that defines `order` while the grant, the index and the trigger constrain `orders` is
+# four documents agreeing with each other and none of them agreeing with the database.
+#
+# The statement that breaks is reliably the one protecting the product's central
+# guarantee, because it is written last, in its own block, after the naming has drifted —
+# and it fails at the first migration, not at review.
+#
+# Fenced blocks of any language are scanned: the damaging case is SQL embedded in an
+# application-language block, which is where a framework's migration DSL puts it.
+SQL_DDL = re.compile(r"\b(CREATE\s+TABLE|ALTER\s+TABLE|CREATE\s+(UNIQUE\s+)?INDEX|"
+                     r"CREATE\s+TRIGGER|REVOKE|GRANT)\b", re.I)
+CREATES = re.compile(r"\bCREATE\s+(?:TABLE|(?:MATERIALIZED\s+)?VIEW)\s+"
+                     r"(?:IF\s+NOT\s+EXISTS\s+)?(?:\w+\.)?([a-z_][a-z0-9_]*)", re.I)
+REFS = [
+    re.compile(r"\bON\s+(?:\w+\.)?([a-z_][a-z0-9_]*)\s*(?:\(|FOR\s+EACH\b|FROM\b|TO\b)", re.I),
+    re.compile(r"\bALTER\s+TABLE\s+(?:ONLY\s+)?(?:\w+\.)?([a-z_][a-z0-9_]*)", re.I),
+    re.compile(r"\bREFERENCES\s+(?:\w+\.)?([a-z_][a-z0-9_]*)", re.I),
+    re.compile(r"\bINSERT\s+INTO\s+(?:\w+\.)?([a-z_][a-z0-9_]*)", re.I),
+]
+
+created, referenced = set(), {}
+for a in present:
+    for block in re.findall(r"```[a-zA-Z0-9_+-]*\n(.*?)```", body(a), re.S):
+        if not SQL_DDL.search(block):
+            continue
+        created.update(m.lower() for m in CREATES.findall(block))
+        for rx in REFS:
+            for name in rx.findall(block):
+                referenced.setdefault(name.lower(), a["file"])
+
+def stem(n):
+    """Fold the spellings that differ only by convention, so the message can say which."""
+    n = n.replace("_", "")
+    if n.endswith("ies"):
+        return n[:-3] + "y"
+    return n[:-1] if n.endswith("s") else n
+
+
+if created:
+    unresolved = []
+    for name, where in sorted(referenced.items()):
+        if name in created:
+            continue
+        near = [c for c in created if stem(c) == stem(name)]
+        hint = f"  (defined as `{near[0]}`)" if near else ""
+        unresolved.append(f"{where}: `{name}` is used and never created{hint}")
+    check(f"every identifier used in a code block is defined ({len(created)} defined)",
+          not unresolved, "\n         ".join(unresolved[:8]))
+else:
+    notes.append("No schema definitions found in the artifacts — the identifier check does "
+                 "not apply.")
+
+# ------------------------------------------------------------------ late answers
+# The trigger — a blocking question answered after its module passed — is the agent's to
+# detect; engine/gates.yaml `late_answer_rederivation` defines it. What is checkable here
+# is that the record left behind is a re-derivation and not a note saying one happened.
+questions = state.get("open_questions") or []
+rederivations = state.get("rederivations") or []
+
+owed = [q.get("question", "?") for q in questions
+        if q.get("blocking") and str(q.get("substitute_assumption") or "").strip()]
+if owed:
+    check("a substituted blocking answer produced a recorded re-derivation",
+          bool(rederivations),
+          "modules ran on a substitute assumption and state.rederivations is empty — "
+          f"the conclusions were corrected in wording only: {owed[:3]}")
+
+if rederivations:
+    thin = [r.get("trigger", "?")[:60] for r in rederivations
+            if not (r.get("conclusions_retested") and
+                    all(c.get("verdict") in ("survived", "changed", "withdrawn")
+                        for c in r["conclusions_retested"]))]
+    check("every re-derivation retested named conclusions to a verdict", not thin,
+          "a re-derivation records no retested conclusion, or one without a verdict of "
+          f"survived / changed / withdrawn: {thin[:3]}")
+
+unanswered = [q.get("question", "?") for q in questions
+              if q.get("blocking") and not str(q.get("answer") or "").strip()]
+if unanswered:
+    notes.append(f"{len(unanswered)} blocking question(s) unanswered at delivery. Each must "
+                 "carry a named owner in Risks-and-Assumptions.")
+
 # ------------------------------------------------------------------ blockers
 blocked = re.search(r"BLOCKS LAUNCH|blocker", text_all, re.I)
 if blocked:

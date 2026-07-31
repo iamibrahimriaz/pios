@@ -11,4 +11,5 @@ gate:
   - Edge cases and failure states specified
   - Anything out of MVP scope moved to roadmap, not dropped silently
   - Every state-changing requirement states whether it is reversible
+  - Every derived or aggregated figure states which records it includes and excludes
 on_fail: return to 07-strategy

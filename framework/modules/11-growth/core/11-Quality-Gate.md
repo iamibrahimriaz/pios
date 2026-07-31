@@ -225,6 +225,7 @@ here undetected.
 | U4 | The growth model records the alternative it rejected |
 | U5 | Every rate, cost and conversion figure without a source is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 U5 does most of the work here. Nearly every quantity in this module is an assumption, and the
 register is what stops a plan of hypotheses from reading as a forecast.
@@ -246,7 +247,7 @@ gate:
     no_growth_laundering: pass | fail
     spend_gated_on_validation: pass | fail
     referral_coherent: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   compounding: loop | funnel | none
   verdict: pass | fail
   regressed_to: «06-business / 07-strategy / none»

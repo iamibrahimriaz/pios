@@ -101,6 +101,20 @@ failures on one module halts the run and escalates to the human.
 **Preserve reasoning, not just conclusions.** Every decision records the alternatives it
 rejected. The output must be auditable by someone who was not present.
 
+**Name where a control executes.** When you write that something is critical,
+load-bearing or non-negotiable, name the component that enforces it and check that the
+component exists in your own artifact set. A rule stated in three documents and enforced
+in none reads as a guarantee and is a wish. This is universal gate U7.
+
+**A late answer forces a re-derivation, not a find-and-replace.** If a blocking question
+from an early module is answered after that module passed, every module since has been
+reasoning on a substitute assumption. Re-derive the affected conclusions from the new
+premise and say per conclusion whether it survived, changed, or was withdrawn — and for a
+survivor, whether it survived for the *same reason*. Correcting the wording while leaving
+the reasoning intact produces a document that agrees with the operator and was derived
+from the premise they just contradicted. The rule is in `framework/engine/gates.yaml`
+under `late_answer_rederivation`; the record goes in `state.rederivations`.
+
 **Write for a stranger.** Every artifact is read by someone with no access to this
 conversation. `12-Build-Handoff.md` especially — it must stand completely alone.
 
@@ -155,6 +169,13 @@ The run validator checks what a tired agent stops doing: tags dropped, `«placeh
 left in a delivered artifact, an empty evidence log, an assumption with no validation
 method, confidence still `unknown`. It also checks the two chains — a declared shortfall
 that changed a weighting, and a cost breach that produced a regress.
+
+Two of its checks catch defects that read as correct. **Every identifier a code block
+operates on must be defined by some code block** — a grant, index or trigger naming a
+table the schema spells differently is four documents agreeing with each other and none
+of them agreeing with the database, and it fails at the first migration rather than at
+review. **And a re-derivation must retest named conclusions to a verdict** — `survived`,
+`changed` or `withdrawn` — so the record cannot be a note saying one happened.
 
 **Run it before you tell the operator you are finished.** A non-zero exit means the run is
 not deliverable.

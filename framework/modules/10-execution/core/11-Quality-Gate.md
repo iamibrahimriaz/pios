@@ -212,6 +212,7 @@ an implied commitment.
 | U4 | Every planning judgment records the alternative it rejected |
 | U5 | Every unsupported duration is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 U6 is not merely satisfied here — it is this module's central criterion, restated as Criterion
 3. Everywhere else in the framework it protects a future reader. Here it protects the person
@@ -234,7 +235,7 @@ gate:
     verification_coverage_stated: pass | fail
     no_invented_steps: pass | fail
     deferred_scope_carried: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   milestone_zero: required | not_required | present | ABSENT
   blocked_work: «count, all with named owners»
   verdict: pass | fail

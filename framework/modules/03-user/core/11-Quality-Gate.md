@@ -158,7 +158,7 @@ It is undetectable downstream and contaminates the PRD, the flows, and the pitch
 
 # Universal Gates
 
-U1–U6 apply. Most often missed here:
+U1–U7 apply. Most often missed here:
 
 | | |
 | --- | --- |
@@ -173,7 +173,7 @@ U1–U6 apply. Most often missed here:
 1. Run the four passes of `engine/review-loop.md`.
 2. Verify every quote resolves to a source.
 3. Verify the segment sits inside the market boundary.
-4. Evaluate universal gates U1–U6.
+4. Evaluate universal gates U1–U7.
 5. Evaluate criteria 1–4 and the evidence honesty checks.
 6. Record the verdict.
 

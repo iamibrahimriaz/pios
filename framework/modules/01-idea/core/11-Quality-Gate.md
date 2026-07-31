@@ -146,7 +146,7 @@ nothing.
 
 # Universal Gates
 
-In addition to the five above, `engine/gates.yaml` U1–U6 apply. For this module the ones
+In addition to the five above, `engine/gates.yaml` U1–U7 apply. For this module the ones
 most often missed:
 
 | | |
@@ -160,7 +160,7 @@ most often missed:
 # Evaluation Procedure
 
 1. Run the four passes of `engine/review-loop.md`.
-2. Evaluate universal gates U1–U6.
+2. Evaluate universal gates U1–U7.
 3. Evaluate criteria 1–5 above.
 4. Record the verdict in `state.run`.
 
@@ -174,7 +174,7 @@ gate:
     buyer_user_distinguished: pass
     five_questions: pass
     assumptions_tagged: pass
-  universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass]
+  universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass, U7 pass]
   verdict: fail
   reason: "Jurisdiction inferred from context rather than confirmed by the operator."
   action: "Add as blocking question at the checkpoint."

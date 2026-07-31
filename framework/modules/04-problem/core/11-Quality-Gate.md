@@ -127,7 +127,7 @@ absorbs assumed problems as established ones, however carefully each sentence wa
 
 # Universal Gates
 
-U1–U6 apply. Most often missed here:
+U1–U7 apply. Most often missed here:
 
 | | |
 | --- | --- |
@@ -142,7 +142,7 @@ U1–U6 apply. Most often missed here:
 1. Run the four passes of `engine/review-loop.md`.
 2. Verify every `[verified]` problem sits at evidence ladder rank 1–3.
 3. Verify validated and assumed sections are structurally separate.
-4. Evaluate universal gates U1–U6.
+4. Evaluate universal gates U1–U7.
 5. Evaluate criteria 1–4.
 6. Record the verdict.
 
@@ -157,7 +157,7 @@ gate:
     shortfall_declared: true          # verified count 1, stated plainly
     sharpest_identified_defended: pass
     unvalidated_listed_separately: pass
-  universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass]
+  universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass, U7 pass]
   verdict: pass_with_declared_shortfall
   note: "Only P1 reaches verified. Milestone Zero required before build."
   action: "Flag to 07-strategy and 09-Roadmap."

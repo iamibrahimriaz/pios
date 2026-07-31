@@ -232,6 +232,26 @@ hits one — and gets "fixed" by someone who does not know it was a decision.
 
 An untested restore is not a backup. It is a cost with an assumption attached.
 
+## The Identifier Check
+
+Every name used in a schema statement, a query, an index, a grant, a trigger or an interface
+path must resolve to something this module defines under that exact spelling.
+
+**Fails when** any identifier is referenced and never defined — including when a definition
+exists under a near-miss spelling: singular against plural, `snake_case` against `camelCase`,
+or a table named one way in the schema and another way in the migration that constrains it.
+
+**How to evaluate.** Collect every identifier the design *creates*. Collect every identifier
+it *references*. Subtract. Anything left is a fail. This is mechanical, it takes a minute, and
+`engine/validate-run.py` repeats it over the finished artifacts — but the gate is where it
+should be caught, because by then the same name has usually been copied into four documents.
+
+> **Criterion 1 asks whether the schema could be generated. It does not ask whether the rest
+> of the design refers to the schema that was generated.** The two are different questions and
+> a design can pass the first while failing the second in the statement that matters most —
+> typically the constraint protecting the product's central guarantee, because that statement
+> is written last, in a separate block, after the naming convention has drifted.
+
 ---
 
 # Universal Gates
@@ -244,6 +264,7 @@ An untested restore is not a backup. It is a cost with an assumption attached.
 | U4 | Every architecture decision records the alternatives it rejected |
 | U5 | Every one-way door and unevidenced judgment is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 ---
 
@@ -263,7 +284,7 @@ gate:
     provenance_cited: pass | fail
     deliberate_absences_stated: pass | fail
     restore_addressed: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   blockers: «unmet regulatory obligations, or none»
   verdict: pass | fail
   regressed_to: «08-product / 06-business / 07-strategy / none»

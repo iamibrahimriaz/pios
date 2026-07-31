@@ -260,6 +260,7 @@ is unstarted work, and a name nobody has agreed to is decoration.
 | U4 | Every operational decision records the alternative it rejected |
 | U5 | Every volume and staffing forecast is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 U6 has its strictest interpretation here. The reader has no access to the conversation **and** is
 under pressure — which is why the runbook standard is what it is.
@@ -281,7 +282,7 @@ gate:
     untested_assumptions_declared: pass | fail
     owners_real: pass | fail
     cost_within_ceiling: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   restore_tested: yes | no | never
   rollback_tested: yes | no | never
   runbooks_walked: «count of «n»»

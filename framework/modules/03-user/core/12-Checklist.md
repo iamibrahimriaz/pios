@@ -165,7 +165,7 @@ Switching cost, all five dimensions:
 - [ ] Criterion 3 — workflow with named tools
 - [ ] Criterion 4 — switching cost named
 - [ ] Evidence honesty checks
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

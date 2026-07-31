@@ -21,13 +21,36 @@ universal:
     rule: Assumptions introduced by this module are appended to state.assumptions with a validation method.
   - id: U6
     rule: Output is written for a reader with no access to this conversation.
+  - id: U7
+    rule: >
+      Every control the module declares load-bearing names where it executes, and that
+      place exists in the specified design.
+    detail: >
+      A control is a rule the output says the product depends on: a constraint, an
+      invariant, a derivation, a check, a permission. U7 asks one question of each —
+      which named component enforces this, and is that component specified anywhere in
+      the artifact set?
+
+      "Computed in the business timezone, never UTC" is not a specification. It is a
+      wish until an artifact names the endpoint that derives the value, or the field is
+      removed from the client's request body so it cannot be supplied instead.
+
+      This is the gate for the class of defect where a rule is stated emphatically in
+      three documents and enforced in none. It is invisible to U1-U6, because nothing is
+      unsourced, contradicted or ambiguous — the enforcement point simply does not exist,
+      and no criterion asked for it.
+    fails_when:
+      - A rule is called critical, load-bearing or non-negotiable and names no mechanism.
+      - The named mechanism is a layer rather than a component — "the application layer".
+      - The mechanism contradicts another artifact, most commonly a value the rule says
+        is derived that an interface accepts as input.
 
 evaluation:
   method: self_review_then_gate
   steps:
     - Produce the module output.
     - Run the module's own review loop (engine/review-loop.md).
-    - Evaluate universal gates U1–U6.
+    - Evaluate universal gates U1–U7.
     - Evaluate the module's gate list from module.yaml.
     - Record pass or fail in state.run.
   verdict:
@@ -67,6 +90,38 @@ loop_protection:
   on_exhaustion: >
     Halt the run. Write the reason to state.run.failed_gates and escalate to the
     human operator with a specific question. Do not proceed with a failed gate.
+
+late_answer_rederivation:
+  # A blocking question raised in an early module is sometimes answered late — at a
+  # checkpoint, or when the operator reads the finished set. By then every module that
+  # ran without the answer has substituted an assumption for it, and those assumptions
+  # are load-bearing precisely because the question was blocking.
+  #
+  # Find-and-replace is the wrong repair. It corrects the words and leaves the
+  # conclusions standing on the premise the operator has just contradicted — which reads
+  # as agreement with the new answer while being derived from the old one.
+  trigger: >
+    Any open_question with blocking: true receives an answer after the module that
+    raised it has passed its gate.
+  required_response:
+    - Identify every module that recorded an assumption in place of the answer.
+      state.assumptions carries the module id; the substitute assumption is the one whose
+      statement answers the question.
+    - Re-derive each affected conclusion from the new premise. Do not edit the wording of
+      a conclusion whose reasoning has not been re-run.
+    - State, per conclusion, whether it survived, changed, or was withdrawn — and for a
+      survivor, whether the reason it survived is still the original reason. A conclusion
+      that survives for a different reason has changed.
+    - Supersede the substitute assumption rather than deleting it, so the run records what
+      it believed and for how long.
+    - Append a record to state.rederivations.
+  applies_to_deliverables: >
+    Every artifact whose argument used the substitute assumption is re-issued at a new
+    version. An artifact whose findings do not move is left at its existing version and
+    said to be unchanged — evidence does not change when a premise does.
+  not_triggered_by:
+    - A non-blocking question answered late. Record the answer and continue.
+    - New evidence that confirms the substitute assumption. Mark the assumption validated.
 
 human_checkpoints:
   # Stages where the run pauses for operator confirmation before continuing.

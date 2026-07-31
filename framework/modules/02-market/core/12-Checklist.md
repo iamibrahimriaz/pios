@@ -155,7 +155,7 @@ through **before** reaching the gate, so the gate confirms rather than discovers
 - [ ] Criterion 2 — sizing sourced or explicitly assumed
 - [ ] Criterion 3 — three trends with direction, including one unfavorable
 - [ ] Criterion 4 — regulatory constraints identified concretely
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

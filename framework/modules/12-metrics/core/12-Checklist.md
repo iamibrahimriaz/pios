@@ -219,7 +219,7 @@ Privacy:
 - [ ] Counter-metric check
 - [ ] Decision point check
 - [ ] Measurement cost check
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Event count and milestone assignment recorded
 - [ ] Verdict recorded in `state.run`
 

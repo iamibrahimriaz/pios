@@ -125,7 +125,7 @@ signal that they are stale.
 
 # Universal Gates
 
-`engine/gates.yaml` U1–U6 apply. Most often missed in this module:
+`engine/gates.yaml` U1–U7 apply. Most often missed in this module:
 
 | | |
 | --- | --- |
@@ -139,7 +139,7 @@ signal that they are stale.
 
 1. Run the four passes of `engine/review-loop.md`.
 2. Verify every `[verified]` tag resolves to a row in the Sources table.
-3. Evaluate universal gates U1–U6.
+3. Evaluate universal gates U1–U7.
 4. Evaluate criteria 1–4.
 5. Record the verdict in `state.run`.
 
@@ -152,7 +152,7 @@ gate:
     sizing_sourced: fail
     three_trends_with_direction: pass
     regulatory_identified: pass
-  universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass]
+  universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass, U7 pass]
   verdict: fail
   reason: "SAM adopted from an analyst report; its boundary was never compared to §1."
   action: "Rebuild SAM bottom-up from practice count and price."

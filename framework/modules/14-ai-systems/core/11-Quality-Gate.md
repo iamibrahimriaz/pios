@@ -281,6 +281,7 @@ not exist.
 | U4 | Every kept-or-dropped verdict records the alternative it rejected |
 | U5 | Every quality expectation, operation count and cost estimate is in `state.assumptions` with a validation method |
 | U6 | Written for a reader with no access to this conversation |
+| U7 | Every control declared load-bearing names where it executes, and that place exists |
 
 ---
 
@@ -301,7 +302,7 @@ gate:
     cost_ratio_computed: pass | fail
     version_pinned: pass | fail
     fallback_is_a_requirement: pass | fail
-  universal: [U1, U2, U3, U4, U5, U6]
+  universal: [U1, U2, U3, U4, U5, U6, U7]
   proposed: «n»
   kept: «n»
   verdict: pass | fail

@@ -231,6 +231,28 @@ thing.»
 
 <!-- Repeat for every requirement. -->
 
+### Derived figures
+
+<!-- Every number the interface shows that is NOT a single stored field: totals, counts,
+     percentages, balances, and any status computed from several records.
+
+     Name the population. The label is not the definition — "the monthly total" is a
+     heading, and two engineers will implement it two ways.
+
+     The rows that matter most are the ones your own spec made possible: if anything in
+     §7 can reverse, cancel, supersede or archive a record, every figure downstream of it
+     needs a stated position on that record. The requirement that introduces a reversal
+     almost never says so, because it is written from the point of view of the person
+     doing the reversing. -->
+
+| Figure | Where shown | Includes | Excludes | Period rule |
+| --- | --- | --- | --- | --- |
+| «name» | «screen / R«n»» | «records counted, and in what state» | «records deliberately left out» | «which period a record spanning two lands in» |
+
+**Reversal position:** «for each reversible action in §7 — a void, cancellation, refund,
+correction or archive — state which figures it removes a record from, and which it does
+not. "Nothing in this spec is reversible" is a complete answer and is worth writing.»
+
 ---
 
 ## 8. Failure and Edge States

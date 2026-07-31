@@ -155,7 +155,7 @@ Tags:
 - [ ] Criterion 2 — three verified problems, **or shortfall declared honestly**
 - [ ] Criterion 3 — sharpest problem identified and defended
 - [ ] Criterion 4 — unvalidated problems listed separately
-- [ ] Universal gates U1–U6
+- [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
 ---

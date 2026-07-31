@@ -231,7 +231,8 @@ For every entity with a lifecycle:
 - [ ] Provenance check
 - [ ] Deliberate-absence check
 - [ ] Restore check
-- [ ] Universal gates U1–U6
+- [ ] Identifier check — every name referenced is defined under that exact spelling
+- [ ] Universal gates U1–U7
 - [ ] Blockers listed and surfaced to the operator
 - [ ] Verdict recorded in `state.run`
 
