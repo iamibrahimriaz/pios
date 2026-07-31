@@ -229,9 +229,17 @@ Output:  a build-ready blueprint in projects/<slug>/deliverables/
 
 The run produces, among others: a Research Dossier, Problem Validation, a full
 PRD, Feature Spec, Data Model, API Contract, Architecture, UX Flows, Roadmap,
-Risks and Assumptions, Success Metrics, and a **Build Handoff** — a standalone
-file an engineering team or coding agent can start building from with no other
-context.
+Risks and Assumptions and Success Metrics — then the two documents a builder
+actually works from:
+
+- **Build Handoff** — what to build, in what order, and what "correct" means.
+  Standalone; assumes no access to the research conversation.
+- **Engineering Setup** — how to run, test and ship it. Environment and secrets,
+  local development, seed data, test strategy (including what *not* to test),
+  CI, deployment, and a pre-launch readiness checklist.
+
+Together they take a coding agent from an empty directory to a verified
+production deploy. From there, the **Operations Plan** takes over.
 
 ---
 

@@ -51,8 +51,14 @@ Three conventions inside every template:
 | `«placeholder»` | A value to replace. None may survive into the final artifact. |
 | `<!-- ACCEPTANCE -->` | The artifact's own checklist. Verify, then remove. |
 
-Write `12-Build-Handoff.md` **last**, and `00-Executive-Summary.md` last of all — the
-summary may contain nothing that is not established in a supporting artifact.
+Write `12-Build-Handoff.md` and `16-Engineering-Setup.md` **last**, and
+`00-Executive-Summary.md` last of all — the summary may contain nothing that is not
+established in a supporting artifact.
+
+Those two are the pair a builder actually works from. `12-Build-Handoff.md` says **what to
+build and in what order**; `16-Engineering-Setup.md` says **how to run, test and ship it**.
+Neither restates the other. If the setup document starts describing product behavior, or
+the handoff starts describing CI, they have crossed.
 
 A template section you cannot fill is a finding, not an inconvenience. Say what is missing
 and why. Never delete a section to hide a gap, and never write filler to occupy one — an
