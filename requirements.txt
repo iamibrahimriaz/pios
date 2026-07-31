@@ -1,0 +1,11 @@
+# Product Intelligence OS — validator dependencies
+#
+# The framework itself has no dependencies. It is markdown and YAML, read by an
+# AI agent. These are only needed to run the two validators:
+#
+#   python3 framework/engine/validate.py                     the framework is sound
+#   python3 framework/engine/validate-run.py projects/<slug> a run is deliverable
+#
+#   pip3 install -r requirements.txt
+
+PyYAML>=6.0

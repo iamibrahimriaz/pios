@@ -114,11 +114,11 @@ framework/            ships to users — treat as read-only
   engine/             how a run executes — order, gates, evidence, state, review
   deliverables/       manifest.yaml — the output specification
   modules/            14 domain modules, each with module.yaml + core/knowledge/resources/learn
-  packs/              optional vertical knowledge (healthcare, fintech, ...)
+  packs/              optional vertical knowledge — planned, not yet built
 
 .claude/skills/       /pios (run a session) · /pios-author (extend the framework)
 projects/<slug>/      this run — state.yaml, research/, deliverables/
-examples/             completed reference runs
+examples/             completed reference runs — none yet
 ```
 
 Each module contains:

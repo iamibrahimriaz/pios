@@ -192,12 +192,12 @@ framework/                ships to users; read-only during a run
     10-execution/  11-growth/  12-metrics/  13-operations/
     14-ai-systems/
 
-  packs/                  optional vertical knowledge (healthcare, fintech, ...)
+  packs/                  optional vertical knowledge — planned, not yet built
 
 .claude/skills/           /pios and /pios-author — the Claude Code interface
 projects/<slug>/          one run — state.yaml, research/, deliverables/
 
-examples/                 completed reference runs
+examples/                 completed reference runs — none yet; see examples/README.md
 ```
 
 Each module contains four layers:
@@ -212,6 +212,27 @@ Each module contains four layers:
 Every module also carries a `module.yaml` — its machine-readable contract:
 what it depends on, what it consumes, what it produces, and the gate it must
 pass before the run continues.
+
+---
+
+# Status
+
+**Complete and structurally validated. Not yet proven by use.**
+
+| | |
+| --- | --- |
+| Framework | Complete — 14 modules, 4 layers each, 15 required deliverables |
+| Structural checks | 20, all passing (`framework/engine/validate.py`) |
+| Reference runs | **None yet.** The framework has not been run end to end |
+| Vertical packs | Planned, not built |
+
+The honest position: every claim about *structure* in this README is verified.
+No claim about *outcomes* has been tested, because nobody has completed a run.
+A reference run is the next piece of work, and it will be published in
+[`examples/`](examples/) together with whatever it exposes about the framework.
+
+Use it with that in mind. If you run it, [tell us what broke](CONTRIBUTING.md) —
+that is currently the most valuable contribution available.
 
 ---
 
