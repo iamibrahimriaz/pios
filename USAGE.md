@@ -114,6 +114,21 @@ echo $PIOS_HOME
 python3 "$PIOS_HOME/framework/engine/validate.py"
 ```
 
+### Two things to know about the global install
+
+**Inside the framework repository, `/pios` exists twice** — once project-scoped, once
+global. They are the same file, because the installer creates a symlink rather than a
+copy, so whichever loads behaves identically. It is only ever a duplicate listing, never
+a conflict.
+
+**The symlink points at your clone.** If you move or delete the repository, `/pios`
+breaks. Re-run `./scripts/install-skill.sh` from the new location. The upside of a link
+over a copy is that `git pull` updates your installed skill automatically.
+
+**Windows:** the installer is a bash script. Use WSL, or do it manually — create the
+`~/.claude/skills/pios` link (or copy the folder) and set `PIOS_HOME` in your environment
+variables.
+
 ### How the skill decides which mode it is in
 
 ```

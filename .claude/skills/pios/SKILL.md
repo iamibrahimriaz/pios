@@ -54,19 +54,33 @@ because every other path in this file depends on it.
 
 ```bash
 if [ -f framework/engine/run-order.yaml ]; then
-  PIOS_HOME="$(pwd)"; RUNS="projects"; MODE="in-repo"
+  echo "MODE=in-repo";  echo "FRAMEWORK=$(pwd)/framework";  echo "RUNS=$(pwd)/projects"
 elif [ -n "$PIOS_HOME" ] && [ -f "$PIOS_HOME/framework/engine/run-order.yaml" ]; then
-  RUNS="pios"; MODE="external"
+  echo "MODE=external"; echo "FRAMEWORK=$PIOS_HOME/framework"; echo "RUNS=$(pwd)/pios"
 else
-  MODE="unresolved"
+  echo "MODE=unresolved"
 fi
-echo "mode=$MODE  PIOS_HOME=$PIOS_HOME  runs=$RUNS"
 ```
 
-| Mode | You are | Framework at | Runs written to |
+> **Read the two absolute paths out of that output and use them literally from now on.**
+>
+> Shell variables **do not survive between commands** — each one runs in a fresh shell, so
+> `$RUNS` and `$PIOS_HOME` will be empty in every later step. A command like
+> `mkdir -p "$RUNS"/my-idea` would expand to `mkdir -p /my-idea` and try to write at the
+> filesystem root.
+>
+> Wherever this file writes `<FRAMEWORK>` or `<RUNS>`, substitute the actual absolute path
+> the command above printed.
+
+| Mode | You are | `<FRAMEWORK>` | `<RUNS>` |
 | --- | --- | --- | --- |
-| **in-repo** | Inside the PIOS repository | `./framework/` | `./projects/<slug>/` |
-| **external** | In any other project | `$PIOS_HOME/framework/` | `./pios/<slug>/` |
+| **in-repo** | Inside the PIOS repository | `<repo>/framework` | `<repo>/projects` |
+| **external** | In any other project | `$PIOS_HOME/framework` | `<this project>/pios` |
+
+**Record both paths in `state.yaml`** as `project.framework_path` and `project.run_dir` as
+soon as you create it. A later session resumes by reading them from there rather than
+re-deriving — which is what makes resume work when `PIOS_HOME` is set differently, or not
+set at all, in that session.
 
 **If unresolved**, stop and tell the operator exactly this, then wait:
 
@@ -82,9 +96,13 @@ Do not guess a location, and do not proceed without the framework. Every module'
 lives there; without it you would be improvising, which is the one thing this framework
 exists to prevent.
 
-**In external mode**, prefix every framework path — in this file and in `AGENTS.md` — with
-`$PIOS_HOME/`. Read from the framework; **never write to it.** It is read-only during a
-run. Everything you produce goes under `./pios/<slug>/`.
+`AGENTS.md` writes framework paths relative to the repository root — read those as
+`<FRAMEWORK>/…` too.
+
+**The framework is read-only during a run**, in both modes. Read from it; never write to
+it. Everything you produce goes under `<RUNS>/<slug>/`. This includes not editing this
+skill file mid-run: in external mode it lives inside someone's shared framework clone, and
+a run must not change the method for every other project on the machine.
 
 State the mode in one line before you begin, so the operator knows where output will land:
 *"External mode. Framework at ~/Projects/product-intelligence-os. Writing to ./pios/."*
@@ -94,7 +112,7 @@ State the mode in one line before you begin, so the operator knows where output 
 ## Step 1 — Establish the mode before anything else
 
 ```bash
-ls "$RUNS"/*/state.yaml 2>/dev/null
+ls <RUNS>/*/state.yaml 2>/dev/null
 ```
 
 | What you find | Mode |
@@ -118,16 +136,16 @@ and a paraphrase silently changes the project.
 2. Create the run directory:
 
    ```bash
-   mkdir -p "$RUNS"/<slug>/research "$RUNS"/<slug>/deliverables
-   cp "$PIOS_HOME"/framework/engine/state-schema.yaml "$RUNS"/<slug>/state.yaml
+   mkdir -p <RUNS>/<slug>/research <RUNS>/<slug>/deliverables
+   cp <FRAMEWORK>/engine/state-schema.yaml <RUNS>/<slug>/state.yaml
    ```
 
 3. Edit `state.yaml`: strip the commented examples, set `slug`, paste the operator's words
    verbatim into `raw_idea`, set `created`. Leave `jurisdiction` empty — module 01 asks
    for it.
-4. Read, in this order, all under `$PIOS_HOME/framework/`: `constitution/core/`,
+4. Read, in this order, all under `<FRAMEWORK>/`: `constitution/core/`,
    `engine/evidence-policy.md` (twice), `engine/run-order.yaml`, `engine/gates.yaml`,
-   `engine/review-loop.md`, `deliverables/manifest.yaml`. Also read `$PIOS_HOME/AGENTS.md`.
+   `engine/review-loop.md`, `deliverables/manifest.yaml`. Also read `<FRAMEWORK>/../AGENTS.md`.
 5. Begin `01-idea`.
 
 ---
@@ -137,13 +155,14 @@ and a paraphrase silently changes the project.
 A full run does not fit in one session. Resuming correctly is the most important thing
 this skill does.
 
-1. Read `$RUNS/<slug>/state.yaml` in full. It is the run's memory — you are continuing
-   work, not starting fresh.
+1. Read `<RUNS>/<slug>/state.yaml` in full — including `project.framework_path` and
+   `project.run_dir`, which tell you where everything is without re-deriving it. It is the
+   run's memory: you are continuing work, not starting fresh.
 2. Check `run.completed_modules` and `run.failed_gates`.
 3. Re-read the constitution and evidence policy. **Do not skip this** because a previous
    session read them — you did not, and the discipline degrades immediately without them.
-4. Find the next module in `$PIOS_HOME/framework/engine/run-order.yaml` whose `depends_on`
-   have all passed, and resume there.
+4. Find the next module in `<FRAMEWORK>/engine/run-order.yaml` whose `depends_on` have all
+   passed, and resume there.
 5. If the last session ended mid-module, redo that module. A half-written module is worse
    than an unstarted one, because its outputs look complete.
 
@@ -157,7 +176,7 @@ Tell the operator where you are before working: *"Resuming `<slug>` at module 07
 Follow the per-module loop in `AGENTS.md` exactly. Two additions that belong to session
 management rather than to the method:
 
-**Write to `$RUNS/<slug>/state.yaml` before you run out of room.** Losing a module's outputs to an
+**Write to `<RUNS>/<slug>/state.yaml` before you run out of room.** Losing a module's outputs to an
 exhausted context is the most common way a run is damaged. Write outputs and evidence as
 you produce them, not at the end of the module.
 
@@ -192,8 +211,8 @@ scope boundary — stop and ask. Record it in `state.open_questions` with `block
 
 ## Step 5 — Finish
 
-1. Fill every required artifact from `$PIOS_HOME/framework/deliverables/templates/` into
-   `$RUNS/<slug>/deliverables/`. Write
+1. Fill every required artifact from `<FRAMEWORK>/deliverables/templates/` into
+   `<RUNS>/<slug>/deliverables/`. Write
    `12-Build-Handoff.md` and `16-Engineering-Setup.md` last, and
    `00-Executive-Summary.md` last of all.
 2. Remove every `«placeholder»`, `<!-- fill -->` and `<!-- ACCEPTANCE -->` block.
@@ -201,7 +220,7 @@ scope boundary — stop and ask. Record it in `state.open_questions` with `block
 4. Run the validator:
 
    ```bash
-   python3 "$PIOS_HOME"/framework/engine/validate-run.py "$RUNS"/<slug>
+   python3 <FRAMEWORK>/engine/validate-run.py <RUNS>/<slug>
    ```
 
 5. **A non-zero exit means the run is not deliverable.** Fix what it reports. Do not
@@ -230,7 +249,7 @@ operator.
 **Skip `learn/` entirely.** It is human curriculum. Read `core/` for method, `knowledge/`
 for concepts, `resources/` for worked examples and anti-examples.
 
-**Never write inside `$PIOS_HOME`.** The framework is read-only during a run. If you
+**Never write inside `<FRAMEWORK>` or its repository.** The framework is read-only during a run. If you
 believe the framework itself needs changing, say so and stop — that is the `/pios-author`
 skill's job, not this one.
 
@@ -238,7 +257,7 @@ skill's job, not this one.
 
 ## Reporting status
 
-When asked for status rather than work, read `$RUNS/<slug>/state.yaml` and report:
+When asked for status rather than work, read `<RUNS>/<slug>/state.yaml` and report:
 
 - Which modules have passed, and which is next
 - Overall confidence, and what would raise it
