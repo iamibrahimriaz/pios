@@ -124,18 +124,35 @@ State the mode in one line before you begin, so the operator knows where output 
 
 ## Step 1 — Establish the mode before anything else
 
+**Several runs live side by side.** One directory per idea, and they do not interact. An
+existing run is not a reason to avoid starting a new one — it is only a reason never to
+write into it.
+
 ```bash
-ls <RUNS>/*/state.yaml 2>/dev/null
+ls -d <RUNS>/*/ 2>/dev/null && grep -h "raw_idea" <RUNS>/*/state.yaml 2>/dev/null
 ```
 
-| What you find | Mode |
-| --- | --- |
-| No `state.yaml` anywhere | **NEW RUN** |
-| One or more exist | **RESUME** — never start a second run over an existing one |
-| Operator asked "what stage / status" | **STATUS** — report and stop |
+**The mode follows what the operator asked for, not how many runs exist:**
 
-If a run exists and the operator describes a *different* idea, ask which they mean. Do not
-overwrite `state.yaml`. Never rewrite `state.project.raw_idea` under any circumstances.
+| What the operator did | Mode |
+| --- | --- |
+| Described an idea that does not match any existing run's `raw_idea` | **NEW RUN** — a new slug, a new directory, alongside whatever else is there |
+| Named an existing run, or said "continue" / "resume" with exactly one run present | **RESUME** that run |
+| Asked "what stage", "status", "where are we" | **STATUS** — report and stop |
+| Said "continue" with **more than one** run present | **Ask which.** List them by slug with a one-line summary of each and stop |
+| Described an idea that is arguably a restatement of an existing run | **Ask.** Show the existing run's `raw_idea` verbatim and ask whether this is the same project or a new one |
+
+**A second run is a normal thing to start.** Nothing is shared between runs except the
+framework itself, so a new idea costs an existing run nothing.
+
+**What is forbidden is writing into the wrong run.** Never overwrite an existing
+`state.yaml`, never reuse a slug that already exists, and never rewrite
+`state.project.raw_idea` under any circumstances — including on the run you are creating,
+once it is written.
+
+**When in doubt, ask before creating a directory.** A wrongly-created run directory is
+cheap to delete; a wrongly-*resumed* run silently mixes two ideas' evidence into one state
+file, and nothing downstream can detect it.
 
 ---
 
