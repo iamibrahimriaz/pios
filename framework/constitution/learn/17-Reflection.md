@@ -1,6 +1,6 @@
 ---
 Title: Reflection
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -15,10 +15,10 @@ Audience:
   - Business Analysts
   - Product Owners
 Prerequisites:
-  - 09-Research-Methodology.md
+  - core/09-Research-Methodology.md
   - 10-Common-Mistakes.md
-  - 11-Quality-Gate.md
-  - 12-Checklist.md
+  - core/11-Quality-Gate.md
+  - core/12-Checklist.md
   - 16-Evaluation.md
 Outputs:
   - Lessons Learned

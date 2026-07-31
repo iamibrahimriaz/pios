@@ -13,7 +13,7 @@ Audience:
   - Delivery Leads
   - Founders
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 08-product and 09-technology gates passed
 Outputs:
   - Shared understanding of what this module establishes

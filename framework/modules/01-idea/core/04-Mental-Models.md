@@ -1,6 +1,6 @@
 ---
 Title: Mental Models
-Module: 01-Idea
+Module: 01-idea
 Section: core
 Category: Thinking Framework
 Version: 1.0.0
@@ -15,9 +15,9 @@ Audience:
   - Researchers
   - Business Analysts
 Prerequisites:
-  - 00-AI-Constitution
+  - ../constitution/core/00-Purpose.md
   - 01-Idea/README.md
-  - Core Principles
+  - ../constitution/core/03-Core-Principles.md
 Outputs:
   - Structured reasoning
   - Better opportunity recognition
@@ -27,7 +27,7 @@ Related Modules:
   - 03-User
   - 04-Problem
 Tags:
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
   - Product Thinking
   - Innovation
   - Decision Making

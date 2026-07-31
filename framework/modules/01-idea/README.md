@@ -1,6 +1,6 @@
 ---
 Title: Idea Module
-Module: 01-Idea
+Module: 01-idea
 Category: Module Overview
 Version: 1.0.0
 Status: Approved
@@ -14,7 +14,7 @@ Audience:
   - Researchers
   - Business Analysts
 Prerequisites:
-  - 00-AI-Constitution
+  - ../constitution/core/00-Purpose.md
 Outputs:
   - Structured product ideas
   - Opportunity statements
@@ -102,14 +102,14 @@ After completing this module, AI should be able to:
 
 The module consists of three major sections.
 
-## 00-Core
+## `constitution/core`
 
 Defines the fundamental principles of idea generation and evaluation.
 
 Topics include:
 
 - Purpose
-- Mental Models
+- ../constitution/core/04-Mental-Models.md
 - Frameworks
 - Workflow
 - Best Practices
@@ -117,7 +117,7 @@ Topics include:
 
 ---
 
-## 01-Knowledge
+## `constitution/knowledge`
 
 Develops AI's understanding of innovation and opportunity thinking.
 

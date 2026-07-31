@@ -1,10 +1,10 @@
 id: 08-product
 name: Product
 purpose: Specify the product precisely enough to be built.
-depends_on: [07-strategy]
+depends_on: [03-user, 07-strategy]
 consumes: [mvp_definition, chosen_approach, personas, jobs_to_be_done]
 produces: [prd_body, feature_spec, acceptance_criteria, prioritization, edge_cases]
-feeds_deliverables: [prd, feature-spec]
+feeds_deliverables: [build-handoff, feature-spec, prd]
 gate:
   - Every feature traces to a ranked problem
   - Acceptance criteria testable, not aspirational

@@ -1,6 +1,6 @@
 ---
 Title: Mission
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -15,7 +15,7 @@ Audience:
   - Researchers
   - Contributors
 Prerequisites:
-  - 00-Core
+  - core/00-Purpose.md
 Outputs:
   - Shared mission
   - Unified direction

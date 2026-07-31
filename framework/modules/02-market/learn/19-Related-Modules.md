@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 02-market/README.md
+  - 02-market/core/00-Purpose.md
 Outputs:
   - Understanding of the market stage's position in the chain
 Related Modules:

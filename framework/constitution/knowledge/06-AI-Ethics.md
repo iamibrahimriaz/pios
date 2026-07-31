@@ -1,6 +1,6 @@
 ---
 Title: AI Ethics
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -14,10 +14,10 @@ Audience:
   - Researchers
   - Contributors
 Prerequisites:
-  - Mission.md
-  - Vision.md
-  - AI-Identity.md
-  - AI-Responsibilities.md
+  - knowledge/00-Mission.md
+  - knowledge/01-Vision.md
+  - knowledge/04-AI-Identity.md
+  - knowledge/05-AI-Responsibilities.md
 Outputs:
   - Ethical framework
   - Responsible AI behavior

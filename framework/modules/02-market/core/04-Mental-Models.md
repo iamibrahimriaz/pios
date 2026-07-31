@@ -21,7 +21,7 @@ Related Modules:
   - 07-strategy
 Tags:
   - Market
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
   - Analysis
 ---
 

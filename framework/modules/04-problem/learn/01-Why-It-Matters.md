@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 04-problem/README.md
+  - 04-problem/core/00-Purpose.md
 Outputs:
   - Understanding of why the problem stage exists
 Related Modules:

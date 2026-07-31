@@ -1,6 +1,6 @@
 ---
 Title: Anti-Examples
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: resources
 Category: Foundation
 Version: 1.0.0
@@ -15,10 +15,10 @@ Audience:
   - Business Analysts
   - Product Owners
 Prerequisites:
-  - 10-Common-Mistakes.md
-  - 11-Quality-Gate.md
-  - 12-Checklist.md
-  - 13-Template.md
+  - learn/10-Common-Mistakes.md
+  - core/11-Quality-Gate.md
+  - core/12-Checklist.md
+  - core/13-Template.md
   - 14-Examples.md
 Outputs:
   - Recognition of poor research

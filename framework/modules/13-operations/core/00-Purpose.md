@@ -13,7 +13,7 @@ Audience:
   - Operators
   - Founders
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 10-execution gate passed
 Outputs:
   - Shared understanding of what this module establishes

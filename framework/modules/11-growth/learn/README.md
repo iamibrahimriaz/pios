@@ -14,7 +14,7 @@ Audience:
   - Marketers
 Prerequisites:
   - 10-execution/learn/README.md
-  - 11-growth/README.md
+  - 11-growth/core/00-Purpose.md
 Outputs:
   - A reading path through the Growth module
 Related Modules:

@@ -21,7 +21,7 @@ Related Modules:
   - 13-operations
 Tags:
   - AI Systems
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

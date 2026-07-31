@@ -1,6 +1,6 @@
 ---
 Title: Learning Objectives of the AI Constitution
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -14,7 +14,7 @@ Audience:
   - Researchers
   - Framework Contributors
 Prerequisites:
-  - 00-Purpose.md
+  - core/00-Purpose.md
   - 01-Why-It-Matters.md
 Outputs:
   - Clear learning goals

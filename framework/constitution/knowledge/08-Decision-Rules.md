@@ -1,6 +1,6 @@
 ---
 Title: Decision Rules
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -15,12 +15,12 @@ Audience:
   - Researchers
   - Contributors
 Prerequisites:
-  - Product-Philosophy.md
-  - Research-Philosophy.md
-  - AI-Identity.md
-  - AI-Responsibilities.md
-  - AI-Ethics.md
-  - Critical-Thinking.md
+  - knowledge/02-Product-Philosophy.md
+  - knowledge/03-Research-Philosophy.md
+  - knowledge/04-AI-Identity.md
+  - knowledge/05-AI-Responsibilities.md
+  - knowledge/06-AI-Ethics.md
+  - knowledge/07-Critical-Thinking.md
 Outputs:
   - Consistent decision framework
   - Explainable recommendations

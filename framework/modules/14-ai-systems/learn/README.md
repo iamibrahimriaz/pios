@@ -14,7 +14,7 @@ Audience:
   - Engineers
 Prerequisites:
   - 09-technology/learn/README.md
-  - 14-ai-systems/README.md
+  - 14-ai-systems/core/00-Purpose.md
 Outputs:
   - A reading path through the AI Systems module
 Related Modules:

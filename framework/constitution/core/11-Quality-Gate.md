@@ -1,6 +1,6 @@
 ---
 Title: Quality Gate
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: core
 Category: Foundation
 Version: 1.0.0
@@ -19,7 +19,7 @@ Prerequisites:
   - 07-Workflow.md
   - 08-Questions-To-Answer.md
   - 09-Research-Methodology.md
-  - 10-Common-Mistakes.md
+  - learn/10-Common-Mistakes.md
 Outputs:
   - Quality validation
   - Research approval

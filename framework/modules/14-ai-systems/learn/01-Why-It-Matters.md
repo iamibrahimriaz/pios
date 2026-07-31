@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Engineers
 Prerequisites:
-  - 14-ai-systems/README.md
+  - 14-ai-systems/core/00-Purpose.md
 Outputs:
   - Understanding of why the AI stage exists
 Related Modules:

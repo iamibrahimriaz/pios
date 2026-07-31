@@ -13,7 +13,7 @@ Audience:
   - Product Managers
   - Founders
 Prerequisites:
-  - 00-AI-Constitution/resources/18-References.md
+  - ../constitution/resources/18-References.md
 Outputs:
   - Source routes for idea-stage questions
 Related Modules:
@@ -108,7 +108,7 @@ The most useful references for this module are internal:
 
 | Need | Where |
 | --- | --- |
-| The evidence tagging rules | `00-AI-Constitution` |
+| The evidence tagging rules | `framework/constitution` |
 | What a validated problem requires | `04-problem/knowledge/Evidence.md` |
 | Why the operator goal matters | `01-idea/knowledge/Goals.md` |
 | How the vision escapes its role | `01-idea/knowledge/Vision.md` |

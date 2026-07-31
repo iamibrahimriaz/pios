@@ -1,6 +1,6 @@
 ---
 Title: Examples
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: resources
 Category: Foundation
 Version: 1.0.0
@@ -15,10 +15,10 @@ Audience:
   - Business Analysts
   - Product Owners
 Prerequisites:
-  - 09-Research-Methodology.md
-  - 11-Quality-Gate.md
-  - 12-Checklist.md
-  - 13-Template.md
+  - core/09-Research-Methodology.md
+  - core/11-Quality-Gate.md
+  - core/12-Checklist.md
+  - core/13-Template.md
 Outputs:
   - Reference examples
   - Best practice demonstrations
@@ -405,8 +405,8 @@ If not, continue improving the research.
 
 These examples reflect the principles defined throughout Product Intelligence OS, including:
 
-- Core Principles
-- Mental Models
+- core/03-Core-Principles.md
+- core/04-Mental-Models.md
 - Best Practices
 - Research Methodology
 - Quality Gate

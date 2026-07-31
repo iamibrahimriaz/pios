@@ -14,7 +14,7 @@ Audience:
   - Operators
 Prerequisites:
   - 10-execution/learn/README.md
-  - 13-operations/README.md
+  - 13-operations/core/00-Purpose.md
 Outputs:
   - A reading path through the Operations module
 Related Modules:

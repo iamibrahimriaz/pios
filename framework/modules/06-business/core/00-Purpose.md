@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Product Managers
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 05-competition gate passed
 Outputs:
   - Shared understanding of what this module establishes

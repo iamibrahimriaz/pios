@@ -14,7 +14,7 @@ Audience:
   - Researchers
 Prerequisites:
   - 02-market/learn/README.md
-  - 03-user/README.md
+  - 03-user/core/00-Purpose.md
 Outputs:
   - A reading path through the User module
 Related Modules:

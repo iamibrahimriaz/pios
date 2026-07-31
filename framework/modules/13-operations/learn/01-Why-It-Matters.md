@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Operators
 Prerequisites:
-  - 13-operations/README.md
+  - 13-operations/core/00-Purpose.md
 Outputs:
   - Understanding of why the operations stage exists
 Related Modules:

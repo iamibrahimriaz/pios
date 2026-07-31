@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 06-business/README.md
+  - 06-business/core/00-Purpose.md
 Outputs:
   - Understanding of the business stage's position in the chain
 Related Modules:

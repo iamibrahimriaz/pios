@@ -1,6 +1,6 @@
 ---
 Title: Continuous Learning
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -15,11 +15,11 @@ Audience:
   - Business Analysts
   - Contributors
 Prerequisites:
-  - Research-Philosophy.md
-  - Critical-Thinking.md
-  - Decision-Rules.md
-  - Quality-Standards.md
-  - Knowledge-Hierarchy.md
+  - knowledge/03-Research-Philosophy.md
+  - knowledge/07-Critical-Thinking.md
+  - knowledge/08-Decision-Rules.md
+  - knowledge/09-Quality-Standards.md
+  - knowledge/10-Knowledge-Hierarchy.md
 Outputs:
   - Learning framework
   - Continuous improvement process

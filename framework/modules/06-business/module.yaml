@@ -1,7 +1,7 @@
 id: 06-business
 name: Business
 purpose: Establish whether a viable business exists around the solution.
-depends_on: [02-market, 05-competition]
+depends_on: [02-market, 03-user, 05-competition]
 consumes: [tam_sam_som, pricing_comparison, segments]
 produces: [business_model, pricing_strategy, unit_economics, go_to_market, revenue_model]
 feeds_deliverables: [research-dossier, executive-summary, prd]

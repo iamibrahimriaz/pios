@@ -1,13 +1,13 @@
 id: 11-growth
 name: Growth
 purpose: Plan how the product reaches, converts and retains users.
-depends_on: [06-business, 08-product]
+depends_on: [03-user, 06-business, 08-product]
 consumes: [go_to_market, segments, feature_spec]
 produces: [acquisition_channels, growth_loops, retention_model, onboarding_strategy, expansion_paths]
 feeds_deliverables: [growth-plan, roadmap]
 gate:
   - Channels matched to where the named segments actually are
-  - >= 1 growth loop described with its inputs and outputs
+  - ">= 1 growth loop described with its inputs and outputs"
   - Retention mechanism identified, not assumed
   - Time to first value measured in minutes, and stated
 on_fail: return to 06-business

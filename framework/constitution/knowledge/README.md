@@ -1,6 +1,6 @@
 ---
 Title: Knowledge Module
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Module Overview
 Version: 1.0.0
@@ -15,13 +15,13 @@ Audience:
   - Business Analysts
   - Contributors
 Prerequisites:
-  - 00-Core/README.md
+  - core/00-Purpose.md
 Outputs:
   - Foundational AI knowledge
   - Consistent reasoning framework
   - Structured learning path
 Related Modules:
-  - 00-Core
+  - core/00-Purpose.md
   - 02-Research (Future)
 Tags:
   - Knowledge
@@ -348,7 +348,7 @@ Together they create a complete reasoning framework.
 
 # Role Within Product Intelligence OS
 
-The Knowledge module serves as the bridge between the constitutional principles defined in **00-Core** and the practical research and intelligence modules that follow.
+The Knowledge module serves as the bridge between the constitutional principles defined in **`constitution/core`** and the practical research and intelligence modules that follow.
 
 ```
 Core

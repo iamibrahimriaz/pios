@@ -13,7 +13,7 @@ Audience:
   - Product Managers
   - Founders
 Prerequisites:
-  - constitution/core
+  - core/00-Purpose.md
   - 04-problem gate passed
 Outputs:
   - Shared understanding of what this module establishes

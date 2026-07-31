@@ -14,7 +14,7 @@ Audience:
   - Engineers
 Prerequisites:
   - 09-technology/learn/README.md
-  - 10-execution/README.md
+  - 10-execution/core/00-Purpose.md
 Outputs:
   - A reading path through the Execution module
 Related Modules:

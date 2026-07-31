@@ -1,6 +1,6 @@
 ---
 Title: Vision
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -14,7 +14,7 @@ Audience:
   - Researchers
   - Contributors
 Prerequisites:
-  - Mission.md
+  - knowledge/00-Mission.md
 Outputs:
   - Long-term direction
   - Strategic objectives

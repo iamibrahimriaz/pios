@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 05-competition/README.md
+  - 05-competition/core/00-Purpose.md
 Outputs:
   - Understanding of why the competition stage exists
 Related Modules:

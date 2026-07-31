@@ -14,7 +14,7 @@ Audience:
   - Researchers
 Prerequisites:
   - 05-competition/learn/README.md
-  - 06-business/README.md
+  - 06-business/core/00-Purpose.md
 Outputs:
   - A reading path through the Business module
 Related Modules:

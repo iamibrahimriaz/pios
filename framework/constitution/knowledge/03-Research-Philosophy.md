@@ -1,6 +1,6 @@
 ---
 Title: Research Philosophy
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: knowledge
 Category: Foundation
 Version: 1.0.0
@@ -15,9 +15,9 @@ Audience:
   - Product Researchers
   - Contributors
 Prerequisites:
-  - Mission.md
-  - Vision.md
-  - Product-Philosophy.md
+  - knowledge/00-Mission.md
+  - knowledge/01-Vision.md
+  - knowledge/02-Product-Philosophy.md
 Outputs:
   - Research mindset
   - Research principles

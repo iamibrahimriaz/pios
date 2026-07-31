@@ -1,6 +1,6 @@
 ---
 Title: References
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: resources
 Category: Foundation
 Version: 1.0.0
@@ -15,10 +15,10 @@ Audience:
   - Business Analysts
   - Product Owners
 Prerequisites:
-  - 09-Research-Methodology.md
-  - 11-Quality-Gate.md
-  - 16-Evaluation.md
-  - 17-Reflection.md
+  - core/09-Research-Methodology.md
+  - core/11-Quality-Gate.md
+  - learn/16-Evaluation.md
+  - learn/17-Reflection.md
 Outputs:
   - Trusted research references
   - Citation standards

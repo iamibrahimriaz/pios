@@ -13,7 +13,7 @@ Audience:
   - Founders
   - Researchers
 Prerequisites:
-  - 02-market/README.md
+  - 02-market/core/00-Purpose.md
 Outputs:
   - Understanding of why the market stage exists
 Related Modules:

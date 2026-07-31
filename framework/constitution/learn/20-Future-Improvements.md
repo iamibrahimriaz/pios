@@ -1,6 +1,6 @@
 ---
 Title: Future Improvements
-Module: 00-AI-Constitution
+Module: framework/constitution
 Section: learn
 Category: Foundation
 Version: 1.0.0
@@ -15,7 +15,7 @@ Audience:
   - Contributors
   - Framework Maintainers
 Prerequisites:
-  - All Core Constitution Documents
+  - core/00-Purpose.md
 Outputs:
   - Framework evolution roadmap
   - Continuous improvement process

@@ -19,7 +19,7 @@ Related Modules:
   - 12-metrics
 Tags:
   - Growth
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

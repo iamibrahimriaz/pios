@@ -20,7 +20,7 @@ Related Modules:
   - 09-technology
 Tags:
   - Product
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models

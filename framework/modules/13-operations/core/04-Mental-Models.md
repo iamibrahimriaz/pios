@@ -20,7 +20,7 @@ Related Modules:
   - 14-ai-systems
 Tags:
   - Operations
-  - Mental Models
+  - ../constitution/core/04-Mental-Models.md
 ---
 
 # Mental Models
