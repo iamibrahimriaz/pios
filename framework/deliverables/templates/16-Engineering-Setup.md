@@ -46,6 +46,60 @@ and escalate. Starting without access produces work that cannot be run or verifi
 
 ---
 
+## 1.1 Who Can Build This
+
+<!-- fill: The skills this specific build needs, derived from the architecture and the
+     data model — not a generic job description. The operator uses this to staff or hire;
+     an agent uses it to know when a task is outside what it should attempt alone.
+
+     Name the level per area, and say WHY that level. "Senior React" is unusable. "Senior,
+     because the offline queue must survive an app kill and replay idempotently" is a
+     hiring brief and a review checklist at once.
+
+     Most projects have ONE area where an ordinary practitioner produces clean, idiomatic,
+     well-tested code that quietly violates a guarantee — usually because the framework's
+     default points away from what the design needs. Find that area and mark it. It is the
+     staffing risk that does not announce itself, because nothing in the happy path fails. -->
+
+| Area | Level needed | Why this level, specifically |
+| --- | --- | --- |
+| «technology» | «familiar / mid / senior» | «what in THIS build demands it» |
+| «technology» | «level» | «what breaks at a lower level» |
+| «domain or language skill» | «level» | «e.g. a native speaker must verify the rendering» |
+
+### What is explicitly not required
+
+<!-- fill: Name what this build does NOT need, so the team is not staffed against an
+     imagined system. Over-hiring is not a neutral error: it raises the fixed cost base,
+     and 06-business's break-even moves with it. -->
+
+- «capability the architecture deliberately avoids, and where that is decided»
+- «capability deferred to a later milestone, with the milestone named»
+
+### The staffing risk worth naming
+
+<!-- fill: The one place a capable person still gets this wrong, and what catches it.
+     If the answer is "code review", say so plainly — and note that review catches it only
+     if the reviewer knows why the rule exists. A CI check that blocks a merge is stronger
+     and should be named here if one exists. -->
+
+> «The failure mode, the reason it is invisible, and the control that catches it.»
+
+### Minimum team for the current milestone
+
+<!-- fill: Not the whole team — the milestone. A run that hands back a headcount for the
+     entire roadmap invites everyone to start at once, and work that has not been validated
+     gets built because people are available. -->
+
+| Role | Count | Notes |
+| --- | --- | --- |
+| «role» | «n» | «when they can start, and on what» |
+
+**«Which milestone this staffs, and what the rest of the team should be doing instead —
+naming any validation work that runs in parallel.»**
+
+---
+
 ## 2. Environment & Configuration
 
 <!-- fill: Every variable the application reads. An agent cannot infer these — a missing

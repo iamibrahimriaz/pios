@@ -30,8 +30,47 @@ project:
 run:
   current_stage: frame
   completed_modules: []
-  failed_gates: []              # [{module, attempt, reason, at}]
   confidence: unknown           # high | medium | low | unknown
+
+  # Why that level, and what specifically would raise it. A confidence word with no basis
+  # is a mood. The Executive Summary opens with both, so this is where it comes from.
+  confidence_basis: ""
+
+  # Every gate evaluation, pass and fail alike. `failed_gates` records only the failures,
+  # which makes a run look like it passed everything except where noted — the opposite of
+  # an audit trail. A verdict names the module, the attempt, each criterion's result, and
+  # the universal gates.
+  #
+  # A pass recorded with no criterion-level detail is a claim, not a verdict.
+  gate_verdicts: []
+  # - module: 05-competition
+  #   attempt: 1
+  #   at: ""
+  #   verdict: pass                 # pass | fail
+  #   criteria: {}                  # {criterion_text: pass | fail}
+  #   universal: []                 # [U1, U2, ...] evaluated
+  #   attempt_counted: true         # false for a decision_dependent_failure
+  #   shortfall_declared: false
+
+  # Which human_checkpoint the run is paused at, if any, and what the operator was asked.
+  # Cleared when they answer. A run resumed a week later reads this before anything else.
+  current_checkpoint: null
+
+  # Set when a gate halts the run. `halted_at` is the module id; `halt_reason` states what
+  # is missing and who owns it. Both are cleared when the halt is resolved — the permanent
+  # record lives in failed_gates, which is append-only. A halt still set at delivery means
+  # the run finished around a gate it never cleared, and must say so in the summary.
+  halted_at: null
+  halt_reason: ""
+
+  # [{module, attempt, reason, at, attempt_counted}]
+  #
+  # `attempt_counted: false` marks a decision-dependent failure — the criterion is unmet
+  # because the operator has not made a choice, and no further research produces one. Those
+  # do not consume the three attempts in engine/gates.yaml `loop_protection`, because a
+  # re-run fails identically and the run would halt for exhaustion while reporting a
+  # research failure that never happened. See `decision_dependent_failure`.
+  failed_gates: []
 
 # Populated by modules. Keys match the `produces` list in each module.yaml.
 outputs: {}
@@ -69,13 +108,27 @@ assumptions:
 
 # Questions the agent could not answer alone.
 #
-# `answered_at` matters as much as `answer`. A blocking question answered after the
-# module that raised it has passed means every module since ran on a substitute
-# assumption — see engine/gates.yaml `late_answer_rederivation`.
+# `answered_at` matters as much as `answer`. A question answered after the module that
+# raised it has passed means every module since ran on a substitute assumption — see
+# engine/gates.yaml `late_answer_rederivation`.
+#
+# `blocking` and `premise_bearing` are DIFFERENT properties and both are required:
+#
+#   blocking        — the run cannot proceed until this is answered.
+#   premise_bearing — the run can proceed by assuming an answer, and later conclusions
+#                     will rest on that assumption.
+#
+# A question can be premise_bearing without being blocking, and that combination is the
+# dangerous one: work continues, nothing halts, and the substitute quietly becomes the
+# premise of everything downstream. Classify when the question is RAISED — by answering
+# time the substitution has happened and is hard to see. When it cannot be determined,
+# premise_bearing is true.
 open_questions:
   # - question: "Is this replacing an EMR or sitting alongside one?"
   #   raised_by: 01-idea
   #   blocking: true
+  #   premise_bearing: true   # will any module proceed by assuming an answer?
+  #   owner: operator
   #   answer: null
   #   answered_at: null       # ISO date. Later than raised_by's gate = re-derivation owed
   #   substitute_assumption: null   # the assumption id modules used in its place
@@ -93,6 +146,25 @@ rederivations:
   #   superseded_assumptions: []
   #   deliverables_reissued: []
   #   unchanged_and_why: []
+
+# Defects found in a deliverable AFTER the module that produced it passed its gate —
+# usually at review, at a checkpoint, or when the operator reads the finished set.
+#
+# Distinct from rederivations, which record a premise that changed. Here the premise held
+# and the artifact was wrong anyway: two statements that were each coherent and did not
+# resolve against each other, a rule stated in three places and enforced in none, a figure
+# that drifted after it was written.
+#
+# `now_caught_by` is the field that matters. A correction without it fixes one run; with
+# it, the defect class is closed for every run afterwards. If nothing catches it yet, say
+# so — that entry is a candidate for /pios-author, and naming the gap is the point.
+corrections:
+  # - at: ""
+  #   found_by: review        # review | checkpoint | operator | later module
+  #   defect: "The append-only DDL named a table the schema never created"
+  #   artifacts: []
+  #   fix: ""
+  #   now_caught_by: "validate-run.py identifier check"   # or: nothing yet
 
 # Where the framework got in the run's way. Appended during the run, at the moment it
 # happens — not reconstructed at the end, when the friction has been worked around and
@@ -138,6 +210,16 @@ rules:
   - A pre_registration entry is written before the work it predicts, and never edited after.
   - A module appends to evidence_log. It never rewrites another module's entries.
   - A blocking open_question halts the run at the next human_checkpoint.
-  - A blocking open_question answered after its module passed forces a re-derivation, not a
-    find-and-replace. Record it in rederivations.
+  - >-
+    Every open_question carries both blocking and premise_bearing. They are different
+    properties and a question can be the second without the first.
+  - >-
+    A blocking OR premise_bearing open_question answered after its module passed forces a
+    re-derivation, not a find-and-replace. Record it in rederivations.
+  - >-
+    A gate failure whose missing input is an operator decision is recorded with
+    attempt_counted: false and does not consume a loop-protection attempt.
   - Every decision records the alternatives it rejected, or it is not a decision.
+  - >-
+    Write to the key this schema defines. Recording the right content under an invented key
+    is invisible to every check that reads the defined one.

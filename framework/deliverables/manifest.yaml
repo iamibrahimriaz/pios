@@ -187,6 +187,15 @@ artifacts:
       - Deployment covers migrations, post-deploy verification and rollback
       - Pre-launch checklist complete — every unchecked box a named blocker or an accepted risk
       - The handover point to 14-Operations-Plan.md is explicit
+      - >-
+        Required skills are stated per area with the level and the reason that level is
+        needed, derived from this build rather than from a generic job description
+      - >-
+        The one area where a capable practitioner would still violate a guarantee is named,
+        together with the control that catches it
+      - >-
+        What is NOT required is stated, so the team is not staffed against a system the
+        architecture deliberately avoids
 
   - id: operations-plan
     file: 14-Operations-Plan.md

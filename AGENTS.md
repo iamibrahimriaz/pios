@@ -113,6 +113,23 @@ other, and it is the agent's job to make that impossible.
 **A failed gate stops you.** Uncertainty about a gate is a fail, not a pass. Three
 failures on one module halts the run and escalates to the human.
 
+**A gate can fail on something research cannot produce.** When the missing input is a
+choice only the operator can make — not a finding you could reach by looking harder — the
+attempt does not count toward the three. Say what research you would run and why its result
+cannot move the criterion; if you cannot say that, it is an ordinary failure. Record it with
+`attempt_counted: false`, put the decision to the operator with its options and what each
+implies, and halt the module. Otherwise the run spends three tries on a question it cannot
+answer and then reports a research failure that never happened. See
+`framework/engine/gates.yaml` under `decision_dependent_failure`.
+
+**`blocking` and `premise_bearing` are different properties, and every open question carries
+both.** Blocking means the run cannot proceed. Premise-bearing means it *can* proceed, by
+assuming an answer — and later conclusions will rest on that assumption. The dangerous
+combination is premise-bearing and not blocking: nothing halts, work continues, and the
+substitute quietly becomes the premise of everything downstream. Ask one question of every
+open question at the moment you raise it: **will any module proceed by assuming an answer?**
+If yes, or if you cannot tell, `premise_bearing: true`.
+
 **Preserve reasoning, not just conclusions.** Every decision records the alternatives it
 rejected. The output must be auditable by someone who was not present.
 
@@ -121,9 +138,9 @@ load-bearing or non-negotiable, name the component that enforces it and check th
 component exists in your own artifact set. A rule stated in three documents and enforced
 in none reads as a guarantee and is a wish. This is universal gate U7.
 
-**A late answer forces a re-derivation, not a find-and-replace.** If a blocking question
-from an early module is answered after that module passed, every module since has been
-reasoning on a substitute assumption. Re-derive the affected conclusions from the new
+**A late answer forces a re-derivation, not a find-and-replace.** If a blocking **or
+premise-bearing** question from an early module is answered after that module passed, every
+module since has been reasoning on a substitute assumption. Re-derive the affected conclusions from the new
 premise and say per conclusion whether it survived, changed, or was withdrawn — and for a
 survivor, whether it survived for the *same reason*. Correcting the wording while leaving
 the reasoning intact produces a document that agrees with the operator and was derived

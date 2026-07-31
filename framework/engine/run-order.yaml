@@ -38,6 +38,18 @@ stages:
     action: framework/deliverables/manifest.yaml
     human_checkpoint: true
 
+  - id: handoff
+    # Not automatic. A run that reaches "do not build", or an operator still deciding, does
+    # not need a build repository. Offered at the delivery checkpoint and run only on request.
+    #
+    # Without a defined step, every run improvises one — most often by staging a second copy
+    # of the specification inside the run directory, where nothing keeps the two aligned and
+    # the build proceeds from whichever went stale.
+    purpose: Put the artifacts where the building happens, in the order the builder needs them.
+    modules: []
+    action: framework/engine/handoff.md
+    on_request: true
+
 rules:
   - A module may not start until every id in its depends_on has passed its gate.
   - A module writes its outputs to projects/<slug>/state.yaml before its gate is evaluated.

@@ -74,6 +74,30 @@ check("delivery surface is set", bool(str(surface).strip()),
       "read it as settled context and none re-examines it, so an unstated surface is a "
       "default that was inherited rather than chosen")
 
+# ------------------------------------------------------------------ schema conformance
+# A run can record exactly the right content under a key this schema does not define, and
+# every check that reads the defined key sees an absent field. The content is present, the
+# reasoning was done, and the validator reports the work as missing — or worse, passes,
+# because the check keys off something else.
+#
+# Only top-level keys and the keys of `project` and `run` are compared. Going deeper would
+# reject the per-run fields a module legitimately adds to a list entry.
+schema = yaml.safe_load(open(os.path.join(FRAMEWORK, "engine/state-schema.yaml"), encoding="utf8")) or {}
+
+def unknown_keys(actual, expected, path):
+    if not isinstance(actual, dict) or not isinstance(expected, dict):
+        return []
+    return [f"{path}{k}" for k in actual if k not in expected]
+
+stray = unknown_keys(state, schema, "")
+for section in ("project", "run"):
+    stray += unknown_keys(state.get(section), schema.get(section), f"{section}.")
+
+check("state.yaml uses only keys the schema defines", not stray,
+      f"undefined key(s): {stray[:6]}\n         "
+      "content recorded under an invented key is invisible to every check that reads the "
+      "defined one — see engine/state-schema.yaml")
+
 # ------------------------------------------------------------------ artifacts
 man = yaml.safe_load(open(os.path.join(FRAMEWORK, "deliverables/manifest.yaml"), encoding="utf8"))
 dl_dir = os.path.join(RUN, "deliverables")
@@ -258,6 +282,48 @@ unanswered = [q.get("question", "?") for q in questions
 if unanswered:
     notes.append(f"{len(unanswered)} blocking question(s) unanswered at delivery. Each must "
                  "carry a named owner in Risks-and-Assumptions.")
+
+# ------------------------------------------------------------------ stated counts
+# A deliverable that reports "23 open assumptions" while state carries 26 is not a rounding
+# difference. The register is the artifact a reader uses to judge how much is unresolved,
+# and a count drifting below the truth understates exactly that. It drifts silently: the
+# figure is written once, more assumptions are added later, and nothing rereads the sentence.
+#
+# Only fires when a number is actually stated. A run that gives no count is not penalized —
+# but a run that gives a wrong one is, because a stated figure is read as authoritative.
+def stated(metric_pattern):
+    """Numbers written next to a metric name, in prose or in a summary table cell."""
+    out = []
+    for a in present:
+        t = body(a)
+        for rx in (rf"(\d+)\s+(?:currently\s+)?{metric_pattern}",
+                   rf"{metric_pattern}[^|\n]*\|\s*\*{{0,2}}(\d+)"):
+            for m in re.finditer(rx, t, re.I):
+                out.append((a["file"], int(m.group(1))))
+    return out
+
+
+COUNTS = [
+    ("open assumptions",
+     len([a for a in assumptions if a.get("status", "open") == "open"]),
+     r"open assumptions"),
+    ("load-bearing assumptions",
+     len([a for a in assumptions if a.get("load_bearing")]),
+     r"load[- ]bearing assumptions"),
+]
+
+drift = []
+for label, actual, pattern in COUNTS:
+    for where, said in stated(pattern):
+        if said != actual:
+            drift.append(f"{where}: says {said} {label}, state.yaml has {actual}")
+
+if any(stated(p) for _, _, p in COUNTS):
+    check("counts stated in the deliverables match state.yaml", not drift,
+          "\n         ".join(drift[:6]))
+else:
+    notes.append("No assumption counts stated in the deliverables — the drift check does "
+                 "not apply.")
 
 # ------------------------------------------------------------------ blockers
 blocked = re.search(r"BLOCKS LAUNCH|blocker", text_all, re.I)

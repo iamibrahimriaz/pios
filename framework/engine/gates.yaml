@@ -90,19 +90,102 @@ loop_protection:
   on_exhaustion: >
     Halt the run. Write the reason to state.run.failed_gates and escalate to the
     human operator with a specific question. Do not proceed with a failed gate.
+  # Attempts are for defects the module can repair. A gate whose missing input is an
+  # operator decision cannot be repaired by re-running it — see decision_dependent_failure.
+
+decision_dependent_failure:
+  # Loop protection assumes a failed gate is a research defect: look harder, reason
+  # better, try again. Some failures are not that. The criterion is unmet because a
+  # decision only the operator can make has not been made, and no amount of further
+  # research produces it.
+  #
+  # Counting those as attempts spends the run's three tries on a question the run cannot
+  # answer, and then halts for exhaustion — reporting a research failure when the actual
+  # state is "waiting on a person". The operator reads it as the framework failing, and
+  # the real request never gets asked.
+  applies_when:
+    - The gate criterion is unmet, and the missing input is a choice rather than a finding.
+    - No further research changes the verdict. State what research would be run and why
+      its result cannot move the criterion — if that cannot be stated, this is an
+      ordinary failure and the attempt counts.
+    - The decision belongs to the operator by authority, not merely by convenience.
+  prohibited_when:
+    - Research was available and was not done. Difficulty is not the same as impossibility.
+    - The agent is declaring a decision-dependency to avoid a criterion about rigor.
+    - The "decision" is one the research was commissioned to inform. A recommendation the
+      operator must approve is still the run's to produce — see the counter-example below.
+  required_response:
+    - Do not increment the attempt counter. Record `attempt_counted: false` in the verdict.
+    - >-
+      Record the decision as an open_question with blocking and premise_bearing both true,
+      and the operator as owner. State the options and what each one implies, so the
+      operator is choosing between consequences rather than being asked an open question.
+    - Halt the module. A decision-dependent failure is still a failure; the run does not
+      proceed past it on the assumption that the answer will be convenient.
+    - If the operator defers the decision, the gate stays failed and the run may continue
+      only into work that does not depend on it. Say plainly which deliverables are
+      complete regardless and which are waiting.
+  counter_example: >
+    "Which of these three segments should we target?" is NOT decision-dependent. Choosing
+    it is the work 07-strategy exists to do, and handing it back is the module declining
+    its own purpose. "What price will you charge, given the research cannot establish what
+    the problem costs anyone?" IS decision-dependent — the input is missing from the world,
+    not from the analysis.
+  consequence: >
+    A run carrying an unresolved decision-dependent failure at delivery must name it in the
+    Executive Summary as an open decision with its options, and set confidence accordingly.
+    It must not be presented as a research gap, because no research closes it.
+
+premise_bearing_questions:
+  # `blocking` and `premise_bearing` are different properties, and conflating them is
+  # how a contradicted premise reaches a delivery checkpoint unnoticed.
+  #
+  #   blocking        — the run cannot proceed until this is answered.
+  #   premise_bearing — the run CAN proceed, by substituting an assumption, and later
+  #                     conclusions will rest on that substitute.
+  #
+  # A question can be the second without being the first. "How many people will build
+  # this?" does not stop market research; it silently sets the cost base that the business
+  # model, the growth ceiling and the executive summary's central argument are derived
+  # from. Answer it late and every one of those is a conclusion about a different company.
+  #
+  # Classified when the question is RAISED, not when it is answered. By answering time the
+  # substitution has already happened and is hard to see.
+  test: >
+    Will any module proceed by assuming an answer? If yes, the question is premise_bearing,
+    whatever its blocking status. The substitute assumption is the evidence: a question no
+    module needed to assume an answer to was genuinely optional.
+  default: >
+    premise_bearing: true when it cannot be determined. Uncertainty is a fail, not a pass —
+    the cost of a false positive is one re-derivation that finds nothing moved; the cost of
+    a false negative is a deliverable set arguing from a premise the operator has denied.
+  recorded_as: >
+    open_questions[].premise_bearing, alongside blocking. When a module substitutes an
+    assumption, it writes that assumption's id to open_questions[].substitute_assumption.
+  examples:
+    premise_bearing_but_not_blocking:
+      - Who is building this, and how many of them — it sets the fixed cost base.
+      - Is this a business, a side project, or an internal tool — it sets what success means.
+      - Is the technology already chosen — it sets what the architecture may assume.
+    blocking_but_not_premise_bearing:
+      - Which jurisdiction — nothing can be assumed in its place, so research halts instead.
+    neither:
+      - Preferences that change wording rather than reasoning.
 
 late_answer_rederivation:
-  # A blocking question raised in an early module is sometimes answered late — at a
-  # checkpoint, or when the operator reads the finished set. By then every module that
-  # ran without the answer has substituted an assumption for it, and those assumptions
-  # are load-bearing precisely because the question was blocking.
+  # A question raised in an early module is sometimes answered late — at a checkpoint, or
+  # when the operator reads the finished set. By then every module that ran without the
+  # answer has substituted an assumption for it, and those assumptions are load-bearing
+  # precisely because the question mattered.
   #
   # Find-and-replace is the wrong repair. It corrects the words and leaves the
   # conclusions standing on the premise the operator has just contradicted — which reads
   # as agreement with the new answer while being derived from the old one.
   trigger: >
-    Any open_question with blocking: true receives an answer after the module that
-    raised it has passed its gate.
+    Any open_question with blocking: true OR premise_bearing: true receives an answer after
+    the module that raised it has passed its gate. Also triggered, regardless of either
+    flag, when an answer contradicts an assumption already recorded in state.assumptions —
+    a question misclassified at raise time is still a re-derivation at answer time.
   required_response:
     - Identify every module that recorded an assumption in place of the answer.
       state.assumptions carries the module id; the substitute assumption is the one whose
@@ -120,8 +203,13 @@ late_answer_rederivation:
     version. An artifact whose findings do not move is left at its existing version and
     said to be unchanged — evidence does not change when a premise does.
   not_triggered_by:
-    - A non-blocking question answered late. Record the answer and continue.
+    - A question that is neither blocking nor premise_bearing, and whose answer contradicts
+      no recorded assumption. Record the answer and continue.
     - New evidence that confirms the substitute assumption. Mark the assumption validated.
+  # An earlier version of this policy excluded every non-blocking question here. That
+  # exclusion is what let a run reach delivery with seven artifacts arguing from a premise
+  # the operator had already contradicted: the question was non-blocking, so the gate
+  # written for exactly this situation was the one that did not fire.
 
 human_checkpoints:
   # Stages where the run pauses for operator confirmation before continuing.
