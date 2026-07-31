@@ -17,7 +17,7 @@ templates_dir: framework/deliverables/templates/
 #   «placeholder»        a value to replace.
 #   <!-- ACCEPTANCE -->  the artifact's own checklist. Removed before delivery.
 #
-# 13 artifacts are required. 3 are emitted only when the run's scope calls for them.
+# 14 artifacts are required. 3 are emitted only when the run's scope calls for them.
 
 artifacts:
 
@@ -169,6 +169,24 @@ artifacts:
       - Names the stack, the repo layout and the first milestone
       - Contains no unresolved [assumption] in a build-blocking position
       - "An agent could open this file and start writing code today"
+
+  - id: engineering-setup
+    file: 16-Engineering-Setup.md
+    required: true
+    audience: the engineer or coding agent building this, from day one to launch day
+    fed_by: [09-technology, 10-execution, 13-operations]
+    critical: true
+    acceptance:
+      - Every environment variable the application reads is listed, marked required and secret
+      - No real secret value appears in the document
+      - Local setup is a command sequence, with a stated time from clone to running system
+      - Seed data specified, and explicitly not derived from production
+      - "Test strategy states the trace rule: every test traces to a criterion, failure mode, non-negotiable or edge case"
+      - A 'what NOT to test' section is present and has not been softened
+      - CI stages state which ones block a merge
+      - Deployment covers migrations, post-deploy verification and rollback
+      - Pre-launch checklist complete — every unchecked box a named blocker or an accepted risk
+      - The handover point to 14-Operations-Plan.md is explicit
 
   # Optional — emitted when the run's scope calls for them.
 

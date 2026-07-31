@@ -4,7 +4,7 @@ purpose: Plan how the product is run, supported and kept compliant after launch.
 depends_on: [02-market, 09-technology, 10-execution]
 consumes: [delivery_plan, security_model, regulatory_landscape]
 produces: [support_model, runbooks, incident_process, compliance_operations, cost_model]
-feeds_deliverables: [operations-plan, build-handoff]
+feeds_deliverables: [build-handoff, engineering-setup, operations-plan]
 gate:
   - Support channel and response expectation defined
   - Incident and escalation path documented

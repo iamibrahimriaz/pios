@@ -4,7 +4,7 @@ purpose: Define the technical shape — data, interfaces, architecture, security
 depends_on: [02-market, 08-product]
 consumes: [feature_spec, acceptance_criteria, regulatory_landscape]
 produces: [data_model, api_contract, architecture, security_model, scalability_plan, tech_stack]
-feeds_deliverables: [data-model, api-contract, architecture, build-handoff]
+feeds_deliverables: [api-contract, architecture, build-handoff, data-model, engineering-setup]
 gate:
   - Entities, relationships and constraints complete enough to generate a schema
   - Every product capability has a supporting endpoint or interface

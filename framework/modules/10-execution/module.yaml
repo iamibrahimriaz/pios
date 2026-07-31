@@ -4,7 +4,7 @@ purpose: Convert the specification into something a team or agent can start buil
 depends_on: [08-product, 09-technology]
 consumes: [prd_body, data_model, api_contract, architecture]
 produces: [ux_flows, delivery_plan, milestones, build_handoff, qa_strategy]
-feeds_deliverables: [architecture, build-handoff, roadmap, ux-flows]
+feeds_deliverables: [architecture, build-handoff, engineering-setup, roadmap, ux-flows]
 gate:
   - Critical user paths mapped end to end
   - Work broken into sequenced, independently shippable milestones
