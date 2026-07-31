@@ -24,11 +24,25 @@ run:
 outputs: {}
 
 # Every claim the run depends on, tagged per engine/evidence-policy.md.
+#
+# `n` and `strength` exist because a tag is not a scale. A finding from one
+# conversation and a finding from two hundred are both [verified], and without
+# these fields they are weighted identically by every module downstream.
+#
+# `mode` distinguishes what was watched from what was described. They are not
+# equivalent evidence and 03-user's gate now requires the distinction.
+#
+# `checked_on` is what makes a reused run safe. A regulation or a price is
+# correct on the day it was captured and decays silently afterward.
 evidence_log:
   # - claim: "Global EMR market was USD 29.8B in 2023"
-  #   tag: verified
+  #   tag: verified          # verified | inferred | assumption
   #   source: "Grand View Research, 2024"
+  #   checked_on: ""         # ISO date the source was consulted
   #   module: 02-market
+  #   n: null                # sample size where the claim rests on observation
+  #   mode: null             # observed | reported — for user and workflow claims
+  #   strength: null         # strong | moderate | weak — the author's own read
   #   load_bearing: true
 
 # Things believed but not established. Carried into the final deliverables.
@@ -56,8 +70,22 @@ decisions:
   #   alternatives_rejected: ["Full EMR replacement", "Billing-first"]
   #   reversible: true
 
+# Recorded before scoring begins in 07-strategy, and never edited afterward.
+# Confidence laundering cannot be detected inside one document — the laundered
+# and the honest version are identical. It can be detected across runs. If the
+# expected winner always wins, the comparison is recording a decision rather
+# than making one.
+pre_registration:
+  # - module: 07-strategy
+  #   question: "Which solution option do we expect to win?"
+  #   expected: "Option A — the AI product"
+  #   recorded_before: scoring
+  #   actual: null            # filled after the comparison completes
+  #   matched: null           # true | false
+
 rules:
   - raw_idea is immutable. Refinements go to outputs.idea_brief.
+  - A pre_registration entry is written before the work it predicts, and never edited after.
   - A module appends to evidence_log. It never rewrites another module's entries.
   - A blocking open_question halts the run at the next human_checkpoint.
   - Every decision records the alternatives it rejected, or it is not a decision.

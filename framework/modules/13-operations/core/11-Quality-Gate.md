@@ -194,6 +194,21 @@ A failed cost check is a regress — `06-business` for the price, `07-strategy` 
 
 ---
 
+# Criterion 5 — A cost ceiling breach is resolved by a recorded change to 06-business price or 07-strategy scope, never by revising the forecast
+
+**Passes when:** no breach occurred, or a breach is recorded together with the regress it
+triggered — a price change in `06-business` or a scope change in `07-strategy` — and the
+person who decided.
+
+**Fails when:** a breach is reported and the run continues on the original numbers, or when
+the forecast that produced the breach is revised downward to clear it.
+
+**The absorption to watch for.** "Support will take less time as the product matures." It is
+probably true. It is also the only lever entirely within the author's control, which is why
+it is reached for — and a margin produced this way exists only in the document.
+
+---
+
 # Module-Specific Checks
 
 ## The Rota Check

@@ -11,4 +11,6 @@ gate:
   - MVP cut line drawn with the reasoning recorded
   - Explicit non-goals listed
   - Risks registered with likelihood, impact and mitigation
+  - The expected winner recorded before scoring begins
+  - If 04-problem declared a shortfall, the weight it changed is named, and whether the winner would differ without it
 on_fail: return to 04-problem

@@ -10,4 +10,6 @@ gate:
   - Every product capability has a supporting endpoint or interface
   - Regulatory requirements from 02-market reflected in the security model
   - Stack choice justified with trade-offs stated, not asserted
+  - Regulated columns listed by name, not described
+  - Every obligation from 02-market mapped to a mechanism, or recorded as a blocker with a named owner
 on_fail: return to 08-product

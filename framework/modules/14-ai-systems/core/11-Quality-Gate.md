@@ -205,6 +205,34 @@ a human confirmation step.
 
 ---
 
+# Criterion 5 — Each alternative carries a one-sentence case written as its advocate would write it
+
+**Passes when:** each non-AI alternative has an honest sentence a competent person could
+have written in its favor.
+
+**Fails when:** the alternative is described in terms its own advocate would not recognize.
+That is a straw man, and the comparison proved nothing.
+
+**The alternatives that win most often** are unglamorous: a form field, a checklist, a rule,
+a person. They win on determinism, auditability, zero marginal cost and no evaluation
+burden. A capability that beats one has earned something.
+
+---
+
+# Criterion 6 — Every failure mode states whether the user can detect it, including when the answer is no
+
+**Passes when:** each failure mode carries a detection column, and at least one honest "no"
+appears where the failure is genuinely undetectable.
+
+**Fails when:** every failure is marked detectable. That is unusual in reality and normally
+means detection was assumed rather than examined.
+
+**What the answer decides.** Detectability governs the autonomy ceiling, not accuracy. A 1%
+error rate the user cannot catch is more dangerous than a 10% rate they can see, because
+their trust is well calibrated to the 99%.
+
+---
+
 # Module-Specific Checks
 
 ## The Cost Ratio Check

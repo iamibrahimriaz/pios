@@ -67,7 +67,7 @@ table, Stage 2 was skipped and this criterion fails.
 
 ---
 
-# Criterion 2 — At least three problems carrying `[verified]` evidence, not inference
+# Criterion 2 — >= 3 problems carrying [verified] evidence, not inference
 
 **Passes when:** three or more problems have `[verified]` tags resolving to retrievable
 sources at evidence ladder ranks 1–3.

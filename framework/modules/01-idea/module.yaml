@@ -11,4 +11,6 @@ gate:
   - Buyer and user distinguished (may be the same, must be stated)
   - ">= 5 clarifying questions asked and answered or explicitly deferred"
   - All initial assumptions tagged per engine/evidence-policy.md
+  - The single load-bearing assumption named among those tagged
+  - A pre-mortem recorded — what would make this idea not worth doing — before research begins
 on_fail: halt and request input from the human operator

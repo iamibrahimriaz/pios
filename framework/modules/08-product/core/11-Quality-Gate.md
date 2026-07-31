@@ -147,6 +147,18 @@ the roadmap output. The ledger is only worth writing if something reads it.
 
 ---
 
+# Criterion 5 — Every state-changing requirement states whether it is reversible
+
+**Passes when:** each requirement that changes state carries reversible or irreversible.
+
+**Fails when:** irreversibility is known to the author and absent from the document. The
+builder then implements it without a confirmation, the interface never communicates it, and
+a user discovers the rule by breaking it.
+
+**One word per requirement**, and it changes the design of every action it applies to.
+
+---
+
 # Module-Specific Checks
 
 These are not in `module.yaml`. They fail the gate independently, because each is a known

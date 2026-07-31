@@ -45,7 +45,7 @@ caught — or permanently absorbed into the blueprint.
 
 ---
 
-# Criterion 1 — At least two segments, with a stated reason for prioritizing one
+# Criterion 1 — >= 2 segments with a stated reason for prioritizing one
 
 **Passes when:** two or more segments exist, they differ **behaviorally**, each is scored
 on pain intensity, ability to pay and reachability, one is chosen, and the choice
@@ -82,7 +82,7 @@ solution enters the blueprint disguised as a user need.
 
 ---
 
-# Criterion 3 — Current workflow documented, including the tools being replaced
+# Criterion 3 — Current workflow documented including the tools being replaced
 
 **Passes when:** the workflow is broken into steps, each step names the tool used, friction
 points are identified, and the products being replaced are **named**.
@@ -110,6 +110,30 @@ the product must clear is stated.
 A product that ignores switching cost gets built, launched, and loses to an inferior tool
 that is already installed. This criterion exists because that failure is both common and
 entirely predictable at this stage.
+
+---
+
+# Criterion 5 — Each user finding marked observed or reported
+
+**Passes when:** every workflow and behavior claim states whether it was watched or
+described.
+
+**Fails when:** interview statements and observations are formatted identically. They are
+not equivalent evidence, and module 04 currently weights them the same.
+
+**Note.** Marking everything `reported` is a passing answer. It is also a finding about the
+run's evidence base, which is the point.
+
+---
+
+# Criterion 6 — Switching cost broken into its five components, not carried as one figure
+
+**Passes when:** data migration, retraining, workflow disruption, contractual lock-in and
+perceived risk each carry a value or an explicit unknown.
+
+**Fails when:** a single number is given. The composition is what module 11 needs — an
+adoption barrier caused by retraining is addressed differently from one caused by contract
+timing.
 
 ---
 

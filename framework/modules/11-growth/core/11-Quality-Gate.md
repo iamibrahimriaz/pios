@@ -71,7 +71,7 @@ the reasoning. Projected CAC before launch is an assumption; the cost of finding
 
 ---
 
-# Criterion 2 — At least one growth loop described with its inputs and outputs
+# Criterion 2 — >= 1 growth loop described with its inputs and outputs
 
 **Passes when** at least one mechanism is described as a cycle with input, action and output,
 and each carries an explicit **closure verdict**.
@@ -148,6 +148,19 @@ If yes, it is the wrong event.
 flow. Migration and retraining are not post-activation concerns — they are the largest thing
 standing between a user and first value, and placing them afterwards is how activation rates get
 planned optimistically.
+
+---
+
+# Criterion 5 — Every conversion figure carries the market it was measured in, or is tagged [assumption]
+
+**Passes when:** each rate states where it came from — your own data, or a named external
+market.
+
+**Fails when:** an industry benchmark appears untagged. It was measured in a market with a
+different switching cost, buyer and alternative, and it feeds the payback check.
+
+**Why this one matters most here.** Every other gap in this module produces a weaker plan.
+This one produces a plan that **passes an arithmetic check it should have failed**.
 
 ---
 

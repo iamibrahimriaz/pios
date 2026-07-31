@@ -10,4 +10,6 @@ gate:
   - Training / grounding data availability confirmed, not assumed
   - Evaluation method defined before the capability is committed to
   - Failure modes and human fallback specified
+  - Each alternative carries a one-sentence case written as its advocate would write it
+  - Every failure mode states whether the user can detect it, including when the answer is no
 on_fail: return to 08-product

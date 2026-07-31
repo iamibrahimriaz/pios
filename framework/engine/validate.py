@@ -100,6 +100,25 @@ check("`depends_on` lists every module it consumes from", not incomplete, incomp
 forward = [(i, x) for i, d in modules.items() for x in d.get("depends_on", []) if x >= i]
 check("no module depends on a later module", not forward, forward)
 
+# AUTHORING.md requires the criteria in 11-Quality-Gate.md to match module.yaml exactly.
+# Drift here means the agent reads one list and is judged against another.
+gate_drift = []
+for i, d in modules.items():
+    qg = f"modules/{i}/core/11-Quality-Gate.md"
+    if not os.path.isfile(qg):
+        gate_drift.append(f"{i}: 11-Quality-Gate.md missing")
+        continue
+    documented = re.findall(r"^# Criterion \d+ — (.+?)\s*$", open(qg, encoding="utf8").read(), re.M)
+    declared = [str(c) for c in d.get("gate", [])]
+    norm = lambda s: re.sub(r"\s+", " ", s).strip().rstrip(".")
+    missing = [c for c in declared if norm(c) not in [norm(x) for x in documented]]
+    extra = [c for c in documented if norm(c) not in [norm(x) for x in declared]]
+    if missing:
+        gate_drift.append(f"{i}: in module.yaml but not documented -> {missing}")
+    if extra:
+        gate_drift.append(f"{i}: documented but not in module.yaml -> {extra}")
+check("module.yaml gate criteria match 11-Quality-Gate.md", not gate_drift, "\n         ".join(gate_drift[:6]))
+
 unresolved_fail = [(i, d.get("on_fail")) for i, d in modules.items()
                    if not any(x in str(d.get("on_fail", "")) for x in modules)
                    and "halt" not in str(d.get("on_fail", ""))]

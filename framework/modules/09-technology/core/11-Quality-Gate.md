@@ -152,6 +152,35 @@ learning curve" is not a trade-off; it is a benefit with a hedge.
 
 ---
 
+# Criterion 5 — Regulated columns listed by name, not described
+
+**Passes when:** an actual list of column names exists.
+
+**Fails when:** the security model describes categories of personal data in prose.
+
+**Why a list.** Three other modules check against it — `12-metrics` verifies no regulated
+field reaches an analytics event property, `13-operations` schedules the review,
+`14-ai-systems` verifies none enters a model input. A paragraph is not checkable, so those
+three checks silently pass.
+
+---
+
+# Criterion 6 — Every obligation from 02-market mapped to a mechanism, or recorded as a blocker with a named owner
+
+**Passes when:** each obligation has a named mechanism — a retention job, a deletion path,
+an audit log, a residency decision — or a blocker with a named human owner.
+
+**Fails when:** an obligation is acknowledged and nothing exists that would satisfy it.
+
+**Blocker, not risk.** If no mechanism satisfies it, that is a blocker. Risks get managed
+and blockers get resolved; softening one into the other buys time at a bad exchange rate.
+
+**Why here.** This module is the middle link of the obligation chain. Break it and
+`13-operations` has nothing to schedule — and nothing downstream notices a rule nobody
+wrote down.
+
+---
+
 # Module-Specific Checks
 
 Not in `module.yaml`. Each fails the gate independently, because each is a way a design can
