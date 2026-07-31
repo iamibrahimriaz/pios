@@ -216,6 +216,20 @@ you skipped to save time is the thing the framework exists to prevent.
 **Announce each module** in one line as you start it, so the operator can follow the run:
 *"Module 04 — problem validation. Ranking against module 03's jobs."*
 
+**Record friction the moment it happens.** When the framework gets in your way — a gate
+criterion you cannot evaluate as written, a template section with no home for something real,
+a question you had to ask the operator twice, an instruction that turned out to be wrong —
+append it to `state.friction_log` before moving on. Mark it `operator_visible: true` if they
+hit it rather than you.
+
+**Do not stop to discuss it, and do not fix the framework.** The framework is read-only
+during a run; `/pios-author` is where changes are made, afterwards and deliberately. Note it
+and keep going.
+
+> **Written at the end, this list is worthless.** By then every rough edge has been worked
+> around, and a workaround is indistinguishable in memory from something that went smoothly.
+> The friction that is worth fixing is exactly the friction you stopped noticing.
+
 ---
 
 ## Step 4 — The three checkpoints are real stops
@@ -300,6 +314,17 @@ instruction for something the research says should not be built.
 
 **5 — The closing line.** What you need from them now, per the reply contract: the decisions
 still open, and **"Tell me which of these you want to resolve and I'll pick it up."**
+
+**If `state.friction_log` is not empty, add one short paragraph before the closing line** —
+not a section, a paragraph. Name the two or three places the framework itself got in the way
+during this run, in plain language, and say that `/pios-author` is where they get fixed. The
+operator does not have to act on it and should not be asked to; they are being told the list
+exists so it is not lost.
+
+**Then ask the one question they can answer and you cannot:** *"Was there anything about how
+this run went that annoyed you?"* Your own friction log records where the framework blocked
+**you**. It cannot see where it was confusing, slow or unclear to **them** — and that is the
+feedback that has historically changed this framework most.
 
 **Say plainly whether they can start building today.** An operator holding fifteen documents
 cannot tell whether the plan is ready or whether something must be answered first. If a

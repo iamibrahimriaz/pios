@@ -155,6 +155,17 @@ Runs are where the framework's real defects surface. Runs are also private —
 if any run content is tracked. Both things are true at once, so the lesson crosses
 the boundary and the project never does.
 
+**Start from the run's own friction log.** A completed run leaves `state.friction_log` —
+the places the framework got in the agent's way, recorded as they happened rather than
+remembered afterwards. Read it before anything else; it is the cheapest source of real
+defects this project has, and entries marked `operator_visible: true` are the ones that
+cost a person something.
+
+**It is not the whole picture.** The log records where the framework blocked the *agent*.
+It cannot record where the framework was confusing, slow or unclear to the *operator* —
+that only arrives when they say so, and historically it has been the more valuable half.
+Ask for it; do not wait for it.
+
 **State the defect so it stands on its own.** If the reasoning only makes sense
 with the run in front of you, it is not a framework change yet.
 

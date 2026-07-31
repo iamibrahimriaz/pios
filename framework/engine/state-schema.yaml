@@ -94,6 +94,23 @@ rederivations:
   #   deliverables_reissued: []
   #   unchanged_and_why: []
 
+# Where the framework got in the run's way. Appended during the run, at the moment it
+# happens — not reconstructed at the end, when the friction has been worked around and
+# forgotten.
+#
+# This exists because the operator should not have to remember, three hours later, what
+# annoyed them at module 04. The run notices, records, and hands the list back at delivery.
+#
+# It is run content: private, gitignored, and never published. A lesson crosses into the
+# framework through /pios-author, generalized so the project does not travel with it.
+friction_log:
+  # - at: 01-idea
+  #   kind: gate            # gate | template | question | checkpoint | tooling | unclear
+  #   what: "Criterion 4 could not be evaluated — no way to tell a deferred question from
+  #          an unanswered one in state.open_questions"
+  #   cost: "Judged it by hand. A second run would judge it differently"
+  #   operator_visible: false   # true if the operator hit it, not just the agent
+
 # Decisions made, with the reasoning preserved. This is what makes the output auditable.
 decisions:
   # - id: D1
