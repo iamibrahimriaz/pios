@@ -45,10 +45,56 @@ the right existing section, never bloat. Every edit must make the skill strictly
 **Self-check before you finish a task:** "What did I learn that this skill should have told
 me up front?" If anything, write it in now.
 
+---
+
+## Step 0 — Locate the framework and the run directory
+
+The framework can be used two ways. **Resolve which one you are in before anything else**,
+because every other path in this file depends on it.
+
+```bash
+if [ -f framework/engine/run-order.yaml ]; then
+  PIOS_HOME="$(pwd)"; RUNS="projects"; MODE="in-repo"
+elif [ -n "$PIOS_HOME" ] && [ -f "$PIOS_HOME/framework/engine/run-order.yaml" ]; then
+  RUNS="pios"; MODE="external"
+else
+  MODE="unresolved"
+fi
+echo "mode=$MODE  PIOS_HOME=$PIOS_HOME  runs=$RUNS"
+```
+
+| Mode | You are | Framework at | Runs written to |
+| --- | --- | --- | --- |
+| **in-repo** | Inside the PIOS repository | `./framework/` | `./projects/<slug>/` |
+| **external** | In any other project | `$PIOS_HOME/framework/` | `./pios/<slug>/` |
+
+**If unresolved**, stop and tell the operator exactly this, then wait:
+
+> I cannot find the framework. Either run this from inside the Product Intelligence OS
+> repository, or point `PIOS_HOME` at where you cloned it:
+>
+> `export PIOS_HOME="$HOME/Projects/product-intelligence-os"`
+>
+> Add that line to your shell profile to make it permanent. See `USAGE.md` in the
+> framework repository.
+
+Do not guess a location, and do not proceed without the framework. Every module's method
+lives there; without it you would be improvising, which is the one thing this framework
+exists to prevent.
+
+**In external mode**, prefix every framework path — in this file and in `AGENTS.md` — with
+`$PIOS_HOME/`. Read from the framework; **never write to it.** It is read-only during a
+run. Everything you produce goes under `./pios/<slug>/`.
+
+State the mode in one line before you begin, so the operator knows where output will land:
+*"External mode. Framework at ~/Projects/product-intelligence-os. Writing to ./pios/."*
+
+---
+
 ## Step 1 — Establish the mode before anything else
 
 ```bash
-ls projects/*/state.yaml 2>/dev/null
+ls "$RUNS"/*/state.yaml 2>/dev/null
 ```
 
 | What you find | Mode |
@@ -72,16 +118,16 @@ and a paraphrase silently changes the project.
 2. Create the run directory:
 
    ```bash
-   mkdir -p projects/<slug>/research projects/<slug>/deliverables
-   cp framework/engine/state-schema.yaml projects/<slug>/state.yaml
+   mkdir -p "$RUNS"/<slug>/research "$RUNS"/<slug>/deliverables
+   cp "$PIOS_HOME"/framework/engine/state-schema.yaml "$RUNS"/<slug>/state.yaml
    ```
 
 3. Edit `state.yaml`: strip the commented examples, set `slug`, paste the operator's words
    verbatim into `raw_idea`, set `created`. Leave `jurisdiction` empty — module 01 asks
    for it.
-4. Read, in this order: `framework/constitution/core/`,
-   `framework/engine/evidence-policy.md` (twice), `run-order.yaml`, `gates.yaml`,
-   `review-loop.md`, `framework/deliverables/manifest.yaml`.
+4. Read, in this order, all under `$PIOS_HOME/framework/`: `constitution/core/`,
+   `engine/evidence-policy.md` (twice), `engine/run-order.yaml`, `engine/gates.yaml`,
+   `engine/review-loop.md`, `deliverables/manifest.yaml`. Also read `$PIOS_HOME/AGENTS.md`.
 5. Begin `01-idea`.
 
 ---
@@ -91,13 +137,13 @@ and a paraphrase silently changes the project.
 A full run does not fit in one session. Resuming correctly is the most important thing
 this skill does.
 
-1. Read `projects/<slug>/state.yaml` in full. It is the run's memory — you are continuing
+1. Read `$RUNS/<slug>/state.yaml` in full. It is the run's memory — you are continuing
    work, not starting fresh.
 2. Check `run.completed_modules` and `run.failed_gates`.
 3. Re-read the constitution and evidence policy. **Do not skip this** because a previous
    session read them — you did not, and the discipline degrades immediately without them.
-4. Find the next module in `framework/engine/run-order.yaml` whose `depends_on` have all
-   passed, and resume there.
+4. Find the next module in `$PIOS_HOME/framework/engine/run-order.yaml` whose `depends_on`
+   have all passed, and resume there.
 5. If the last session ended mid-module, redo that module. A half-written module is worse
    than an unstarted one, because its outputs look complete.
 
@@ -111,7 +157,7 @@ Tell the operator where you are before working: *"Resuming `<slug>` at module 07
 Follow the per-module loop in `AGENTS.md` exactly. Two additions that belong to session
 management rather than to the method:
 
-**Write to `state.yaml` before you run out of room.** Losing a module's outputs to an
+**Write to `$RUNS/<slug>/state.yaml` before you run out of room.** Losing a module's outputs to an
 exhausted context is the most common way a run is damaged. Write outputs and evidence as
 you produce them, not at the end of the module.
 
@@ -146,7 +192,8 @@ scope boundary — stop and ask. Record it in `state.open_questions` with `block
 
 ## Step 5 — Finish
 
-1. Fill every required artifact from `framework/deliverables/templates/`. Write
+1. Fill every required artifact from `$PIOS_HOME/framework/deliverables/templates/` into
+   `$RUNS/<slug>/deliverables/`. Write
    `12-Build-Handoff.md` and `16-Engineering-Setup.md` last, and
    `00-Executive-Summary.md` last of all.
 2. Remove every `«placeholder»`, `<!-- fill -->` and `<!-- ACCEPTANCE -->` block.
@@ -154,7 +201,7 @@ scope boundary — stop and ask. Record it in `state.open_questions` with `block
 4. Run the validator:
 
    ```bash
-   python3 framework/engine/validate-run.py projects/<slug>
+   python3 "$PIOS_HOME"/framework/engine/validate-run.py "$RUNS"/<slug>
    ```
 
 5. **A non-zero exit means the run is not deliverable.** Fix what it reports. Do not
@@ -183,11 +230,15 @@ operator.
 **Skip `learn/` entirely.** It is human curriculum. Read `core/` for method, `knowledge/`
 for concepts, `resources/` for worked examples and anti-examples.
 
+**Never write inside `$PIOS_HOME`.** The framework is read-only during a run. If you
+believe the framework itself needs changing, say so and stop — that is the `/pios-author`
+skill's job, not this one.
+
 ---
 
 ## Reporting status
 
-When asked for status rather than work, read `state.yaml` and report:
+When asked for status rather than work, read `$RUNS/<slug>/state.yaml` and report:
 
 - Which modules have passed, and which is next
 - Overall confidence, and what would raise it

@@ -195,6 +195,7 @@ framework/                ships to users; read-only during a run
   packs/                  optional vertical knowledge — planned, not yet built
 
 .claude/skills/           /pios and /pios-author — the Claude Code interface
+scripts/install-skill.sh  install /pios globally, for use from other projects
 projects/<slug>/          one run — state.yaml, research/, deliverables/
 
 examples/                 completed reference runs — none yet; see examples/README.md
@@ -243,9 +244,9 @@ agent reads and executes. You supply the agent; this repository supplies the
 discipline.
 
 ```bash
-git clone <this-repo>
+git clone https://github.com/iamibrahimriaz/product-intelligence-os.git
 cd product-intelligence-os
-pip3 install pyyaml          # for the validators
+pip3 install -r requirements.txt
 python3 framework/engine/validate.py
 ```
 
@@ -258,6 +259,9 @@ plus `git` and `python3`.
 ---
 
 # Running It
+
+**Full instructions: [USAGE.md](USAGE.md)** — install, both modes, moving the output
+into your build, and troubleshooting.
 
 ## With Claude Code
 
@@ -276,6 +280,20 @@ resumes from the next unpassed module.
 | --- | --- |
 | `/pios` | Running a research session on an idea. Start, resume or status |
 | `/pios-author` | Extending the framework itself — a new module, a vertical pack, a gate change |
+
+## From another project
+
+By default you work inside this repository and runs land in `projects/<slug>/`. To run
+research from your own project instead — so the artifacts sit beside the code they
+describe — install the skill globally and point it here:
+
+```bash
+./scripts/install-skill.sh
+export PIOS_HOME="$HOME/Projects/product-intelligence-os"   # add to your shell profile
+```
+
+Then `/pios` works in any directory, and writes to `./pios/<slug>/` in whichever project
+you are in. The framework itself stays in one place and is never written to.
 
 ## With any other agent
 

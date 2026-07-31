@@ -42,6 +42,33 @@ the right existing section, never bloat. Every edit must make the skill strictly
 **Self-check before you finish a task:** "What did I learn that this skill should have told
 me up front?" If anything, write it in now.
 
+## Before you start — you must be inside the repository
+
+Authoring edits the framework itself, so unlike `/pios` it cannot run from another
+project. Check:
+
+```bash
+test -f framework/AUTHORING.md && echo "ok" || echo "not in the framework repository"
+```
+
+If you are not, stop and tell the operator:
+
+> Authoring changes the framework itself, so it has to run from inside the Product
+> Intelligence OS repository. `cd` there and invoke `/pios-author` again — if `PIOS_HOME`
+> is set, that is where it lives.
+
+Then, before changing anything:
+
+```bash
+pip3 install -r requirements.txt
+python3 framework/engine/validate.py
+```
+
+It must exit 0 before you start and again before you finish. Twenty checks. Read
+`framework/AUTHORING.md` — it is the specification, and this file does not repeat it.
+
+---
+
 ## The rule that decides everything
 
 > If an agent mid-run would **act differently** for having read it, it belongs in `core/`.
