@@ -194,6 +194,7 @@ framework/                ships to users; read-only during a run
 
   packs/                  optional vertical knowledge (healthcare, fintech, ...)
 
+.claude/skills/           /pios and /pios-author — the Claude Code interface
 projects/<slug>/          one run — state.yaml, research/, deliverables/
 
 examples/                 completed reference runs
@@ -214,18 +215,87 @@ pass before the run continues.
 
 ---
 
+# Install
+
+Product Intelligence OS is **not a program.** It is a body of method that an AI
+agent reads and executes. You supply the agent; this repository supplies the
+discipline.
+
+```bash
+git clone <this-repo>
+cd product-intelligence-os
+pip3 install pyyaml          # for the validators
+python3 framework/engine/validate.py
+```
+
+If the validator exits 0, the framework is sound.
+
+**Requirements:** an AI coding agent that can read and write files —
+[Claude Code](https://claude.com/claude-code) is the reference implementation —
+plus `git` and `python3`.
+
+---
+
 # Running It
 
-An agent is pointed at this repository and given one idea. It reads
-`AGENTS.md`, works through the modules in the order defined by
-`framework/engine/run-order.yaml`, and emits the artifact set specified in
-`framework/deliverables/manifest.yaml`.
+## With Claude Code
+
+The repository ships two skills. Open Claude Code in this directory and type:
+
+```
+/pios   an app that helps small gyms manage memberships
+```
+
+That is the whole interface. The skill creates the run, reads the framework, and
+begins module 01. To pick a run back up in a later session — a full run does not
+fit in one — just invoke `/pios` again; it finds the existing `state.yaml` and
+resumes from the next unpassed module.
+
+| Skill | For |
+| --- | --- |
+| `/pios` | Running a research session on an idea. Start, resume or status |
+| `/pios-author` | Extending the framework itself — a new module, a vertical pack, a gate change |
+
+## With any other agent
+
+Point it at the repository and tell it to read `AGENTS.md`. That file is the
+complete operating manual: startup sequence, per-module loop, the rules it may
+not break, and how to know when it is finished.
 
 ```
 Input:   one idea, loosely described
 Process: 14 modules, gated, evidence-bound
 Output:  a build-ready blueprint in projects/<slug>/deliverables/
 ```
+
+## What it is like to use
+
+It is an interview, not a button. The run **stops three times** and hands control
+back to you:
+
+1. **After `01-idea`** — at least five clarifying questions. Jurisdiction and
+   payer are not optional, and the agent is forbidden from guessing them.
+2. **After `07-strategy`** — confirm the MVP cut. It is a commercial commitment,
+   not a research finding.
+3. **Before delivery** — review the artifact set and the stated confidence.
+
+Between those, if something is genuinely undecidable, it stops and asks rather
+than picking a plausible answer.
+
+Expect hours of agent work rather than seconds. Fourteen gated modules with an
+adversarial review pass each is not a fast process, and was not designed to be.
+
+## Checking the output
+
+```bash
+python3 framework/engine/validate-run.py projects/<slug>
+```
+
+This lints a finished run rather than the framework — dropped evidence tags,
+`«placeholder»` scaffolding left in a delivered artifact, an empty evidence log,
+assumptions with no validation method, unrecorded confidence, and whether the
+two chains were actually carried. A non-zero exit means the run is not
+deliverable.
 
 The run produces, among others: a Research Dossier, Problem Validation, a full
 PRD, Feature Spec, Data Model, API Contract, Architecture, UX Flows, Roadmap,

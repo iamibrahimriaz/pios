@@ -196,6 +196,29 @@ check(f"all path Prerequisites resolve ({semantic_count} semantic preconditions)
 check("no vague non-path Prerequisites", not vague, vague[:10])
 check("no stale directory or module identifiers", not stale_ids, stale_ids[:10])
 
+# The skills are the shipped interface. A broken name or a missing description
+# means the skill silently does not load, and the repository looks inert.
+skill_problems = []
+skills = sorted(glob.glob("../.claude/skills/*/SKILL.md"))
+if not skills:
+    skill_problems.append("no skills found under .claude/skills/")
+for sf in skills:
+    directory = os.path.basename(os.path.dirname(sf))
+    m = re.match(r"^---\n(.*?)\n---\n", open(sf, encoding="utf8").read(), re.S)
+    if not m:
+        skill_problems.append(f"{directory}: no frontmatter")
+        continue
+    try:
+        fm = yaml.safe_load(m.group(1)) or {}
+    except Exception as e:
+        skill_problems.append(f"{directory}: frontmatter does not parse — {e}")
+        continue
+    if fm.get("name") != directory:
+        skill_problems.append(f"{directory}: name is '{fm.get('name')}' — must match the directory")
+    if not str(fm.get("description", "")).strip():
+        skill_problems.append(f"{directory}: no description — it will never be matched")
+check(f"Claude Code skills valid ({len(skills)} found)", not skill_problems, skill_problems)
+
 placeholders = [f for f in glob.glob("**/*.md", recursive=True)
                 if re.search(r"^(Created|Last Updated):\s*YYYY-MM-DD", open(f, encoding="utf8").read(), re.M)]
 check("no YYYY-MM-DD frontmatter placeholders", not placeholders, placeholders[:10])
