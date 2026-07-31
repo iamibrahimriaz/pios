@@ -14,10 +14,10 @@ python3 framework/engine/validate.py
 ```
 
 It must exit 0 before you change anything, and again before you open a pull
-request. Twenty checks: YAML parses, required files exist, the dependency graph
+request. Twenty-one checks: YAML parses, required files exist, the dependency graph
 is complete and acyclic, gate criteria match their documentation, the manifest
-and the modules agree, prerequisites resolve, skills are valid, spelling is
-American.
+and the modules agree, prerequisites resolve, skills are valid and do not
+self-modify, spelling is American.
 
 If you use Claude Code, the `/pios-author` skill loads the authoring rules for
 you. Otherwise read [`framework/AUTHORING.md`](framework/AUTHORING.md) — it is

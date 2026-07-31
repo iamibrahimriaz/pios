@@ -304,7 +304,7 @@ and use `/pios-author`.
 
 ## A note on where this stands
 
-The framework is complete and structurally validated — 20 checks, all passing — and
+The framework is complete and structurally validated — 21 checks, all passing — and
 **has not yet been run end to end by anyone.** No reference run exists in
 [`examples/`](examples/) yet.
 

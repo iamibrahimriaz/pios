@@ -17,7 +17,7 @@ examples/<slug>/
 
 This directory is empty on purpose rather than by oversight, and the honest
 position is worth stating plainly: **the framework has not yet been run end to
-end.** Everything in this repository has been verified structurally — 20 checks
+end.** Everything in this repository has been verified structurally — 21 checks
 in `framework/engine/validate.py`, all passing — and nothing has been verified
 by use.
 

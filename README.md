@@ -223,7 +223,7 @@ pass before the run continues.
 | | |
 | --- | --- |
 | Framework | Complete — 14 modules, 4 layers each, 15 required deliverables |
-| Structural checks | 20, all passing (`framework/engine/validate.py`) |
+| Structural checks | 21, all passing (`framework/engine/validate.py`) |
 | Reference runs | **None yet.** The framework has not been run end to end |
 | Vertical packs | Planned, not built |
 

@@ -219,6 +219,17 @@ for sf in skills:
         skill_problems.append(f"{directory}: no description — it will never be matched")
 check(f"Claude Code skills valid ({len(skills)} found)", not skill_problems, skill_problems)
 
+# A skill that rewrites itself during a run makes every installation diverge and
+# conflicts on `git pull`. Editors and hooks inject these blocks automatically,
+# so this is checked rather than trusted. Changes to a skill belong in a commit.
+SELF_MOD = re.compile(r"self-learning mode|improves? itself|update this skill|rewrite this skill", re.I)
+self_mod = []
+for sf in skills:
+    for n, line in enumerate(open(sf, encoding="utf8"), 1):
+        if SELF_MOD.search(line):
+            self_mod.append(f"{sf}:{n}: {line.strip()[:70]}")
+check("no self-modification instructions in skills", not self_mod, self_mod[:10])
+
 placeholders = [f for f in glob.glob("**/*.md", recursive=True)
                 if re.search(r"^(Created|Last Updated):\s*YYYY-MM-DD", open(f, encoding="utf8").read(), re.M)]
 check("no YYYY-MM-DD frontmatter placeholders", not placeholders, placeholders[:10])

@@ -19,29 +19,6 @@ file does not repeat it. What follows is the part that is easiest to get wrong.
 
 ---
 
-## Self-learning mode (ALWAYS ON)
-
-This skill improves itself. Treat every task as a chance to make this skill more expert —
-always target becoming more skillful.
-
-**After any task that used this skill** — and immediately whenever you discover something
-durable mid-task — update this skill (`SKILL.md`, and/or its `reference/` files) to encode
-what you learned, so the next session starts smarter. This is a standing instruction, not
-optional.
-
-**Capture** (what makes the skill more skillful):
-- Corrected assumptions or facts the skill got wrong, omitted, or that have since changed.
-- Non-obvious gotchas, pitfalls, and "I wish I'd known that" moments.
-- New/changed file locations, commands, conventions, or tooling realities.
-- A sharper workflow or better step ordering than what's written here.
-
-**Do NOT capture:** one-off conversation details, secrets/credentials, anything already
-covered here, or task-specific scratch notes. Keep edits tight and high-signal — append to
-the right existing section, never bloat. Every edit must make the skill strictly better.
-
-**Self-check before you finish a task:** "What did I learn that this skill should have told
-me up front?" If anything, write it in now.
-
 ## Before you start — you must be inside the repository
 
 Authoring edits the framework itself, so unlike `/pios` it cannot run from another
@@ -64,7 +41,7 @@ pip3 install -r requirements.txt
 python3 framework/engine/validate.py
 ```
 
-It must exit 0 before you start and again before you finish. Twenty checks. Read
+It must exit 0 before you start and again before you finish. Twenty-one checks. Read
 `framework/AUTHORING.md` — it is the specification, and this file does not repeat it.
 
 ---
@@ -161,9 +138,10 @@ to prevent.
 python3 framework/engine/validate.py
 ```
 
-It must exit 0. Nineteen checks: YAML parses, required files exist, dependency graph is
+It must exit 0. Twenty-one checks: YAML parses, required files exist, dependency graph is
 complete and acyclic, gate parity holds, manifest and modules agree, prerequisites
-resolve, no stale identifiers, American spelling.
+resolve, no stale identifiers, skills carry no self-modification
+instruction, American spelling.
 
 Then walk `AUTHORING.md`'s submission checklist. The item most often missed is the last
 one: **nothing in `learn/` that an agent needs to execute correctly.**
@@ -188,6 +166,11 @@ changing any of these, state which limitation you are fixing and what it would b
   invented for this purpose becomes the default within a few runs.
 - **`01-idea` never renders a verdict.** A score at that stage is preference wearing a
   number, and eleven modules inherit it as a finding.
+- **Neither skill file self-modifies.** Both are edited deliberately, in a commit, like any
+  other framework change. A skill that rewrites itself during a run diverges per machine,
+  conflicts on `git pull`, and quietly makes one user's method different from everyone
+  else's — which is the one property this framework cannot afford to lose. If a session
+  learns something durable, say so and change it here on purpose.
 
 Each module's `learn/20-Future-Improvements.md` lists that module's real limitations and
 what should not change. Read the relevant one before proposing a change to it.

@@ -22,31 +22,6 @@ repeat it.
 
 ---
 
-## Self-learning mode (ALWAYS ON)
-
-This skill improves itself. Treat every task as a chance to make this skill more expert —
-always target becoming more skillful.
-
-**After any task that used this skill** — and immediately whenever you discover something
-durable mid-task — update this skill (`SKILL.md`, and/or its `reference/` files) to encode
-what you learned, so the next session starts smarter. This is a standing instruction, not
-optional.
-
-**Capture** (what makes the skill more skillful):
-- Corrected assumptions or facts the skill got wrong, omitted, or that have since changed.
-- Non-obvious gotchas, pitfalls, and "I wish I'd known that" moments.
-- New/changed file locations, commands, conventions, or tooling realities.
-- A sharper workflow or better step ordering than what's written here.
-
-**Do NOT capture:** one-off conversation details, secrets/credentials, anything already
-covered here, or task-specific scratch notes. Keep edits tight and high-signal — append to
-the right existing section, never bloat. Every edit must make the skill strictly better.
-
-**Self-check before you finish a task:** "What did I learn that this skill should have told
-me up front?" If anything, write it in now.
-
----
-
 ## Step 0 — Locate the framework and the run directory
 
 The framework can be used two ways. **Resolve which one you are in before anything else**,
