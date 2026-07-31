@@ -90,8 +90,12 @@ loop_protection:
   on_exhaustion: >
     Halt the run. Write the reason to state.run.failed_gates and escalate to the
     human operator with a specific question. Do not proceed with a failed gate.
-  # Attempts are for defects the module can repair. A gate whose missing input is an
-  # operator decision cannot be repaired by re-running it — see decision_dependent_failure.
+  what_counts_as_an_attempt: >
+    A failure the module could repair by researching further or reasoning better. A gate
+    whose missing input is an operator decision cannot be repaired by re-running it, so it
+    does not consume an attempt — see decision_dependent_failure. Counting one spends the
+    three tries on a question the run cannot answer, then halts for exhaustion while
+    reporting a research failure that never happened.
 
 decision_dependent_failure:
   # Loop protection assumes a failed gate is a research defect: look harder, reason
