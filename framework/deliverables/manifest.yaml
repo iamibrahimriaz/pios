@@ -17,7 +17,7 @@ templates_dir: framework/deliverables/templates/
 #   «placeholder»        a value to replace.
 #   <!-- ACCEPTANCE -->  the artifact's own checklist. Removed before delivery.
 #
-# 14 artifacts are required. 3 are emitted only when the run's scope calls for them.
+# 15 artifacts are required. 2 are emitted only when the run's scope calls for them.
 
 artifacts:
 
@@ -188,21 +188,47 @@ artifacts:
       - Pre-launch checklist complete — every unchecked box a named blocker or an accepted risk
       - The handover point to 14-Operations-Plan.md is explicit
 
-  # Optional — emitted when the run's scope calls for them.
+  - id: operations-plan
+    file: 14-Operations-Plan.md
+    required: true
+    audience: whoever runs the product after launch — often the founder alone
+    fed_by: [02-market, 09-technology, 13-operations, 14-ai-systems]
+    critical: true
+    acceptance:
+      - Support channel, hours and response targets stated — and agreed by the operator, tagged [verified] and never mixed with volume forecasts
+      - Severity graded by user impact, assignable in ten seconds; data loss is always the highest grade
+      - Incident path names who communicates, within what time, using a pre-written template
+      - Regulatory notification deadline stated with its citation and the moment the clock starts
+      - "Every runbook passes the 3am test: access needed at the top, step / expected / if-different, a recovery verification, and a 'do not do' line"
+      - Every runbook corresponds to a failure mode from 09-technology, and every failure mode has one
+      - Every compliance obligation carries a cadence, a named owner, the evidence it produces, and where that evidence is kept
+      - Every alert carries a threshold, a named person and a runbook — alerts with no available action are deleted, not tuned
+      - Scheduled obligations alert on the absence of success, not on failure — a stopped job raises no error
+      - True cost to serve computed at launch scale, including the operator's own hours at a real rate
+      - A cost ceiling breach reported as a regress to 06-business or 07-strategy — never absorbed by revising the forecast
+      - The rota answered honestly, including what happens when the only person is unavailable
+
+  # Conditional — emitted when the run's scope calls for them.
 
   - id: growth-plan
     file: 13-Growth-Plan.md
     required: false
-    fed_by: [11-growth]
-
-  - id: operations-plan
-    file: 14-Operations-Plan.md
-    required: false
-    fed_by: [13-operations]
+    audience: founder, whoever owns acquisition
+    fed_by: [03-user, 05-competition, 06-business, 11-growth]
+    acceptance:
+      - Channels named as specific places and people, not as categories
+      - Each channel states whether it reaches the user, the payer, or both
+      - Growth loops pass the closure test — a funnel is labeled a funnel
+      - Conversion figures carry their source market, or are tagged [assumption]
+      - Time to first value measured in minutes along a real flow
+      - Retention identified as a mechanism, not inferred from usefulness
+      - Implied CAC computed and checked against the payback ceiling from 06-business
+      - Acquisition spend gated on Milestone Zero where 04-problem declared a shortfall
 
   - id: ai-strategy
     file: 15-AI-Strategy.md
     required: false
+    audience: engineering, founder, whoever is accountable for a wrong output
     fed_by: [14-ai-systems]
     acceptance:
       - Each AI capability justified against a non-AI alternative

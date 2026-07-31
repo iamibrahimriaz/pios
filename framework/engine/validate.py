@@ -130,6 +130,14 @@ no_template = [a["file"] for a in man["artifacts"]
                if not os.path.isfile(os.path.join("deliverables/templates", a["file"]))]
 check("every artifact has its template file", not no_template, no_template)
 
+# An artifact without acceptance criteria cannot fail its own gate, which makes it
+# undeliverable in the only sense the framework cares about.
+no_acceptance = [a["id"] for a in man["artifacts"] if not a.get("acceptance")]
+check("every artifact has acceptance criteria", not no_acceptance, no_acceptance)
+
+no_audience = [a["id"] for a in man["artifacts"] if not a.get("audience")]
+check("every artifact names its audience", not no_audience, no_audience)
+
 run_order = open("engine/run-order.yaml", encoding="utf8").read()
 absent = [i for i in modules if i not in run_order]
 check("run-order references every module", not absent, absent)

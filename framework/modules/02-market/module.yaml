@@ -4,7 +4,7 @@ purpose: Size and characterize the market the idea would enter.
 depends_on: [01-idea]
 consumes: [idea_brief, scope_boundaries]
 produces: [market_definition, tam_sam_som, trends, regulatory_landscape, market_gaps]
-feeds_deliverables: [research-dossier, executive-summary]
+feeds_deliverables: [executive-summary, operations-plan, research-dossier]
 gate:
   - Market defined by boundary, not by adjective
   - TAM / SAM / SOM each sourced or explicitly marked [assumption]
