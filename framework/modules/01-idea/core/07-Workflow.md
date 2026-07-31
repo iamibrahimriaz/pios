@@ -163,8 +163,22 @@ Present to the operator:
 3. **Deferrable questions** — will proceed on a recorded assumption if unanswered
 4. **The assumptions** — what you are about to build research on
 5. **What happens next** — which module runs, and what it will produce
+6. **A closing line naming what you need** — the questions, numbered, and *"Answer these and
+   I'll start the research."* The operator must be able to close the message and know the
+   ball is in their court
 
 Then wait.
+
+**Three answers are blocking without exception:** the **jurisdiction**, the **payer**, and
+the **delivery surface** — website, phone app, both, desktop program, or no interface at
+all, and if more than one, which ships first. Ask the surface question in the operator's own
+words, not as a technology question. It is not module 09's to settle: six later modules read
+it as settled context and none re-examines it.
+
+**Number the questions, one idea each, in the operator's language**, and give each a
+fallback — what you will assume if they say "I don't know", and what that assumption costs.
+An operator who cannot answer must never be stuck, but must see the price of the default
+before it is applied.
 
 Do not proceed past a blocking question by selecting the more plausible answer. The whole
 purpose of this checkpoint is that the operator knows things you cannot research: their

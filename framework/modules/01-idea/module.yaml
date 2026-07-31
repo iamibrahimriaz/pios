@@ -8,6 +8,7 @@ feeds_deliverables: [research-dossier, prd, executive-summary]
 gate:
   - Raw idea restated in one unambiguous sentence
   - Geography / market and regulatory jurisdiction named
+  - Delivery surface named by the operator — web, mobile, desktop, API or other
   - Buyer and user distinguished (may be the same, must be stated)
   - ">= 5 clarifying questions asked and answered or explicitly deferred"
   - All initial assumptions tagged per engine/evidence-policy.md

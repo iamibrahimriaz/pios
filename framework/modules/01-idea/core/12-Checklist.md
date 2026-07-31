@@ -169,10 +169,13 @@ If the adversarial pass produced nothing, it was not performed honestly. Re-run 
 # Gate
 
 - [ ] Criterion 1 — unambiguous sentence
-- [ ] Criterion 2 — jurisdiction named, not inferred
-- [ ] Criterion 3 — buyer and user distinguished
-- [ ] Criterion 4 — five qualifying questions
-- [ ] Criterion 5 — assumptions tagged
+- [ ] Criterion 2 — jurisdiction named
+- [ ] Criterion 3 — delivery surface named by the operator, with an order if more than one, not inferred
+- [ ] Criterion 4 — buyer and user distinguished
+- [ ] Criterion 5 — five qualifying questions
+- [ ] Criterion 6 — assumptions tagged
+- [ ] Criterion 7 — the single load-bearing assumption named
+- [ ] Criterion 8 — pre-mortem recorded before research began
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 

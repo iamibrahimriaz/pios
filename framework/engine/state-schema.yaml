@@ -14,6 +14,13 @@ project:
   jurisdiction: ""              # drives regulatory research — must be set in 01-idea
   language: en
 
+  # What the product physically is: web | mobile | web+mobile | desktop | api | other.
+  # An operator answer, never an inference — 01-idea gate criterion 3. Where more than one
+  # surface is named, `order` records which ships first. Eight modules read this as settled
+  # context and none re-examines it, so a default here is inherited rather than corrected.
+  delivery_surface: ""
+  delivery_order: ""            # e.g. "web, then Android, then iOS" — empty if single-surface
+
   # Absolute paths, written once when the run is created. A later session reads
   # them instead of re-deriving, so resume works even when PIOS_HOME is set
   # differently — or not at all — in that session.

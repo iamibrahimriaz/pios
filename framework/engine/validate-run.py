@@ -68,6 +68,12 @@ juris = (state.get("project") or {}).get("jurisdiction", "")
 check("jurisdiction is set", bool(str(juris).strip()),
       "01-idea's gate requires it; without it the regulatory research is unanchored")
 
+surface = (state.get("project") or {}).get("delivery_surface", "")
+check("delivery surface is set", bool(str(surface).strip()),
+      "state.project.delivery_surface is empty — 01-idea gate criterion 3. Eight modules "
+      "read it as settled context and none re-examines it, so an unstated surface is a "
+      "default that was inherited rather than chosen")
+
 # ------------------------------------------------------------------ artifacts
 man = yaml.safe_load(open(os.path.join(FRAMEWORK, "deliverables/manifest.yaml"), encoding="utf8"))
 dl_dir = os.path.join(RUN, "deliverables")

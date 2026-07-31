@@ -92,8 +92,23 @@ framework's value. If you cannot verify something, say so and carry it forward a
 open assumption. An honest `low` confidence run is worth more than a confident fiction.
 
 **Ask before assuming.** Module 01 exists to interrogate the idea. If jurisdiction,
-buyer, or scope is unclear, ask the operator. Do not pick a plausible answer and proceed —
-a wrong jurisdiction produces a wrong product.
+buyer, scope or **delivery surface** is unclear, ask the operator. Do not pick a plausible
+answer and proceed — a wrong jurisdiction produces a wrong product, and a defaulted surface
+produces a plan that is internally consistent and built for the wrong thing.
+
+**Delivery surface is a module-01 question, not a module-09 one.** Website, phone app, both,
+desktop program, or no interface at all — and if more than one, which ships first. Six later
+modules read it as settled context: market sizing assumes device ownership, user research
+assumes where the person is standing, competition assumes where rivals are found, business
+assumes a billing rail, product assumes whether offline is a requirement, and growth assumes
+a channel. **None of them re-examines it**, so an unstated surface is not discovered — it is
+inherited.
+
+**End every reply by telling the operator what to do next.** A question they can answer, a
+decision to confirm, or "nothing needed — type `continue`." Number questions, one idea each,
+in the operator's own language, and say what you will assume if they do not know and what
+that assumption costs. A run stalls most often because both sides were waiting for the
+other, and it is the agent's job to make that impossible.
 
 **A failed gate stops you.** Uncertainty about a gate is a fail, not a pass. Three
 failures on one module halts the run and escalates to the human.
@@ -192,3 +207,11 @@ The last thing you check is the standalone test on `12-Build-Handoff.md`:
 > Could an agent open this file, with no other context, and start writing code today?
 
 If no, the run is not finished.
+
+**Then hand it over properly.** Writing the files is not the handover. Tell the operator the
+verdict in one line, where the files are as an absolute path, the three things they must not
+miss, and — as a block they can copy to a developer or a coding agent — the instruction to
+build from `12-Build-Handoff.md`, set up from `16-Engineering-Setup.md`, and start nothing
+listed under its Blocked Work. **Say plainly whether they can begin today or whether
+something must be answered first.** An operator holding fifteen documents cannot tell which
+it is, and that sentence matters more than any of the documents.

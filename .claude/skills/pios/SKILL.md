@@ -22,6 +22,44 @@ repeat it.
 
 ---
 
+## The reply contract — end every message by telling the operator what to do next
+
+**This applies to every reply you send during a run, without exception**, from the first
+message to the last. A run is long, most of it is you working, and the operator cannot see
+your state. If a reply does not end by saying what happens next, they have to guess whether
+to wait, answer something, or type something — and the usual result is that the run stalls
+with neither side knowing the other is waiting.
+
+**Close every message with a short block that names exactly one of these three:**
+
+| Situation | The closing block says |
+| --- | --- |
+| You need an answer before you can continue | The questions, numbered, in plain language — and **"Answer these and I'll continue."** Say which are blocking and which can be deferred |
+| You want confirmation before committing to something | The decision, your recommendation, and **"Type `continue` to go ahead, or tell me what to change."** |
+| You are mid-run and nothing is needed from them | What you just finished, what you are doing next, and **"Nothing needed from you — type `continue` and I'll keep going."** |
+
+**Write it for the person, not for the framework.** No module numbers without a plain-English
+gloss, no gate vocabulary, no internal field names. "I need to know who pays for this before
+I can size the market" lands; "01-idea criterion 4 is unsatisfied" does not.
+
+**Ask in the operator's language.** If they wrote to you in Bengali, Hindi, Urdu or anything
+else, ask in that language. `state.project.language` records it. A precise question the
+operator cannot read is a blocked run.
+
+**Numbered questions, one idea each.** Never a paragraph containing four questions — the
+operator will answer the first and the last. Number them so they can reply "1. yes, 2. no,
+3. skip" and you can match the answers to the questions without ambiguity.
+
+**Say what happens if they don't know.** Every blocking question gets a fallback sentence:
+what you will assume if they say "I don't know", and what that assumption will cost. An
+operator who cannot answer must never be stuck — but they must see the price of the default
+before it is applied.
+
+> **The test:** could the operator close this message and know, without re-reading it, whether
+> the ball is in their court? If not, the message is not finished.
+
+---
+
 ## Step 0 — Locate the framework and the run directory
 
 The framework can be used two ways. **Resolve which one you are in before anything else**,
@@ -169,8 +207,17 @@ At each, present the finding and **stop**. Do not answer your own questions and 
 
 **After `01-idea`** — you must have at least five clarifying questions. Ask them as a
 numbered list, plainly, in the operator's language. Include at least one whose answer you
-would rather not hear. Jurisdiction and payer are not optional; the run cannot proceed
-without them.
+would rather not hear.
+
+**Three answers are not optional and the run cannot proceed without them:** the
+**jurisdiction**, the **payer**, and the **delivery surface** — is this a website, a phone
+app, both, a desktop program, or something with no interface at all, and if more than one,
+which comes first. Ask the surface question in those words. It is not a technology question
+and it does not wait for module 09: market sizing, user context, where competitors are
+found, the billing rail, whether offline is a requirement and the entire acquisition channel
+are all downstream of it, and none of them re-examines it later.
+
+End the message with **"Answer these and I'll start the research."**
 
 **After `07-strategy`** — present the option comparison, your recommendation, and what
 would change it. The MVP cut is a commercial commitment and it is the operator's to
@@ -200,6 +247,47 @@ scope boundary — stop and ask. Record it in `state.open_questions` with `block
 
 5. **A non-zero exit means the run is not deliverable.** Fix what it reports. Do not
    report completion to the operator until it exits 0.
+
+### Then send the completion message
+
+**The research is not finished when the files are written. It is finished when the operator
+knows what they have and what to do with it.** Send one message, in their language,
+containing exactly these five parts and nothing else:
+
+**1 — The verdict, in one line.** Build it, build it with changes, or do not build it. Then
+the confidence level and, in one sentence, what would raise it.
+
+**2 — What was produced.** The artifact count and where the files are, as an absolute path
+the operator can paste into a file manager. Name the two that matter — the build handoff and
+the engineering setup — and say in one line each what they are for.
+
+**3 — The three things they must not miss.** The failed gate, the unresolved decision, the
+assumption the whole plan rests on. Whatever the run's real weak points are. Do not soften
+them and do not bury them under the good news.
+
+**4 — The instruction to start building.** A block the operator can copy and hand to a
+developer or to a coding agent with no other context, naming absolute paths:
+
+> Build the product specified in `<RUNS>/<slug>/deliverables/12-Build-Handoff.md`.
+> Read that file first and completely — it is self-contained and states what to build, in
+> what order, and what "correct" means. Set the project up using `16-Engineering-Setup.md`
+> in the same directory. The data model, API contract and acceptance criteria are in the
+> sibling artifacts it references.
+>
+> **Do not start anything listed under "Blocked Work" in §12 of the handoff.** Those items
+> are waiting on a decision or an answer that no amount of engineering produces.
+
+**If the run reached "do not build", the block above is replaced by what to do instead** —
+the cheapest test that would change the verdict, and what it costs. Never hand over a build
+instruction for something the research says should not be built.
+
+**5 — The closing line.** What you need from them now, per the reply contract: the decisions
+still open, and **"Tell me which of these you want to resolve and I'll pick it up."**
+
+**Say plainly whether they can start building today.** An operator holding fifteen documents
+cannot tell whether the plan is ready or whether something must be answered first. If a
+blocker stands between them and the first line of code, that sentence is the most important
+one in the message, and it goes near the top rather than in a table at the end.
 
 ---
 

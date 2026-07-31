@@ -103,6 +103,8 @@ original framing held"»
 | Dimension | Value | Source |
 | --- | --- | --- |
 | Jurisdiction | «country/region» | operator / stated in idea / **ASKED** |
+| Delivery surface | «web / phone app / both / desktop / no interface / other» | operator / stated in idea / **ASKED** |
+| Surface order | «which ships first, then what — or "single surface"» | operator / **ASKED** |
 | Segment | «who specifically» | operator / stated in idea / **ASKED** |
 | User | «who uses it» | operator / stated in idea / **ASKED** |
 | Buyer | «who pays» | operator / stated in idea / **ASKED** |
@@ -231,6 +233,7 @@ original framing held"»
 | --- | --- |
 | Problem statement | «one sentence» |
 | Jurisdiction | «value» |
+| Delivery surface | «value», «order if more than one» |
 | Segment | «value» |
 | Scope boundary | «what defines the market edge» |
 

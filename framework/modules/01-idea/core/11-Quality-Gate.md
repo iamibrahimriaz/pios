@@ -75,7 +75,47 @@ time, and nothing downstream will catch it.
 
 ---
 
-# Criterion 3 — Buyer and user distinguished (may be the same, must be stated)
+# Criterion 3 — Delivery surface named by the operator — web, mobile, desktop, API or other
+
+**Passes when:** `state.project.delivery_surface` holds an operator answer naming what the
+product physically is. Where more than one surface is named, their **order** is recorded
+too — which ships first, and which follows.
+
+**Fails when:** it is inferred from the idea, defaulted to a web application, or deferred
+to the technical module.
+
+**Ask it in the operator's own terms**, not in ours:
+
+> **What should this actually be?** A website they open in a browser · a phone app they
+> install · both · a desktop program · something with no interface that other software
+> talks to · something else. **And if more than one — which one do you want first?**
+
+**This is not a technology question and it does not belong to `09-technology`.** By the
+time that module runs, eight others have already assumed an answer:
+
+| Module | What it silently assumed |
+| --- | --- |
+| `02-market` | Device ownership as a sizing input. A phone app in a market with low smartphone ownership has a smaller addressable base than the population |
+| `03-user` | Where the person is standing, what they are holding, and whether they have a signal |
+| `05-competition` | Where competitors are even found — an app store, a search result, or a procurement list |
+| `06-business` | The billing rail, and whether a platform takes a cut of it |
+| `08-product` | Whether offline behavior is a requirement or a non-goal |
+| `11-growth` | Whether the channel is an app store listing, search, or a sales conversation |
+
+**A wrong answer here is not corrected later — it is inherited.** Nothing downstream
+re-examines it, because each module reads the surface as settled context rather than as a
+decision, and the error surfaces as a plan that is internally consistent and built for the
+wrong thing.
+
+| Fails | Passes |
+| --- | --- |
+| Silence, then a stack chosen in module 09 | "Web first for the «primary user», then Android. iOS later. Confirmed by the operator" |
+| "A mobile-friendly platform" | "A phone app the «user» installs. No desktop version at any milestone" |
+| "Web app" inferred because the idea said "software" | "Operator asked; answered: a desktop program, because the «setting» has no reliable connectivity" |
+
+---
+
+# Criterion 4 — Buyer and user distinguished (may be the same, must be stated)
 
 **Passes when:** the brief states who uses the product and who pays for it, even where
 they are the same person. Saying "the same person" explicitly is a pass. Silence is not.
@@ -86,7 +126,7 @@ module 06 means re-running 03 and 04.
 
 ---
 
-# Criterion 4 — >= 5 clarifying questions asked and answered or explicitly deferred
+# Criterion 5 — >= 5 clarifying questions asked and answered or explicitly deferred
 
 **Passes when:** five or more questions exist, each satisfies the asking test in
 `08-Questions-To-Answer.md`, and each has either an operator answer or a recorded
@@ -105,7 +145,7 @@ five with cosmetic questions has failed this criterion while appearing to satisf
 
 ---
 
-# Criterion 5 — All initial assumptions tagged per engine/evidence-policy.md
+# Criterion 6 — All initial assumptions tagged per engine/evidence-policy.md
 
 **Passes when:** every factual claim in the brief carries exactly one tag, every
 assumption appears in `state.assumptions` with a validation method, and no hedging
@@ -117,7 +157,7 @@ willingness to pay. Each one needs a tag.
 
 ---
 
-# Criterion 6 — The single load-bearing assumption named among those tagged
+# Criterion 7 — The single load-bearing assumption named among those tagged
 
 **Passes when:** one assumption is marked as the one the premise rests on, and removing it
 would change what the run is about.
@@ -130,7 +170,7 @@ load-bearing one.
 
 ---
 
-# Criterion 7 — A pre-mortem recorded — what would make this idea not worth doing — before research begins
+# Criterion 8 — A pre-mortem recorded — what would make this idea not worth doing — before research begins
 
 **Passes when:** a short list exists, written before module 02 starts, of the conditions
 under which this idea should not be pursued.
@@ -146,7 +186,7 @@ nothing.
 
 # Universal Gates
 
-In addition to the five above, `engine/gates.yaml` U1–U7 apply. For this module the ones
+In addition to the eight above, `engine/gates.yaml` U1–U7 apply. For this module the ones
 most often missed:
 
 | | |

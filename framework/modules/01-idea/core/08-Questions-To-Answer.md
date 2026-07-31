@@ -108,6 +108,7 @@ are the answers that change what gets built, and none of them can be researched.
 | 3.5 | Is there an incumbent system this must integrate with? | Interop may dominate the architecture |
 | 3.6 | In what physical or operational setting is it used? | Drives the interface and the failure modes |
 | 3.7 | Is this a regulated domain? | Compliance is structural, not a feature |
+| **3.8** | **What should this actually be — a website, a phone app, both, a desktop program, or something with no interface at all? And if more than one, which first?** | **Gate criterion 3.** It changes market sizing, where competitors are found, the billing rail, whether offline is a requirement, and the acquisition channel. Eight later modules assume an answer; none of them re-examines it |
 
 **None of these may be assumed.** If the idea does not answer them, they go to the
 operator as blocking questions.
