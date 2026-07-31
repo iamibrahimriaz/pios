@@ -188,6 +188,27 @@ Stop and hand control back to the operator at:
 
 ---
 
+## After delivery — making the folder buildable
+
+**On request only, and never automatically.** A run that reached "do not build", or an
+operator still deciding, does not need it.
+
+The step writes **one entry file at the run directory root** — `CLAUDE.md`, `AGENTS.md`, or
+whatever convention the operator's tool expects — so that opening the folder and saying
+*"analyze this project and start developing"* is sufficient. The method is in
+`framework/engine/handoff.md`.
+
+**Copy nothing.** Not a subset, not into a staging folder, not into a second repository. Any
+of those puts two copies of the same specification in play with nothing keeping them aligned,
+and the build proceeds from whichever went stale. Which documents a builder reads first is
+solved by **stating a reading order**, not by selecting files.
+
+Every path the entry file names must resolve from the run root, and none may point outside
+the folder. That is what lets the operator move it, or run `git init` inside it, without
+rewriting anything.
+
+---
+
 ## Validating your work
 
 Two scripts. Neither replaces the review loop; both catch what discipline misses.

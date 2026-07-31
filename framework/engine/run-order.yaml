@@ -40,12 +40,15 @@ stages:
 
   - id: handoff
     # Not automatic. A run that reaches "do not build", or an operator still deciding, does
-    # not need a build repository. Offered at the delivery checkpoint and run only on request.
+    # not need this. Offered at the delivery checkpoint and run only on request.
     #
-    # Without a defined step, every run improvises one — most often by staging a second copy
-    # of the specification inside the run directory, where nothing keeps the two aligned and
-    # the build proceeds from whichever went stale.
-    purpose: Put the artifacts where the building happens, in the order the builder needs them.
+    # Writes ONE entry file at the run directory root, so that opening the folder and saying
+    # "analyze this project and start developing" is sufficient. It copies nothing: a subset
+    # assembled into a staging folder or a second repository puts two copies of the same
+    # specification in play with nothing keeping them aligned, and the build then proceeds
+    # from whichever went stale. Which documents a builder reads first is solved by stating a
+    # reading order, not by selecting files.
+    purpose: Make the run directory itself the place the building starts.
     modules: []
     action: framework/engine/handoff.md
     on_request: true

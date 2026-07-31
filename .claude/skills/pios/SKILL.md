@@ -329,9 +329,10 @@ developer or to a coding agent with no other context, naming absolute paths:
 the cheapest test that would change the verdict, and what it costs. Never hand over a build
 instruction for something the research says should not be built.
 
-**That block points into the run directory, which is private and gitignored.** It is enough
-for one developer reading over the operator's shoulder, and not enough for a team. If they
-are actually starting, offer Step 6 in one sentence rather than explaining it.
+**That block is for handing to someone who is not standing in the run directory.** If the
+operator is actually starting work, Step 6 removes the need for it entirely — the instruction
+moves into the folder, and opening it is enough. Offer that in one sentence rather than
+explaining it.
 
 **5 — The closing line.** What you need from them now, per the reply contract: the decisions
 still open, and **"Tell me which of these you want to resolve and I'll pick it up."**
@@ -354,24 +355,34 @@ one in the message, and it goes near the top rather than in a table at the end.
 
 ---
 
-## Step 6 — Package the handoff, when they are ready to build
+## Step 6 — Make the run directory buildable, when they are ready
 
-**Not automatic, and not part of Step 5.** A run that reaches "do not build", or an operator
-who is still deciding, does not need a build repository. Offer it; do not assume it.
+**Not automatic.** A run that reached "do not build", or an operator still deciding, does not
+need this. Offer it in one sentence; do not assume it.
 
-When they say yes, **read `<FRAMEWORK>/engine/handoff.md` and follow it.** It defines which
-artifacts go, which stay, where they go, and what has to be written that does not yet exist.
+When they say yes, **read `<FRAMEWORK>/engine/handoff.md` and follow it.**
 
-Two things that file will make you ask, and both need the operator:
+**It writes exactly one file** — an entry file at `<RUNS>/<slug>/` root, named by whatever
+convention their tool expects. Ask which; `CLAUDE.md` if they have no preference. After that:
 
-- **Where does the build repository live?** A separate repository from the run — the run is
-  private and gitignored, and a team cannot clone what they cannot see.
-- **Which entry-file convention does their tool expect?** `CLAUDE.md`, `AGENTS.md`, or
-  something else. Ask; do not guess.
+```bash
+cd <RUNS>/<slug>
+claude
+```
 
-**The failure this step exists to prevent** is copying the specification into a staging
-folder inside the run directory. It produces two copies of every file in one repository with
-nothing keeping them aligned, and the build proceeds from whichever went stale.
+> analyze this project and start developing properly
+
+That has to be sufficient. If the operator needs to remember anything else, the file failed.
+
+**Copy nothing.** Not a subset, not into a staging folder, not into a second repository. Any
+of those puts two copies of the same specification in play with nothing keeping them aligned,
+and the build proceeds from whichever went stale. **Which documents a builder reads first is
+solved by stating a reading order inside the entry file, not by selecting files.**
+
+**Check every path it names resolves from the run root, and that none points outside the
+folder** — not at the framework, not at `PIOS_HOME`, not at an absolute path. That is what
+lets the operator later move the folder, or run `git init` inside it, without rewriting
+anything.
 
 ---
 

@@ -1,146 +1,115 @@
-# Handoff — getting the artifacts to whoever builds
+# Handoff — making the run directory buildable
 
-The run does not end when `validate-run.py` exits 0. It ends when the artifacts are in the
-hands of the person or agent who will build from them, in a form they will actually read.
+The run does not end when `validate-run.py` exits 0. It ends when someone can open the run
+directory, say *"analyze this project and start developing"*, and have that be enough.
 
-**Without a defined step here, every run invents one.** The invented version is different
-each time, and the most common improvisation — copying the specification documents into a
-staging folder inside the run directory — creates two copies of the same file in one
-repository with nothing keeping them in sync. The build then proceeds from whichever copy
-was stale.
-
-This step runs **after** the validator passes and **after** the delivery checkpoint. It
-produces no new findings. It is packaging, and packaging is where a correct run still fails
-to reach anyone.
+**One folder. No copy, no subset, no second repository.** The run directory already holds
+the specification; what it lacks is an entry file telling an agent what to read, in what
+order, and what not to touch. Writing that file is the whole step.
 
 ---
 
-## What a handoff is
+## Why not assemble a separate build package
 
-Three things, and it is worth being precise about which is which.
+Because every version of that idea reintroduces the same defect. A subset copied into a
+staging folder, or into a new repository, produces **two copies of the same specification
+with nothing keeping them aligned** — and the build proceeds from whichever went stale. The
+copy is then maintained by hand, forever, by someone who has to remember it exists.
 
-| | What it is | Where it lives |
-| --- | --- | --- |
-| **The specification** | A subset of `deliverables/` | Copied into the build repository at `docs/` |
-| **The entry file** | New. Tells an agent what to read and in what order | Written by this step |
-| **The readme** | New. Orients a human arriving at the repository | Written by this step |
+Selecting which documents a builder sees is a real need. **Solve it with reading order, not
+with file selection.** The entry file says what to read first, what is reference, and what is
+research behind the specification rather than instruction in it. A builder who ignores that
+ordering and reads the risk register has lost nothing; a builder handed nine files out of
+sixteen and told the rest do not concern them has lost the ability to check a decision.
 
-**Only the second and third are authored here.** The specification is copied, never
-re-written for the developer — a spec paraphrased for readability is a second source of
-truth, and the two disagree within a week.
-
----
-
-## Which artifacts go, and which do not
-
-Default: **the build subset**, not the whole set.
-
-| Goes | Why |
-| --- | --- |
-| `03-PRD.md` | What is required |
-| `04-Feature-Spec.md` | The MVP cut line, and what was deliberately cut |
-| `05-Data-Model.md` | Schema and constraints |
-| `06-API-Contract.md` | Interfaces |
-| `07-Architecture.md` | The decisions and their reasons |
-| `08-UX-Flows.md` | How it is used |
-| `09-Roadmap.md` | Sequence and decision points |
-| `12-Build-Handoff.md` | **The entry point.** Start here |
-| `16-Engineering-Setup.md` | Setup, tests, CI, release |
-
-| Stays | Why |
-| --- | --- |
-| `00-Executive-Summary.md` | Contains the build-or-not verdict. An operator conversation |
-| `01-Research-Dossier.md`, `02-Problem-Validation.md` | Evidence, not instruction |
-| `10-Risks-and-Assumptions.md` | Carries the case for stopping |
-| `11-Success-Metrics.md`, `13-Growth-Plan.md`, `14-Operations-Plan.md` | Post-launch |
-
-This is a default, not a rule. **A tech lead who asks for the whole set should get it** —
-the split exists to keep a builder's context clear, not to withhold anything. State the
-split to the operator rather than applying it silently.
-
-> A developer given seventeen documents reads none of them. A developer given nine, with
-> one marked "start here", reads that one.
+> A specification that exists in two places has no source of truth. A specification that
+> exists in one place, with a stated reading order, has both.
 
 ---
 
-## The entry file
+## What this step produces
 
-Agentic build tools read a conventional file at the repository root — `CLAUDE.md`,
-`AGENTS.md`, or whatever the operator's tool expects. **Ask which; do not guess**, and if
-the operator has no preference, write `CLAUDE.md` and say so.
+**One file, at the root of the run directory**, named by whatever convention the operator's
+tool expects — `CLAUDE.md`, `AGENTS.md`, or another. **Ask; do not guess.** If they have no
+preference, write `CLAUDE.md` and say so.
 
-Its job is that a bare instruction — *"analyze this project and start developing"* — is
-enough. If the operator has to remember a paragraph of context, the file has failed.
+Its job is that a bare instruction is sufficient. If the operator has to remember a
+paragraph of context to start a session, the file has failed and no amount of detail inside
+it compensates.
 
 It carries, in this order:
 
-1. **A standing instruction**, written to trigger on any phrasing of "start" or
-   "continue": what to read, in what order, before writing code.
-2. **How to check what already exists**, so a second session continues rather than restarts.
-3. **The current milestone, and only that one**, with its end-to-end acceptance test.
-4. **The order of work inside that milestone.**
-5. **The non-negotiables**, each with the cost of breaking it. A rule whose reason is
-   absent gets refactored away by someone who assumes it was arbitrary.
-6. **The blocked list** — what the builder must ask about rather than decide.
-7. **A progress file to maintain**, so the next session picks up cleanly.
+1. **A standing instruction**, written to trigger on any phrasing of "start", "continue" or
+   "build the next thing" — not on one exact sentence.
+2. **What is in the folder**: which directory is the specification, which is the working
+   record, and where code goes. A run directory contains research the builder does not need
+   on day one, and an unexplained folder gets either ignored or read at the wrong moment.
+3. **Read this first, in this order** — the build handoff in full, then the engineering
+   setup, then the reference documents by name.
+4. **How to check what already exists**, so a second session continues rather than restarts.
+5. **The current milestone, and only that one**, with its end-to-end acceptance test.
+6. **The order of work inside that milestone.**
+7. **The non-negotiables, each with the cost of breaking it.** A rule whose reason is absent
+   gets refactored away by someone who assumes it was arbitrary.
+8. **The blocked list** — what to ask about rather than decide.
+9. **A progress file to maintain**, and an instruction not to edit the specification or the
+   audit trail in place. If a document is wrong, the builder says so; they do not correct it,
+   because the run's record of what it believed is what makes the output auditable.
 
-**Point 5 is the one that decays.** Copy the constraint and its consequence together, or
-the constraint travels alone and does not survive contact with a package that suggests
-otherwise.
-
----
-
-## Where it goes
-
-**A separate repository from the run.** Not a subdirectory of it.
-
-The run directory is private and gitignored; the build repository is the team's and is
-committed. Keeping the specification inside the run couples the team's build to the
-operator's research notes, and the team cannot clone what they cannot see.
-
-Copy the specification subset directly from `deliverables/` at setup time. **Do not stage a
-second copy inside the run directory** — that is the improvisation this step exists to
-prevent.
+**Point 7 is the one that decays.** Copy the constraint and its consequence together, or the
+constraint travels alone and does not survive contact with a library that suggests otherwise.
 
 ---
 
-## The snapshot rule
+## The folder must be self-contained
 
-The build repository holds a **snapshot**, and that is deliberate: a specification that
-shifts under a team mid-milestone is worse than one that is slightly out of date.
+**Nothing in the entry file may point outside the run directory** — not at the framework, not
+at `PIOS_HOME`, not at an absolute path on the operator's machine.
 
-When a deliverable is genuinely revised — most often after a re-derivation, see
-`gates.yaml` `late_answer_rederivation` — copy that one file across and **commit it there
-with a message saying what moved and why.**
+This is what lets the folder move. It works in place; it works copied to another machine;
+it works with `git init` run inside it and pushed as the product repository. The operator
+chooses when and whether to do that, and nothing has to be rewritten when they do.
 
-> The commit is the signal that something changed. A silent file replacement is not, and a
-> team that discovers a moved requirement by reading it is a team that stopped trusting the
-> document.
+**Check it rather than assuming it.** Every path the entry file names must resolve from the
+run directory root.
+
+---
+
+## What this step does not do
+
+- **It does not create a git repository.** Runs are private and gitignored by the framework
+  repo. Whether this becomes the team's repository, and when, is the operator's decision.
+- **It does not rewrite any deliverable for the builder.** A specification paraphrased for
+  readability is a second source of truth, and the two disagree within a week.
+- **It does not run automatically.** A run that reached "do not build", or an operator still
+  deciding, does not need this. Offer it; do not assume it.
 
 ---
 
 ## What the operator still owes
 
-The handoff names what the build cannot start or finish without, taken from
-`12-Build-Handoff.md`'s blocked work: account access, a vendor quote, a legal opinion,
-domain-language copy, a decision the run recorded as decision-dependent.
+Name what the build cannot start or finish without, taken from `12-Build-Handoff.md`'s
+blocked work: account access, a vendor quote, a legal opinion, domain-language copy, a
+decision the run recorded as decision-dependent.
 
-**Each with an owner and the point at which it bites** — "before the first paying customer"
-is a different urgency from "before the first line of code", and a list that does not
-distinguish them gets treated as uniformly ignorable.
+**Each with an owner and the point at which it bites.** "Before the first paying customer" is
+a different urgency from "before the first line of code", and a list that does not
+distinguish them is treated as uniformly ignorable.
 
 ---
 
 ## Checklist
 
 - [ ] Validator exits 0, and the delivery checkpoint has been presented
-- [ ] The operator has confirmed the target repository and the entry-file convention
-- [ ] Build subset copied from `deliverables/` — no second copy staged inside the run
-- [ ] Entry file written, and a bare "start developing" would be sufficient
+- [ ] The operator has confirmed the entry-file convention their tool expects
+- [ ] Entry file written at the run directory root
+- [ ] A bare "analyze this project and start developing" would be sufficient
+- [ ] Every path it names resolves from the run directory root — checked, not assumed
+- [ ] Nothing in it points outside the run directory
+- [ ] Reading order stated: what is instruction, what is reference, what is research
 - [ ] Non-negotiables carry their consequences, not just their rules
 - [ ] Blocked work listed with owners and the moment each one bites
-- [ ] Readme orients a human who has never seen the run
-- [ ] The split — what went and what stayed — stated to the operator, not applied silently
+- [ ] The specification and the audit trail are marked not-to-be-edited-in-place
 
 ---
 
@@ -148,5 +117,5 @@ distinguish them gets treated as uniformly ignorable.
 >
 > A specification nobody reads is indistinguishable from one that was never written.
 >
-> The last step of a run is not producing the artifacts. It is putting them where the work
-> happens, in the order the builder needs them, with the reasons attached to the rules.
+> The last step of a run is not producing the artifacts. It is making the folder they are
+> already in the place the work starts, with the reasons attached to the rules.
