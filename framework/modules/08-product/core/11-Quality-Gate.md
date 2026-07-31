@@ -247,6 +247,33 @@ of: a cited external standard, derived from a finding, or a registered design de
 layout. Those decisions belong to `09-technology` and to design, and a requirement that
 makes them has taken them.
 
+## The Budget Check — a limit stated against a content list
+
+**Fails when** a requirement states a hard limit on an artifact — a character or byte
+budget, a page count, a time-to-render, a payload size, a screen — **and** a list of things
+that artifact must contain, without showing that both can hold at once.
+
+**How to evaluate.** Take the required content at its most expensive plausible values, not
+its example values, and measure it against the limit. If the measurement was never taken,
+the criterion fails; if it was taken and the two do not fit, the requirement is a
+contradiction and one side has to give.
+
+> **The tell is a requirement that names a cost saving as its justification.** "Fitting
+> this into one «unit» saves «amount»" reads as a stretch goal and is treated as a
+> copywriting or polish task. It is neither: it is two acceptance criteria that cannot both
+> pass, and the money attached to it was calculated from a baseline nobody measured.
+
+**Measure the worst case, not the example.** Limits are almost always breached by a
+user-supplied value at the top of its range — a long name, a long label, a long
+translation — while the example in the document uses a short one. Where the breach is
+possible, the requirement states what gets truncated or dropped, and that behavior has its
+own acceptance criterion.
+
+**Where this bites hardest:** anything measured in a unit the author is not fluent in.
+Non-Latin scripts in a byte- or code-unit-limited channel are the standard case — a single
+glyph can cost several units — and the error is silent, arrives as a recurring cost rather
+than a failure, and is discovered on an invoice.
+
 ---
 
 # Universal Gates

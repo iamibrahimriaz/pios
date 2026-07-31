@@ -177,6 +177,7 @@ For every MUST requirement:
 - [ ] Confidence check
 - [ ] Invented-number check
 - [ ] Implementation-leak check
+- [ ] Budget check — a stated limit and a required content list can both hold
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
