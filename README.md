@@ -168,7 +168,7 @@ Everything required before development begins.
 # Repository Structure
 
 ```
-product-intelligence-os/
+pios/
 
 AGENTS.md                 how an agent executes a run — start here
 
@@ -244,8 +244,8 @@ agent reads and executes. You supply the agent; this repository supplies the
 discipline.
 
 ```bash
-git clone https://github.com/iamibrahimriaz/product-intelligence-os.git
-cd product-intelligence-os
+git clone https://github.com/iamibrahimriaz/pios.git
+cd pios
 pip3 install -r requirements.txt
 python3 framework/engine/validate.py
 ```
@@ -289,7 +289,7 @@ describe — install the skill globally and point it here:
 
 ```bash
 ./scripts/install-skill.sh
-export PIOS_HOME="$HOME/Projects/product-intelligence-os"   # add to your shell profile
+export PIOS_HOME="$HOME/Projects/pios"   # add to your shell profile
 ```
 
 Then `/pios` works in any directory, and writes to `./pios/<slug>/` in whichever project

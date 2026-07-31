@@ -17,7 +17,7 @@ project:
   # Absolute paths, written once when the run is created. A later session reads
   # them instead of re-deriving, so resume works even when PIOS_HOME is set
   # differently — or not at all — in that session.
-  framework_path: ""            # .../product-intelligence-os/framework
+  framework_path: ""            # .../pios/framework
   run_dir: ""                   # .../projects/<slug>  or  .../pios/<slug>
 
 run:

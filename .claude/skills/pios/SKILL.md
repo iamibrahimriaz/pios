@@ -62,7 +62,7 @@ set at all, in that session.
 > I cannot find the framework. Either run this from inside the Product Intelligence OS
 > repository, or point `PIOS_HOME` at where you cloned it:
 >
-> `export PIOS_HOME="$HOME/Projects/product-intelligence-os"`
+> `export PIOS_HOME="$HOME/Projects/pios"`
 >
 > Add that line to your shell profile to make it permanent. See `USAGE.md` in the
 > framework repository.
@@ -80,7 +80,7 @@ skill file mid-run: in external mode it lives inside someone's shared framework 
 a run must not change the method for every other project on the machine.
 
 State the mode in one line before you begin, so the operator knows where output will land:
-*"External mode. Framework at ~/Projects/product-intelligence-os. Writing to ./pios/."*
+*"External mode. Framework at ~/Projects/pios. Writing to ./pios/."*
 
 ---
 

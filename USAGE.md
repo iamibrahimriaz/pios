@@ -25,8 +25,8 @@ You supply the agent. This repository supplies the discipline.
 ## Install
 
 ```bash
-git clone https://github.com/iamibrahimriaz/product-intelligence-os.git
-cd product-intelligence-os
+git clone https://github.com/iamibrahimriaz/pios.git
+cd pios
 pip3 install -r requirements.txt
 python3 framework/engine/validate.py
 ```
@@ -48,7 +48,7 @@ lands.
 You work inside the framework repository. Every run lives there.
 
 ```
-~/Projects/product-intelligence-os/
+~/Projects/pios/
   framework/                     the method
   projects/gym-memberships/      run 1
   projects/rug-estate/           run 2
@@ -68,7 +68,7 @@ You work in your own project. The framework stays where you cloned it; the run o
 lands in the project you are working on.
 
 ```
-~/Projects/product-intelligence-os/    the framework — read-only, never written to
+~/Projects/pios/                       the framework — read-only, never written to
 ~/Projects/my-app/
   pios/my-app/                         the run lives here
     state.yaml
@@ -89,7 +89,7 @@ Two steps: install the skill globally, and tell it where the framework is.
 ### Automatic
 
 ```bash
-cd ~/Projects/product-intelligence-os
+cd ~/Projects/pios
 ./scripts/install-skill.sh
 ```
 
@@ -101,10 +101,10 @@ shell profile.
 
 ```bash
 # 1. make the skill available everywhere
-ln -s ~/Projects/product-intelligence-os/.claude/skills/pios ~/.claude/skills/pios
+ln -s ~/Projects/pios/.claude/skills/pios ~/.claude/skills/pios
 
 # 2. tell it where the framework lives  (add to ~/.zshrc or ~/.bashrc)
-export PIOS_HOME="$HOME/Projects/product-intelligence-os"
+export PIOS_HOME="$HOME/Projects/pios"
 ```
 
 Restart your terminal, then check:
