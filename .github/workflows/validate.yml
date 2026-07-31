@@ -1,0 +1,56 @@
+name: validate
+
+# The framework is prose, so nothing compiles and nothing has tests in the usual
+# sense. This is the only automated check there is — it verifies the structure
+# every module and deliverable depends on.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  structure:
+    name: Framework structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate the framework
+        run: python3 framework/engine/validate.py
+
+  runs:
+    name: Committed example runs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate every run in examples/
+        run: |
+          shopt -s nullglob
+          found=0
+          for run in examples/*/; do
+            [ -f "$run/state.yaml" ] || continue
+            found=1
+            echo "::group::$run"
+            python3 framework/engine/validate-run.py "$run"
+            echo "::endgroup::"
+          done
+          if [ "$found" = "0" ]; then
+            echo "No committed runs yet — nothing to validate."
+          fi
