@@ -116,6 +116,7 @@ framework/            ships to users — treat as read-only
   modules/            14 domain modules, each with module.yaml + core/knowledge/resources/learn
   packs/              optional vertical knowledge (healthcare, fintech, ...)
 
+.claude/skills/       /pios (run a session) · /pios-author (extend the framework)
 projects/<slug>/      this run — state.yaml, research/, deliverables/
 examples/             completed reference runs
 ```
