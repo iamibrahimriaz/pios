@@ -1,35 +1,23 @@
-<!--
-  Product Intelligence OS — Deliverable Template
-  16-Engineering-Setup.md
-
-  Fed by: 09-technology, 10-execution, 13-operations
-  Audience: the engineer or coding agent building this, from day one to launch day
-
-  This artifact answers "how do I run, test and ship what I built".
-  It does NOT restate what to build — that is 03-PRD, 04-Feature-Spec and
-  12-Build-Handoff. If a section here begins describing product behavior, it is
-  in the wrong document.
-
-  Conventions:
-    <!-- fill: ... -->   guidance for the agent. REMOVE before delivery.
-    «placeholder»        a value to replace. None may survive into the final artifact.
-    <!-- ACCEPTANCE -->  the artifact's checklist. Verify, then remove.
--->
-
 ---
-Title: Engineering Setup
-Artifact: 16-Engineering-Setup.md
-Version: 1.0.0
-Status: Template
-Owner: Product Intelligence OS
-Fed By:
-  - 09-technology
-  - 10-execution
-  - 13-operations
-Audience:
-  - Engineering
-  - Delivery agent
+Artifact: engineering-setup
+Project: «project name»
+Version: 1.0
+Date: «ISO date»
+Modules: [09-technology, 10-execution, 13-operations]
+Critical: true
 ---
+
+<!-- fill: This artifact answers "how do I run, test and ship what I built".
+
+     It does NOT restate what to build — that is 03-PRD, 04-Feature-Spec and
+     12-Build-Handoff. If a section here starts describing product behavior, it is in
+     the wrong document. If 12-Build-Handoff starts describing CI, so is that.
+
+     The reader has the code and no context. Every command must be runnable as written.
+     A step that needs a person to explain it is a blocker, not a note.
+
+     Write this LAST, alongside 12-Build-Handoff.md. Remove every <!-- fill --> comment
+     before delivery. -->
 
 # Engineering Setup — «Product Name»
 
@@ -371,8 +359,9 @@ Once every box above is checked, this document's job is finished. From that poin
 | Is it working? | `11-Success-Metrics.md` |
 | What do we build next? | `09-Roadmap.md` |
 
-**If `14-Operations-Plan.md` was not produced, the product has no operating plan.** Say so
-explicitly here rather than launching quietly without one.
+`14-Operations-Plan.md` is a **required** artifact. If it is absent or incomplete, the
+product has no operating plan and the launch is not ready — record that here as a blocker
+rather than launching quietly without one.
 
 ---
 

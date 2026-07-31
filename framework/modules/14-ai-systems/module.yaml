@@ -4,7 +4,7 @@ purpose: Decide where AI genuinely improves the product, and how it will be eval
 depends_on: [03-user, 08-product, 09-technology]
 consumes: [feature_spec, data_model, jobs_to_be_done]
 produces: [ai_opportunities, model_strategy, data_requirements, evaluation_plan, failure_modes]
-feeds_deliverables: [ai-strategy, prd, build-handoff]
+feeds_deliverables: [ai-strategy, build-handoff, operations-plan, prd]
 gate:
   - Each AI capability justified against a non-AI alternative
   - Training / grounding data availability confirmed, not assumed

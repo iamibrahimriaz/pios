@@ -4,7 +4,7 @@ purpose: Identify who is served, what they are trying to get done, and what they
 depends_on: [01-idea, 02-market]
 consumes: [idea_brief, market_definition]
 produces: [segments, personas, jobs_to_be_done, current_workflow, switching_cost]
-feeds_deliverables: [research-dossier, prd, ux-flows]
+feeds_deliverables: [growth-plan, prd, research-dossier, ux-flows]
 gate:
   - ">= 2 segments with a stated reason for prioritizing one"
   - Jobs stated as jobs, not features
