@@ -330,9 +330,15 @@ the cheapest test that would change the verdict, and what it costs. Never hand o
 instruction for something the research says should not be built.
 
 **That block is for handing to someone who is not standing in the run directory.** If the
-operator is actually starting work, Step 6 removes the need for it entirely — the instruction
+operator is actually starting work, Step 7 removes the need for it entirely — the instruction
 moves into the folder, and opening it is enough. Offer that in one sentence rather than
 explaining it.
+
+**Offer the proposal in the same breath, on every run** — *"Do you want a project proposal for
+whoever approves this? One HTML file, print-ready."* The work is on request; **the offer is not
+optional**, because an operator who does not know the framework produces this does not know to ask
+for it. **A run that reached "do not build" gets the same offer** — stopping is also a decision
+someone has to sign.
 
 **5 — The closing line.** What you need from them now, per the reply contract: the decisions
 still open, and **"Tell me which of these you want to resolve and I'll pick it up."**
@@ -355,7 +361,36 @@ one in the message, and it goes near the top rather than in a table at the end.
 
 ---
 
-## Step 6 — Make the run directory buildable, when they are ready
+## Step 6 — The proposal, when someone has to approve this
+
+**On request. The offer is not.** You offered it in the completion message; this is what to do when
+they say yes.
+
+**Read `<FRAMEWORK>/engine/proposal.md` and follow it.**
+
+It writes **one self-contained HTML file** into `<RUNS>/<slug>/proposal/`, and renders it to PDF if a
+headless browser is on the machine. If none is, hand over the HTML and say it prints to PDF from any
+browser — do not install a toolchain for one keystroke.
+
+**Derived, never re-researched.** Every figure in it is already in `<RUNS>/<slug>/deliverables/`. If
+the proposal needs a number no artifact carries, write that it is not established. Do not compute one:
+it would arrive with no evidence tag, in the document that gets quoted back for a year.
+
+**It may not read better than the research reads.** Confidence on the first page. Any failed gate
+named, not summarized into a risk. Stop conditions stated as binding on approval. **If the run reached
+"do not build", the proposal proposes not building** — or the cheapest test that would change the
+verdict.
+
+**Nothing in `deliverables/` is edited.** If writing the proposal shows a deliverable is wrong, say so
+and stop. A document written to win an approval must not be allowed to amend the record.
+
+**Open the rendered file and look at it, page by page, before reporting it done.** Print stylesheets
+produce blank pages, split tables and clipped diagrams that are invisible in a browser window — and
+the operator discovers them in front of the approver.
+
+---
+
+## Step 7 — Make the run directory buildable, when they are ready
 
 **Not automatic.** A run that reached "do not build", or an operator still deciding, does not
 need this. Offer it in one sentence; do not assume it.

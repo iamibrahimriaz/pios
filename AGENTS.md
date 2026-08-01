@@ -188,6 +188,31 @@ Stop and hand control back to the operator at:
 
 ---
 
+## After delivery — the proposal for whoever approves it
+
+**Offer this at the delivery checkpoint, in one sentence, on every run.** *"Do you want a project
+proposal for whoever approves this?"* On request only — but the **offer** is not optional, because an
+operator who does not know the framework produces this does not know to ask for it.
+
+The artifact set is written for the builder. **The person who decides whether the build is funded is
+not the builder**, will not read sixteen documents, and is answering a different question: approve,
+defer, or reject. Without this step they assemble that document by hand, and what falls out is the
+confidence level, the open decisions, the stop conditions and any gate that failed — the parts that
+make the approval honest, and the parts that feel least helpful to include when asking for money.
+
+It produces **one self-contained HTML file** in `projects/<slug>/proposal/`, rendered to PDF where a
+headless browser exists. The method is in `framework/engine/proposal.md`.
+
+**Derived, never re-researched.** Every figure in it already exists in the artifact set; the proposal
+selects and arranges, it does not establish. If it needs a number no artifact carries, say the figure
+is not established — do not compute one, because it arrives with no evidence tag in the one document
+that gets quoted back for a year.
+
+**It may not read better than the research reads.** Confidence goes on the first page. A run that
+reached "do not build" still gets the offer, and produces a proposal to not build. The test: would
+this document win approval for a run the evidence does not support? If yes, it is written wrong,
+however good it looks.
+
 ## After delivery — making the folder buildable
 
 **On request only, and never automatically.** A run that reached "do not build", or an

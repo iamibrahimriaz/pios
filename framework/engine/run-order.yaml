@@ -38,6 +38,23 @@ stages:
     action: framework/deliverables/manifest.yaml
     human_checkpoint: true
 
+  - id: proposal
+    # Not automatic. Offered once at the delivery checkpoint, in one sentence.
+    #
+    # The artifact set is written for the builder. The person who decides whether the build
+    # is funded is not the builder, will not read sixteen documents, and is answering a
+    # different question — approve, defer, or reject. Without this step the operator
+    # assembles that document by hand, and what gets dropped is the confidence level, the
+    # open decisions, the stop conditions and any gate that failed.
+    #
+    # Derived, never re-researched: every figure already exists in the artifact set. A run
+    # that reached "do not build" still gets the offer — stopping is also a decision someone
+    # has to sign.
+    purpose: Produce the document the funding decision is actually made from.
+    modules: []
+    action: framework/engine/proposal.md
+    on_request: true
+
   - id: handoff
     # Not automatic. A run that reaches "do not build", or an operator still deciding, does
     # not need this. Offered at the delivery checkpoint and run only on request.
