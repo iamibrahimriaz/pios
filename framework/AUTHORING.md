@@ -108,6 +108,28 @@ the folder count. **Splitting an artifact to fill a new folder is the change to 
 against**, and `12-Build-Handoff.md` may not be split at all: its acceptance says an agent could
 open it and start writing code today, and no fragment of it can pass that.
 
+### Add acceptance criteria; never edit one in place
+
+**Every completed run carries a verbatim copy of its artifacts' criteria in `_acceptance.md`,
+and `validate-run.py` compares them exactly. Rewording a criterion in the manifest turns every
+faithful copy ever made into drift** — the runs did nothing wrong and all of them start failing
+at once.
+
+| Change | Effect on completed runs |
+| --- | --- |
+| **Add** a criterion | None. The omission half of the parity check is gated on the run's manifest version |
+| **Edit** a criterion's wording | **Every run that copied the old wording now reports as reworded.** There is no version gate that can save it, because a reworded criterion is wrong whenever it was written |
+| **Delete** a criterion | Same as editing |
+
+**So: to sharpen a criterion, leave it alone and add a second one that qualifies it.** Two
+criteria reading slightly awkwardly together is the price, and it is much smaller than the
+alternative. The wording you regret is load-bearing the moment a run copies it.
+
+**Bump the manifest `version` when you add a criterion**, so the runs produced before it are
+judged against what existed at the time.
+
+---
+
 ### The manifest owns every path it declares
 
 **No two artifacts may claim the same file, and no completion artifact may sit on a

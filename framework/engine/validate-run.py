@@ -248,7 +248,20 @@ if FOLDERED and present:
     for a in present:
         by_folder.setdefault(a.get("folder"), []).append(a)
 
-    absent_acc, drifted, compared = [], [], 0
+    # Checked in BOTH directions, and only one of them may be era-gated.
+    #
+    #   REWORDED — a criterion in the file that matches nothing in the manifest. This is the
+    #   softening the copy rule exists to prevent, and it is wrong whenever it was written, so
+    #   it is never era-gated.
+    #
+    #   MISSING — a manifest criterion absent from the file. For a run produced under the
+    #   CURRENT manifest that is an omission. For an older run it is usually just a criterion
+    #   that did not exist yet, and failing the run for it would mean no acceptance criterion
+    #   could ever be added without breaking every completed run — the exact property
+    #   `version` exists to protect. Reported as a note there instead.
+    ROW = re.compile(r"^\|\s*\d+\s*\|(.+?)\|[^|]*\|\s*$", re.M)
+
+    absent_acc, reworded, missing, compared = [], [], [], 0
     for folder, arts in sorted(by_folder.items()):
         if not folder:
             continue
@@ -256,23 +269,43 @@ if FOLDERED and present:
         if not os.path.isfile(p):
             absent_acc.append(f"deliverables/{folder}/{ACCEPTANCE_FILE}")
             continue
-        got = norm(open(p, encoding="utf8").read())
+        raw = open(p, encoding="utf8").read()
+        got = norm(raw)
+        manifest_here = {norm(c) for a in arts for c in a.get("acceptance", [])}
+        for row in ROW.findall(raw):
+            row = norm(row)
+            if row and row not in manifest_here:
+                reworded.append(f"{folder}/{ACCEPTANCE_FILE}: \"{row[:70]}\"")
         for a in arts:
             for c in a.get("acceptance", []):
                 compared += 1
                 if norm(c) not in got:
-                    drifted.append(f"{folder}/{ACCEPTANCE_FILE}: {a['id']} — \"{norm(c)[:70]}\"")
+                    missing.append(f"{folder}/{ACCEPTANCE_FILE}: {a['id']} — \"{norm(c)[:70]}\"")
     check("every folder that received an artifact carries its acceptance file",
           not absent_acc, absent_acc)
 
-    # Reported only when it actually compared something. With no acceptance files on disk this
-    # check has an empty drift list and would print PASS — a validator claiming a property it
-    # never examined, one line under the check that just said the files are missing.
+    # Reported only when it actually compared something. With no acceptance files on disk these
+    # checks have empty lists and would print PASS — a validator claiming a property it never
+    # examined, one line under the check that just said the files are missing.
     if compared:
-        check(f"every folder acceptance criterion is the manifest's, character for character "
-              f"({compared} compared)", not drifted,
-              "\n         ".join(drifted[:8])
-              + "\n         copied from deliverables/manifest.yaml, never rewritten")
+        check("no folder acceptance criterion was reworded on the way in",
+              not reworded,
+              "\n         ".join(reworded[:8])
+              + "\n         matches no criterion in deliverables/manifest.yaml. Copied "
+                "character for character, never improved — a criterion softened here is the "
+                "version the builder works to, and nothing downstream can see that it drifted")
+        if run_version >= MANIFEST_VERSION:
+            check(f"every folder acceptance criterion is the manifest's, character for character "
+                  f"({compared} compared)", not missing,
+                  "\n         ".join(missing[:8])
+                  + "\n         copied from deliverables/manifest.yaml, never rewritten")
+        elif missing:
+            notes.append(
+                f"{len(missing)} manifest acceptance criterion/criteria are not in this run's "
+                f"acceptance files. This run was produced under manifest v{run_version} and the "
+                f"framework is now v{MANIFEST_VERSION}, so they most likely arrived afterwards "
+                "and are not required of it. A completed run is a record, not a draft to be "
+                "brought up to a later standard.")
     else:
         notes.append("No folder acceptance file could be read, so no criterion was compared "
                      "against the manifest. This check did not run.")
