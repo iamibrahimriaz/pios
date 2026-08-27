@@ -194,7 +194,8 @@ framework/                ships to users; read-only during a run
 
   packs/                  optional vertical knowledge — planned, not yet built
 
-.claude/skills/           /pios and /pios-author — the Claude Code interface
+.claude-plugin/           plugin.json + marketplace.json — the install manifests
+skills/                   /pios and /pios-author — the agent interface
 scripts/install-skill.sh  install /pios globally, for use from other projects
 projects/<slug>/          one run — state.yaml, research/, deliverables/
 
@@ -248,68 +249,73 @@ Product Intelligence OS is **not a program.** It is a body of method that an AI
 agent reads and executes. You supply the agent; this repository supplies the
 discipline.
 
+## Claude Code
+
 ```bash
-git clone https://github.com/iamibrahimriaz/pios.git
-cd pios
-pip3 install -r requirements.txt
-python3 framework/engine/validate.py
+claude plugin marketplace add iamibrahimriaz/pios
+claude plugin install pios@pios
 ```
 
-If the validator exits 0, the framework is sound.
-
-**Requirements:** an AI coding agent that can read and write files —
-[Claude Code](https://claude.com/claude-code) is the reference implementation —
-plus `git` and `python3`.
-
----
-
-# Running It
-
-**Full instructions: [USAGE.md](USAGE.md)** — install, both modes, moving the output
-into your build, and troubleshooting.
-
-## With Claude Code
-
-The repository ships two skills. Open Claude Code in this directory and type:
+Then, from **any** project directory:
 
 ```
 /pios   an app that helps small gyms manage memberships
 ```
 
-That is the whole interface. The skill creates the run, reads the framework, and
-begins module 01. To pick a run back up in a later session — a full run does not
-fit in one — just invoke `/pios` again; it finds the existing `state.yaml` and
-resumes from the next unpassed module.
+The run lands in `./pios/<slug>/` — beside the code it describes. Nothing to clone,
+no environment variable, no Python.
+
+## Gemini CLI
+
+```bash
+gemini extensions install https://github.com/iamibrahimriaz/pios
+```
+
+## Any other agent
+
+Point it at this repository and tell it to read [`AGENTS.md`](AGENTS.md) — the complete
+operating manual: startup sequence, per-module loop, the rules it may not break, and how
+to know when it is finished.
+
+```bash
+npx pios-framework init     # framework/ + AGENTS.md into your project
+```
+
+**Requirements:** an AI coding agent that can read and write files.
+[Claude Code](https://claude.com/claude-code) is the reference implementation.
+**Python is not required to run PIOS** — it is needed only by the two validators,
+covered under [Checking the output](#checking-the-output).
+
+---
+
+# Running It
+
+**Full instructions: [USAGE.md](USAGE.md)** — every install mode, moving the output
+into your build, and troubleshooting.
+
+```
+Input:   one idea, loosely described
+Process: 14 modules, gated, evidence-bound
+Output:  a build-ready blueprint in ./pios/<slug>/
+```
+
+A full run does not fit in one session. Invoke `/pios` again to resume — it finds the
+existing `state.yaml` and continues from the next unpassed module.
 
 | Skill | For |
 | --- | --- |
 | `/pios` | Running a research session on an idea. Start, resume or status |
 | `/pios-author` | Extending the framework itself — a new module, a vertical pack, a gate change |
 
-## From another project
+## Working inside the repository instead
 
-By default you work inside this repository and runs land in `projects/<slug>/`. To run
-research from your own project instead — so the artifacts sit beside the code they
-describe — install the skill globally and point it here:
+Cloning still works and is how you develop the framework itself. Inside the repo, runs
+land in `projects/<slug>/`, and `PIOS_HOME` remains supported for agents without a
+plugin system:
 
 ```bash
-./scripts/install-skill.sh
-export PIOS_HOME="$HOME/Projects/pios"   # add to your shell profile
-```
-
-Then `/pios` works in any directory, and writes to `./pios/<slug>/` in whichever project
-you are in. The framework itself stays in one place and is never written to.
-
-## With any other agent
-
-Point it at the repository and tell it to read `AGENTS.md`. That file is the
-complete operating manual: startup sequence, per-module loop, the rules it may
-not break, and how to know when it is finished.
-
-```
-Input:   one idea, loosely described
-Process: 14 modules, gated, evidence-bound
-Output:  a build-ready blueprint in projects/<slug>/deliverables/
+git clone https://github.com/iamibrahimriaz/pios.git
+cd pios && python3 framework/engine/validate.py
 ```
 
 ## What it is like to use

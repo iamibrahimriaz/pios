@@ -17,33 +17,55 @@ You supply the agent. This repository supplies the discipline.
 | | |
 | --- | --- |
 | **You need** | An AI coding agent that can read and write files. [Claude Code](https://claude.com/claude-code) is the reference implementation |
-| **Plus** | `git`, and `python3` with PyYAML for the two validators |
-| **You do not need** | Node, a database, an API key, or a build step |
+| **You do not need** | Python, Node, a database, an API key, or a build step |
+| **Optional** | `python3` with PyYAML — only to run the two validators |
 
 ---
 
 ## Install
 
 ```bash
-git clone https://github.com/iamibrahimriaz/pios.git
-cd pios
-pip3 install -r requirements.txt
-python3 framework/engine/validate.py
+claude plugin marketplace add iamibrahimriaz/pios
+claude plugin install pios@pios
 ```
 
-The last command must print **All structural checks pass.** If it does, you are ready.
+Then, from any project directory:
 
-Clone it **once**. Do not copy it into each project — it is 611 files of method with
-nothing to do with your application's source, and copies drift apart within months.
+```
+/pios   an app that helps small gyms manage memberships
+```
+
+That is the whole install. The framework travels with the plugin; the run lands in
+`./pios/<slug>/` in whatever project you are standing in.
+
+**Gemini CLI:** `gemini extensions install https://github.com/iamibrahimriaz/pios`
+
+**Any other agent:** `npx pios-framework init`, then point it at `AGENTS.md`.
 
 ---
 
 ## Which mode do you want
 
-There are two ways to use it. Both work; they differ in where your research output
+Three ways to use it. They differ only in where the framework lives and where output
 lands.
 
-### Mode 1 — Workspace (default, nothing to configure)
+### Mode 0 — Plugin (recommended, nothing to configure)
+
+The framework lives inside the plugin. You never see it. Runs land beside your code.
+
+```
+~/Projects/my-app/
+  pios/my-app/           the run lives here
+    state.yaml
+    deliverables/        the artifacts
+  src/
+```
+
+**Choose this unless you are developing the framework itself.** No clone, no
+environment variable, no shell profile edit — and `claude plugin update` keeps the
+method current.
+
+### Mode 1 — Workspace (for developing the framework)
 
 You work inside the framework repository. Every run lives there.
 
@@ -101,7 +123,7 @@ shell profile.
 
 ```bash
 # 1. make the skill available everywhere
-ln -s ~/Projects/pios/.claude/skills/pios ~/.claude/skills/pios
+ln -s ~/Projects/pios/skills/pios ~/.claude/skills/pios
 
 # 2. tell it where the framework lives  (add to ~/.zshrc or ~/.bashrc)
 export PIOS_HOME="$HOME/Projects/pios"
@@ -132,15 +154,24 @@ variables.
 ### How the skill decides which mode it is in
 
 ```
-framework/engine/run-order.yaml exists in the current directory?
-   yes -> workspace mode:  framework is ./framework,  runs go to ./projects/<slug>/
-   no  -> is PIOS_HOME set and valid?
-             yes -> external mode: framework is $PIOS_HOME/framework,
-                                   runs go to ./pios/<slug>/
-             no  -> it stops and tells you to set PIOS_HOME
+is CLAUDE_PLUGIN_ROOT set, with a framework inside it?
+   yes -> plugin mode:     framework is $CLAUDE_PLUGIN_ROOT/framework,
+                           runs go to ./pios/<slug>/
+   no  -> framework/engine/run-order.yaml in the current directory?
+             yes -> workspace mode: framework is ./framework,
+                                    runs go to ./projects/<slug>/
+             no  -> is PIOS_HOME set and valid?
+                       yes -> external mode: framework is $PIOS_HOME/framework,
+                                             runs go to ./pios/<slug>/
+                       no  -> it stops and tells you to install the plugin
 ```
 
 It will never guess a location or run without the framework.
+
+**Every framework path is written repo-relative** — `framework/engine/gates.yaml` — and
+resolved against whichever framework the check above found. That one rule is what lets the
+same 623 documents work from a clone and from inside an installed plugin. Two structural
+checks enforce it.
 
 ---
 

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "pios",
+  "displayName": "Product Intelligence OS",
+  "version": "0.1.0",
+  "description": "The research stage before the code. Turns one loosely described product idea into a build-ready blueprint \u2014 15 gated, evidence-tagged artifacts plus a decision report, proposal, kickoff deck, phase board and AI entry file. Every claim is tagged verified, inferred or assumption; gates fail on uncertainty; and \"do not build\" is a valid, complete result.",
+  "author": {
+    "name": "Ibrahim Riaz",
+    "url": "https://github.com/iamibrahimriaz"
+  },
+  "homepage": "https://github.com/iamibrahimriaz/pios",
+  "repository": "https://github.com/iamibrahimriaz/pios",
+  "license": "MIT",
+  "category": "productivity",
+  "keywords": [
+    "product-discovery",
+    "product-research",
+    "prd",
+    "specification",
+    "market-research",
+    "validation",
+    "planning",
+    "agent-skills"
+  ]
+}

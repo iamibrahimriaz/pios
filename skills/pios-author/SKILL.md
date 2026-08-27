@@ -41,7 +41,7 @@ pip3 install -r requirements.txt
 python3 framework/engine/validate.py
 ```
 
-It must exit 0 before you start and again before you finish. Twenty-two checks. Read
+It must exit 0 before you start and again before you finish. Thirty-seven checks. Read
 `framework/AUTHORING.md` — it is the specification, and this file does not repeat it.
 
 ---
@@ -138,10 +138,13 @@ to prevent.
 python3 framework/engine/validate.py
 ```
 
-It must exit 0. Twenty-two checks: YAML parses, required files exist, dependency graph is
-complete and acyclic, gate parity holds, manifest and modules agree, prerequisites
-resolve, no stale identifiers, skills carry no self-modification
-instruction, no run content is tracked, American spelling.
+It must exit 0. Thirty-seven checks: YAML parses, required files exist, dependency graph is
+complete and acyclic, gate parity holds, manifest and modules agree, **no two manifest
+artifacts claim the same path**, **every artifact names a folder the layout defines and every
+folder is used**, prerequisites resolve, no stale identifiers, **every engine method file is
+reachable from something an agent reads**, **every controlled-vocabulary value in `gates.yaml`
+reaches a skill that teaches it**, skills carry no self-modification instruction, no run
+content is tracked, American spelling.
 
 Then walk `AUTHORING.md`'s submission checklist. The item most often missed is the last
 one: **nothing in `learn/` that an agent needs to execute correctly.**
@@ -184,6 +187,43 @@ The commit message explains the defect, not the project that revealed it.
 
 ---
 
+## What must never be added to this framework
+
+**The framework produces the pre-development package — research, specification, proposal,
+handoff — and stops there.** `constitution/core/00-Purpose.md` states the boundary; this is the
+authoring consequence.
+
+**Do not add modules, engine steps, templates or skills that perform, direct or verify
+development work.** Specifically: no build module, no test-authoring step, no scaffolding
+generator, no deployment or release process, no code-review or QA method.
+
+**Expect the request repeatedly.** "Now build it" follows every completed run, and it arrives
+disguised as a small, reasonable extension — a setup helper, a scaffolding step, "just the
+repository layout". Each looks like a natural continuation of the handoff. **Together they turn
+a research framework into a half-built engineering one**, governed by evidence rules that cannot
+judge whether code works.
+
+**The test:** does this change help establish what is true, or does it help produce a working
+system? The second belongs to the project that receives the package.
+
+---
+
+## The principle every change is judged against
+
+> **Accurate uncertainty outranks unsupported confidence.**
+> `constitution/core/03-Core-Principles.md`, Principle 16.
+
+**Any change that would reduce the uncertainty a run records must state what evidence justifies the
+reduction.** Not what makes the output read better, not what makes a gate easier to pass — what
+evidence.
+
+This applies to more changes than it first appears: softening a gate criterion, adding a fourth
+evidence tag, letting a confidence level be set by hand, permitting a template section to be
+omitted, or widening any waiver. **Each is locally reasonable and each spends the same
+property.** If you cannot name the evidence, the change is a preference and should be argued as one.
+
+---
+
 ## Changes that need a stronger argument than usual
 
 Some parts of this framework are load-bearing in ways that are not obvious. Before
@@ -207,6 +247,44 @@ changing any of these, state which limitation you are fixing and what it would b
   conflicts on `git pull`, and quietly makes one user's method different from everyone
   else's — which is the one property this framework cannot afford to lose. If a session
   learns something durable, say so and change it here on purpose.
+- **`inconclusive` and `blocked` stay separate validation outcomes.** They look like a
+  distinction without a difference until a run reports a distribution failure as a demand
+  failure and kills a product nobody was ever asked about.
+- **The six claims stay six.** Existence, frequency, severity, business impact, solution
+  demand, willingness to pay. Every proposal to merge them arrives as "these are really the
+  same thing at different strengths" — and the merge always runs in the direction that lets
+  problem evidence stand in for demand evidence.
+- **A generated option stays marked.** The mark costs one field and looks redundant on every
+  run where the generated option loses. It is worth its cost only on the runs where it wins,
+  which are the runs where the recommendation changed.
+- **`development_authorized` is never set by a run**, and the readiness states stay five.
+  Collapsing them into one "ready" flag is the single most requested simplification and the
+  one that converts a research framework's output into a build authorization.
+- **`state.version` gating stays.** It is what lets a required check be added without
+  rewriting history. A change that makes a new check fail an older run has broken the
+  property that makes completed runs worth keeping.
+- **Technical feasibility, product demand, willingness to pay and business viability stay
+  four separate judgements.** The merge always arrives as "these are all just viability", and
+  it always runs in the direction that lets a passed feasibility gate stand in for the three
+  that were not passed. A run that specified a buildable product nobody was shown to want
+  must be able to say exactly that, in one sentence, without hedging any of the four.
+- **A run may recommend against building, and nothing may be added that makes that harder to
+  reach.** An operator whose run ended in "do not build yet" named it the most valuable
+  outcome they got — they had expected a development-ready specification and the research
+  established that technical completeness is not product validation. Every change that
+  smooths the path from a complete artifact set to a build is spending that property.
+- **The six failure classes stay six, and `insufficient_evidence` never merges with
+  `failed_validation`.** They read as degrees of the same thing and they are not: one means
+  nobody asked, the other means somebody answered no. The merge always runs in the direction
+  that converts an unasked question into a negative result, which kills products that were
+  never tested.
+
+**And read `state.confirmed_value` in every run you are folding lessons from.** It records
+mechanisms an operator confirmed were worth their cost. The friction log tells you what went
+wrong; that key is the only thing that tells you what went right, and **a mechanism that costs
+effort in every module and appears in no friction entry looks exactly like a candidate for
+simplification.** It is a record of confirmation rather than a prohibition — you may still
+change what it names, but the change must state what replaces the property it provided.
 
 Each module's `learn/20-Future-Improvements.md` lists that module's real limitations and
 what should not change. Read the relevant one before proposing a change to it.

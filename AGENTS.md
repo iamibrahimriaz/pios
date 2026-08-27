@@ -24,6 +24,34 @@ module you run exists to fill those files.
 
 ---
 
+## Resolving paths — read this before the startup sequence
+
+**Every path in this file and in every framework document is written relative to the repository
+root**: `framework/engine/gates.yaml`, `framework/modules/04-problem/module.yaml`. That form is
+the convention and it never changes.
+
+**It is not necessarily where the file sits on this machine.** Resolve the framework once, then
+read every `framework/…` path against it:
+
+```bash
+if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -f "$CLAUDE_PLUGIN_ROOT/framework/engine/run-order.yaml" ]; then
+  echo "FRAMEWORK=$CLAUDE_PLUGIN_ROOT/framework"; echo "RUNS=$(pwd)/pios"
+elif [ -f framework/engine/run-order.yaml ]; then
+  echo "FRAMEWORK=$(pwd)/framework";              echo "RUNS=$(pwd)/projects"
+elif [ -n "${PIOS_HOME:-}" ] && [ -f "$PIOS_HOME/framework/engine/run-order.yaml" ]; then
+  echo "FRAMEWORK=$PIOS_HOME/framework";          echo "RUNS=$(pwd)/pios"
+fi
+```
+
+A path beginning `framework/` means `<FRAMEWORK>/…`. **The framework is read-only; everything you
+produce goes under `<RUNS>/<slug>/`.**
+
+**If a framework path does not resolve, stop.** A gate criterion pointing at a file is not an
+optional reference — proceeding without it is how a run reaches delivery having skipped the
+document that would have failed it.
+
+---
+
 ## Startup sequence
 
 1. Read `framework/constitution/core/` — how to think. This governs everything.
@@ -32,6 +60,7 @@ module you run exists to fill those files.
 4. Read `framework/engine/gates.yaml` — how you pass or fail.
 5. Read `framework/engine/review-loop.md` — how you check yourself.
 6. Read `framework/deliverables/manifest.yaml` — what you are producing.
+   **Every path it declares is owned.** Never write to one except as that artifact.
 7. Create `projects/<slug>/state.yaml` from `framework/engine/state-schema.yaml`.
 8. Record the operator's raw idea verbatim into `state.project.raw_idea`. Never rewrite it.
 
@@ -42,6 +71,17 @@ module you run exists to fill those files.
 Copy each template from `framework/deliverables/templates/` into
 `projects/<slug>/deliverables/` and fill it. Do not invent a structure — the templates
 encode the acceptance criteria.
+
+**Each artifact goes into the folder its manifest entry names.** The `folder` key on the
+artifact, defined under `folder_layout`, groups the set by when it is read: `00-decision`,
+`01-research`, `02-product`, `03-technical`, `04-delivery`. **The filenames and their global
+numbering do not change** — `03-PRD.md` is the document's identity in every cross-reference the
+framework carries, and renumbering per folder would make one name mean two things.
+
+**Every folder that receives an artifact also gets `_acceptance.md`**, from
+`templates/_Folder-Acceptance.md`, holding that folder's criteria copied from the manifest
+character for character. It is a convenience for whoever is working in the folder and **never a
+second source of truth** — `validate-run.py` compares the two exactly.
 
 Three conventions inside every template:
 
@@ -122,16 +162,39 @@ implies, and halt the module. Otherwise the run spends three tries on a question
 answer and then reports a research failure that never happened. See
 `framework/engine/gates.yaml` under `decision_dependent_failure`.
 
-**`blocking` and `premise_bearing` are different properties, and every open question carries
-both.** Blocking means the run cannot proceed. Premise-bearing means it *can* proceed, by
+**`class`, `blocking` and `premise_bearing` are three different properties, and every open
+question carries all three.**
+
+**`class` decides whether the operator's attention is spent at all.** `operator_only` — nobody
+but they can supply it, and **it is the only class that may stop the run**. `researchable` —
+you can establish it, and asking would be faster, which is not a reason: an operator answering
+a researchable question answers from memory, and the run then treats memory as evidence.
+`assumable` — record it as a tagged assumption now and ask at the module that makes the answer
+worth having, named in `ask_at`. **Default to `researchable` when you cannot tell.** Stops are
+the scarce resource; research is not.
+
+**Blocking** means the run cannot proceed. **Premise-bearing** means it *can* proceed, by
 assuming an answer — and later conclusions will rest on that assumption. The dangerous
 combination is premise-bearing and not blocking: nothing halts, work continues, and the
 substitute quietly becomes the premise of everything downstream. Ask one question of every
 open question at the moment you raise it: **will any module proceed by assuming an answer?**
 If yes, or if you cannot tell, `premise_bearing: true`.
 
-**Preserve reasoning, not just conclusions.** Every decision records the alternatives it
-rejected. The output must be auditable by someone who was not present.
+**Preserve reasoning, not just conclusions.** Every decision is an entry in `state.decisions`
+recording the alternatives it rejected, and the gate verdict names the ids it added — or the
+literal `none`. That is universal gate U4, and **prose in the verdict does not satisfy it**: a
+run recorded fourteen consecutive U4 passes that way while `state.decisions` stayed empty, and
+validated. The output must be auditable by someone who was not present, and a sentence inside a
+verdict is not auditable by anyone but its author.
+
+**Say which kind of shortfall a shortfall is.** Every non-pass verdict and every declared
+shortfall records a `failure_class` — one of six in `framework/engine/gates.yaml`, written at
+the moment the verdict is written, not chosen later to fit the recommendation. *Failed
+assumption* means re-derive. *Insufficient evidence* means nothing is known to be false. *Failed
+validation* means a test ran, met its floor and missed. *Technical impossibility* means
+respecify or stop. *Business weakness* means the viability decision, and it is the operator's.
+*Unresolved question* means ask. **Never report insufficient evidence as failed validation** —
+the error always runs in that direction, and it converts "we did not ask" into "they said no".
 
 **Name where a control executes.** When you write that something is critical,
 load-bearing or non-negotiable, name the component that enforces it and check that the
@@ -146,6 +209,59 @@ survivor, whether it survived for the *same reason*. Correcting the wording whil
 the reasoning intact produces a document that agrees with the operator and was derived
 from the premise they just contradicted. The rule is in `framework/engine/gates.yaml`
 under `late_answer_rederivation`; the record goes in `state.rederivations`.
+
+**Six claims, never collapsed.** Problem *existence* · *frequency* · *severity* · *business
+impact* · *solution demand* · *willingness to pay*. Evidence for one is not evidence for
+another, and a gate passed on one never passes another. **A problem can be real, recurring
+and expensively documented, and people will still not pay to prevent it.** The collapse is a
+sentence, not a decision — *"44 people lost money to this, so there is clearly demand"* moves
+two claims in one clause and nothing in the paragraph looks wrong.
+`framework/engine/evidence-policy.md` has the table.
+
+**Justify your corpus before you read it.** Where problem evidence comes from determines the
+answer more than the coding does. Write the *selection rule* — one a stranger could apply and
+get the same set — and answer this literally: **if the product hypothesis were different,
+would this still be the right place to look?** Normalize before comparing anything; raw
+complaint counts measure population size, not severity. `04-problem` criterion 6 and
+`modules/04-problem/knowledge/Corpus-Selection.md`.
+
+**Mark an option you generated.** Modules 02–06 research one direction. When `07-strategy`
+invents an option — which is the framework working, not failing — that option arrives with
+none of that research, and its score looks identical on the page to one that had five modules
+behind it. Mark it `generated_here`, list what was never examined, and if it **wins**,
+re-score it with its unresearched criteria at the lowest value any researched option scored.
+If it still wins, say so. If it does not, **the win rests on the gap.**
+`framework/engine/gates.yaml` under `generated_option`.
+
+**A validation outcome is one of six states.** pass · fail · revise · **inconclusive** ·
+**blocked** · not_applicable. The last two are not results about the product: `inconclusive`
+means the test ran and the sample cannot carry the reading; `blocked` means it could not run
+at all. **Merging them turns "we could not reach these people" into "these people do not want
+it"** — a verdict nobody chose. Record in `state.validation`.
+
+**You may substitute a validation instrument the operator cannot operate.** Interviews they
+cannot get, a survey they cannot field. What makes the swap legitimate: the test records what
+it **measures** independently of method, the substitute measures the same claim class, the
+equivalence argument is written **before** the instrument runs, and confidence moves down.
+`framework/engine/instrument-substitution.md` — it also carries the coding standard for
+public evidence and the willingness-to-pay ladder.
+
+**Honor a directive; surface its cost.** An operator constraint is never overridden, not even
+by evidence against it. But when evidence shows a directive is costing the opportunity, **size
+it and tell them once**, then continue under the directive until they say otherwise. Saying
+nothing is a decision made on their behalf. `gates.yaml` under `directive_tension`.
+
+**Never write to a filename the manifest owns.** `framework/deliverables/manifest.yaml`
+declares every path under `deliverables/`. A second package — a revised specification, a
+superseded set — goes in **its own subdirectory**. Runs are not under version control, so an
+overwrite is unrecoverable, and a completed run lost a deliverable this way one step after
+asserting that no filenames collided. **Check before you write.**
+
+**Engineering-ready is not development-authorized.** A complete specification is not
+permission to build, and no run sets `development_authorized`. Record
+`state.run.readiness` with what the gate is `blocked_on` and whose it is. **A count of ticked
+engineering boxes says the product is specified; it says nothing about whether anyone will
+pay for it.** `framework/engine/handoff.md`.
 
 **Write for a stranger.** Every artifact is read by someone with no access to this
 conversation. `12-Build-Handoff.md` especially — it must stand completely alone.
@@ -162,9 +278,27 @@ framework/            ships to users — treat as read-only
   modules/            14 domain modules, each with module.yaml + core/knowledge/resources/learn
   packs/              optional vertical knowledge — planned, not yet built
 
-.claude/skills/       /pios (run a session) · /pios-author (extend the framework)
-projects/<slug>/      this run — state.yaml, research/, deliverables/
+skills/               /pios (run a session) · /pios-author (extend the framework)
+.claude-plugin/       plugin.json + marketplace.json — installable as a plugin
+projects/<slug>/      this run — see below
 examples/             finished runs kept locally — gitignored, never published
+```
+
+A run directory:
+
+```
+projects/<slug>/
+  DECISION.md         one page, for whoever decides in five minutes
+  CLAUDE.md           the entry file — what an agent reads first
+  state.yaml          the audit trail
+  research/           module working documents
+  deliverables/       the specification, grouped by when it is read
+    00-decision/  01-research/  02-product/  03-technical/  04-delivery/
+      _acceptance.md  in each — that folder's criteria, copied from the manifest
+  phases/             README.md (the board) + one document per milestone
+  proposal/           proposal.html
+  presentation/       engineering-kickoff.pptx
+  milestone-zero/     only where the strategy committed to validating first
 ```
 
 Each module contains:
@@ -188,49 +322,56 @@ Stop and hand control back to the operator at:
 
 ---
 
-## After delivery — the proposal for whoever approves it
+## After delivery — three completion artifacts, one per audience
 
-**Offer this at the delivery checkpoint, in one sentence, on every run.** *"Do you want a project
-proposal for whoever approves this?"* On request only — but the **offer** is not optional, because an
-operator who does not know the framework produces this does not know to ask for it.
+**Every completed run produces all three. They are not offered and they are not conditional on
+the verdict.** They are listed under `completion_artifacts` in the manifest, and
+`validate-run.py` fails a run that is missing one.
 
-The artifact set is written for the builder. **The person who decides whether the build is funded is
-not the builder**, will not read sixteen documents, and is answering a different question: approve,
-defer, or reject. Without this step they assemble that document by hand, and what falls out is the
-confidence level, the open decisions, the stop conditions and any gate that failed — the parts that
-make the approval honest, and the parts that feel least helpful to include when asking for money.
+| Artifact | Path in the run | Written for | Method |
+| --- | --- | --- | --- |
+| Decision report | `DECISION.md` at the run root | whoever decides in five minutes | `engine/decision-report.md` |
+| Project proposal, HTML | `proposal/proposal.html` | whoever approves or refuses the build | `engine/proposal.md` |
+| Engineering kickoff, PPTX | `presentation/engineering-kickoff.pptx` | the team that would build it | `engine/presentation.md` |
+| Phase plan | `phases/` — a board plus one document per milestone | whoever asks what may be started | `engine/phases.md` |
+| AI entry file | `CLAUDE.md` at the run root | an agent opening the folder cold | `engine/handoff.md` |
+| Milestone Zero package — *conditional* | `milestone-zero/` | the operator running the validation week | `engine/milestone-zero.md` |
 
-It produces **one self-contained HTML file** in `projects/<slug>/proposal/`, rendered to PDF where a
-headless browser exists. The method is in `framework/engine/proposal.md`.
+**One artifact set cannot serve every reader.** The deliverables are written for the builder.
+The person deciding whether the build is funded will not read sixteen documents and is answering
+a different question — approve, defer, or reject. An agent opening the folder needs to know what
+to read first and what not to touch, which is a third thing again.
 
-**Derived, never re-researched.** Every figure in it already exists in the artifact set; the proposal
-selects and arranges, it does not establish. If it needs a number no artifact carries, say the figure
-is not established — do not compute one, because it arrives with no evidence tag in the one document
-that gets quoted back for a year.
+**This was optional once, and that was the defect.** The operator assembled the proposal by hand,
+under time pressure, from documents written for someone else — and what fell out was the
+confidence level, the open decisions, the stop conditions and any gate that failed. Exactly the
+parts that make an approval honest, and the parts that feel least helpful to include when asking
+for money.
 
-**It may not read better than the research reads.** Confidence goes on the first page. A run that
-reached "do not build" still gets the offer, and produces a proposal to not build. The test: would
-this document win approval for a run the evidence does not support? If yes, it is written wrong,
-however good it looks.
+**Derived, never re-researched.** Every figure in them already exists in the artifact set; they
+select and arrange, they never establish. If one needs a number no artifact carries, write
+that the figure is not established — do not compute one, because it arrives with no evidence tag
+in the documents most likely to be quoted back at the team for a year.
 
-## After delivery — making the folder buildable
+**None of them may read better than the research reads.** Confidence goes on the proposal's first
+page. A run that reached "do not build" still produces every one of them: a proposal to not
+build, a deck that says so, a board whose first line says so with no phase marked current, and an
+entry file whose first section stops the agent. The test: would these documents win approval, or
+start a build, that the evidence does not support? If yes, they are written wrong, however good
+they look.
 
-**On request only, and never automatically.** A run that reached "do not build", or an
-operator still deciding, does not need it.
+**They must not disagree with each other.** The entry file and the phase board both answer
+whether work may start, and the decision report and the executive summary both state the verdict.
+Where two of these differ, the reader acts on whichever is more permissive — so `final_gate`
+requires the recommendation to be word for word identical, and the board to cover exactly the
+milestones the roadmap carries.
 
-The step writes **one entry file at the run directory root** — `CLAUDE.md`, `AGENTS.md`, or
-whatever convention the operator's tool expects — so that opening the folder and saying
-*"analyze this project and start developing"* is sufficient. The method is in
-`framework/engine/handoff.md`.
-
-**Copy nothing.** Not a subset, not into a staging folder, not into a second repository. Any
-of those puts two copies of the same specification in play with nothing keeping them aligned,
-and the build proceeds from whichever went stale. Which documents a builder reads first is
-solved by **stating a reading order**, not by selecting files.
-
-Every path the entry file names must resolve from the run root, and none may point outside
-the folder. That is what lets the operator move it, or run `git init` inside it, without
-rewriting anything.
+**The entry file copies nothing.** Not a subset, not into a staging folder, not into a second
+repository. Any of those puts two copies of the same specification in play with nothing keeping
+them aligned, and the build proceeds from whichever went stale. Which documents a builder reads
+first is solved by **stating a reading order**, not by selecting files. Every path it names must
+resolve from the run root and none may point outside the folder — that is what lets the operator
+move it, or run `git init` inside it, without rewriting anything.
 
 ---
 
@@ -255,6 +396,17 @@ of them agreeing with the database, and it fails at the first migration rather t
 review. **And a re-derivation must retest named conclusions to a verdict** — `survived`,
 `changed` or `withdrawn` — so the record cannot be a note saying one happened.
 
+**A validator that cannot be satisfied by correct work is worse than no validator**, because
+it teaches operators to ignore validators. Presence is tested against the `format` the
+manifest declares — a `format: directory` artifact is checked as a directory and its text
+files are scanned — and a check that could only be passed by damaging the artifact is a bug
+in the check. **Report one rather than working around it.**
+
+**New required checks never invalidate a completed run.** `state.version` records the schema
+era a run was written against, and checks introduced afterwards are reported as out of scope
+for it. A run is a historical record; a validator that grew later must not be able to fail
+one retroactively.
+
 **Run it before you tell the operator you are finished.** A non-zero exit means the run is
 not deliverable.
 
@@ -270,6 +422,13 @@ The last thing you check is the standalone test on `12-Build-Handoff.md`:
 > Could an agent open this file, with no other context, and start writing code today?
 
 If no, the run is not finished.
+
+**And then a separate question, which is not the same one:** *should* they? Record
+`state.run.readiness` — research-ready, product-definition-ready, engineering-ready are
+yours; **commercially-validated and development-authorized are not.** A run that delivers a
+complete specification with the commercial gate open has produced a complete, honest result,
+and the entry file must say so first and say what an agent may usefully do instead. A folder
+that only says "do not build" gets built anyway.
 
 **Then hand it over properly.** Writing the files is not the handover. Tell the operator the
 verdict in one line, where the files are as an absolute path, the three things they must not

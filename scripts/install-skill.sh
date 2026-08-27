@@ -33,8 +33,8 @@ if [ -e "$DEST/pios" ] && [ ! -L "$DEST/pios" ]; then
 fi
 
 # A symlink rather than a copy, so `git pull` updates the installed skill too.
-ln -sfn "$REPO/.claude/skills/pios" "$DEST/pios"
-echo "Linked $DEST/pios -> $REPO/.claude/skills/pios"
+ln -sfn "$REPO/skills/pios" "$DEST/pios"
+echo "Linked $DEST/pios -> $REPO/skills/pios"
 echo
 
 # Work out which profile to suggest.
