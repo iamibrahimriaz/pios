@@ -243,6 +243,12 @@ run:
   #   commercially_validated    Someone has been observed paying, or the equivalent test passed.
   #   development_authorized    The owner has authorised the build, on a recorded basis.
   #
+  # `development_authorized: false` MEANS THE OWNER HAS NOT DECIDED. It does not mean permission
+  # was refused and the run has no standing to refuse it. Rendered literally into prose it becomes
+  # "the build is not authorised", which a downstream agent reads as a prohibition — and the
+  # package then declines an instruction the operator is entitled to give. Report what is
+  # unestablished and whose the decision is. See engine/handoff.md.
+  #
   # They are not a sequence that carries: the first three are the run's to establish and the
   # last two are not. A run can and often should deliver `engineering_ready: true` with
   # `commercially_validated: false` — that is a complete, honest result, and the framework's

@@ -263,6 +263,12 @@ permission to build, and no run sets `development_authorized`. Record
 engineering boxes says the product is specified; it says nothing about whether anyone will
 pay for it.** `framework/engine/handoff.md`.
 
+**And `development_authorized: false` means the operator has not decided — never that permission
+is withheld.** Recommend against building as forcefully as the evidence supports; **do not
+instruct the operator's agent to refuse work they have authorized.** The specification is
+delivered complete either way, and the run says what changes if they proceed without the
+outstanding answer. `framework/engine/handoff.md`.
+
 **Write for a stranger.** Every artifact is read by someone with no access to this
 conversation. `12-Build-Handoff.md` especially — it must stand completely alone.
 

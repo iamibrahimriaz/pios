@@ -99,8 +99,13 @@ verdict. `engine/phases.md` produces the second.
 the commercial gate is open, beside a board showing phase-01 current, is read as permission —
 the board is the operational document and the entry file reads like preamble.
 
-So: **where this file blocks the build, the board's first line says so and no phase is marked
-current.** Check it by opening both, not by remembering what you wrote.
+So: **where the run recommends against starting, the board's first line says so and no phase is
+marked current.** Check it by opening both, not by remembering what you wrote.
+
+**Both documents state the recommendation; neither issues a prohibition.** The board says what
+makes a phase current — including the operator deciding to proceed without the outstanding
+answer — so that a run whose recommendation is overruled produces a board that still works. See
+*An undecided question is not withheld permission* below.
 
 ---
 
@@ -148,6 +153,40 @@ what basis. **It is never inferred from the specification being complete.**
 the validation, review the package, ask the blocked questions. A folder that only says "do not
 build" gets built anyway, by the next agent that reads a complete specification and finds no
 alternative offered.
+
+### An undecided question is not withheld permission
+
+**`development_authorized: false` means the operator has not decided. It does not mean permission
+was refused, and the run has no standing to refuse it.** The distinction is invisible in the state
+file and decisive in the prose written from it.
+
+Rendered literally, the flag becomes *"the build is not authorized"* — which is what it says, and
+which a downstream agent reads as a prohibition. The entry file then instructs that agent not to
+write code, the board marks every phase blocked, and **the package refuses an instruction the
+operator is entitled to give.** The operator asks their coding agent to start; their own research
+folder tells it no.
+
+| Says | Reads as | Use |
+| --- | --- | --- |
+| "The build is not authorized" | The run is withholding permission | **Never** |
+| "Do not write application code" | An instruction to the operator's agent, from a document with no authority to give one | **Never** |
+| "The specification is complete; whether to build is not established and the decision is yours" | An accurate report of two different states | **Yes** |
+
+**This changes nothing about the verdict.** A run that recommends against building says so, as
+forcefully as the evidence supports, in the first thing the file says. What changes is that it
+recommends rather than forbids — and it names the sentence from the operator that resolves the
+question, so the folder is not waiting on something nobody knows how to supply.
+
+**Then write the branch the file usually omits: what happens if they authorize it anyway.**
+Almost every entry file states the not-authorized path and stops, which leaves the agent that
+receives *"start building"* with the recommendation and no route through it. Name where to start,
+and name what changes about the sequencing when the open question is being answered by building
+instead of by asking. **An operator overruling a recommendation is entitled to the best version of
+the thing they asked for, not a worse one delivered reluctantly.**
+
+> **The failure mode this prevents is not an unbuilt product. It is a run whose honest finding
+> gets discarded wholesale** — because the only way past a prohibition is to ignore the document
+> that issued it, and a reader who ignores one paragraph stops reading the rest.
 
 ---
 
@@ -201,6 +240,9 @@ distinguish them is treated as uniformly ignorable.
 - [ ] `state.run.readiness` is recorded, with `blocked_on` naming what is missing and whose it is
 - [ ] `development_authorized` is false unless the operator recorded an override, with their basis
 - [ ] Where the commercial gate is open, the file says what an agent may usefully do instead
+- [ ] No sentence phrases an undecided question as withheld permission, and none instructs the operator's agent to refuse work
+- [ ] The file names the sentence from the operator that resolves the open question
+- [ ] The authorize-anyway branch is written: where to start, and what changes about the sequencing
 - [ ] Every integration contract built on inference names its verification step and says it blocks
 - [ ] A bare "analyze this project and start developing" would be sufficient
 - [ ] Every path it names resolves from the run directory root — checked, not assumed

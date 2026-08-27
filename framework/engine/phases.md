@@ -115,6 +115,18 @@ This mirrors `engine/handoff.md`'s rule for the entry file, and the two must agr
 entry file says the build is blocked and the board shows phase-01 current, the folder contains
 two answers and the builder will use the one that lets them start.**
 
+**Say what makes the next phase current, and include the operator deciding to proceed anyway.**
+`development_authorized: false` records that they have not decided — it is not a refusal, and the
+board has no standing to issue one. A board whose only route forward is a validation result
+**stalls permanently the moment the operator chooses a different route**, and the agent reading it
+either halts against its owner's instruction or ignores the board entirely. Neither outcome
+preserves the finding the board exists to carry.
+
+**Reserve the word *blocked* for what a decision cannot waive** — a legal requirement, a
+dependency, an unbuilt predecessor. A phase waiting on a judgment is *not started*, and the
+distinction is the difference between a board that reports and a board that forbids.
+`engine/handoff.md`, *An undecided question is not withheld permission*.
+
 ---
 
 ## What each phase document must carry that the roadmap does not
