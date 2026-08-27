@@ -125,6 +125,65 @@ channel categories to fill the section is not.
 
 ---
 
+# Criterion 5 — Willingness to pay carries its own evidence, or is recorded as unestablished with the test that would settle it
+
+**Passes when:** the module states, as a separate claim with its own tag, whether anyone has
+been observed paying for this — **or** records willingness to pay as unestablished and names
+the test that would settle it.
+
+**Fails when:** willingness to pay is treated as following from problem evidence, competitor
+pricing, or the strength of the pain described in module 04.
+
+## Six claims, and this module owns the last one
+
+`engine/evidence-policy.md` separates them: **existence · frequency · severity · business
+impact · solution demand · willingness to pay.** Evidence for any of the first five is not
+evidence for the sixth.
+
+> **A problem can be real, recurring, cross-vendor and expensively documented, and people
+> will still not pay to prevent it.** That is the ordinary fate of insurance products, and it
+> is not a rare case.
+
+**The collapse is a sentence, not a decision.** *"44 people reported losing money to this, so
+there is clearly demand"* moves from claim 4 to claim 6 in one clause, and nothing in the
+paragraph looks wrong. **The first half is `[verified]`; the second is `[assumption]`.** Only
+splitting the sentence makes that visible.
+
+## What competitor pricing does and does not establish
+
+**Criterion 2 requires the price to be justified against competitor pricing.** That
+establishes what a market will bear **for products that already exist and have customers**.
+It does not establish that anyone will pay *you*, at that price, for something that does not
+exist yet.
+
+**Both are needed and they are different claims.** A price anchored to a real comparable and
+tagged `[assumption: needs validation]` for the willingness itself is a pass. A price anchored
+to a comparable and presented as demonstrated demand is the failure this criterion exists to
+catch.
+
+## Unestablished is a pass — silently assumed is not
+
+**From a public corpus, willingness to pay can never be established.** No volume of
+complaints, reviews or forum threads converts into it. **The honest output is
+`unestablished`, with the test named** — and that test becomes a Milestone Zero, ahead of any
+build.
+
+`engine/instrument-substitution.md` carries the ladder: stated interest → stated price →
+registration with friction → refundable reservation → uncaptured card authorization → real
+purchase. **Name the rung.** A number from rung 2 and a number from rung 5 are not the same
+evidence and must not carry the same weight.
+
+> **Where stated and revealed willingness to pay disagree, revealed governs** — recorded
+> before the result, never chosen after it.
+
+| Fails | Passes |
+| --- | --- |
+| "The problem costs users «n» hours a week, so a «price» tool is easily justified" | "Value justifies «price» [inferred: from the hours in 04]. **Whether anyone pays it is unestablished** — nobody has been observed buying, because nothing exists to buy [assumption: needs validation]. Test: MZ-2, uncaptured card authorization, threshold pre-registered" |
+| A price table, competitor anchors, and no statement about demand | "Competitors sustain «band» [verified: pricing pages]. That establishes what the market bears for existing products; it does not establish demand for this one" |
+| "Strong willingness to pay" citing module 04's severity scores | "Severity is claim 3. Willingness to pay is claim 6. We have the first and not the second" |
+
+---
+
 # Universal Gates
 
 U1–U7 apply. Most often missed here:
@@ -143,7 +202,7 @@ U1–U7 apply. Most often missed here:
 2. Count sourced vs assumed inputs; check confidence matches.
 3. Verify the price fits the segment's plausible budget.
 4. Evaluate universal gates U1–U7.
-5. Evaluate criteria 1–4.
+5. Evaluate criteria 1–5. **All of them.**
 6. Record the verdict.
 
 ```yaml
@@ -157,6 +216,7 @@ gate:
     price_justified_three_ways: pass
     unit_economics_assumptions_surfaced: fail
     first_ten_customers: pass
+    wtp_evidenced_or_unestablished: pass
   verdict: fail
   reason: "Gross margin asserted at 80% with no cost-to-serve derivation."
   action: "Derive from infrastructure, support and third-party components."

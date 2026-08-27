@@ -194,18 +194,67 @@ A failed cost check is a regress — `06-business` for the price, `07-strategy` 
 
 ---
 
-# Criterion 5 — A cost ceiling breach is resolved by a recorded change to 06-business price or 07-strategy scope, never by revising the forecast
+# Criterion 5 — A cost ceiling breach is resolved by a recorded change to 06-business price or 07-strategy scope, or the residual gap is stated as a figure and escalated to the viability decision — never by revising the forecast
 
-**Passes when:** no breach occurred, or a breach is recorded together with the regress it
-triggered — a price change in `06-business` or a scope change in `07-strategy` — and the
-person who decided.
+**Passes when** one of three things is true:
 
-**Fails when:** a breach is reported and the run continues on the original numbers, or when
-the forecast that produced the breach is revised downward to clear it.
+1. **No breach occurred.**
+2. **A breach is recorded together with the regress it triggered** — a price change in
+   `06-business` or a scope change in `07-strategy` — the regress **closed the gap**, and the
+   person who decided is named.
+3. **A regress was made and the gap did not close.** The **residual gap is stated as a
+   figure**, what each regress bought is recorded, and the run escalates to the viability
+   decision rather than narrowing again.
+
+**Fails when:** a breach is reported and the run continues on the original numbers, when the
+forecast that produced the breach is revised downward to clear it, or when a regress is
+recorded and the surviving gap is not.
+
+## The third outcome, and why it needed its own words
+
+**The original rule assumed a recorded change resolves the breach.** Sometimes it does not.
+
+**A run narrowed its scope twice** — from a category product, to a reliability layer, to a
+single narrow function — **and the venture still did not repay its build cost in any modelled
+scenario.** The rule had no vocabulary for that, so the honest answer had to be invented in
+prose. **And a run following the rule literally could record two scope changes, satisfy the
+check, and never say that the thing still loses money.**
+
+> **The danger is not a wrong answer. It is an indefinite loop.** Each narrowing feels like
+> progress, each one is cheaper than the last, and nothing says when to stop narrowing and
+> start deciding.
+
+## What escalation requires
+
+**State the residual gap as a number.** *"Remains challenging"* is not a statement of a gap.
+Give the figure and say what it is a gap between.
+
+**Record what each regress actually bought.** A narrowing that cut build cost by 40% and left
+the venture unprofitable is a real finding about the shape of the opportunity, and it is lost
+if only the final position is reported.
+
+**Stop narrowing.** A third scope reduction is permitted **only when it targets a named cost
+driver the first two did not touch**, and the module says which. Otherwise the remaining
+question is not "what else can we cut".
+
+**Escalate to the viability decision**, which is the operator's and is decision-dependent
+(`engine/gates.yaml`): **standalone venture, one product in a portfolio, or not built?**
+Recorded as an `open_question` with `blocking` and `premise_bearing` both true, each option's
+consequence stated. **Scope reduction cannot answer it**, which is why it is not a gate the
+run can pass by working harder.
+
+**And it travels.** The residual gap changes what the whole run recommends, so it appears in
+the Executive Summary's opening and in the decision report — not only here.
 
 **The absorption to watch for.** "Support will take less time as the product matures." It is
 probably true. It is also the only lever entirely within the author's control, which is why
 it is reached for — and a margin produced this way exists only in the document.
+
+| Fails | Passes |
+| --- | --- |
+| Two scope changes recorded, final scope presented as the answer | "Scope reduced twice. Build cost fell from «a» to «b». **Ceiling still exceeded by «figure»/yr.** Escalated: standalone, portfolio, or not built — Q«n», operator" |
+| "The narrowed product is materially cheaper to build" | "«figure» cheaper, and still short by «figure». Narrowing addressed build cost; the gap is now maintenance labor, which no further narrowing touches" |
+| A third narrowing round | "Not narrowed again. The first two targeted feature count; the residual driver is per-customer support, which scope reduction does not move" |
 
 ---
 
@@ -277,6 +326,7 @@ gate:
     incident_path_documented: pass | fail
     obligations_owned_and_scheduled: pass | fail
     running_cost_estimated: pass | fail
+    cost_breach_resolved_or_escalated: pass | fail
   module_checks:
     rota_sustainable: pass | fail
     untested_assumptions_declared: pass | fail

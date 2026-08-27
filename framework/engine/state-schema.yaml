@@ -5,7 +5,21 @@
 # writes to it before its gate is evaluated. Without it, each module reasons in
 # isolation and the deliverables contradict each other.
 
-version: 1
+# The schema era this file defines. A run copies it at creation and never changes it.
+#
+# It is what lets new REQUIRED checks be added without rewriting completed runs. A run
+# written at version 1 is judged against version 1's contract; checks introduced later are
+# reported as out of scope for it, never as failures. A completed run is a historical record,
+# and a validator that grows afterwards must not be able to invalidate one retroactively.
+#
+# Bump this when a new key becomes REQUIRED. Adding an optional key does not need a bump.
+#
+#   1  the original contract
+#   2  adds: validation, project.differentiation_stance, run.readiness,
+#      outputs.solution_options[].provenance
+#   3  adds: run.gate_verdicts[].decisions, run.gate_verdicts[].failure_class,
+#      open_questions[].class
+version: 3
 
 project:
   slug: ""                      # kebab-case, used as the directory name
@@ -21,16 +35,87 @@ project:
   delivery_surface: ""
   delivery_order: ""            # e.g. "web, then Android, then iOS" — empty if single-surface
 
+  # What `other` actually means, when the enum above cannot carry it. Optional, and empty
+  # for every surface the enum names.
+  #
+  # `other` is the honest answer more often than the enum suggests — a browser extension, a
+  # CLI, a bot, a firmware image, an extension PLUS a backend that must never receive user
+  # data. In each case the constraint that eight downstream modules need is in the
+  # qualification, not in the word `other`. Without a field for it the qualification gets
+  # written into the enum value as a paragraph, which every module then reads as prose where
+  # it expected a token.
+  delivery_surface_note: ""
+
+  # How committed the idea is to a differentiating position, set in 01-idea. THREE STATES,
+  # and the middle one is the reason this field exists:
+  #
+  #   vague      The sentence does not identify what is being built or for whom. This is a
+  #              gate failure. More words from the operator fix it.
+  #   category   The idea names its category clearly and has NO differentiating position yet,
+  #              and the operator has said so deliberately: "I don't know the differentiation;
+  #              I want the research to find it." THIS IS A VALID STARTING STATE, not a
+  #              defective idea, and in a saturated category it is the honest one.
+  #   committed  The operator has a differentiating thesis. Record it verbatim in
+  #              `differentiation_thesis` — it becomes a claim the research can refute.
+  #
+  # `vague` and `category` present identically to a cold read — both are a sentence that could
+  # describe several products — and a gate that cannot tell them apart fails a healthy idea for
+  # not having decided something it was never asked to decide. That happened, cost a gate cycle,
+  # and reversed only because the criterion's own passing example contains no differentiator.
+  #
+  # A run at `category` carries an OBLIGATION, not a waiver: 07-strategy must record which
+  # option supplies the differentiation, or state that the research found none. An idea that
+  # entered undifferentiated and exits undifferentiated has a finding, not an omission.
+  differentiation_stance: ""
+  differentiation_thesis: ""    # verbatim, when stance is `committed`
+  differentiation_resolved_by: ""   # module id, or "not found" — written at 07-strategy
+
   # Absolute paths, written once when the run is created. A later session reads
   # them instead of re-deriving, so resume works even when PIOS_HOME is set
   # differently — or not at all — in that session.
   framework_path: ""            # .../pios/framework
   run_dir: ""                   # .../projects/<slug>  or  .../pios/<slug>
 
+  # Which deliverables/manifest.yaml version this run was produced under, copied
+  # from that file's `version` when the run is created.
+  #
+  # A completed run is a historical record and is never rewritten to satisfy a
+  # newer validator. This field is what lets that hold: checks introduced after a
+  # run was made are skipped for it and reported as not applicable, rather than
+  # failing a run that was correct under the contract it was produced against.
+  #
+  # Absent means "produced before this field existed" — treated as version 1.
+  framework_version: 3
+
 run:
   current_stage: frame
   completed_modules: []
   confidence: unknown           # high | medium | low | unknown
+
+  # interactive | continuous. Asked ONCE at the frame checkpoint, never again.
+  #
+  # interactive — pauses at the three checkpoints AND with a progress note between modules.
+  # continuous  — pauses at the three checkpoints only, plus a genuine blocker: a decision
+  #               that is the operator's, evidence only they can supply, two directions
+  #               equally supported, or a gate that needs clarification.
+  #
+  # CONTINUOUS IS NOT A LIGHTER RUN. Every gate is still evaluated and every friction entry
+  # still recorded. What disappears is the pause that carries no decision.
+  #
+  # A message ending "nothing needed from you — type continue" is a stop with no decision in
+  # it. Enough of those and the operator learns that checkpoints are conversational, and by
+  # the time a real one arrives they are steering work that did not need steering. That is
+  # not hypothetical: it is what TWO completed runs reported as their single largest friction
+  # — the second one after the fix that was supposed to have closed it.
+  #
+  # CONTINUOUS IS THE DEFAULT AND THE RUN DOES NOT ASK. Offering the choice makes the mode
+  # read as a preference the operator is expressing, and an operator who has not yet seen a
+  # run has no basis for expressing one. Interactive is opt-in, on request, at any point.
+  #
+  # This field defaulted to `interactive` while the skill said continuous was the default,
+  # which is the same two-homes defect the framework carries elsewhere: the copy nobody
+  # checks is the one that governs, because it is the one the machine reads.
+  execution_mode: continuous
 
   # Why that level, and what specifically would raise it. A confidence word with no basis
   # is a mood. The Executive Summary opens with both, so this is where it comes from.
@@ -46,11 +131,33 @@ run:
   # - module: 05-competition
   #   attempt: 1
   #   at: ""
-  #   verdict: pass                 # pass | fail
+  #   verdict: pass                 # pass | fail | conditional_pass
   #   criteria: {}                  # {criterion_text: pass | fail}
   #   universal: []                 # [U1, U2, ...] evaluated
   #   attempt_counted: true         # false for a decision_dependent_failure
   #   shortfall_declared: false
+  #   attempt_reserved: false       # true for a conditional_pass — one attempt held back
+  #   reserved_against_method: ""   # the method that failed; the reserve may not be spent on it
+  #
+  #   decisions: [D3, D4]           # SCHEMA v3. The ids this module wrote to `decisions`
+  #                                 # below, or the literal string `none`.
+  #
+  #   failure_class: ""             # SCHEMA v3. REQUIRED when verdict is not `pass`, and when
+  #                                 # shortfall_declared is true. One of the six in
+  #                                 # engine/gates.yaml `failure_classes`.
+
+  # `decisions` is the field that stops universal gate U4 from being satisfied in prose.
+  #
+  # U4 says every decision records the alternatives it rejected. A module can satisfy that
+  # by writing a sentence into the verdict — which reads as compliance, is not queryable, and
+  # is what happened for fourteen consecutive modules in a completed run while the top-level
+  # `decisions` list stayed empty. Nothing checked that the two agreed, so the unchecked home
+  # is the one that went empty.
+  #
+  # Two homes for one record means the unchecked one goes empty. There is now one home
+  # — the `decisions` list — and this field is the reference into it, checked by
+  # validate-run.py. `none` is a legitimate value and must be stated rather than left blank:
+  # a module that made no recordable decision is different from a module that did not say.
 
   # Which human_checkpoint the run is paused at, if any, and what the operator was asked.
   # Cleared when they answer. A run resumed a week later reads this before anything else.
@@ -72,8 +179,140 @@ run:
   # research failure that never happened. See `decision_dependent_failure`.
   failed_gates: []
 
+  # Standing constraints the operator placed on HOW the research is conducted, as distinct
+  # from answers about the product. "Do not assume this should be built", "never paywall
+  # essential features", "do not size to a team I have not given you" are directives; the
+  # jurisdiction is an answer.
+  #
+  # They bind modules that run in later sessions, and they have no other home: an answer
+  # lands in open_questions, a belief lands in assumptions, and a constraint on method lands
+  # nowhere unless it lands here. A run that keeps them only in conversation loses them at
+  # the next session, which is where they matter most.
+  #
+  # THE RUN ASSIGNS THE IDS, NEVER THE OPERATOR. Operators cannot see this file, so a
+  # directive offered as "D-15" may collide with a D-15 already recorded. Take the intent,
+  # assign the next free id, and record their number in `operator_numbering` if they used
+  # one. validate-run.py fails on a duplicate id.
+  operator_directives: []
+  # A directive is HONORED, never quietly overridden. But a directive that the evidence shows
+  # is costing the opportunity must be SURFACED, and surfacing it is not overriding it. A run
+  # that constrains itself to one customer segment and then finds every comparable product
+  # priced for a different one owes the operator that sentence — they cannot choose to relax
+  # a constraint whose cost nobody told them about.
+  #
+  # `tension` is written by whichever module finds the evidence, not by 01-idea. Leave it null
+  # until something contradicts the directive.
+  #
+  # - id: D-1
+  #   at: ""
+  #   directive: "the operator's constraint, in their words where possible"
+  #   binds: [04-problem, 05-competition]   # modules that must honor it, or "all"
+  #   operator_numbering: ""                # what they called it, if it differs
+  #   consequence_if_ignored: ""            # what the run would conclude without it
+  #   tension: null
+  #   # found_by: 06-business               # the module whose evidence contradicts it
+  #   # evidence: ""                        # what was found, tagged, not characterised
+  #   # what_it_costs: ""                   # the opportunity the directive forecloses, sized
+  #   # adjacent_option: ""                 # what relaxing it would permit the run to test
+  #   # surfaced_to_operator: false         # true once they have been told, with the date
+  #   # operator_response: ""               # kept | relaxed | deferred — their words
+
+  # Written once, when the artifact set is complete and the validator has run. Delivery is a
+  # property of the RUN, not an output of a module — recording it under `outputs` puts a
+  # fact about the whole run on the shelf reserved for one module's produce.
+  #
+  # `operator_owes` is the field with no substitute. What the operator still has to decide is
+  # otherwise spread across open_questions and two or three deliverables, and nobody reading
+  # any one of them sees the whole list.
+  delivery: null
+  # at: ""
+  # artifacts_required: 0
+  # artifacts_optional_emitted: []
+  # optional_rationale: ""
+  # completion_artifacts: []      # [{path, audience, note}]
+  # validator: ""                 # the command run, and its exit code
+  # operator_owes: []             # [{item, bites}] — the single list, nowhere else complete
+
+  # FIVE SEPARATE STATES. A complete specification is not permission to build, and the two
+  # are confused every time because they arrive together — the package is finished, it looks
+  # finished, and finished reads as authorised.
+  #
+  #   research_ready            The evidence base is complete and its limits are stated.
+  #   product_definition_ready  Scope, PRD and acceptance criteria are settled.
+  #   engineering_ready         An implementer can start with no further decisions from research.
+  #   commercially_validated    Someone has been observed paying, or the equivalent test passed.
+  #   development_authorized    The owner has authorised the build, on a recorded basis.
+  #
+  # They are not a sequence that carries: the first three are the run's to establish and the
+  # last two are not. A run can and often should deliver `engineering_ready: true` with
+  # `commercially_validated: false` — that is a complete, honest result, and the framework's
+  # boundary is exactly there. `development_authorized` is NEVER set by a run. It is the
+  # operator's, recorded by them, and the field exists so that its absence is visible rather
+  # than assumed.
+  #
+  # `blocked_on` is the field that does the work: what specifically is missing, and whose it
+  # is to supply. "Nineteen ticked engineering boxes say the plugin is fully specified. They
+  # say nothing about whether anyone will pay for it."
+  readiness: null
+  # research_ready: false
+  # product_definition_ready: false
+  # engineering_ready: false
+  # commercially_validated: false
+  # development_authorized: false     # never set by the run
+  # blocked_on: ""                    # what is missing and who owns it
+  # override: null                    # {by, at, basis} — an operator authorising without
+  #                                   # the commercial gate. Recorded, never inferred.
+
 # Populated by modules. Keys match the `produces` list in each module.yaml.
+#
+# When a gate is in conditional_continuation, EVERY module that runs after it records
+# `conditional_on: <module-id>` alongside its outputs. Inheritance is automatic and
+# validate-run.py checks the chain is unbroken — a downstream module without it fails the
+# run, because a conclusion that quietly drops its condition is how a conditional finding
+# becomes an apparent fact.
+#
+# One shape is fixed across runs because a check reads it. Every entry in
+# `outputs.solution_options` carries `provenance`:
+#
+#   carried_from_research   The option is what modules 02-06 researched. It arrives with a
+#                           market, a competitor set, a user segment and a problem ranking.
+#   generated_here          The option was invented while writing 07-strategy, or later, in
+#                           response to the evidence. It arrives with none of that.
+#
+# A generated option is frequently the RIGHT answer — it is what a run looks like when the
+# evidence redirected it, which is the framework working. What it is not is comparably
+# evidenced, and scoring it against options that had five modules each is a comparison
+# between an option and a hypothesis. See engine/gates.yaml `generated_option`.
+#
+# A SECOND SHAPE IS FIXED, for the same reason. `outputs.roadmap.milestones` is a list, each
+# entry carrying an `id` and a `name`:
+#
+#   roadmap:
+#     milestone_zero_present: true
+#     milestones:
+#       - id: M0
+#         name: Validation week
+#
+# engine/phases.md writes one phase document per entry and validate-run.py compares the two
+# lists in both directions. Without the list there is nothing to compare against, and a
+# milestone that exists only in the roadmap's prose gets no phase document — which nothing
+# reports, because the roadmap still describes it and every review of the roadmap passes. The
+# phase board is what anyone actually builds from, and the work is simply never started.
 outputs: {}
+# conditional_on: null            # or the module-id whose gate is conditionally continued
+#
+# EXACTLY ONE option carries `chosen: true`. It is not decoration: the asymmetry rule below
+# fires on the winner, so an unmarked winner silently switches that rule off — and the run
+# looks identical either way. validate-run.py requires the mark.
+#
+# solution_options:
+#   - id: A
+#     chosen: false                       # exactly one option in the list is true
+#     provenance: carried_from_research   # carried_from_research | generated_here
+#     unresearched: []                    # REQUIRED when generated_here: which modules never
+#                                         # examined this option, and what each would have tested
+#     asymmetry_effect: ""                # REQUIRED when generated_here and it WINS: whether
+#                                         # the win survives the missing research, or rests on it
 
 # Every claim the run depends on, tagged per engine/evidence-policy.md.
 #
@@ -81,8 +320,13 @@ outputs: {}
 # conversation and a finding from two hundred are both [verified], and without
 # these fields they are weighted identically by every module downstream.
 #
-# `mode` distinguishes what was watched from what was described. They are not
-# equivalent evidence and 03-user's gate now requires the distinction.
+# `mode` distinguishes what was watched from what was described from what was
+# worked out. They are not equivalent evidence and 03-user's gate requires the
+# distinction. `reconstructed` is the desk-research case and it is the honest
+# label for most user findings in a run with no field access — a workflow
+# derived from the shape of the work and from adjacent facts, watched by nobody
+# and described by nobody. Marking a reconstruction as `reported` satisfies the
+# gate while destroying the thing the gate protects.
 #
 # `checked_on` is what makes a reused run safe. A regulation or a price is
 # correct on the day it was captured and decays silently afterward.
@@ -93,7 +337,7 @@ evidence_log:
   #   checked_on: ""         # ISO date the source was consulted
   #   module: 02-market
   #   n: null                # sample size where the claim rests on observation
-  #   mode: null             # observed | reported — for user and workflow claims
+  #   mode: null             # observed | reported | reconstructed — user and workflow claims
   #   strength: null         # strong | moderate | weak — the author's own read
   #   load_bearing: true
 
@@ -123,15 +367,44 @@ assumptions:
 # premise of everything downstream. Classify when the question is RAISED — by answering
 # time the substitution has happened and is hard to see. When it cannot be determined,
 # premise_bearing is true.
+# THREE PROPERTIES, AND THEY ARE DIFFERENT QUESTIONS.
+#
+#   class            — CAN this be answered without the operator? (schema v3)
+#   blocking         — must the run stop until it is answered?
+#   premise_bearing  — will a module proceed by substituting an assumption?
+#
+# `class` is the one that decides whether the operator's attention is spent, and it is
+# recorded when the question is RAISED. Three values:
+#
+#   operator_only   Nobody but the operator can supply it. Their jurisdiction, their budget,
+#                   their risk appetite, their authority to decide. Research cannot reach it
+#                   at any depth. THIS IS THE ONLY CLASS THAT MAY STOP THE RUN.
+#   researchable    The run can establish it. Asking is faster, and faster is not a reason:
+#                   an operator answering a researchable question answers from memory, and
+#                   the run then treats memory as evidence. Research it; if the research
+#                   fails, it becomes `operator_only` and the reclassification is recorded.
+#   assumable       An answer can be recorded as a tagged assumption now and revisited when
+#                   a later module has the evidence to make the answer worth having. Carries
+#                   `ask_at`, and the assumption it substitutes.
+#
+# Without the class stated in the question itself, every question looks equally obligatory to
+# the operator, and the ones research could have closed consume the attention budget before
+# the ones nothing else can. An operator asked for a revenue target in module 01 answers from
+# instinct; asked in module 06 against a break-even table, they answer from arithmetic. The
+# early answer is worse data AND it cost more to obtain.
 open_questions:
   # - question: "Is this replacing an EMR or sitting alongside one?"
   #   raised_by: 01-idea
+  #   class: operator_only    # operator_only | researchable | assumable   (schema v3)
   #   blocking: true
   #   premise_bearing: true   # will any module proceed by assuming an answer?
+  #   ask_at: ""              # the module where the answer is worth most. Required for `assumable`
   #   owner: operator
   #   answer: null
   #   answered_at: null       # ISO date. Later than raised_by's gate = re-derivation owed
   #   substitute_assumption: null   # the assumption id modules used in its place
+  #   reclassified_from: null       # set when `researchable` research failed and it became
+  #                                 # `operator_only`. The failed method is named in `answer`.
 
 # Written when a blocking question is answered late and the run re-derives rather than
 # find-and-replaces. Absent when nothing was answered late — which is the normal case.
@@ -146,6 +419,140 @@ rederivations:
   #   superseded_assumptions: []
   #   deliverables_reissued: []
   #   unchanged_and_why: []
+
+# What desk research could NOT close, per engine/remote-validation.md. Written per question,
+# not per run — a run answers most questions remotely and hits the wall on two or three.
+#
+# This is the fieldwork plan. It is derived from what the public ladder could not reach, so a
+# validation trip has a defined purpose before anyone books it. Where a gate then fails on one
+# of these questions, the entry becomes the seed of that gate's research_exhaustion report —
+# the same finding at two levels of formality. Do not write them independently.
+remote_validation_limit: []
+  # - question: "The specific claim or quantity — not the topic"
+  #   why_remote_cannot_close_it: ""   # structural: which rungs remain, why each cannot carry it
+  #   cheapest_method_that_would: ""   # specific. not "research", not "talk to users"
+  #   cost_days: 0
+  #   requires: ""                     # what the operator must have or be able to reach
+
+# Mechanisms an operator confirmed were worth their cost. The friction log records where the
+# framework OBSTRUCTED a run; nothing else records what it got RIGHT, so an author reading a
+# run sees only a list of failures and no signal about which properties are load-bearing.
+#
+# /pios-author reads this as a do-not-remove list. It is a record of confirmation, not a
+# prohibition: a mechanism here may still be changed, but the change must state what replaces
+# the property it was providing.
+#
+# Record it when the operator says so unprompted. Do not solicit praise.
+confirmed_value: []
+  # - mechanism: "The three evidence tags, with no partial credit"
+  #   confirmed_by: operator
+  #   at: ""
+  #   what_it_cost: "A tag on every claim, and rework when a claim could not carry one"
+  #   what_it_bought: "The reader can tell which conclusions are safe to act on"
+
+# The Research Exhaustion Report. Written ONLY when a gate enters conditional_continuation
+# (engine/gates.yaml), and REQUIRED before it may. It is the safeguard that separates
+# "the evidence boundary was genuinely reached" from "the operator wanted to continue".
+#
+# Every field is required and validate-run.py checks them. A summary in place of the
+# per-method record defeats the purpose: the itemisation IS the safeguard, because a method
+# nobody can name is a method nobody ran.
+#
+# "Nothing found" is never a reason under why_failed. The reason is structural — the source
+# type does not cover this question, the corpus does not exist, access is restricted, or the
+# material is not published in retrievable form.
+research_exhaustion:
+  # - module: 06-business
+  #   criterion: "the criterion text, verbatim from module.yaml"
+  #   question: "The specific claim or quantity that could not be established"
+  #   methods_attempted:
+  #     - method: ""            # named individually, never as a category
+  #       evidence_produced: "" # what it actually returned, including partial results
+  #       failed: true
+  #       why_failed: ""        # structural reason, not "nothing found"
+  #   evidence_still_unavailable: ""
+  #   why_further_desk_research_will_not_help: ""   # which source types remain, and why
+  #                                                 # each cannot carry this class of evidence
+  #   what_would_resolve_it: ""                     # and the cheapest method that obtains it
+  #   becomes_validation_milestone: true
+  #   at: ""
+
+# Validation performed AFTER the modules complete — Milestone Zero, and anything with the
+# same shape: a test with a pre-registered threshold whose result can invalidate a delivered
+# recommendation.
+#
+# It has no other home. A validation result is not an assumption, not a correction, not a
+# decision and not an open_question, and a run that records it under `outputs` puts a finding
+# that can overturn the whole recommendation somewhere no check reads.
+#
+# THE OUTCOME STATES ARE SIX AND THEY ARE NOT INTERCHANGEABLE. Collapsing any pair is how a
+# test that never ran gets reported as a test that failed:
+#
+#   pass            The threshold was met.
+#   fail            The threshold was missed and the sample was sufficient to say so.
+#   revise          A defined middle band. Only valid if the band was pre-registered.
+#   inconclusive    The test RAN and the sample cannot carry the reading. Keep collecting.
+#   blocked         The test COULD NOT RUN — no access, no channel, no instrument. Not a
+#                   result about the product. A blocked test is owed to the operator as an
+#                   action, not reported as a finding.
+#   not_applicable  The condition the test was written for did not arise.
+#
+# `inconclusive` and `blocked` are the pair most often merged, and merging them converts
+# "we could not reach these people" into "these people do not want it" — a verdict nobody
+# chose, arrived at by nobody deciding.
+validation:
+  # - id: MZ-2
+  #   at: ""
+  #
+  #   # WHAT the test establishes, stated independently of how it is measured. This is the
+  #   # field that makes an instrument substitutable: a test that only records its method
+  #   # cannot be judged against an alternative, because there is nothing to compare except
+  #   # the method that is unavailable. See engine/instrument-substitution.md.
+  #   measures: "Whether a course seller will pay money for order/enrollment reconciliation"
+  #   claim_class: willingness_to_pay   # see engine/evidence-policy.md — the six claims
+  #
+  #   instrument: "Card authorisation, never captured, on a landing page"
+  #   substituted_for: null       # the specified instrument this replaced, if any
+  #   equivalence_argument: ""    # REQUIRED when substituted_for is set: why the substitute
+  #                               # measures the same thing, and at what threshold
+  #   confidence_effect: ""       # how the substitution moves confidence, and in which direction
+  #
+  #   # Every criterion, with whether it is NECESSARY or merely CORROBORATING. A test whose
+  #   # criteria are all necessary cannot report a partial result, and one whose criteria are
+  #   # undifferentiated cannot report a mixed one. Both happen: a run hit a breadth criterion
+  #   # that was unsatisfiable for reasons unknowable before collecting, while its primary
+  #   # floor cleared 2.1x, and had no way to say so.
+  #   criteria: []
+  #   # - text: ">=10 successful authorisations"
+  #   #   necessary: true
+  #   #   result: pass            # pass | fail | inconclusive | blocked | not_applicable
+  #   #   observed: ""            # the actual value, not a restatement of the verdict
+  #
+  #   # REQUIRED when more than one criterion can fire independently. Two criteria firing with
+  #   # opposite implications is the normal case, not an edge case, and without a rule fixed
+  #   # in advance the question of which governs is settled in the write-up — by whoever
+  #   # preferred an answer.
+  #   precedence: "A fired stop condition governs over any passing criterion."
+  #
+  #   outcome: pass               # pass | fail | revise | inconclusive | blocked | not_applicable
+  #   outcome_reason: ""          # REQUIRED for inconclusive and blocked: what was missing,
+  #                               # and whose action obtains it
+  #
+  #   stop_condition_fired: false
+  #   required_action: ""         # REQUIRED when stop_condition_fired. What the run must now
+  #                               # do. A fired stop condition that names no action is a
+  #                               # finding the run walked past.
+  #   action_taken: ""            # and what was actually done, if anything
+  #
+  #   # The record that makes the result auditable and the thresholds unmovable. Paths,
+  #   # relative to the run root. A result with no coded evidence behind it cannot be
+  #   # re-read by anyone who disagrees with the coding — which is the only defence a
+  #   # threshold has against being adjusted afterwards.
+  #   artifacts:
+  #     methodology: ""
+  #     raw_evidence: ""
+  #     coding: ""
+  #     results: ""
 
 # Defects found in a deliverable AFTER the module that produced it passed its gate —
 # usually at review, at a checkpoint, or when the operator reads the finished set.
@@ -184,6 +591,14 @@ friction_log:
   #   operator_visible: false   # true if the operator hit it, not just the agent
 
 # Decisions made, with the reasoning preserved. This is what makes the output auditable.
+#
+# THE SINGLE HOME. Universal gate U4 is satisfied by an entry here and by nothing else —
+# each module lists the ids it added in `run.gate_verdicts[].decisions`, or the literal
+# `none`, and validate-run.py checks every listed id resolves. A run that recorded its
+# decisions as prose inside gate verdicts has not satisfied U4.
+#
+# Ids are assigned by the run, sequentially, and never reused. `module` is the module id, or
+# `delivery` for a decision taken at the delivery checkpoint.
 decisions:
   # - id: D1
   #   decision: "Wedge on ambient capture, not records management"
@@ -192,22 +607,64 @@ decisions:
   #   alternatives_rejected: ["Full EMR replacement", "Billing-first"]
   #   reversible: true
 
-# Recorded before scoring begins in 07-strategy, and never edited afterward.
-# Confidence laundering cannot be detected inside one document — the laundered
-# and the honest version are identical. It can be detected across runs. If the
-# expected winner always wins, the comparison is recording a decision rather
-# than making one.
+# Recorded before scoring begins in 07-strategy. Confidence laundering cannot be
+# detected inside one document — the laundered and the honest version are
+# identical. It can be detected across runs. If the expected winner always wins,
+# the comparison is recording a decision rather than making one.
+#
+# `independence` is the field that makes the mechanism work, and it is recorded
+# at prediction time. A prediction can be contaminated — by upstream modules that
+# already converged on the answer, by an operator instruction that pre-committed
+# the direction, or by the agent's own previous run. A contaminated prediction
+# that matches looks IDENTICAL in the state file to an independent one that
+# matches, and it proves nothing. Without this field, `matched: true` cannot be
+# read across runs at all.
+#
+# Recording contamination AFTER seeing the result is not a control. It is an
+# excuse written by whoever disliked the outcome. That is why it goes in the
+# block that is written first.
+#
+# It applies to VALIDATION TESTS as well as to the strategy comparison — anywhere a threshold
+# is set that a later result will be read against. `falsification_value` is the field that
+# only validation tests need, and it exists because of a specific failure: a test pre-
+# registered a coding rule ("default to unknown; mark paying only on explicit evidence") and
+# an inconclusiveness threshold (">60% unknown means the distributions must not be read")
+# that could not both be satisfied. Conservative coding of review text all but guarantees
+# crossing that threshold. The test was overwhelmingly likely to return "inconclusive" before
+# a single observation existed, and nothing required anyone to check the threshold against
+# the coding rule that feeds it.
 pre_registration:
-  # - module: 07-strategy
+  # - module: 07-strategy          # or: test: MZ-2, for a validation test
   #   question: "Which solution option do we expect to win?"
   #   expected: "Option A — the AI product"
+  #   expected_because: "05-competition found no incumbent shipping it"
+  #   independence: independent   # independent | contaminated
+  #   independence_reason: ""     # REQUIRED when contaminated: what pre-committed the answer
   #   recorded_before: scoring
-  #   actual: null            # filled after the comparison completes
-  #   matched: null           # true | false
+  #
+  #   # REQUIRED for a validation test with a threshold. What value would the measurement
+  #   # take if the hypothesis were FALSE, under the coding rule that produces it? If that
+  #   # value also crosses the threshold, the threshold cannot discriminate and the test is
+  #   # not yet designed. Compute it before collecting; afterwards it is an excuse.
+  #   falsification_value: ""
+  #   # --- Only the three fields below are written after the work. Nothing above
+  #   #     them is edited, ever, including when the result is embarrassing. ---
+  #   actual: null                # filled after the comparison completes
+  #   matched: null               # true | false
+  #   matched_note: ""            # what this match or miss does and does not prove
 
 rules:
   - raw_idea is immutable. Refinements go to outputs.idea_brief.
-  - A pre_registration entry is written before the work it predicts, and never edited after.
+  - >-
+    A pre_registration entry is written before the work it predicts. Only actual, matched
+    and matched_note are completed afterward. Every other field, including independence,
+    is fixed at the moment of prediction and is never edited.
+  - >-
+    independence is recorded at prediction time or it is not recorded. Contamination
+    noticed after the result is an excuse, not a control.
+  - >-
+    matched: true on a contaminated prediction is not evidence that the comparison
+    decided anything, and must never be reported as confirmation.
   - A module appends to evidence_log. It never rewrites another module's entries.
   - A blocking open_question halts the run at the next human_checkpoint.
   - >-
@@ -223,3 +680,35 @@ rules:
   - >-
     Write to the key this schema defines. Recording the right content under an invented key
     is invisible to every check that reads the defined one.
+  - >-
+    A validation outcome is one of six states and they are never merged. `blocked` is not
+    `fail` and `inconclusive` is not `fail`. A test that could not run has produced no
+    evidence about the product.
+  - >-
+    A fired stop condition names a required_action, and the run does not pass it silently.
+    A stop condition that fires and changes nothing is a finding the run walked past.
+  - >-
+    A validation instrument may be substituted when the specified one is impossible for the
+    operator. The substitute is judged against what the test MEASURES, not against how the
+    original measured it, and the equivalence argument is recorded before the instrument runs.
+  - >-
+    Problem existence, frequency, severity, business impact, solution demand and willingness
+    to pay are six separate claims. Evidence for one is never evidence for another, and a gate
+    passed on one never passes another.
+  - >-
+    Where stated and revealed willingness to pay disagree, revealed governs. Recorded before
+    the result, never chosen after it.
+  - >-
+    An option generated inside 07-strategy or later is marked `generated_here` and names the
+    research it did not receive. It may still win; it may not win unremarked.
+  - >-
+    An operator directive is honored, never overridden. Evidence that a directive is costing
+    the opportunity is surfaced to the operator with its cost, and the directive stands until
+    they say otherwise.
+  - >-
+    The manifest owns every filename it declares under deliverables/. Never write to one
+    except as that artifact, and never write a second package into that directory without its
+    own subdirectory. Runs are not under version control and an overwrite is unrecoverable.
+  - >-
+    engineering_ready is not development_authorized. A complete specification is not
+    permission to build, and no run sets development_authorized.

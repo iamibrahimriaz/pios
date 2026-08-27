@@ -1,0 +1,4 @@
+1. • After SGD administration, prototype components and metabolites were detected at 10 time points using UPLC-Q-TOF-MS/MS.
+2. • Identified 79 prototype components and 527 metabolites, with flavonoids and terpenoids emerging as key active ingredients.
+3. • Characterized major metabolic processes including oxidation, reduction, glucuronidation, and sulfate esterification.
+4. • Seven key components were consistently detected in both ion modes, potentially underlying SGD's hepatoprotective effects.

@@ -91,6 +91,18 @@ ignored for the rest of the document.
 installed, fully trusted, requires no migration, and no one gets blamed for continuing it.
 An analysis that treats it only as a weak baseline has not evaluated it.
 
+**"Do nothing" is almost never literally nothing.** `04-problem` hands this module
+`substitute_workflows` — the named things people use who use nothing in this category: the
+manual routine, the spreadsheet, the script somebody wrote once, the adjacent product that
+solves a neighboring problem well enough. **Each of those is a competitor with a user base,
+and the largest of them frequently dwarfs the entire product category.**
+
+**This criterion is not satisfied by a row labelled "status quo".** It is satisfied when the
+substitutes handed over by `04-problem` appear in the coverage table by name and are scored
+like any other competitor. A substitute measured in millions of users, sitting outside the
+matrix because it is not a product in this category, is the most expensive omission this
+module can make — and it is invisible, because nothing in the matrix looks wrong.
+
 **Also expected:** non-consumption considered. Not a separate gate criterion, but an
 analysis that assumes everyone in the segment uses something has probably overstated the
 addressable opportunity.

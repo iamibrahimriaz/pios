@@ -102,7 +102,34 @@ A section that cannot be filled is a finding. Write what is missing and why.
 ## 3. Primary Persona
 
 <!-- Move 3. Grounded in evidence, not invented. A persona that could describe anyone
-     describes no one. Every row should be something you could show a source for. -->
+     describes no one.
+
+     THE EVIDENCE COLUMN TAKES THREE VALUES, not a tag or a blank:
+       [verified: <source>]        — observed or reported by a real person
+       [inferred: <basis>]         — reconstructed; NAME what it was reconstructed from
+       [assumption: needs validation]
+
+     A blank reads as an oversight and an invented citation is worse. Where a row has no
+     source, mark it and say what it was built from. A persona whose rows are honestly all
+     inferred is a finding about the run's evidence base — carry it into the limit output
+     in engine/remote-validation.md rather than dressing it up.
+
+     SEPARATELY FROM THE TAG, every user finding carries a MODE in evidence_log. The gate
+     requires it and the two vocabularies are not interchangeable — a tag says how well the
+     claim is supported, a mode says where it came from. Use these three words exactly:
+
+       observed       — someone watched the work happen
+       reported       — a person described it, in an interview, a review or a post
+       reconstructed  — worked out from the shape of the work and from adjacent facts;
+                        watched by nobody and described by nobody
+
+     `reconstructed` is the normal case in a desk run and it is not a lesser answer. Marking
+     a reconstruction as `reported` passes the gate while destroying the only distinction the
+     gate exists to protect. Do not substitute a synonym — two runs that say `reconstructed`
+     and `inferred` for the same thing cannot be compared to each other. -->
+
+<!-- ACCEPTANCE: every persona row carries an evidence tag, and every user finding in
+     state.evidence_log carries mode: observed | reported | reconstructed. -->
 
 ### «Name» — «role», «segment»
 

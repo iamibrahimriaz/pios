@@ -16,7 +16,27 @@ universal:
   - id: U3
     rule: No claim contradicts an earlier entry in state.evidence_log without explicitly superseding it.
   - id: U4
-    rule: Every decision records the alternatives it rejected.
+    rule: >
+      Every decision is an entry in state.decisions recording the alternatives it rejected,
+      and the module's gate verdict lists the ids it added — or the literal `none`.
+    detail: >
+      U4 has one home and it is state.decisions. A sentence in the gate verdict saying
+      decisions were recorded is not a decision record: it is not queryable, it cannot be
+      read across runs, and it satisfies a reviewer while satisfying nothing else.
+
+      A completed run recorded fourteen consecutive U4 passes this way while the decisions
+      list stayed empty, and the run validated. Nothing checked that the two agreed, so the
+      unchecked home is the one that went empty. `run.gate_verdicts[].decisions` is the
+      reference that closes it, and validate-run.py resolves every id.
+
+      `none` is a legitimate verdict and must be written rather than left blank. A module
+      that made no recordable decision is a different state from a module that did not say,
+      and only one of them is worth investigating.
+    fails_when:
+      - The verdict describes decisions in prose and names no id.
+      - An id is named that does not exist in state.decisions.
+      - An entry records no alternatives_rejected — a choice with no rejected alternative
+        was not a decision, it was a description.
   - id: U5
     rule: Assumptions introduced by this module are appended to state.assumptions with a validation method.
   - id: U6
@@ -60,6 +80,78 @@ evaluation:
     A gate is failed by default when its status cannot be determined.
     Uncertainty is a fail, not a pass. A gate that never fails is not a gate.
 
+failure_classes:
+  # SCHEMA v3. Required in run.gate_verdicts[].failure_class whenever a verdict is not
+  # `pass`, and whenever shortfall_declared is true.
+  #
+  # A GATE FALLING SHORT IS NOT ONE THING, AND REPORTING IT AS ONE THING IS THE DEFECT.
+  #
+  # An operator reading "04-problem carries a declared shortfall" cannot tell whether the
+  # product is wrong, unproven, or merely under-researched — and those three imply completely
+  # different next actions. One means stop. One means spend a week. One means spend an hour.
+  # The framework had the information and reported all three in the same register.
+  #
+  # THIS IS NOT THE SAME AXIS as loop_protection / decision_dependent_failure /
+  # conditional_continuation. Those classify the failure for the ENGINE: does the attempt
+  # count, may the run continue, what must be recorded first. This classifies it for the
+  # OPERATOR: what does this mean about the product, and what do I do now. A gate is
+  # classified on both axes and they do not determine each other.
+  #
+  # It is recorded when the verdict is written, not at delivery. By delivery the run has a
+  # recommendation, and a class chosen to fit a recommendation is not a finding.
+  values:
+    failed_assumption: >-
+      A recorded assumption was tested and found false. The premise moved; the conclusions
+      built on it have not. ACTION: re-derive per late_answer_rederivation. This is the class
+      most often misreported as insufficient_evidence, because both feel like being wrong —
+      but here the evidence exists and it says no.
+    insufficient_evidence: >-
+      The claim could not be established to the standard the criterion requires. NOTHING IS
+      KNOWN TO BE FALSE. ACTION: name the cheapest method that would close it and what it
+      costs. This is the class that most often carries a declared_shortfall, and the one most
+      damaging to misreport as failed_validation — an unasked question reported as a negative
+      answer kills products nobody ever tested.
+    failed_validation: >-
+      A test ran, its sample met its floor, and the threshold was missed. ACTION: read the
+      stop condition and perform its required_action. Requires an entry in state.validation
+      with outcome `fail` — and `fail` there has two halves, so a miss below the volume floor
+      is `inconclusive`, which maps to insufficient_evidence here, not to this.
+    technical_impossibility: >-
+      The thing cannot be built as specified, on evidence rather than on difficulty. ACTION:
+      respecify or stop. The bar is high: "hard", "expensive" and "nobody has done it" are
+      not this class, and a run reaching for it should check whether it means
+      business_weakness instead.
+    business_weakness: >-
+      It can be built, someone wants it, and the economics do not close. ACTION: the viability
+      decision, which is the operator's — see cost_ceiling_unresolved. A complete, correct,
+      wanted product can fail here, and the run must not report that as a research failure.
+    unresolved_question: >-
+      The criterion is unmet because an input only the operator can supply has not been
+      supplied. ACTION: ask, with the options and their consequences. NOT A FINDING ABOUT THE
+      PRODUCT and it must never be summarized as one. Pairs with decision_dependent_failure
+      on the engine axis, and with open_questions[].class `operator_only`.
+  required_response:
+    - >-
+      Record `failure_class` in the gate verdict, at the moment the verdict is written.
+    - >-
+      Carry it wherever the shortfall is surfaced — the module output, the Executive Summary,
+      Risks-and-Assumptions, and the completion message. A class recorded only in state.yaml
+      has been recorded for nobody: the operator does not read state.yaml.
+    - >-
+      State the ACTION the class implies, not only the class. The class exists because each
+      one implies a different next step; naming the class and omitting the step reproduces the
+      defect with more vocabulary.
+  prohibited:
+    - >-
+      Reporting insufficient_evidence as failed_validation. The direction of this error is
+      always the same and always expensive: it converts "we did not ask" into "they said no".
+    - >-
+      Choosing the class after the recommendation is written. It is recorded with the verdict.
+    - >-
+      More than one class per criterion. If two genuinely apply, the criterion is testing two
+      things and should be split — say so as a friction entry rather than picking the
+      convenient one.
+
 declared_shortfall:
   # A narrow, deliberate exception. Some criteria require evidence an agent may be
   # unable to obtain — most often primary research. Demanding it unconditionally
@@ -71,6 +163,11 @@ declared_shortfall:
     - The actual position is stated plainly in the module output, not implied.
     - Confidence is lowered accordingly.
     - The shortfall is recorded in the gate verdict as `shortfall_declared: true`.
+    - >-
+      A `failure_class` is recorded alongside it. A declared shortfall is almost always
+      `insufficient_evidence` — if it is anything else, say why, because a shortfall declared
+      over a criterion that actually failed for economic or technical reasons is the waiver
+      being used for something it was not scoped for.
     - A validation task that would close the gap is added to state.open_questions.
   prohibited_when:
     - The evidence was obtainable and the agent did not look.
@@ -96,6 +193,12 @@ loop_protection:
     does not consume an attempt — see decision_dependent_failure. Counting one spends the
     three tries on a question the run cannot answer, then halts for exhaustion while
     reporting a research failure that never happened.
+  reserved_attempt: >
+    A gate in conditional_continuation holds one attempt in reserve rather than spending it.
+    The reserve is recorded, and the method that already failed is named so it cannot be
+    spent on that method again. A reserved attempt is not an unused attempt: the gate is
+    postponed against a specific future input, and the run may not reach delivery claiming
+    validation while it is outstanding.
 
 decision_dependent_failure:
   # Loop protection assumes a failed gate is a research defect: look harder, reason
@@ -139,6 +242,160 @@ decision_dependent_failure:
     A run carrying an unresolved decision-dependent failure at delivery must name it in the
     Executive Summary as an open decision with its options, and set confidence accordingly.
     It must not be presented as a research gap, because no research closes it.
+
+conditional_continuation:
+  # THE THIRD CAUSE OF GATE FAILURE.
+  #
+  # loop_protection assumes a failed gate is a research defect: look harder, try again.
+  # decision_dependent_failure covers a gate waiting on a person. This covers the third:
+  # the evidence the criterion requires DOES NOT EXIST in any source this run can reach,
+  # and no further work by the agent will produce it.
+  #
+  # Without a name for that state a run has two options and both are wrong. Abandon
+  # completed work that remains valid, or continue by improvisation with no shared
+  # vocabulary — and two runs improvising produce two records that cannot be compared.
+  #
+  # ENTERING THIS STATE IS DELIBERATELY HARDER THAN PASSING THE GATE HONESTLY.
+  # If it is ever the easier path, it has been implemented wrongly.
+  #
+  # It is NOT declared_shortfall. That is scoped to one criterion in one module, because a
+  # waiver available everywhere binds nowhere. It is NOT degraded_mode, which covers an
+  # agent with no retrieval capability — here retrieval works and the answer is not in the
+  # world. Conflating them lets a broken toolchain claim the standing of an exhaustive search.
+  allowed_when:
+    - The gate has already failed at least twice on the same criterion.
+    - >-
+      A research_exhaustion report exists and is complete. This is the load-bearing
+      precondition — see below. Without it the claim "unobtainable" is an assertion.
+    - >-
+      The operator has authorised continuation explicitly, recorded verbatim with a date in
+      state.decisions. An agent may propose this state; only the operator may enter it.
+    - >-
+      One gate attempt is RESERVED rather than spent, and the method that already failed is
+      named so the reserved attempt cannot be spent on it again.
+    - >-
+      A validation milestone becomes the FIRST milestone of the roadmap, and the first build
+      milestone is blocked until the reserved attempt has been evaluated against its result.
+  prohibited_when:
+    - The evidence was obtainable and the agent did not look. Difficulty is not impossibility.
+    - The missing input is a decision. That is decision_dependent_failure, not this.
+    - The agent has no retrieval capability. That is degraded_mode, not this.
+    - It is used to bypass a criterion about rigor rather than about evidence access.
+    - >-
+      The operator wants to proceed and the exhaustion report was written to justify a
+      decision already made. The report establishes the boundary; it does not ratify a wish.
+
+  research_exhaustion:
+    # A permanent, structured record in state.research_exhaustion, checked by validate-run.py.
+    # Its purpose is to demonstrate that the run has genuinely reached the current evidence
+    # boundary — not that the operator would like to continue.
+    required_fields:
+      - methods_attempted: Every research method used, named individually.
+      - evidence_produced: What each method actually returned, including partial results.
+      - methods_failed: Which produced nothing, listed separately from those that produced little.
+      - why_failed: >-
+          Why each failed. "Nothing found" is not a reason. The reason is structural — the
+          source type does not cover this question, the corpus does not exist, access is
+          restricted, the material is not published in a retrievable form.
+      - evidence_still_unavailable: The specific claim or quantity that remains unestablished.
+      - why_further_desk_research_will_not_help: >-
+          Stated as a structural argument, not as fatigue. Which source types remain
+          unattempted, and why each cannot carry this class of evidence.
+      - what_would_resolve_it: >-
+          The evidence that would close it immediately if it became available, and the
+          cheapest method that would obtain it. This becomes the validation milestone.
+    prohibited:
+      - A method listed as attempted that was not attempted.
+      - A summary in place of the per-method record. The itemisation is the safeguard.
+      - Recording only the methods that failed. Partial results are evidence and must appear.
+
+  required_response:
+    - Record the gate verdict as `conditional_pass`. It is a THIRD verdict, not a pass.
+    - >-
+      The module remains in state.run.failed_gates and MUST NOT be added to
+      completed_modules. A failed gate remains failed. Adding it to satisfy a validator is
+      the confidence laundering the evidence policy exists to prevent.
+    - >-
+      Every module that runs after it records `conditional_on: <module-id>` in its outputs.
+      Inheritance is automatic and is checked; a downstream module without it fails the run.
+    - >-
+      Every downstream deliverable states its conditional standing where a reader meets it,
+      and marks each claim as evidence-supported, requiring validation, or scenario-based.
+    - >-
+      state.run.confidence is CAPPED AT LOW while any conditional gate is open. It cannot be
+      raised by later modules, by a favourable finding, or by the volume of work completed.
+      Only new evidence closing the gate raises it.
+    - >-
+      The Executive Summary states that the run is a conditional blueprint and not a
+      validated case, and names the unresolved gate.
+  guarantees:
+    # Six properties this state must preserve. A design that breaks any one of them is
+    # wrong and should be rejected rather than amended.
+    - A failed gate remains failed.
+    - Conditional work is always explicitly marked.
+    - Validation status can never be upgraded implicitly.
+    - Every downstream module inherits the uncertainty automatically.
+    - Final outputs cannot claim validated conclusions while a conditional gate is unresolved.
+    - "Validators distinguish three states: passed, failed, conditionally continued."
+  consequence: >
+    validate-run.py reports a THIRD outcome — "deliverable, conditionally" — and exits 2.
+    Exit 2 is not 0 and is not 1: the artifact set is complete and honestly marked, and the
+    run is not validated. Any automation reading the exit status must treat 2 as neither
+    success nor failure.
+
+    The objective of this state is to represent reality more accurately. It is not to make
+    continuing easier, and every precondition above exists to keep those two things apart.
+
+operator_question_classes:
+  # SCHEMA v3. Recorded in open_questions[].class when the question is RAISED.
+  #
+  # THE RULE THIS EXISTS FOR: only `operator_only` may stop the run.
+  #
+  # A completed run stopped the operator repeatedly for things it could have researched or
+  # recorded as an assumption. Their instruction, which they should not have had to give:
+  # "Do not stop for something that can reasonably be resolved through research." The cost is
+  # not the irritation — it is that every question looks equally obligatory when none of them
+  # says what it is, so the attention budget is spent before the question nothing else can
+  # answer arrives.
+  values:
+    operator_only: >-
+      Research cannot reach it at any depth: their jurisdiction, their budget, their risk
+      appetite, their authority to decide, facts about their own situation. THE ONLY CLASS
+      THAT MAY STOP THE RUN.
+    researchable: >-
+      The run can establish it. Asking would be faster, and faster is not a reason — an
+      operator answering a researchable question answers from memory, and the run then treats
+      memory as evidence with none of the tagging that would have exposed it.
+    assumable: >-
+      Recordable now as a tagged assumption and worth asking later, when a module has the
+      evidence that makes the answer worth having. Carries `ask_at` and the substitute
+      assumption's id.
+  default: >-
+    `researchable` when it cannot be determined. The cost of a false positive is research the
+    run would mostly have done anyway; the cost of a false negative is a stop that did not
+    need to happen, and stops are the scarce resource.
+  required_response:
+    - >-
+      State the class when the question is put to the operator, in plain language: what only
+      they can answer, what the run will find out, what it will assume for now. They are
+      then spending attention on a known budget rather than an unbounded one.
+    - >-
+      A `researchable` question whose research fails becomes `operator_only`. Record
+      `reclassified_from` and name the failed method. Reclassification is legitimate;
+      skipping the research and calling it operator_only is not.
+    - >-
+      Batch. Multiple `operator_only` questions arising between checkpoints wait and are
+      asked together, unless one of them blocks the work that would raise the others.
+  prohibited:
+    - >-
+      Classifying as `operator_only` because asking is quicker than researching. That is the
+      failure this block exists to name.
+    - >-
+      Asking an `assumable` question early. The early answer is worse data AND it anchors
+      every module that reads it — a revenue target given in module 01 from instinct is
+      inherited as settled context by six modules that never re-examine it.
+    - >-
+      Sending a message that stops the run for a question of any other class.
 
 premise_bearing_questions:
   # `blocking` and `premise_bearing` are different properties, and conflating them is
@@ -214,6 +471,204 @@ late_answer_rederivation:
   # exclusion is what let a run reach delivery with seven artifacts arguing from a premise
   # the operator had already contradicted: the question was non-blocking, so the gate
   # written for exactly this situation was the one that did not fire.
+
+validation_outcomes:
+  # MODULE gates have three verdicts: pass, fail, conditional_pass. VALIDATION TESTS — the
+  # Milestone Zero week, and anything with the same shape — have six, and they are a different
+  # vocabulary because they answer a different question. A module gate asks whether the work is
+  # good enough. A validation test asks what the world said.
+  #
+  # Recorded in state.validation. The states are not interchangeable and merging any pair
+  # destroys information that cannot be recovered afterwards.
+  states:
+    pass: The threshold was met.
+    fail: >-
+      The threshold was missed AND the sample was sufficient to say so. Both halves are
+      required. A miss below the volume floor is `inconclusive`, not `fail`.
+    revise: >-
+      A defined middle band. Valid ONLY if the band was pre-registered. A `revise` invented
+      after seeing a result that was neither clearly good nor clearly bad is a threshold
+      change wearing a category name.
+    inconclusive: >-
+      The test RAN and the sample cannot carry the reading. The action is to keep collecting,
+      not to conclude. Never a stop.
+    blocked: >-
+      The test COULD NOT RUN — no access, no channel, no reachable population, no working
+      instrument. THIS IS NOT A RESULT ABOUT THE PRODUCT. It is an item the operator is owed,
+      with a named action, and it must never appear in a summary as evidence of anything.
+    not_applicable: The condition the test was written for did not arise.
+  the_pair_most_often_merged: >-
+    `inconclusive` and `blocked`. Merging them converts "we could not reach these people" into
+    "these people do not want it" — a verdict nobody chose, arrived at by nobody deciding. A run
+    that cannot distinguish them will report a distribution failure as a demand failure, and the
+    recommendation that follows is wrong in the most expensive available direction.
+  requirements:
+    - >-
+      Every test declares what it MEASURES, independently of how. A test recorded only as a
+      method cannot be substituted, cannot be compared across runs, and cannot say what its
+      result was about. See engine/instrument-substitution.md.
+    - >-
+      Every criterion is marked `necessary` or `corroborating` BEFORE collection. A test whose
+      criteria are undifferentiated cannot report a mixed result, and mixed results are the
+      normal case: a run cleared its primary floor by 2.1x while a breadth criterion failed for
+      reasons that could not be known before collecting, and had no way to say so.
+    - >-
+      Where more than one criterion can fire independently, a PRECEDENCE RULE is recorded in
+      advance. Two criteria firing with opposite implications is ordinary. Without a rule fixed
+      beforehand, which one governs is settled in the write-up, by whoever preferred an answer —
+      and both readings are defensible, which is what makes it undetectable.
+    - >-
+      A fired stop condition names a `required_action` and the run performs it or halts. A stop
+      condition that fires and changes nothing is worse than no stop condition, because the run
+      now carries a record of having checked.
+    - >-
+      A volume floor is evaluated BEFORE the result. Below it, the outcome is `inconclusive`
+      whatever the count says. Reading a result that has not met its own floor is the most
+      common way a validation week produces a confident wrong answer.
+  prohibited:
+    - Moving a threshold after seeing a result. If a genuine methodological defect requires it,
+      the reason is written down BEFORE the change, and the original threshold is preserved.
+    - Rescaling a threshold that became unreachable at the n actually achieved.
+    - Reporting `blocked` or `inconclusive` as a finding about the product.
+    - >-
+      Reading a validation result as evidence for a claim class it does not measure. A test of
+      problem frequency says nothing about willingness to pay — see engine/evidence-policy.md.
+
+generated_option:
+  # THE ASYMMETRY. Modules 02-06 research one direction. 07-strategy then generates options —
+  # and sometimes the option that wins is one it invented, because the evidence pointed
+  # somewhere the earlier modules never looked.
+  #
+  # That is the framework WORKING. A run whose recommendation cannot change under evidence is
+  # a run that decided before it started. What must not happen is the generated option being
+  # scored against five-module options as though the comparison were even.
+  #
+  # It happened twice in one run: the winning option was generated inside 07-strategy with two
+  # data points behind it, and a later validation test overturned the problem ranking and
+  # produced a second winner that had never been researched at all. Both were correct
+  # redirections. Neither was comparably evidenced, and nothing in the framework required
+  # anyone to say so.
+  applies_when: >-
+    An option that was not researched by modules 02-06 is scored in 07-strategy, or a new
+    option is generated after 07-strategy by a validation result.
+  required_response:
+    - >-
+      Mark it `provenance: generated_here` in state.outputs.solution_options, and list under
+      `unresearched` which modules never examined it and what each would have tested.
+    - >-
+      State the asymmetry explicitly in the module output, as the comparison's own strongest
+      objection. Not in a footnote — in the section that presents the scores.
+    - >-
+      If it WINS, record `asymmetry_effect`: whether the win survives the missing research, or
+      rests on it. The test is mechanical — re-score with the generated option's unresearched
+      criteria set to the lowest value any researched option scored on them. If it still wins,
+      the win is robust. If it does not, say so.
+    - >-
+      A generated option that wins takes ONE of two paths, and the choice is recorded:
+      (a) a research pass through the modules it skipped, before the recommendation stands, or
+      (b) a validation milestone that closes its specific unresearched claims, placed FIRST in
+      the roadmap and blocking the first build milestone.
+      Path (b) is usually correct and always cheaper. It is not the default — it is a choice
+      that gets named.
+  prohibited:
+    - >-
+      Presenting a generated option's score as comparable without the asymmetry stated. The
+      numbers are identical on the page whether the asymmetry was considered or not, which is
+      exactly why it has to be written down.
+    - >-
+      Using the generated option's better fit to the final evidence as the argument for it. It
+      fits better in part because it was written after the evidence. That is not a finding.
+    - >-
+      Retiring a researched option without saying which of its evidence still stands. Evidence
+      does not stop being true because the recommendation moved.
+
+directive_tension:
+  # An operator directive constrains HOW the research runs — a customer segment, a pricing
+  # posture, a technology to avoid. It is honored. It is never quietly overridden, and nothing
+  # here changes that.
+  #
+  # But a directive can be COSTING the opportunity, and the run is the only party that can see
+  # it. A run scoped to solo creators that then finds every comparable product in the category
+  # priced and shaped for agencies is holding evidence the operator does not have. Saying
+  # nothing is not neutrality — it is a decision made on their behalf, by omission.
+  trigger: >-
+    Any module finds evidence that materially contradicts a standing directive: the payers are
+    a different segment, the price band the directive implies is below the cost of serving it,
+    the excluded technology is the only one the obligation can be met with.
+  required_response:
+    - Record it in state.run.operator_directives[].tension, with the evidence tagged.
+    - >-
+      Size what it costs. "This may be limiting" is not surfacing it — a directive kept without
+      a number attached is kept without a decision. Where the size cannot be established, say
+      what would establish it.
+    - >-
+      Name the adjacent option the directive forecloses, and what testing it would take. The
+      operator is choosing between consequences, not answering an open question.
+    - >-
+      Surface it at the next human checkpoint, in one sentence, with the directive restated so
+      they know exactly what they are being asked about.
+    - >-
+      CONTINUE UNDER THE DIRECTIVE unless they change it. The run does not pause, does not
+      hedge every downstream conclusion, and does not research the adjacent segment on
+      speculation.
+  prohibited:
+    - Overriding the directive. Ever. Evidence against a constraint is not permission to ignore it.
+    - >-
+      Softening it by degrees — researching the adjacent segment "for comparison", scoring an
+      option the directive excludes, or writing the recommendation so it works either way.
+      Each is the override without the sentence that would have let the operator refuse it.
+    - >-
+      Raising it more than once per directive unless new evidence changes the size. A tension
+      re-surfaced every module is pressure, not information.
+
+cost_ceiling_unresolved:
+  # 13-operations requires a cost ceiling breach to be resolved by a recorded change to
+  # 06-business price or 07-strategy scope, never by revising the forecast. That rule assumes
+  # a recorded change RESOLVES the breach.
+  #
+  # Sometimes it does not. A run narrowed its scope twice — from a category product to a
+  # reliability layer to a single narrow function — and the venture still did not repay its
+  # build cost in any modelled scenario. The rule had no vocabulary for that outcome, so the
+  # honest answer had to be invented in prose, and a run following the rule literally could
+  # record two scope changes, satisfy the check, and never say that the thing still loses money.
+  #
+  # THE DANGER IS NOT A WRONG ANSWER. It is an indefinite loop: each narrowing feels like
+  # progress, each one is cheaper than the last, and there is no rule that says when to stop
+  # narrowing and start deciding.
+  applies_when: >-
+    A cost ceiling breach has been through at least one recorded regress to 06-business or
+    07-strategy, and the revised figures still do not clear the ceiling.
+  required_response:
+    - >-
+      State the RESIDUAL GAP as a number, in the module output, the Executive Summary and the
+      decision report. Not "remains challenging" — the figure, and what it is a gap between.
+    - >-
+      Record what each regress actually bought. A narrowing that reduced build cost by 40% and
+      left the venture unprofitable is a real finding about the shape of the opportunity, and
+      it is lost if only the final position is reported.
+    - >-
+      STOP NARROWING. A third scope reduction is permitted only when it is aimed at a named
+      cost driver that the first two did not touch, and the module says which. Otherwise the
+      remaining question is not "what else can we cut".
+    - >-
+      Escalate to the viability decision, which is the operator's and is decision-dependent:
+      is this a standalone venture, one product in a portfolio, or not built? Record it as an
+      open_question with blocking and premise_bearing both true, with each option's
+      consequence stated. Scope reduction cannot answer it, which is why it is not a gate the
+      run can pass by working harder.
+  prohibited:
+    - >-
+      Reporting the final scope as though it resolved the breach. The check the original rule
+      performs — "was there a recorded regress" — is satisfied by a regress that failed.
+    - Revising the forecast. That prohibition is unchanged and is the reason the rule exists.
+    - >-
+      Carrying the residual gap only in 13-operations. It changes what the whole run
+      recommends, so it appears wherever the recommendation does.
+  consequence: >-
+    A run delivering with an unresolved cost ceiling states, in the Executive Summary's opening,
+    that the venture does not repay its build cost under the modelled assumptions and what would
+    have to be true for it to. A recommendation to build, delivered over an unresolved ceiling
+    without that sentence, is the single most expensive thing this framework can produce.
 
 human_checkpoints:
   # Stages where the run pauses for operator confirmation before continuing.

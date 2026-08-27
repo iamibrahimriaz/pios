@@ -133,7 +133,7 @@ GATE
   ✓ Bounded, not adjectival
   ✓ TAM/SAM/SOM each sourced or marked [assumption]
   ✓ 4 trends with direction and evidence, including one against
-  ✓ Regulatory constraints for the named jurisdiction identified
+  ✓ Regulatory constraints for the named jurisdiction identified, including its general data-protection regime
 ```
 
 ---

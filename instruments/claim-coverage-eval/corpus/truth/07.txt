@@ -1,0 +1,5 @@
+1. • Novel data quality evaluation framework combining unsupervised learning and domain expertise.
+2. • Automated classification of high and low-quality data through quality-sensitive clustering.
+3. • Validated on chromatography datasets to improve machine learning model performance.
+4. • Reduces manual intervention in analytical chemistry data quality assessment.
+5. • Flexible framework design adaptable across different application domains.

@@ -170,6 +170,12 @@ Tags:
 - [ ] Criterion 3 — MVP cut with reasoning and a passing end-to-end test
 - [ ] Criterion 4 — explicit non-goals
 - [ ] Criterion 5 — risks rated, mitigated, with early warnings
+- [ ] Criterion 6 — expected winner recorded before scoring, **with `independence` set**
+- [ ] Criterion 7 — if 04-problem declared a shortfall, the weight it changed is named
+- [ ] Criterion 8 — every option marked `carried_from_research` or `generated_here`
+- [ ] A generated option lists which modules never examined it and what each would have tested
+- [ ] If a generated option WINS: the re-score test run, `asymmetry_effect` recorded, and a path chosen — research pass, or a validation milestone placed first and blocking
+- [ ] Criterion 9 — if 01-idea recorded `category`, the option supplying the differentiation is named, or `not found` is stated as a finding
 - [ ] Milestone Zero check
 - [ ] Confidence laundering check
 - [ ] Universal gates U1–U7
@@ -179,7 +185,7 @@ Tags:
 
 # Human Checkpoint
 
-- [ ] §12 written and decidable
+- [ ] §13 written and decidable
 - [ ] Proposal stated in one sentence
 - [ ] Non-goals stated
 - [ ] Load-bearing assumption named

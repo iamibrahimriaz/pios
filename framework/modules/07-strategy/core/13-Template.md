@@ -82,7 +82,7 @@ research finding. Present it for approval; do not proceed past it alone.
 | Price | «figure» — from 06-business |
 
 **If the problem is assumed rather than verified:** «state the consequence — Milestone
-Zero is validation, and it appears in §7 before any build milestone»
+Zero is validation, and it appears in §10 Sequence before any build milestone»
 
 ---
 
@@ -101,6 +101,9 @@ Zero is validation, and it appears in §7 before any build milestone»
 | Price it supports | «figure» |
 | Defensibility | «assessment» |
 | Biggest risk | «what» |
+| **Provenance** | «`carried_from_research` — modules 02–06 researched this / `generated_here` — invented in this module» |
+| **Chosen** | «true on exactly one option across the whole list, once §6 commits. The asymmetry rule fires on the winner and cannot fire without this» |
+| **Never researched by** | «modules that did not examine this option, and what each would have tested. Only for `generated_here`; write "n/a" otherwise» |
 
 ### Option B — «name»
 
@@ -113,9 +116,74 @@ Zero is validation, and it appears in §7 before any build milestone»
 **How these differ:** «one paragraph — if they differ only in feature scope, they are
 one option and the module must generate more»
 
+### Provenance and what it costs the comparison
+
+<!-- Criterion 8. A generated option is frequently the RIGHT answer — it is what a run looks
+     like when the evidence redirected it. What it is not is comparably evidenced. Say so
+     HERE, where the scores are, not in a footnote. -->
+
+**Options generated in this module:** «list, or "none — all three carried from research"»
+
+**What they arrive without:** «per generated option — the market sizing, competitor set,
+segment work and problem ranking that the researched options have and this one does not»
+
+**If a generated option wins, the re-score test:** re-score it with every criterion it was
+never researched on set to the lowest value any researched option scored on that criterion.
+
+| | |
+| --- | --- |
+| Original score | «figure» |
+| Re-scored at the floor | «figure» |
+| **Still wins?** | «yes — the win is robust to the missing research / no — **the win rests on the gap**» |
+| **`asymmetry_effect`** | «the sentence written to `state.outputs.solution_options[].asymmetry_effect`. The validator reads this field, not the table above — reasoning that lives only in prose here leaves it empty» |
+
+**Path chosen:** «(a) a research pass through the skipped modules before the recommendation
+stands / (b) a validation milestone closing its specific unresearched claims, placed first in
+the roadmap and blocking the first build milestone»
+
+**What still stands from the options it displaced:** «evidence does not stop being true
+because the recommendation moved — name what survives and applies to the winner»
+
 ---
 
-## 4. Comparison
+## 4. Pre-Registration
+
+<!-- WRITE THIS BEFORE SECTION 5. It is the only section whose value depends entirely on
+     when it was written, and the only one that cannot be repaired afterward. Once a single
+     score is assigned, this section can no longer be written honestly at all.
+
+     Copy the fields below into state.pre_registration verbatim. Do not invent field
+     names — four runs each invented their own and none of them could be compared. -->
+
+**Expected winner:** «Option X»
+
+**Expected because:** «the reasoning as held right now, in one paragraph, referencing what
+the research established rather than what feels right»
+
+**Independence:** «independent / contaminated»
+
+**If contaminated, what pre-committed the answer:** «name it — upstream modules that
+already converged, an operator instruction that stated a direction, a previous run whose
+conclusion was easy to defend. Leave blank only when marking independent»
+
+> **Mark it `contaminated` when unsure.** A false `contaminated` discounts one honest
+> prediction. A false `independent` reports a clean record the framework has not earned,
+> and the error is invisible from inside this document.
+
+<!-- Everything below is filled in AFTER section 5 completes. Nothing above is edited,
+     including when the result is embarrassing. -->
+
+**Actual winner:** «Option X — filled after scoring»
+
+**Matched:** «yes / no»
+
+**What this match or miss does and does not prove:** «one paragraph. A miss is the
+strongest available evidence that the comparison did real work. A match on a contaminated
+expectation proves nothing and must not be presented as confirmation»
+
+---
+
+## 5. Comparison
 
 <!-- Move 2. Score against what the research established, not against preference. -->
 
@@ -134,14 +202,14 @@ one option and the module must generate more»
 
 ---
 
-## 5. The Choice
+## 6. The Choice
 
 <!-- Move 3. Commit. Record what was rejected and why — that is what makes this a
      decision rather than a preference. -->
 
 ## Chosen: Option «X» — «name»
 
-**Why:** «one paragraph, referencing §4 and the ranked problems»
+**Why:** «one paragraph, referencing §5 and the ranked problems»
 
 **Rejected**
 
@@ -154,9 +222,23 @@ one option and the module must generate more»
 
 **What would make us choose differently:** «the trigger that would reverse this»
 
+### Differentiation
+
+<!-- Criterion 9. Required when 01-idea recorded stance `category`. Where the stance was
+     `committed`, write "not applicable — the thesis was set at 01-idea" and move on. -->
+
+**Stance at 01-idea:** «`category` / `committed`»
+
+**Resolved by:** «the option that supplies the differentiating position, and what it is —
+or `not found`»
+
+**If `not found`:** «the finding, with its evidence. A category with no available position
+is a real conclusion and usually the one that saves the most money. It is stated here, not
+left as an empty field»
+
 ---
 
-## 6. MVP Definition
+## 7. MVP Definition
 
 <!-- Move 4. The cut line, drawn and defended. -->
 
@@ -189,7 +271,7 @@ above the line? **«yes / no»**
 
 ---
 
-## 7. Non-Goals
+## 8. Non-Goals
 
 <!-- Move 5. Explicit. This section prevents six months of argument. -->
 
@@ -203,7 +285,7 @@ above the line? **«yes / no»**
 
 ---
 
-## 8. Risk Register
+## 9. Risk Register
 
 <!-- Move 6. Likelihood, impact, mitigation, and the early warning sign. -->
 
@@ -239,7 +321,7 @@ above the line? **«yes / no»**
 
 ---
 
-## 9. Sequence
+## 10. Sequence
 
 <!-- Move 6 continued. High-level only — 09-Roadmap.md is the full artifact. -->
 
@@ -257,7 +339,7 @@ a schedule entry, not a milestone»
 
 ---
 
-## 10. Stop Conditions
+## 11. Stop Conditions
 
 <!-- Define failure before it arrives, while the thinking is still cheap. -->
 
@@ -267,7 +349,7 @@ a schedule entry, not a milestone»
 
 ---
 
-## 11. Contradicting Evidence
+## 12. Contradicting Evidence
 
 | Finding | Source | Implication | Resolved? |
 | --- | --- | --- | --- |
@@ -275,7 +357,7 @@ a schedule entry, not a milestone»
 
 ---
 
-## 12. For the Checkpoint
+## 13. For the Checkpoint
 
 <!-- This section is what the operator reads. Make it decidable. -->
 
@@ -295,7 +377,7 @@ a schedule entry, not a milestone»
 
 ---
 
-## 13. Handoff
+## 14. Handoff
 
 | Field | Value | Consumed by |
 | --- | --- | --- |

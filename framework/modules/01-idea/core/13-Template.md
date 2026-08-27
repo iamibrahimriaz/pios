@@ -71,12 +71,32 @@ a section to hide a gap, and never write filler to occupy one.
 ## 2. The Idea, Sharpened
 
 <!-- One sentence. Names who it is for, what it does, and what changes for them.
-     Must pass the cold-read test: two readers should picture the same product. -->
+     Three components. This sentence is NOT required to state a differentiator — that is
+     recorded separately below, and "no differentiator yet" is a valid answer. -->
 
 «One sentence.»
 
 **What changed from the raw idea:** «what the six passes revealed, or "nothing — the
 original framing held"»
+
+### 2a. Differentiation stance
+
+<!-- Criterion 9. Established WITH the operator, never inferred from how the idea reads.
+     Written to state.project.differentiation_stance. -->
+
+| | |
+| --- | --- |
+| **Stance** | «`category` — clear category, no differentiating position yet, deliberately / `committed` — a differentiating thesis exists» |
+| **Operator's own words** | «what they said about it, verbatim» |
+| **Thesis** | «verbatim, when `committed`. Otherwise: "unset — the research is to find it"» |
+
+**If `committed`:** the thesis is a claim, so it carries a tag and appears in section 6.
+`05-competition` is where it gets tested.
+«the thesis» [assumption: needs validation]
+
+**If `category`:** this is a valid starting state, not a gap. It carries one obligation —
+**`07-strategy` must record which option supplies the differentiation, or state that the
+research found none.** Note it in the handoff so the obligation travels.
 
 ---
 
@@ -98,7 +118,13 @@ original framing held"»
 
 ## 4. Context
 
-<!-- Pass 3. Every row answered or marked ASKED. Nothing guessed. -->
+<!-- Pass 3. Every row answered or marked ASKED. Nothing guessed.
+
+     ADD A USER ROW PER DISTINCT ROLE. Many products have three or more — the person who
+     buys, the person who produces the thing, the person who consumes it — and they overlap
+     only partly. One row forces the distinction into prose, where no gate reads it and
+     03-user inherits a single merged persona. Where there is genuinely one role, write
+     "none — single user role" in the second row rather than deleting it. -->
 
 | Dimension | Value | Source |
 | --- | --- | --- |
@@ -107,6 +133,7 @@ original framing held"»
 | Surface order | «which ships first, then what — or "single surface"» | operator / **ASKED** |
 | Segment | «who specifically» | operator / stated in idea / **ASKED** |
 | User | «who uses it» | operator / stated in idea / **ASKED** |
+| User (2nd role) | «the other role, or "none — single user role"» | operator / stated in idea / **ASKED** |
 | Buyer | «who pays» | operator / stated in idea / **ASKED** |
 | Incumbent | «what they use today» | operator / stated in idea / **ASKED** |
 | Setting | «where and how it is used» | operator / stated in idea / **ASKED** |
@@ -213,7 +240,38 @@ original framing held"»
 
 ---
 
-## 11. Adversarial Review
+## 11. Pre-Mortem
+
+<!-- Gate criterion: "A pre-mortem recorded — what would make this idea not worth doing —
+     before research begins."
+
+     THIS SECTION IS NOT FILLED WHEN THE REST OF THIS FILE IS. It is written at the
+     Pre-Mortem pass in 12-Checklist.md, which sits BEFORE the existence check — because the
+     existence check is research, and a pre-mortem written after it cannot satisfy the
+     criterion. A run that filled this at assembly answered its own "recorded before research
+     began" field with No, every time, and the field could not be answered any other way.
+
+     Create this file at the pre-mortem pass, write this section, and leave it alone. Its
+     value is that it was recorded while the idea was still attractive; a pre-mortem revised
+     after the research agrees with it proves nothing. Later evidence goes in §12. -->
+
+**Imagine it is twelve months from now and this was not worth doing. What happened?**
+
+| # | Failure | Class | What would show this early |
+| --- | --- | --- | --- |
+| 1 | «the most likely way this ends badly» | demand / access / economics / execution / regulatory | «the signal, and roughly when it would appear» |
+| 2 | «second» | | |
+| 3 | «third» | | |
+
+**The one that would be hardest to admit:** «the failure the operator is most invested against»
+
+**Recorded before research began:** «yes/no — if no, say why, because a pre-mortem written
+after the evidence is a summary of the evidence. Following `12-Checklist.md` in order makes
+this Yes. If it is No, the pass order was not followed, and that is the finding»
+
+---
+
+## 12. Adversarial Review
 
 <!-- From engine/review-loop.md pass 3. Must not be empty. -->
 
@@ -227,7 +285,7 @@ original framing held"»
 
 ---
 
-## 12. Handoff to 02-market
+## 13. Handoff to 02-market
 
 | Field | Value |
 | --- | --- |
@@ -241,7 +299,7 @@ original framing held"»
 
 ---
 
-## 13. Evidence Standing
+## 14. Evidence Standing
 
 | | Count |
 | --- | --- |

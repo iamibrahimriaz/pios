@@ -1,0 +1,146 @@
+{
+ "01": {
+  "sentences": [
+   "The sustained rotational and translational motions of MBFRs therefore increase the frequency of productive encounters between antibiotic molecules and surface adsorption sites, leading to motion-enhanced interfacial transport rather than passive diffusion alone.55 Consistent with this mechanism, magnetic actuation imparted a clear speed dependence on MBFR adsorption.",
+   "As shown in Figure 4C, the adsorption efficiencies of MBFRs toward NOR, ciprofloxacin (CIP), OTC, TC, and sulfamethoxazole (SMX) were 98%, 98.8%, 96.2%, 95%, and 92.5%, respectively.",
+   "Although some specialized metal–organic framework (MOF)-based adsorbents can show higher capacities under optimized static conditions, MBFRs combine high adsorption capacity with fuel-free magnetic actuation, accelerated mass transfer, facile magnetic recovery, and long-term reusability.",
+   "As shown in Figure 5D, after the adsorption of OTC, the N 1s spectrum of MBFRs displayed a shift of the –NH3+ peak (402.2 eV) toward lower binding energy by approximately 0.4 eV, with the new peak located around 401.8 eV.",
+   "Besides, weaker O–H···π and C–H···π contacts, together with van der Waals interactions between hydrophobic scaffold domains and polyaromatic backbones, create a “multipoint-anchoring” interface.58 These cooperative but reversible noncovalent interactions account for the high adsorption capacity, the motion-enhanced uptake under magnetic actuation, and the efficient regeneration of MBFRs during repeated antibiotic-removal cycles."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 225,
+  "n_eligible": 188
+ },
+ "02": {
+  "sentences": [
+   "(2) To what extent do deterministic and stochastic processes, analyzed using the phylogenetic-bin-based iCAMP framework, govern the assembly of bacterial and fungal communities along different reaches of the river?",
+   "Overall, the α-diversity did not differ significantly between the oasis and desert sediments for either bacterial or fungal communities (Figure 1).",
+   "In addition, the distance-decay analysis further showed that both bacterial and fungal community similarity decreased with increasing geographical distance, indicating clear spatial turnover of benthic microbial communities along the Yarkand River continuum (Figure S8).",
+   "Collectively, these pathways point to a central inference: desert section salinization in the Yarkand River drives pronounced compositional and diversity responses, yet the dominant assembly operator remains stochastic—primarily drift, modulated by increasing dispersal limitation.",
+   "Community assembly processes were inferred using the iCAMP package in R.47 The rarefied ASV abundance table and corresponding rooted phylogenetic tree were used as inputs, and bacterial and fungal communities were analyzed separately."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 148,
+  "n_eligible": 116
+ },
+ "03": {
+  "sentences": [
+   "In the present study, we integrated human cartilage specimens, primary chondrocytes, transcriptomic profiling, and chondrocyte-specific RORα conditional knockout mice to investigate the role of ferroptosis in OA and its upstream regulatory mechanism.",
+   "Transcriptomic analysis revealed that RORα was significantly upregulated in OA chondrocytes (Figure 3A), which was validated in human cartilage by immunohistochemistry (Figure 3B).",
+   "Chondrocyte-specific RORα cKO mice exhibited marked protection against cartilage degeneration following DMM surgery (Figure 3C).",
+   "RORα gain of function suppressed ferroptosis defense systems, as evidenced by reduced GPX4 and SLC7A11 expression (Figure 4A) and increased lipid ROS (Figure 4B).",
+   "In vivo, RORα CKO mice were protected from erastin-induced cartilage damage, with preserved structure and restored COL2A1 expression (Figures 4H and 4I)."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 159,
+  "n_eligible": 113
+ },
+ "04": {
+  "sentences": [
+   "We performed an extensive analysis of iNKT and γδT cell populations using flow cytometry data previously obtained to characterize MAIT cells in adult patients, allowing an extensive characterization and comparison of alterations in MAIT, γδT, and iNKT cells in patients with RO or LT T1D.",
+   "We analyzed, using flow cytometry, the frequency and phenotype of iNKT cells in fresh blood samples from adults with RO T1D and from adults with LT T1D, compared with healthy donors (HDs) (Table S1). iNKT cells were identified based on the expression of the Vα24Jα18 TCR (Figure S1A), and their frequencies were similar among the three groups (Figure 1A).",
+   "Cytokine production analysis showed that in patients with LT T1D, frequencies of all Th1 cytokines and IL-10-producing γδT cells significantly decreased compared with HDs, supporting an exhaustion-like functional profile of these cells as for iNKT cells in these patients (Figures 3D and S4B).",
+   "Polyfunctional iNKT and γδT cell frequencies were significantly decreased (p = 0.006 for iNKT and p < 0.0001 for γδT cells) in patients with LT T1D compared with healthy controls (Figures S6A–S6D).",
+   "Flow cytometry analysis of iNKT and γδT cells was performed on fresh peripheral blood samples from adult patients with T1D or healthy donors, patients which were also used to study MAIT cell alterations as previously described (Table S1).15 Ancestry, race, ethnicity, and socioeconomic status of participants were not considered in this study."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 193,
+  "n_eligible": 153
+ },
+ "05": {
+  "sentences": [
+   "Fig. 1a–b shows participant mind-wandering responses in the baseline block as a function of type of report (Deliberate, Spontaneous) and cannabis use (Sober, Cannabis) with the data for the two sober sessions (Sessions 1 and 3) combined and compared to data from the cannabis session (Session 2).",
+   "In Session 2 (i.e., when participants were using cannabis) we observed that reports of spontaneous mind-wandering are consistently elevated, and that the slope of the relationship between preceding performance and deliberate mind-wandering reports is reduced.",
+   "First, one would expect that if participants’ responses were motivated by bias, deliberate mind-wandering reports would be more affected by the administration of cannabis than spontaneous mind-wandering reports, as deliberate mind-wandering is ostensibly under more conscious control; however, in the baseline blocks we found the opposite to be true.",
+   "Second, during the instructed blocks, we would expect demand characteristics to lead cannabis use to be consistently associated with greater mind-wandering reports; however, we found that when participants were instructed to mind-wander 80 % of the time, their deliberate mind-wandering reports were significantly reduced under the influence of cannabis relative to when they were sober.",
+   "Third, since participants were not informed that response variability was being used as an index of task performance, we might expect that a cannabis-related response bias ought to influence mind-wandering reports and not response variability, thus reducing the relation between the two measures; however, we found that the relation between mind-wandering reports and response variability was unaffected by cannabis use."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 199,
+  "n_eligible": 170
+ },
+ "06": {
+  "sentences": [
+   "Therefore, it is crucial to identify and track the presence of prototype components and SGD metabolites in blood at different time points to study the effective substances and their underlying mechanisms of action against liver injury.",
+   "Similarly, Chen et al. [11] conducted qualitative analysis of drug-containing serum samples at nine time points within 6 h and detected 32 blood-entering components of SGD, including 17 prototype components and 15 metabolites.",
+   "A total of 79 prototype components were detected in the serum samples in the positive ion mode, and 11 of these were detected at all time points, including liquiritigenin, isoliquiritigenin, vitexin, glycyrrhetinic acid, isoglycyrrhetinic acid, macedonian acid, diisobutyl phthalate, dibutyl phthalate, methyl linoleate, linoleic acid, and pinocembrin.",
+   "A total of 79 prototype components and 527 metabolites were detected in serum samples collected at 10 different time points, including flavonoids, terpenoids, volatile oils, organic acids, alkaloids, coumarins, etc.",
+   "This study utilized the UPLC-Q-TOF-MS/MS technology to dynamically monitor and analyze the blood-entered prototype components and corresponding metabolites of SGD at different time points, which may be the key active components of the anti-hepatic injury effects of SGD."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 185,
+  "n_eligible": 145
+ },
+ "07": {
+  "sentences": [
+   "In this section, we adopt the quality-centric data evaluation framework for the case study of predicting of ASO compounds including defining the relevant DQ measurements.",
+   "The derived measurements represent the quality of the ASO data in the three datasets, which serve as input to the unsupervised ML method.",
+   "The quality-centric data evaluation framework is tested on the G1 dataset resulting in the grouping of the data into three clusters as shown in Fig. 8(a).",
+   "After the data were clustered according to the quality measurements, the hypertuned Gradient Boost model was applied to the three clusters.",
+   "The variant performance of the ML model in each of the clusters represented by quantitative statistical metrics, such as the rmse and R2 in this case study, offers a quantitative representation of the quality of the data records belonging to each cluster."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 360,
+  "n_eligible": 267
+ },
+ "08": {
+  "sentences": [
+   "This study presents the development and characterization of polycaprolactone (PCL) nanoparticles (NPs) functionalized with α-amylase, specifically designed for the degradation of Staphylococcus aureus biofilms in hospital environments.",
+   "Finally, to confirm the enzyme's coupling to nanoparticles, FT-IR spectra of the starting α-amylase powder and PCL-COOH were compared with those of the respective untreated (PCL NPs) and enzyme conjugated nanoparticles (NPs + α-amylase) (Fig. 4).",
+   "As we can see from the graph in Fig. 5, fresh α-amylase conjugated NPs showed a biofilm degradation of (37.5 ± 10.8)%, comparable to that one of (46.4 ± 12.2)% obtained by the fresh free enzyme molecules, confirming a successful immobilization.",
+   "The graph also compare the residual antibiofilm activity over time of fresh and one week old free enzyme and α-amylase conjugated NPs.",
+   "The results demonstrated the effective catalytic activity of the selected enzyme, namely α-amylase, towards the EPS matrix and the enhanced enzyme stability thanks to its immobilization on nanoparticles."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 140,
+  "n_eligible": 117
+ },
+ "09": {
+  "sentences": [
+   "Collectively, these findings suggest that the AP firing and waveform abnormalities observed in C9-MSNs are best explained by a combination of AP initiation problems, related to AIS dysfunction, and broadly reduced slow-activated Kv channel function, impairing AP repolarization.",
+   "To investigate whether AIS abnormalities contribute to impaired excitability in C9-MSNs, we performed immunostaining for Ankyrin-G. Quantitative analysis revealed a significant reduction in AIS length, but not distance away from the soma, in C9-MSNs compared to control MSNs (Figures 6E and 6F), indicating a structurally diminished AP initiation site, confirming the phase plot data.",
+   "Given that shorter AIS length is well established to be associated with reduced excitability,39 these findings support the hypothesis that AP initiation is compromised in C9-MSNs due to AIS disruption, which likely accounts for the sustained reduction in firing frequency (hypoexcitability) despite improved AP waveform properties in the presence of NS11021.",
+   "Given the contribution of reduced BK channel function to AP repolarization kinetics in C9-MSNs and that the temporal dynamics of APs could be partially rescued using NS11021, we next tested whether enhancement of BK channel function could restore temporal fidelity of synaptic transmission.",
+   "These channels are highly expressed in striatal neurons, particularly in the somatic compartment of MSNs, and are known to shape AP repolarization and AHP dynamics.35,36,37 Importantly, activation of BK channels using the selective modulator NS11021 partially rescued AP waveform features, confirming a role for BK channel dysfunction in C9-MSNs."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 213,
+  "n_eligible": 181
+ },
+ "10": {
+  "sentences": [
+   "A de novo assembly of the C. lanceolata genome was performed using PacBio reads (1,113.16 Gb in total) along with Illumina whole-genome sequencing reads (516.42 Gb in total) (Tables S1 and S2), resulting in an assembled genome of 11.24 Gb with a contig N50 value of 2.16 Mb (Table 1; Table S3).",
+   "Upon comparing the genomes of 19 plant species, we observed 1,860 expanded gene families within the C. lanceolata genome, with 120 of these families showing significant expansion (p < 0.01) (Figure 1B; Table S10; Figure S3).",
+   "A total of 3,623 genes were uniquely present in our assembly but absent from the genome of the C. lanceolata assembly of Shirasawa et al.; these were classified into three categories: true gene loss (11 genes), highly divergent sequences (433 genes), and sequences with altered start or stop codons (3,179 genes).",
+   "Among phylogenetic trees (Figures S7A and S7B), the concatenated tree based on amino acid sequences strongly supported G. biloba and Cycas panzhihuaensis clustering together and being sister to all other extant gymnosperms, while T. wallichiana and C. lanceolata formed a sister group of Gnetales (W. mirabilis and G. montanum)–Pinaceae (A. alba, P. abies, and P. taeda) (Figure S7A).",
+   "Based on the phylogenetic tree, gene family expansion and loss rates were inferred using CAFÉ 4.2 ( https://github . com/hahnlab/CAFE).52 Functional enrichment analysis was conducted on genes belonging to significantly expanded and contracted gene families in C. lanceolata."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 315,
+  "n_eligible": 252
+ },
+ "11": {
+  "sentences": [
+   "CC10137 was further evaluated in a Walker-256-induced bone cancer pain model in rats (rBCP) to assess its long-term efficacy, as rats are routinely used for long-term behavioral testing according to WuXi AppTec’s standard operating procedures (Figure 4E).",
+   "With the exception of the rat bone cancer pain model, which used female animals, all other studies were conducted using male animals following WuXi AppTec’s standardized protocols.",
+   "The study was conducted at WuXi AppTec following their standardized in vivo pharmacology protocol for mice cancer pain model assessment.",
+   "The study was conducted at WuXi AppTec following their standardized in vivo pharmacology protocol for rats bone cancer pain model assessment.",
+   "All mechanical allodynia testing was performed at WuXi AppTec following their standardized in vivo pharmacology protocol for pain behavioral assessment."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 348,
+  "n_eligible": 266
+ },
+ "12": {
+  "sentences": [
+   "Next, we developed FGFR4-targeted ADCs using microtubule and Topo I inhibitors, both of which are standard-of-care agents for RMS, including in the relapsed setting.2 For the microtubule inhibitor-based ADC, we conjugated the FGFR4-specific mAb 3A11 to MMAE via a commonly used protease-cleavable VC-PABC linker, generating α-FGFR4-vc-MMAE (Figure 2A).",
+   "Both ADCs exhibited the most significant cytotoxic activity in cell lines with high FGFR4 expression, RMS559 and JR (Figure 2B; Table S1).",
+   "In contrast, the isotype control ADCs showed no cytotoxicity in any FGFR4-expressing RMS cell lines, nor did FGFR4-targeted ADCs have any effect on FGFR4-KO cell lines (RH30 KO and RH4 KO) or the human fibroblast 7250 cell line lacking FGFR4 expression, confirming the target specificity of FGFR4-directed ADCs (Figure 2B; Table S1).",
+   "At 11 nM (1.67 μg/mL), α-FGFR4-vc-MMAE exhibited clear bystander killing that suppressed the growth of FGFR4 KO cells, whereas neither α-FGFR4-NNβA-exatecan at 22 nM (3.33 μg/mL) nor control ADCs showed any significant growth suppression of FGFR4 KO cells (Figure 3F), demonstrating the dependence of FGFR4 expression for the bystander activity of α-FGFR4-vc-MMAE ADC.",
+   "Although both FGFR4-targeted ADCs exhibited comparable in vitro efficacy in RMS559 and RH4 cell lines, in vivo studies have demonstrated that the exatecan-based ADC provided superior and more durable tumor control despite differences in dosing, leading to improved survival compared with the MMAE-based ADC."
+  ],
+  "verbatim_ok": true,
+  "n_sentences_total": 236,
+  "n_eligible": 190
+ }
+}

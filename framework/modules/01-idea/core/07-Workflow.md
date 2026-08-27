@@ -97,6 +97,33 @@ memory and produce them all at the end.
 | 5. Interrogate | `state.open_questions` |
 | 6. Bound | draft brief — scope |
 
+## Ask the differentiation question during pass 2
+
+**Criterion 9, and it is an operator question, not an inference.** Pass 2 separates the
+solution from the problem, which is the moment the absence of a differentiating position
+becomes visible — and the moment you will be most tempted to supply one.
+
+Ask it in their words:
+
+> **Do you already know what will make this different from what exists — or do you want the
+> research to work that out?** Either answer is fine. If you have a view, I will record it as
+> a claim the research can refute rather than as a premise.
+
+| Their answer | Record |
+| --- | --- |
+| A differentiating thesis | `differentiation_stance: committed`, thesis **verbatim** in `differentiation_thesis`, tagged `[assumption: needs validation]` |
+| "I don't know yet — find it" | `differentiation_stance: category`, their words in the brief |
+| A sentence that does not identify who it is for, what it does, or what changes | Not a stance answer — that is criterion 1, and the fix is more words from them |
+
+**Do not infer it from how the idea reads.** A clear sentence about a crowded category reads
+exactly like a vague one, and the two need opposite responses. **`category` is a valid
+starting state**; supplying a differentiator on their behalf creates a premise eleven modules
+inherit.
+
+**Say the obligation out loud when they answer `category`:** *"Then 07-strategy has to name
+which option supplies it, or report that the research found none — and I'll carry that
+forward."*
+
 ---
 
 # Step 4 — Assemble the Idea Brief

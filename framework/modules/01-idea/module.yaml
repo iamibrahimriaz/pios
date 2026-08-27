@@ -6,12 +6,13 @@ consumes: [state.raw_idea]
 produces: [idea_brief, clarifying_questions, initial_assumptions, scope_boundaries]
 feeds_deliverables: [research-dossier, prd, executive-summary]
 gate:
-  - Raw idea restated in one unambiguous sentence
+  - Raw idea restated in one sentence naming who it is for, what it does and what changes
   - Geography / market and regulatory jurisdiction named
   - Delivery surface named by the operator — web, mobile, desktop, API or other
   - Buyer and user distinguished (may be the same, must be stated)
-  - ">= 5 clarifying questions asked and answered or explicitly deferred"
+  - ">= 5 clarifying questions asked, each satisfying the asking test"
   - All initial assumptions tagged per engine/evidence-policy.md
   - The single load-bearing assumption named among those tagged
   - A pre-mortem recorded — what would make this idea not worth doing — before research begins
+  - Differentiation stance recorded as vague, category or committed, with a committed thesis stated verbatim
 on_fail: halt and request input from the human operator

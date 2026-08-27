@@ -226,6 +226,11 @@ For every entity with a lifecycle:
 - [ ] Criterion 2 — capability coverage, both directions
 - [ ] Criterion 3 — obligations traced to mechanisms
 - [ ] Criterion 4 — stack trade-offs stated
+- [ ] Criterion 5 — regulated columns listed by name
+- [ ] Criterion 6 — every obligation mapped to a mechanism, or a blocker with a named owner
+- [ ] Criterion 7 — every external integration contract marked `verified` or `inferred`
+- [ ] Each inferred contract names the step that verifies it, and that step is stated to block implementation
+- [ ] Inferred contracts are named in the handoff's own text, not only tagged inside the interface table
 - [ ] Cost check
 - [ ] Load check
 - [ ] Provenance check

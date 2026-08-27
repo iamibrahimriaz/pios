@@ -294,6 +294,11 @@ teaches the team to tolerate all of them.
 <!-- Move 6. This is where the TRUE cost to serve finally exists. `09-technology` costed
      the infrastructure; support and compliance are the lines that get forgotten. -->
 
+**Scope of this cost model:** «what is actually shipping — name it. If `07-strategy` cut the
+backend, the accounts or the paid tier out of the MVP, this table costs the smaller product
+and `06-business`'s figure costs the larger one. **Both are right. Say which is which here,
+because this is the number the operations plan, the architecture and the proposal all copy.**»
+
 | Item | Monthly at launch | At target scale | Driver | Source |
 | --- | --- | --- | --- | --- |
 | Infrastructure | «figure» | «figure» | «what grows it» | `09-technology` §12 |
@@ -308,11 +313,48 @@ teaches the team to tolerate all of them.
 | Users at launch | «n», from `06-business` |
 | **True cost per user at launch** | «figure» |
 | Ceiling from `06-business` | «figure» |
+| **Scopes match?** | «yes / no — if `06-business` costed a product this MVP does not ship, say so before comparing. A ceiling and a cost that describe different products do not compare» |
 | **Within ceiling** | «yes / no» |
 
 **If no:** «this is the complete cost to serve, and it breaks the business model. Regress to
 `06-business` for the price or `07-strategy` for the scope. Do not absorb it by assuming
 support takes less time than stated.»
+
+---
+
+## 11a. If the Ceiling Is Still Breached After a Regress
+
+<!-- Criterion 5, third outcome. Fill this ONLY when a regress to 06-business or 07-strategy
+     was made and the gap did not close. Leave the whole section out otherwise. -->
+
+**Regresses made, and what each bought:**
+
+| # | What changed | Where | Cost before | Cost after | Gap closed? |
+| --- | --- | --- | --- | --- | --- |
+| 1 | «price change / scope reduction» | «06-business / 07-strategy» | «figure» | «figure» | «no» |
+| 2 | «...» | | | | «no» |
+
+| | |
+| --- | --- |
+| **Residual gap** | «figure per period — and what it is a gap between» |
+| **What the regresses addressed** | «the cost driver they moved» |
+| **What the residual gap is made of** | «the driver they did not move» |
+
+**A third narrowing round:** «not made — the remaining driver is «what», which scope reduction
+does not touch» / «made, and it targets «named driver» that the first two did not»
+
+**Escalated to the viability decision:** «Q«n» — standalone venture, one product in a
+portfolio, or not built. Operator's, blocking and premise-bearing. Scope reduction cannot
+answer it, which is why it is not a gate this run can pass by working harder»
+
+| Option | What it would mean |
+| --- | --- |
+| Standalone venture | «the gap has to be closed by «what», and whether that is plausible» |
+| One product in a portfolio | «what it shares, and what the shared cost base does to the gap» |
+| Not built | «what is preserved — the research, the validated problems, the reusable evidence» |
+
+> **This travels.** The residual gap changes what the whole run recommends, so it appears in
+> the Executive Summary's opening and in the decision report — not only here.
 
 ---
 

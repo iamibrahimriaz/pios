@@ -205,8 +205,8 @@ distinguished without new evidence indicate the earlier modules stopped too earl
 | `state.decisions` | Every decision with alternatives rejected and rationale — U4 requires it |
 | `state.assumptions` | Every bet, with what would invalidate it |
 | `state.open_questions` | Anything the checkpoint must resolve |
-| Strategy §8 | The risk register |
-| Strategy §10 | Stop conditions with thresholds |
+| Strategy §9 | The risk register |
+| Strategy §11 | Stop conditions with thresholds |
 
 ---
 

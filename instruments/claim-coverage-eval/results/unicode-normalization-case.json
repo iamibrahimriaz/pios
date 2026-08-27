@@ -1,0 +1,31 @@
+{
+  "finding": "Verbatim anchoring is mechanically achievable. Its realistic failure mode is Unicode punctuation normalization, not semantics.",
+  "observed": {
+    "sentences_checked": 120,
+    "arms": 2,
+    "raw_byte_containment_failures": 1,
+    "failures_surviving_NFC_and_punctuation_fold": 0
+  },
+  "why_this_case_is_stored": "selections/arm1-model-guided.json holds the CORRECTED sentence, so the failure no longer reproduces from the stored corpus. This fixture preserves the original failing string so the finding stays testable rather than becoming an anecdote.",
+  "case": {
+    "document": "09",
+    "pmcid": "PMC13415681",
+    "sentence_index": 4,
+    "as_emitted_by_the_selector": "Together, these findings indicate coordinated reduction of multiple slow-activating Kv conductance's in C9-MSNs, consistent with a broader remodeling of repolarizing mechanisms that contributes to altered spike waveform repolarization dynamics.",
+    "as_present_in_source": "Together, these findings indicate coordinated reduction of multiple slow-activating Kv conductance’s in C9-MSNs, consistent with a broader remodeling of repolarizing mechanisms that contributes to altered spike waveform repolarization dynamics.",
+    "differing_codepoint": {
+      "emitted": "U+0027 APOSTROPHE",
+      "source": "U+2019 RIGHT SINGLE QUOTATION MARK",
+      "character_offset_in_sentence": 84
+    },
+    "raw_containment": false,
+    "containment_after_NFC_and_punctuation_fold": true
+  },
+  "engineering_consequence": "A shipped anchor check that compares raw bytes will report false anchor failures on ordinary published prose. Normalize to NFC and fold the curly/straight quote, en/em/minus dash, and non-breaking/thin/zero-width space classes on BOTH sides before comparing. Do not fold case, digits, or whitespace runs that carry meaning inside code or formulae.",
+  "fold_map_used": {
+    "’": "'", "‘": "'", "“": "\"", "”": "\"",
+    "–": "-", "—": "-", "−": "-",
+    " ": " ", " ": " ", " ": " ", " ": " ", "﻿": ""
+  },
+  "how_to_reproduce": "python3 scripts/verify_and_score.py reports 0 raw failures against the stored corrected selection. To reproduce the failure, substitute the as_emitted_by_the_selector string above into selections/arm1-model-guided.json document 09 index 4 and re-run: raw containment fails, folded containment passes."
+}

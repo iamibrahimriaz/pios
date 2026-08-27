@@ -49,6 +49,13 @@ Tags:
 - [ ] Switching-cost pain mined
 - [ ] Review and forum complaints mined
 - [ ] Workarounds identified — each is a gap with evidence attached
+- [ ] **Substitute workflows enumerated BY NAME** — the manual routine, the general-purpose
+      tool bent to the job, the thing they built themselves, the adjacent product, tolerating
+      it. Section 2a of the template
+- [ ] **Each substitute measured where a measure exists** — downloads, installs, tutorial
+      views, forum answers recommending it
+- [ ] **The silent majority accounted for.** Every other source in this stage is a complaint,
+      and complaints only come from people who adopted something and were disappointed
 - [ ] Out-of-hours cost captured
 - [ ] Problems recorded in the person's own framing
 - [ ] No filtering applied during collection
@@ -155,6 +162,10 @@ Tags:
 - [ ] Criterion 2 — three verified problems, **or shortfall declared honestly**
 - [ ] Criterion 3 — sharpest problem identified and defended
 - [ ] Criterion 4 — unvalidated problems listed separately
+- [ ] Criterion 5 — substitute workflows enumerated by name, including what people who use nothing do
+- [ ] Criterion 6 — the corpus states its selection rule, and the independence test is answered in writing
+- [ ] Counts are normalized, or cross-source comparison is explicitly refused
+- [ ] All six biases in `knowledge/Corpus-Selection.md` addressed, each with what was done about it
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
@@ -176,6 +187,9 @@ Re-run the module if any of these are true:
 - [ ] A preference appears in the scoring table
 - [ ] A symptom is being treated as the problem
 - [ ] The workaround dimension is missing
+- [ ] **The workaround column is scored but section 2a names no substitute that justifies it**
+- [ ] **A substitute larger than the entire product category was found and recorded as a
+      footnote rather than put in front of the operator**
 - [ ] Validated and assumed problems share a section
 - [ ] The validated list was padded with inference
 - [ ] No single sharpest problem was chosen

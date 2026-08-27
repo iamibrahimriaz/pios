@@ -215,7 +215,7 @@ Overall confidence: **«high | medium | low»**
 - [ ] Market defined by boundary, not adjective
 - [ ] TAM/SAM/SOM each sourced or explicitly marked assumption
 - [ ] >= 3 trends with direction and evidence
-- [ ] Regulatory constraints for the named jurisdiction identified
+- [ ] Regulatory constraints for the named jurisdiction identified, including its general data-protection regime
 - [ ] >= 2 segments with a stated reason for prioritizing one
 - [ ] Jobs stated as jobs, not features
 - [ ] Current workflow documented including tools being replaced

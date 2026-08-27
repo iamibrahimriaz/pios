@@ -83,6 +83,68 @@ If a claim cannot be verified:
 A deliverable that says *"we assumed $40/month; untested; validate before build"* is honest
 and useful. One that silently asserts $40/month is a liability.
 
+## Three different reasons a claim is unverified — do not conflate them
+
+The tag is the same in all three cases. **What happens next is not**, and recording the wrong
+reason sends the run down the wrong path.
+
+| Reason | Where it is handled |
+| --- | --- |
+| **No retrieval capability.** The agent cannot search at all | `gates.yaml` → `degraded_mode` |
+| **Retrieval works; the evidence needs a person, and no person is reachable yet** | `remote-validation.md` — work the public ladder to its edge, then state the edge |
+| **Retrieval works; the evidence does not exist in retrievable form at all** | `remote-validation.md` establishes it, and if a gate depends on it, `gates.yaml` → `conditional_continuation` |
+
+**The second and third are the common cases and neither is a research failure.** Reaching the edge
+of public evidence and naming it precisely is completed work — it produces the fieldwork plan, and
+the absence of a public corpus is frequently evidence about the market in its own right.
+
+**None of the three lowers the evidence bar.** A claim reached remotely is tagged by its source
+exactly as any other, and no amount of searching converts an `[assumption]` into a `[verified]`.
+
+---
+
+# Six Claims That Are Routinely Collapsed
+
+**A tag says how well a claim is evidenced. It does not say what the claim is about** — and the most
+expensive errors this framework can produce come from evidence for one claim being read as evidence
+for another.
+
+**These are six different claims. Each needs its own evidence, and passing a gate on one never
+passes another.**
+
+| # | Claim | Established by | Says nothing about |
+| --- | --- | --- | --- |
+| 1 | **Existence** — the problem happens | Any firsthand report of it happening | How often, or to whom |
+| 2 | **Frequency** — how often, per what | A count over a stated denominator | Whether it matters when it happens |
+| 3 | **Severity** — how bad it is when it happens | The consequence the sufferer states | Whether it cost them anything |
+| 4 | **Business impact** — what it costs | Money, customers, data or hours **named by the person who lost them** | Whether they would pay to prevent it |
+| 5 | **Solution demand** — they want it fixed | Built workarounds, paid substitutes, active searching | Whether they would pay *you* |
+| 6 | **Willingness to pay** — they will pay, at a price | Money moved, or the strongest available proxy | Retention, or that the price is right |
+
+> **The gap between 4 and 6 is where products die.**
+>
+> A problem can be real, recurring, cross-vendor and expensively documented, and people will still
+> not pay to prevent it. That is the ordinary fate of insurance products, and no volume of evidence
+> for claims 1 through 5 constitutes evidence for claim 6.
+
+**The collapse is a sentence, not a decision.** *"44 people reported losing money to this, so there
+is clearly demand"* moves from claim 4 to claim 5 in one clause, and nothing in the paragraph looks
+wrong. **The tag on that sentence is `[verified]` for the first half and `[assumption]` for the
+second, and only splitting the sentence makes that visible.**
+
+## What each module owes
+
+| Module | Establishes | Must not claim |
+| --- | --- | --- |
+| `04-problem` | 1, 2, 3, 4 | 5 or 6. A ranked problem list is not a demand signal |
+| `05-competition` | Partial 5 — people pay *someone* for something adjacent | That they will pay you, or at your price |
+| `06-business` | 6, or records it as unestablished | That problem evidence carried it |
+
+**Where claim 6 cannot be established** — and from a public corpus it never can — **the honest output
+is that it is unestablished, and a validation test that measures it becomes the first milestone.**
+See `engine/instrument-substitution.md` for the willingness-to-pay ladder, and `gates.yaml`
+`validation_outcomes`: a test that could not run has produced no evidence about the product.
+
 ---
 
 # Confidence

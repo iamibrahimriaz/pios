@@ -58,10 +58,12 @@ out, with everything else either ranked below it or explicitly excluded.
 
 ---
 
-# The Six Stages
+# The Stages
 
 ```
 User Analysis (from 03-user)
+   ↓
+0. Frame      — the corpus selection rule, before anything is read
    ↓
 1. Harvest    — collect every candidate problem
    ↓
@@ -80,6 +82,40 @@ Problem Analysis → 05-competition, 07-strategy, 08-product
 
 ---
 
+# Stage 0 — Frame the corpus
+
+**Before a single source is read.** Where the evidence comes from determines the answer more
+than the coding does, and the corpus is normally chosen in a few seconds, on grounds of
+availability, and never revisited.
+
+**Produces:** the selection rule, its exclusions, the independence answer and the
+normalization basis — written into the module document as §1a, not held in your head.
+
+| Step | What it produces |
+| --- | --- |
+| Write the **selection rule** | A rule a stranger could apply and get the same set. *"Every product in the category above «n» users with at least «n» reviews"*, not *"the main ones"* |
+| Name what it **excludes** | The sources the rule cannot see, and what is likely to live in them. A rule that only sees one directory cannot see the commercial products sold direct — often where the paying customers are |
+| Answer the **independence test** | *If the product hypothesis were different, would this still be the right place to look for this problem?* If no, the corpus is a description of the hypothesis |
+| Establish a **denominator** | Raw complaint counts measure population size. Where no denominator is obtainable, say so and make no cross-source comparison at all |
+
+> **A corpus selected by the hypothesis will confirm the hypothesis** — not through bad
+> coding, through the sampling frame, which nobody re-examines because it was never written
+> down as a decision.
+
+**This stage may not be skipped**, and it is the one whose omission is invisible: the
+inventory that follows looks identical whether the corpus was framed or grabbed.
+
+**The failure it prevents.** A run read its entire problem inventory from the two largest
+products in a category. Normalized per active user per year, both turned out to be among the
+*least* complained-about — one the lowest of any established entrant. The corpus had been
+selected for size and read as though it had been selected for severity. **The repair was not a
+correction; it was a re-rank**, which changed the sharpest problem, the strategy scoring and
+the recommendation.
+
+`knowledge/Corpus-Selection.md` carries the six biases and what each looks like.
+
+---
+
 # Stage 1 — Harvest
 
 Collect every candidate problem, without filtering.
@@ -94,13 +130,43 @@ The sources are already in hand from `03-user`:
 | Switching cost pain | Problems with the incumbent |
 | Review and forum complaints | Stated frustration, self-selected |
 | Immovables | Constraints that create problems downstream |
+| **Substitute workflows** | **What people do INSTEAD, when they use nothing in this category at all** |
 
 Record each in the person's own framing, not a cleaned-up version. "I end up doing notes
 at home after clinic" is more useful than "documentation burden".
 
 Do not filter yet. Filtering during collection loses the problem you were not looking for.
 
-**Produces:** raw `problem_inventory`
+## Enumerate the substitutes before scoring, not after
+
+**The last row is the one that gets skipped, and Stage 3 cannot be scored without it.** The
+workaround dimension asks how well the problem is already solved. Every source above it
+describes people who adopted *something in this category* and found it wanting. **The
+substitutes are what everyone else is doing** — and in most markets everyone else is the
+majority.
+
+Go and list them by name, as a research step with its own output:
+
+| Substitute class | Ask |
+| --- | --- |
+| **Do it by hand** | What does the manual version cost them, in minutes and in errors? |
+| **A general-purpose tool bent to the job** | A spreadsheet, a document, a chat thread, a saved template |
+| **Something they built themselves** | A script, a macro, a form, an internal tool. **Published DIY recipes are evidence this is widespread** |
+| **An adjacent product at a different moment** | Solves a neighboring problem well enough that this one never surfaces |
+| **Nothing — they tolerate it** | The strongest signal available, and the easiest to mistake for absence of demand |
+
+**Measure them where a measure exists.** Package downloads, template installs, the view count
+on the DIY tutorial, the number of forum answers recommending the manual route. A substitute
+two orders of magnitude larger than the whole category is not a footnote — **it is the
+finding**, and it belongs in front of the operator before anything is scored.
+
+> **The cost of skipping this stage:** the workaround column gets filled from whichever
+> substitutes happened to surface while researching something else. That biases every score
+> upward, because the alternatives nobody mentioned are the ones working well enough that
+> nobody complains about them. A module that harvests only complaints will conclude that
+> every problem is unsolved.
+
+**Produces:** raw `problem_inventory`, `substitute_workflows`
 
 ---
 

@@ -252,6 +252,7 @@ gate:
     definitions_source_and_targets: pass | fail
     leading_lagging_distinguished: pass | fail
     instrumentation_at_event_level: pass | fail
+    gaming_response_stated: pass | fail
   module_checks:
     privacy_no_regulated_properties: pass | fail
     confidence_separated: pass | fail

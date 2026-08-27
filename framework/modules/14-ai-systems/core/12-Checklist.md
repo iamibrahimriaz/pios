@@ -224,6 +224,8 @@ Per capability:
 - [ ] Criterion 2 — data availability confirmed
 - [ ] Criterion 3 — evaluation defined before commitment
 - [ ] Criterion 4 — failure modes and fallback specified
+- [ ] Criterion 5 — each alternative carries a one-sentence case written as its advocate would write it
+- [ ] Criterion 6 — every failure mode states whether the user can detect it, including when the answer is no
 - [ ] Data rights check — no regulated model input
 - [ ] Detectability check
 - [ ] Cost ratio check

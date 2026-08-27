@@ -38,37 +38,45 @@ stages:
     action: framework/deliverables/manifest.yaml
     human_checkpoint: true
 
-  - id: proposal
-    # Not automatic. Offered once at the delivery checkpoint, in one sentence.
+  - id: completion
+    # AUTOMATIC, on every completed run. Not offered, not conditional on the verdict.
     #
-    # The artifact set is written for the builder. The person who decides whether the build
-    # is funded is not the builder, will not read sixteen documents, and is answering a
-    # different question — approve, defer, or reject. Without this step the operator
-    # assembles that document by hand, and what gets dropped is the confidence level, the
-    # open decisions, the stop conditions and any gate that failed.
+    # A completed run has to be understood by several different readers and no single document
+    # serves them all. The artifact set above is written for the builder. The person who
+    # decides whether the build is funded will not read sixteen files and is answering a
+    # different question — approve, defer, or reject. Someone else decides in five minutes
+    # whether to open the proposal at all. An agent opening the folder needs to know what to
+    # read first and what not to touch, which is different again.
+    #
+    # It was optional once, and that was the defect: the operator assembled the proposal by
+    # hand, and what fell out was the confidence level, the open decisions, the stop
+    # conditions and any gate that failed.
     #
     # Derived, never re-researched: every figure already exists in the artifact set. A run
-    # that reached "do not build" still gets the offer — stopping is also a decision someone
-    # has to sign.
-    purpose: Produce the document the funding decision is actually made from.
-    modules: []
-    action: framework/engine/proposal.md
-    on_request: true
-
-  - id: handoff
-    # Not automatic. A run that reaches "do not build", or an operator still deciding, does
-    # not need this. Offered at the delivery checkpoint and run only on request.
+    # that reached "do not build" produces all of them anyway — stopping is also a decision
+    # someone has to sign, and the entry file's first job is then to say the build is blocked.
     #
-    # Writes ONE entry file at the run directory root, so that opening the folder and saying
-    # "analyze this project and start developing" is sufficient. It copies nothing: a subset
-    # assembled into a staging folder or a second repository puts two copies of the same
-    # specification in play with nothing keeping them aligned, and the build then proceeds
-    # from whichever went stale. Which documents a builder reads first is solved by stating a
-    # reading order, not by selecting files.
-    purpose: Make the run directory itself the place the building starts.
+    # The entry file copies nothing. A subset assembled into a staging folder or a second
+    # repository puts two copies of the same specification in play with nothing keeping them
+    # aligned, and the build proceeds from whichever went stale. Which documents a builder
+    # reads first is solved by stating a reading order, not by selecting files.
+    #
+    # THE MANIFEST IS THE LIST, NOT THIS BLOCK. `methods` below names where each is specified;
+    # `completion_artifacts` in the manifest is what decides which are owed. When the two
+    # disagree, an artifact declared required is silently never produced — this list held three
+    # entries while the manifest declared five, and nothing reported it.
+    purpose: >-
+      Emit one artifact per audience — the five-minute decision maker, the approver, the
+      engineering team, whoever asks what may be started, and the AI agent opening the folder.
     modules: []
-    action: framework/engine/handoff.md
-    on_request: true
+    action: framework/deliverables/manifest.yaml   # completion_artifacts — the authoritative list
+    methods:
+      - framework/engine/decision-report.md  # DECISION.md, one page, at the run root
+      - framework/engine/proposal.md         # project proposal, HTML
+      - framework/engine/presentation.md     # engineering kickoff, PPTX
+      - framework/engine/phases.md           # phases/ — the board and one document per milestone
+      - framework/engine/handoff.md          # AI entry file at the run root
+      - framework/engine/milestone-zero.md   # milestone-zero/ — CONDITIONAL, see the manifest
 
 rules:
   - A module may not start until every id in its depends_on has passed its gate.

@@ -1,0 +1,4 @@
+1. • FGFR4 is highly expressed in RMS and other cancers, with limited expression in vital organs
+2. • Internalization of 3A11 α-FGFR4 antibody correlates with FGFR4 expression
+3. • FGFR4-ADCs are cytotoxic, and their potency is associated with FGFR4 expression
+4. • FGFR4-ADCs provide durable tumor control in RMS and other FGFR4-expressing cancers

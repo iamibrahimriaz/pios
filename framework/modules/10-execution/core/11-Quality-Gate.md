@@ -105,16 +105,27 @@ last gate that can catch its absence.
 
 ---
 
-# Criterion 3 — Build handoff readable by an agent with no prior context
+# Criterion 3 — Build sequence and blocked work specified well enough for the handoff to be written from them alone
 
 **Passes when** every row of the cold-start check in §16 is yes.
 
 **Fails when** any is no, or cannot be determined.
 
-> **The cold-start test.** Could an agent or engineer open this file, with no access to the
-> research and no other document, and start writing correct code today?
+> **The cold-start test, applied to this module's own output.** Could an agent or engineer
+> open the build sequence and blocked-work list produced here, with no access to the research,
+> and know what to build first and what not to touch?
 
 Not "could understand the project" — could **start**.
+
+> **This criterion evaluates what exists NOW, not the delivered handoff artifact.**
+> `12-Build-Handoff.md` is written at the delivery stage, several modules later. A criterion
+> phrased against that artifact cannot be evaluated here — the file does not exist yet — so it
+> was either failed on a technicality or judged by hand against something imagined.
+>
+> **What this module owes is the raw material: an ordered build sequence, a definition of done,
+> and a blocked list with owners.** If those three are complete, the handoff can be written
+> from them alone. Whether the finished handoff actually reads well is checked at delivery, by
+> `validate-run.py` and the manifest's acceptance criteria.
 
 | Check | Fails when |
 | --- | --- |

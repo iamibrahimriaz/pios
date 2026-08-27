@@ -1,0 +1,51 @@
+doc,claim_no,claim_text,arm1_model_guided,arm2_mechanical,note
+01,1,Magnetically actuated miniature bamboo-fiber robots remove antibiotics efficiently,Y,Y,
+01,2,Miniature helical bamboo-fiber scaffolds form via stress-induced self-coiling,N,N,scaffold fabrication absent from both extracts
+01,3,A propulsion theory is developed for tapered magnetic helical microrobots,Y,N,
+01,4,MBFRs show high adsorption capacities and retain >90% NOR removal after 20 cycles,Y,N,
+02,1,Salinity and nutrients restructure benthic microbiota along the Yarkand River,Y,Y,
+02,2,"Bacterial diversity declines downstream, whereas fungal diversity varies among sites",Y,N,
+02,3,Ecological drift dominates assembly despite strong environmental filtering,Y,Y,
+02,4,Desert microbial networks become denser as dispersal limitation increases downstream,Y,N,
+03,1,Ferroptosis is activated in OA cartilage and promotes degeneration,Y,N,
+03,2,p53 drives chondrocyte ferroptosis and OA progression,Y,N,arm2 extract never mentions p53
+03,3,RORα aggravates OA via p53-dependent ferroptotic signaling,Y,N,
+03,4,RORα recruits HAUSP to stabilize p53 through deubiquitination,Y,N,
+04,1,Innate like-T cells display a common impaired Th1 profile at T1D onset in adults,Y,N,
+04,2,Alterations are exacerbated in long-term patients with an exhaustion-like profile,Y,Y,
+04,3,"iNKT, γδT, and MAIT cell phenotypes also present some unique singularities",N,N,'unique singularities' stated in neither extract
+04,4,Innate-like T cell features represent potential immune-biomarkers in T1D,Y,N,
+05,1,Examined cannabis effects on mind-wandering using a naturalistic design.,Y,N,
+05,2,Cannabis decreased task performance and increased mind-wandering.,Y,N,
+05,3,Effects of cannabis were larger for spontaneous vs. deliberate mind-wandering.,Y,N,
+05,4,Cannabis use diminished instruction-related changes in mind-wandering.,Y,Y,
+05,5,Results suggest cannabis impairs the regulation of mind-wandering.,Y,Y,
+06,1,"After SGD administration, prototype components and metabolites were detected at 10 time points using UPLC-Q-TOF-MS/MS.",Y,Y,
+06,2,"Identified 79 prototype components and 527 metabolites, with flavonoids and terpenoids emerging as key active ingredients.",Y,N,
+06,3,"Characterized major metabolic processes including oxidation, reduction, glucuronidation, and sulfate esterification.",N,N,
+06,4,"Seven key components were consistently detected in both ion modes, potentially underlying SGD's hepatoprotective effects.",N,N,
+07,1,Novel data quality evaluation framework combining unsupervised learning and domain expertise.,N,N,'domain expertise' half of the conjunctive claim absent
+07,2,Automated classification of high and low-quality data through quality-sensitive clustering.,Y,Y,
+07,3,Validated on chromatography datasets to improve machine learning model performance.,Y,N,
+07,4,Reduces manual intervention in analytical chemistry data quality assessment.,N,N,
+07,5,Flexible framework design adaptable across different application domains.,N,N,
+08,1,Health care-associated infections cause significant mortality and healthcare costs.,N,N,background claim; no extract carries HAI mortality/cost
+08,2,Pathogens can persist on surfaces forming protective biofilms enabling them to spread.,N,N,background claim; biofilm persistence absent
+08,3,α-amylase was used to disperse biofilms acting on their exopolysaccharidic component.,N,Y,
+08,4,Star-shaped polycaprolactone nanoparticles were ad-hoc synthetized.,N,N,
+08,5,The presented green-based nanoplatform can be an innovative antibiofilm strategy.,Y,Y,
+09,1,C9ORF72 repeat expansion mutations cause hypoexcitability in striatal neurons,Y,Y,
+09,2,Axon initial segment shortening impairs spike initiation,Y,Y,
+09,3,Reduced potassium channel function alters spike repolarization,Y,Y,
+09,4,Spike timing deficits disrupt inhibitory microcircuit fidelity,Y,N,
+10,1,A chromosome-level genome of Cunninghamia lanceolata is presented,Y,N,
+10,2,Cupressaceae forms a sister group to Gntales-Welwitschia and pine clade among conifer,N,N,arm1 extract states a different phylogenetic topology
+10,3,"No ancient polyploidization exists in C. lanceolata, seed-plant-shared WGD is confirmed",N,N,
+10,4,Astringent seeds formation and reproductive organs’ evolution are explored,N,N,
+11,1,CC10137 is a peripherally restricted α2AAR agonist with oral bioavailability,Y,N,arm2 extract is entirely contract-research boilerplate
+11,2,"It provides broad-spectrum analgesia without sedation, hypotension, or hypothermia",Y,N,arm2 extract is entirely contract-research boilerplate
+11,3,It preserves protective spinal reflexes and offers opioid-sparing potential,Y,N,arm2 extract is entirely contract-research boilerplate
+12,1,"FGFR4 is highly expressed in RMS and other cancers, with limited expression in vital organs",N,N,expression-in-normal-organs claim absent from both
+12,2,Internalization of 3A11 α-FGFR4 antibody correlates with FGFR4 expression,N,N,
+12,3,"FGFR4-ADCs are cytotoxic, and their potency is associated with FGFR4 expression",Y,Y,
+12,4,FGFR4-ADCs provide durable tumor control in RMS and other FGFR4-expressing cancers,Y,N,

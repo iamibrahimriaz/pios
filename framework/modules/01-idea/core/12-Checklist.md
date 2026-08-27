@@ -120,6 +120,26 @@ And for each assumption recorded:
 
 ---
 
+# Pre-Mortem — before the existence check, not at assembly
+
+**This pass exists where it does for one reason: criterion 8 says "before research begins",
+and the existence check below IS research.** A run that filled the pre-mortem during Brief
+Assembly — where the template section sits — had already searched the field, and the honest
+answer to the template's own *"recorded before research began"* field was always No.
+
+The pre-mortem's entire value is that it was written while the idea was still attractive. **A
+pre-mortem that agrees with the research proves nothing if the research came first.**
+
+- [ ] Written **now**, before a single search is run
+- [ ] Three failures, each with a class and the early signal that would show it
+- [ ] The one that would be hardest to admit — named, not softened
+- [ ] Written straight into §11 of `projects/<slug>/research/01-idea.md`, which is created
+      at this point rather than at assembly
+- [ ] **Never edited afterwards.** Later evidence goes in §12, the adversarial review, or in
+      the module output — not back into this section
+
+---
+
 # Research
 
 - [ ] Existence check performed, or explicitly recorded as not possible
@@ -133,6 +153,8 @@ And for each assumption recorded:
 # Brief Assembly
 
 - [ ] `13-Template.md` filled into `projects/<slug>/research/01-idea.md`
+- [ ] **§11 left exactly as the pre-mortem pass wrote it** — it is the one section assembly
+      does not touch
 - [ ] Every `«placeholder»` replaced
 - [ ] Every guidance comment removed
 - [ ] Every factual claim carries exactly one evidence tag
@@ -168,7 +190,7 @@ If the adversarial pass produced nothing, it was not performed honestly. Re-run 
 
 # Gate
 
-- [ ] Criterion 1 — unambiguous sentence
+- [ ] Criterion 1 — who it is for, what it does, what changes. **Not differentiation**
 - [ ] Criterion 2 — jurisdiction named
 - [ ] Criterion 3 — delivery surface named by the operator, with an order if more than one, not inferred
 - [ ] Criterion 4 — buyer and user distinguished
@@ -176,6 +198,7 @@ If the adversarial pass produced nothing, it was not performed honestly. Re-run 
 - [ ] Criterion 6 — assumptions tagged
 - [ ] Criterion 7 — the single load-bearing assumption named
 - [ ] Criterion 8 — pre-mortem recorded before research began
+- [ ] Criterion 9 — differentiation stance recorded as `category` or `committed`, established with the operator and not inferred; a committed thesis verbatim and tagged
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 
@@ -210,6 +233,9 @@ Stop and re-run the module if any of these are true:
 - [ ] The brief could be mistaken for the original idea
 - [ ] Fewer than five assumptions were surfaced
 - [ ] The jurisdiction was inferred
+- [ ] The stance was recorded as `vague` for a sentence that names who, what and the change — that is `category`, and it is valid
+- [ ] The stance was inferred from how the idea reads rather than established with the operator
+- [ ] One user row was filled for a product with more than one distinct role
 - [ ] Every claim is tagged `[verified]`
 - [ ] No question would change the work if answered differently
 - [ ] There is no "out of scope" section

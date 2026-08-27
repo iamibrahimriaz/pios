@@ -11,6 +11,8 @@ gate:
   - MVP cut line drawn with the reasoning recorded
   - Explicit non-goals listed
   - Risks registered with likelihood, impact and mitigation
-  - The expected winner recorded before scoring begins
+  - The expected winner recorded before scoring begins, with its independence marked
   - If 04-problem declared a shortfall, the weight it changed is named, and whether the winner would differ without it
+  - Each option marked carried_from_research or generated_here, and a generated winner states what its missing research would have tested
+  - If 01-idea recorded stance `category`, the option supplying the differentiation is named, or the research is stated to have found none
 on_fail: return to 04-problem

@@ -1,0 +1,4 @@
+1. • C9ORF72 repeat expansion mutations cause hypoexcitability in striatal neurons
+2. • Axon initial segment shortening impairs spike initiation
+3. • Reduced potassium channel function alters spike repolarization
+4. • Spike timing deficits disrupt inhibitory microcircuit fidelity

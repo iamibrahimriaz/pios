@@ -282,6 +282,50 @@ Avoid optimizing only for today's requirements.
 
 ---
 
+# Principle 16 — Preserve Uncertainty Rather Than Reduce It
+
+**Accurate uncertainty outranks unsupported confidence.**
+
+Principle 2 governs what to do when evidence exists. This one governs what to do when it does not,
+and it is the harder case, because the pressure at that moment is always toward producing something
+that sounds more solid than the evidence supports.
+
+Several mechanisms in this framework implement this principle — three evidence tags with no partial
+credit, mechanically computed confidence, the refusal to fabricate, the declared shortfall,
+pre-registration of expectations. **They are implementations. This is the rule they implement**, and
+it is stated here because a principle that exists only as implementations is removed one
+implementation at a time, each removal locally reasonable, and none of them obviously the moment the
+property was lost.
+
+## What this requires
+
+1. **A finding that cannot be established is reported as unestablished.** It is never estimated into
+   existence to complete a section, and a section is never filled with a plausible value because it
+   would look incomplete otherwise.
+2. **Confidence is computed from the evidence standing of load-bearing claims. It is never
+   asserted**, and never adjusted to match the tone of a conclusion.
+3. **No downstream step may raise the standing of an upstream claim.** Restating an assumption in a
+   later artifact does not convert it into a finding, however many artifacts repeat it.
+4. **Where a required output cannot be produced honestly, report the impossibility and what would
+   resolve it** — rather than producing a lower-quality version of the output that reads as though
+   it were the real thing.
+
+## What this does not mean
+
+It is not a license to leave work undone. Uncertainty that could be resolved by available research
+is a gap, not a finding. **The distinction is whether the evidence exists and was not obtained, or
+does not exist in any form this run can reach.**
+
+Nor does it constrain how something is written. Simplifying prose, structure or length is untouched.
+**Simplifying away the record of what is not known is what this prohibits.**
+
+**Remember**
+
+> The most useful sentence a research framework can produce is often the one admitting what it could
+> not find out.
+
+---
+
 # Applying These Principles
 
 Every task should naturally follow this flow.

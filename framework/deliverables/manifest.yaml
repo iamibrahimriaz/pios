@@ -4,12 +4,105 @@
 #
 # A run is complete when every `required` artifact below exists in
 # projects/<slug>/deliverables/, passes its acceptance criteria, and carries
-# compliant evidence tags.
+# compliant evidence tags — AND every required `completion_artifact` at the
+# bottom of this file exists at its stated path.
+#
+# ---------------------------------------------------------------------------
+# FOUR AUDIENCES, AND ONE OF THEM READS A SINGLE PAGE
+#
+# A completed run has to be understood by three different readers, and no single
+# document serves all three. The specification below is written for the builder.
+# The person who decides whether the build happens will not read sixteen files,
+# and the two the builder works from answer a question they are not asking. An
+# AI agent opening the folder needs to know what to read first and what not to
+# touch, which is a third thing again.
+#
+# Expecting one artifact set to serve all three produced the same failure every
+# time: the operator assembled a proposal by hand, under time pressure, from
+# documents written for a different reader — and what got dropped in that
+# assembly was predictable. The confidence level, the open decisions, the stop
+# conditions, the gate that failed. Exactly the parts that make an approval
+# honest, and the parts that feel least helpful to include when asking for money.
+#
+# So the framework emits a dedicated artifact per audience, produced by the same
+# discipline as everything else, and none of them is optional.
+#
+# THE FOURTH AUDIENCE IS THE ONE WHO DECIDES IN FIVE MINUTES. Operator feedback,
+# recorded after a completed run: the proposal is the right document for an
+# approval meeting and the wrong one for the first thirty seconds. Founders read
+# a page, then decide whether to open anything larger. Without a page written for
+# them, they make that decision from the executive summary's opening paragraph —
+# which was written to introduce a document, not to be the whole answer.
+#
+# THE FIFTH ARTIFACT IS CONDITIONAL, AND IT EXISTS BECAUSE OF THE SAME FEEDBACK.
+# A run that concludes "validate before building" has told the operator what is
+# unresolved and left them to design the validation. The most valuable thing that
+# run can emit is the week of work that resolves it, written out. It is required
+# whenever the strategy commits to Milestone Zero, and absent otherwise.
+# ---------------------------------------------------------------------------
 
-version: 1
+version: 4
 
 output_dir: projects/<slug>/deliverables/
 templates_dir: framework/deliverables/templates/
+
+# ---------------------------------------------------------------------------
+# LAYOUT — GROUPED BY WHEN IT IS READ, NOT BY WHO PRODUCED IT
+#
+# Every artifact sits in a folder. The folder is the reading unit: an agent
+# implementing an endpoint opens `03-technical/` and needs nothing from
+# `01-research/` to do it, and a folder that is complete is visibly complete.
+#
+# THE FILENAMES DID NOT CHANGE, AND THEIR NUMBERING IS STILL GLOBAL. `01-research/`
+# holds 01, 02 and 10. That looks untidy and it is deliberate: the number is the
+# document's identity across every cross-reference in the framework, and the
+# folder is a second axis over it rather than a replacement. Renumbering per folder
+# would make `03-PRD.md` mean two different things depending on where it was cited.
+#
+# WHY NOT MORE FOLDERS, WITH SMALLER FILES IN THEM. Because two properties break at
+# once. `final_gate` requires that no artifact contradicts another — at 17 artifacts
+# a person can hold that; at fifty it is 1,225 pairs and the gate becomes decorative.
+# And every required heading is a place that gets filled whether the evidence exists
+# or not, which is the failure `engine/evidence-policy.md` exists to prevent. A
+# specification is not made more complete by being cut into more pieces.
+#
+# ONE ARTIFACT IN PARTICULAR MUST NOT BE SPLIT. `12-Build-Handoff.md` is `critical`
+# and its acceptance says an agent could open it and start writing code today. Shard
+# it across folders and no file passes that test any more — the single document that
+# most helps a builder is the one fragmentation destroys.
+# ---------------------------------------------------------------------------
+
+folder_layout:
+
+  # Emitted into every folder that received at least one artifact. Its criteria are
+  # COPIED from the `acceptance` blocks below, verbatim — the folder-level file is a
+  # convenience for whoever is working in that folder, never a second source of truth.
+  # validate-run.py compares them character for character, so a criterion softened on
+  # the way in is a failed run rather than a quiet divergence.
+  acceptance_file: _acceptance.md
+  acceptance_template: _Folder-Acceptance.md
+
+  folders:
+
+    - id: 00-decision
+      purpose: The recommendation and what it rests on
+      reader: whoever decides whether this gets built
+
+    - id: 01-research
+      purpose: The evidence base, and the limits of it
+      reader: anyone auditing how a conclusion was reached
+
+    - id: 02-product
+      purpose: What the product is, who it is for, and how it wins
+      reader: product, design, and the engineer who needs to know why
+
+    - id: 03-technical
+      purpose: How it is built
+      reader: engineering, and a coding agent implementing a specific piece
+
+    - id: 04-delivery
+      purpose: How it ships, in what order, and how it is run afterwards
+      reader: whoever builds it and whoever operates it after launch
 
 # Each artifact's template is templates_dir + its `file` value.
 # Templates carry three conventions:
@@ -23,6 +116,7 @@ artifacts:
 
   - id: executive-summary
     file: 00-Executive-Summary.md
+    folder: 00-decision
     required: true
     audience: founder, investor, decision maker
     fed_by: [01-idea, 02-market, 05-competition, 06-business, 07-strategy]
@@ -35,6 +129,7 @@ artifacts:
 
   - id: research-dossier
     file: 01-Research-Dossier.md
+    folder: 01-research
     required: true
     audience: product, strategy, anyone auditing the reasoning
     fed_by: [01-idea, 02-market, 03-user, 04-problem, 05-competition, 06-business]
@@ -47,6 +142,7 @@ artifacts:
 
   - id: problem-validation
     file: 02-Problem-Validation.md
+    folder: 01-research
     required: true
     audience: product, founder
     fed_by: [04-problem]
@@ -58,6 +154,7 @@ artifacts:
 
   - id: prd
     file: 03-PRD.md
+    folder: 02-product
     required: true
     audience: engineering, design, delivery agent
     fed_by: [01-idea, 03-user, 04-problem, 05-competition, 06-business, 07-strategy, 08-product, 12-metrics, 14-ai-systems]
@@ -70,6 +167,7 @@ artifacts:
 
   - id: feature-spec
     file: 04-Feature-Spec.md
+    folder: 02-product
     required: true
     audience: engineering, delivery agent
     fed_by: [07-strategy, 08-product]
@@ -80,6 +178,7 @@ artifacts:
 
   - id: data-model
     file: 05-Data-Model.md
+    folder: 03-technical
     required: true
     audience: engineering, delivery agent
     fed_by: [09-technology]
@@ -92,6 +191,7 @@ artifacts:
 
   - id: api-contract
     file: 06-API-Contract.md
+    folder: 03-technical
     required: true
     audience: engineering, delivery agent
     fed_by: [09-technology]
@@ -103,6 +203,7 @@ artifacts:
 
   - id: architecture
     file: 07-Architecture.md
+    folder: 03-technical
     required: true
     audience: engineering, technical founder
     fed_by: [09-technology, 10-execution]
@@ -114,6 +215,7 @@ artifacts:
 
   - id: ux-flows
     file: 08-UX-Flows.md
+    folder: 02-product
     required: true
     audience: design, engineering
     fed_by: [03-user, 10-execution]
@@ -125,6 +227,7 @@ artifacts:
 
   - id: roadmap
     file: 09-Roadmap.md
+    folder: 04-delivery
     required: true
     audience: founder, delivery
     fed_by: [07-strategy, 10-execution, 11-growth]
@@ -136,6 +239,7 @@ artifacts:
 
   - id: risks-and-assumptions
     file: 10-Risks-and-Assumptions.md
+    folder: 01-research
     required: true
     audience: founder, investor
     fed_by: [07-strategy, all]
@@ -147,6 +251,7 @@ artifacts:
 
   - id: success-metrics
     file: 11-Success-Metrics.md
+    folder: 02-product
     required: true
     audience: founder, product, engineering
     fed_by: [12-metrics]
@@ -158,6 +263,7 @@ artifacts:
 
   - id: build-handoff
     file: 12-Build-Handoff.md
+    folder: 04-delivery
     required: true
     audience: a coding agent or engineering team with no prior context
     fed_by: [08-product, 09-technology, 10-execution, 12-metrics, 13-operations, 14-ai-systems]
@@ -172,6 +278,7 @@ artifacts:
 
   - id: engineering-setup
     file: 16-Engineering-Setup.md
+    folder: 04-delivery
     required: true
     audience: the engineer or coding agent building this, from day one to launch day
     fed_by: [09-technology, 10-execution, 13-operations]
@@ -199,6 +306,7 @@ artifacts:
 
   - id: operations-plan
     file: 14-Operations-Plan.md
+    folder: 04-delivery
     required: true
     audience: whoever runs the product after launch — often the founder alone
     fed_by: [02-market, 09-technology, 13-operations, 14-ai-systems]
@@ -221,6 +329,7 @@ artifacts:
 
   - id: growth-plan
     file: 13-Growth-Plan.md
+    folder: 02-product
     required: false
     audience: founder, whoever owns acquisition
     fed_by: [03-user, 05-competition, 06-business, 11-growth]
@@ -236,6 +345,7 @@ artifacts:
 
   - id: ai-strategy
     file: 15-AI-Strategy.md
+    folder: 03-technical
     required: false
     audience: engineering, founder, whoever is accountable for a wrong output
     fed_by: [14-ai-systems]
@@ -244,9 +354,235 @@ artifacts:
       - Evaluation method defined before commitment
       - Failure modes and human fallback specified
 
+# ===========================================================================
+# COMPLETION ARTIFACTS — one per audience, emitted by every completed run.
+#
+# These are NOT optional outputs and they are NOT offered. A run that produced
+# the artifact set above and stopped has finished the research and not finished
+# the job: the specification exists and nobody outside the build team can act
+# on it.
+#
+# They differ from the artifacts above in three ways, which is why they are
+# listed separately rather than mixed in:
+#
+#   1. They are written OUTSIDE deliverables/, at `path` relative to the run
+#      root — because the entry file must sit where an agent opening the folder
+#      will find it, and the other two are not part of the specification.
+#   2. Two of them are not markdown, so the placeholder scan, the evidence-tag
+#      scan and the identifier checks that apply to deliverables/ do not.
+#   3. They are DERIVED. Every figure in them already exists in deliverables/.
+#      They select and arrange; they never establish. If one needs a number no
+#      artifact carries, that is a finding — write that it is not established.
+#      Computing one here creates a figure with no evidence tag, in the document
+#      most likely to be quoted back at the team for a year.
+#
+# `method` names the engine document that specifies how each is produced.
+# `template` names the file under templates_dir that it starts from.
+# ===========================================================================
+
+completion_artifacts:
+
+  - id: project-proposal
+    path: proposal/proposal.html
+    format: html
+    template: 17-Project-Proposal.html
+    method: engine/proposal.md
+    required: true
+    audience: business decision makers — founder, management, investor, whoever approves this
+    acceptance:
+      - Self-contained — no external stylesheet, font, script or image
+      - The decision requested, the recommendation, the confidence level and the validation status all appear on the first page
+      - >-
+        Why development has not started is answered on the first page, or the page states
+        plainly that it has
+      - The recommendation is the run's recommendation, unchanged, with its qualifiers
+      - Any failed gate is named, never summarized into a risk
+      - Stop conditions present, and stated as binding on approval
+      - Open decisions listed with an owner and the moment each one bites
+      - >-
+        Where the run could not establish a figure, the row says so rather than being
+        omitted or filled by computation
+      - Evidence standing present, including primary research that was not conducted
+      - Prints to a page size AND reads on a phone — no horizontal page scroll at a phone width
+      - Nothing in deliverables/ was edited to match it
+
+  - id: decision-report
+    path: DECISION.md
+    format: markdown
+    template: 20-Decision-Report.md
+    method: engine/decision-report.md
+    required: true
+    audience: >-
+      the person who decides in five minutes — a founder, a sponsor, anyone who will read one
+      page and then decide whether to open the proposal at all
+    acceptance:
+      - >-
+        ONE PAGE. If it does not fit on one screen without scrolling past the next actions, it
+        has failed its only structural constraint
+      - The recommendation is the first thing on the page, in the run's own words, unchanged
+      - Confidence stated as a word, with one clause saying why it is that word and not higher
+      - >-
+        The load-bearing assumptions listed with what each one costs if it is wrong — not the
+        full register, only the ones that decide the outcome
+      - >-
+        Remaining risks stated as what could still go wrong, not as a risk-management table
+        copied from the register
+      - >-
+        Immediate next actions: what happens on Monday, who does it, and what it costs. An
+        action nobody owns is not an action
+      - Every figure on the page appears in deliverables/ — nothing computed here
+      - >-
+        Where the recommendation is conditional, the condition is on the page and not one
+        link away
+      - >-
+        It does not summarize the proposal. A reader who reads only this page and acts on it
+        has not been misled — that is the test, not completeness
+
+  - id: engineering-presentation
+    path: presentation/engineering-kickoff.pptx
+    format: pptx
+    template: 18-Engineering-Presentation.md
+    method: engine/presentation.md
+    required: true
+    audience: engineering — manager, tech lead, engineers, QA, product; and AI coding agents as supporting material
+    acceptance:
+      - 10–15 slides, sized for a 10–15 minute internal kickoff
+      - Cover states the project, the research verdict and the confidence level
+      - >-
+        What NOT to build is given equal weight to what to build, and each exclusion
+        carries its reason
+      - A system diagram and a milestone timeline are present as visuals, not as prose
+      - Tables rather than paragraphs
+      - Risks and the load-bearing assumptions are named, with what happens if each is false
+      - Milestone Zero or its equivalent validation step is a slide of its own
+      - Blocked work is listed as things to ask about, not decide
+      - Every slide carries speaker notes
+      - No shape falls outside the slide bounds
+
+  - id: ai-entry-file
+    path: CLAUDE.md
+    format: markdown
+    template: 19-AI-Entry-File.md
+    method: engine/handoff.md
+    required: true
+    audience: an AI coding agent, or an engineer, opening this folder with no prior context
+    acceptance:
+      - >-
+        A bare "analyze this project and start developing" would be sufficient — the operator
+        has to remember nothing
+      - >-
+        The standing instruction triggers on any phrasing of start / continue / build the next
+        thing, not on one exact sentence
+      - Every path it names resolves from the run root — checked, not assumed
+      - Nothing in it points outside the run directory
+      - >-
+        Reading order stated: what is instruction, what is reference, what is research behind
+        the specification
+      - Every directory in the run folder is explained, so none is read at the wrong moment
+      - How to check what already exists, so a second session continues rather than restarts
+      - >-
+        The current phase only — named, with its phase document pointed at. The scope,
+        definition of done and acceptance test are NOT restated here; they live in
+        phases/phase-NN-*.md and a third copy is a third answer
+      - Non-negotiables carry their consequences, not just their rules
+      - Blocked work listed with an owner and the moment each one bites
+      - >-
+        The specification and the audit trail are marked not-to-be-edited-in-place, with the
+        reason
+      - >-
+        Where the run's verdict blocks the build, the file says so first and states what the
+        agent may do instead
+
+  - id: phase-plan
+    path: phases/
+    format: directory
+    template: 22-Phase-Plan.md
+    method: engine/phases.md
+    required: true
+    audience: >-
+      whoever builds this, and the coding agent that opens the folder and asks what to do
+      next — one document per phase, so the current one can be read without the other fifteen
+    acceptance:
+      - >-
+        A board at phases/README.md listing every phase in order, each with its status and
+        what gates it
+      - >-
+        One document per milestone recorded in state.outputs.roadmap.milestones — no more and
+        no fewer. A phase with no milestone is scope the roadmap never authorized
+      - >-
+        Each phase states what is in it, what is deliberately NOT in it, its definition of
+        done, and its end-to-end acceptance test
+      - >-
+        Every definition of done is the one already in 09-Roadmap.md, reproduced word for
+        word. Never re-derived, never sharpened, never softened while writing this
+      - Each phase names the deliverables that specify it, by path, so nothing is restated here
+      - >-
+        Phases stop at milestone granularity. No task breakdown, no estimates, no sprint plan —
+        decomposition belongs to whoever builds, and this framework does not do it
+      - Exactly one phase is marked current, and it is the first one not yet done
+      - >-
+        Where the strategy committed to Milestone Zero, it is phase-00 and every build phase
+        states in its own document that it is gated behind it
+      - >-
+        Where the run's verdict does not support building, README.md says so as its first line
+        and no build phase is marked current
+
+  - id: milestone-zero-package
+    path: milestone-zero/
+    format: directory
+    template: 21-Milestone-Zero-Package.md
+    method: engine/milestone-zero.md
+    required: conditional
+    required_when: >-
+      outputs.roadmap.milestone_zero_present is true — that is, the strategy committed to
+      validating before building. Absent otherwise, and its absence is then correct rather
+      than a gap.
+    audience: >-
+      the operator, executing the validation week themselves — and anyone they hand one test to
+    acceptance:
+      - One working document per Milestone Zero test, each executable without reading the research
+      - >-
+        A one-page checklist that can be followed start to finish without opening any other
+        document, including the research it came from
+      - >-
+        Every threshold in the package is the threshold already recorded in
+        outputs.stop_conditions — reproduced, never re-derived, never softened
+      - >-
+        Each test states what it proves, what it costs, what evidence to keep, and the exact
+        result that kills the plan
+      - >-
+        A verdict table mapping results to BUILD / BUILD A SMALLER MVP / PIVOT / DO NOT BUILD,
+        read top to bottom, first match wins
+      - >-
+        Any test that depends on other people states when recruitment or outreach starts, and
+        what happens if it cannot be completed
+      - >-
+        Where a test requires an artifact to be built, the artifact is SPECIFIED and not built.
+        This framework does not write application code
+      - >-
+        An empty results directory with pre-headed data files, so the operator records rather
+        than designs
+
 final_gate:
   - Every required artifact exists and meets its acceptance criteria
   - No artifact contradicts another
   - Overall confidence recorded in the Executive Summary
   - Every open assumption appears in Risks-and-Assumptions
   - Build-Handoff passes the standalone test
+  - Every required completion artifact exists at its stated path
+  - >-
+    The Decision Report's recommendation is the Executive Summary's recommendation, word for
+    word. Two documents stating the verdict differently is the failure this artifact set exists
+    to prevent, and the one-pager is the one most likely to be quoted back
+  - >-
+    Where the strategy committed to Milestone Zero, the execution package exists and every
+    threshold in it matches state.outputs.stop_conditions
+  - >-
+    No completion artifact reads more confidently than the research it was drawn from,
+    and none of them established a figure the artifact set does not carry
+  - >-
+    Every folder that received an artifact carries its _acceptance.md, and every criterion in
+    it is the manifest's criterion character for character
+  - >-
+    The phase plan covers exactly the milestones in 09-Roadmap.md, and every definition of
+    done in it is that document's, reproduced rather than rewritten

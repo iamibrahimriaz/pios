@@ -1,7 +1,16 @@
-# Handoff — making the run directory buildable
+# Handoff — making the run directory legible to whoever builds
 
-The run does not end when `validate-run.py` exits 0. It ends when someone can open the run
-directory, say *"analyze this project and start developing"*, and have that be enough.
+**This is the framework's last act, not the first step of a build.** `constitution/core/00-Purpose.md`
+states the boundary: this framework produces research, specification, proposal and handoff, and
+stops. **The handoff is the final research artifact.**
+
+Its job is to make the specification legible to whoever builds next — so that someone can open the
+run directory, say *"analyze this project and start developing"*, and have that be enough **without
+this framework being involved in what happens after.**
+
+> **Writing the entry file is the whole step. Acting on it is not part of this framework**, and an
+> agent that writes the entry file and then starts building has carried the run past the point where
+> anything gates it.
 
 **One folder. No copy, no subset, no second repository.** The run directory already holds
 the specification; what it lacks is an entry file telling an agent what to read, in what
@@ -27,11 +36,27 @@ sixteen and told the rest do not concern them has lost the ability to check a de
 
 ---
 
+## When it runs
+
+**Every completed run, automatically.** It is a required completion artifact in
+`deliverables/manifest.yaml`, alongside the proposal and the engineering presentation. It is not
+offered and it is not conditional.
+
+**A run that reached "do not build" still produces it, and that is when it matters most.** The
+entry file is where an agent is told the gate is closed and what it may do instead. A folder with
+no entry file does not stay unbuilt; it gets opened by an agent that reads the specification,
+finds it complete, and starts.
+
+---
+
 ## What this step produces
 
 **One file, at the root of the run directory**, named by whatever convention the operator's
 tool expects — `CLAUDE.md`, `AGENTS.md`, or another. **Ask; do not guess.** If they have no
 preference, write `CLAUDE.md` and say so.
+
+**Fill `deliverables/templates/19-AI-Entry-File.md`.** It carries the required structure and the
+guidance for each section.
 
 Its job is that a bare instruction is sufficient. If the operator has to remember a
 paragraph of context to start a session, the file has failed and no amount of detail inside
@@ -47,8 +72,11 @@ It carries, in this order:
 3. **Read this first, in this order** — the build handoff in full, then the engineering
    setup, then the reference documents by name.
 4. **How to check what already exists**, so a second session continues rather than restarts.
-5. **The current milestone, and only that one**, with its end-to-end acceptance test.
-6. **The order of work inside that milestone.**
+5. **The current phase, and only that one** — named, with `phases/phase-NN-*.md` pointed at.
+   **Do not restate its scope, its definition of done or its acceptance test.** Those were
+   copied from the roadmap into the phase document; a copy here is a third version, and the
+   one open on the agent's screen is the one that wins.
+6. **What closing it means**: mark it done on the board, move `current` forward, stop there.
 7. **The non-negotiables, each with the cost of breaking it.** A rule whose reason is absent
    gets refactored away by someone who assumes it was arbitrary.
 8. **The blocked list** — what to ask about rather than decide.
@@ -58,6 +86,21 @@ It carries, in this order:
 
 **Point 7 is the one that decays.** Copy the constraint and its consequence together, or the
 constraint travels alone and does not survive contact with a library that suggests otherwise.
+
+---
+
+## The entry file and the phase board must give the same answer
+
+**Both of them tell an agent whether work may start**, and they are written by different steps
+from different sources — this file from the readiness states, the board from the roadmap and the
+verdict. `engine/phases.md` produces the second.
+
+**Where they disagree, the builder acts on the more permissive one.** An entry file that says
+the commercial gate is open, beside a board showing phase-01 current, is read as permission —
+the board is the operational document and the entry file reads like preamble.
+
+So: **where this file blocks the build, the board's first line says so and no phase is marked
+current.** Check it by opening both, not by remembering what you wrote.
 
 ---
 
@@ -75,14 +118,64 @@ run directory root.
 
 ---
 
+## Readiness is five states, and only three of them are the run's
+
+**A complete specification is not permission to build.** These are confused every time, because
+they arrive together: the package is finished, it looks finished, and finished reads as authorized.
+
+| State | Means | Whose |
+| --- | --- | --- |
+| **research_ready** | The evidence base is complete and its limits are stated | The run's |
+| **product_definition_ready** | Scope, requirements and acceptance criteria are settled | The run's |
+| **engineering_ready** | An implementer can start with no further decisions from research | The run's |
+| **commercially_validated** | Someone has been observed paying, or the equivalent test passed | **Not the run's** — a validation result |
+| **development_authorized** | The owner has authorized the build, on a recorded basis | **Never set by a run** |
+
+**They are not a ladder that carries.** A run can and often should deliver `engineering_ready: true`
+alongside `commercially_validated: false`, and that is a complete, honest result rather than an
+unfinished one.
+
+> **A count of ticked engineering boxes says the product is fully specified. It says nothing about
+> whether anyone will pay for it.** Those are different questions and only one of them has an
+> answer at handoff.
+
+**Recorded in `state.run.readiness`, and stated in the entry file's first section** — with
+`blocked_on` naming what is missing and whose it is to supply. An operator may authorize without the
+commercial gate; that is theirs to do, and it is recorded as an `override` with who decided and on
+what basis. **It is never inferred from the specification being complete.**
+
+**Where the commercial gate is open, the entry file says what an agent may do instead** — help run
+the validation, review the package, ask the blocked questions. A folder that only says "do not
+build" gets built anyway, by the next agent that reads a complete specification and finds no
+alternative offered.
+
+---
+
+## Integration contracts built on inference carry their verification step
+
+**Where the specification describes an external system the run could not read** — an API inferred
+from error messages, a schema reconstructed from documentation that may be stale, a third-party
+behavior taken from support threads — **the handoff names the verification step that must precede
+implementation, and states that it blocks.**
+
+This is not an engineering instruction; the framework does not verify it. **It is a disclosure**:
+the run is saying which parts of its own specification are `[assumption]` rather than `[verified]`,
+and building an adapter on an unverified assumption is a defect the specification can prevent and
+the code cannot.
+
+**Bury it and it disappears.** An `[assumption]` tag inside an interface definition on page nine is
+invisible to a builder who was told the package is complete.
+
+---
+
 ## What this step does not do
 
 - **It does not create a git repository.** Runs are private and gitignored by the framework
   repo. Whether this becomes the team's repository, and when, is the operator's decision.
 - **It does not rewrite any deliverable for the builder.** A specification paraphrased for
   readability is a second source of truth, and the two disagree within a week.
-- **It does not run automatically.** A run that reached "do not build", or an operator still
-  deciding, does not need this. Offer it; do not assume it.
+- **It does not authorize the build.** Where the run's verdict or a gate blocks it, the entry
+  file's first section says so and states what an agent may do instead.
 
 ---
 
@@ -103,10 +196,18 @@ distinguish them is treated as uniformly ignorable.
 - [ ] Validator exits 0, and the delivery checkpoint has been presented
 - [ ] The operator has confirmed the entry-file convention their tool expects
 - [ ] Entry file written at the run directory root
+- [ ] Every directory in the run folder is explained, so none is read at the wrong moment
+- [ ] Where the verdict or a gate blocks the build, that is the first thing the file says
+- [ ] `state.run.readiness` is recorded, with `blocked_on` naming what is missing and whose it is
+- [ ] `development_authorized` is false unless the operator recorded an override, with their basis
+- [ ] Where the commercial gate is open, the file says what an agent may usefully do instead
+- [ ] Every integration contract built on inference names its verification step and says it blocks
 - [ ] A bare "analyze this project and start developing" would be sufficient
 - [ ] Every path it names resolves from the run directory root — checked, not assumed
 - [ ] Nothing in it points outside the run directory
 - [ ] Reading order stated: what is instruction, what is reference, what is research
+- [ ] The current phase is named and pointed at, and its acceptance test is not restated here
+- [ ] The board and this file agree about whether work may start
 - [ ] Non-negotiables carry their consequences, not just their rules
 - [ ] Blocked work listed with owners and the moment each one bites
 - [ ] The specification and the audit trail are marked not-to-be-edited-in-place

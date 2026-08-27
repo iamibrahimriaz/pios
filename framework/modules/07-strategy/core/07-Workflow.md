@@ -179,8 +179,17 @@ outputs:
   mvp_definition:    # the cut, the principle, what it proves
   non_goals:         # explicit exclusions
   risk_register:     # rated, mitigated, with early warnings
-  roadmap:           # milestones including M0 if required
+  roadmap:
+    milestone_zero_present:   # true where the strategy validates before building
+    milestones:               # every milestone, M0 included where present
+      - id:                   # stable, and cited by the phase document later
+        name:
 ```
+
+**`roadmap.milestones` is a real list, not prose.** `engine/phases.md` writes one phase
+document per entry and the validator compares the two. **A milestone that exists only in the
+narrative gets no phase document, and nothing reports it** — the roadmap still describes it, so
+every review of the roadmap passes, and the work is simply never started.
 
 Append every strategic bet to `state.assumptions`. Append every decision to
 `state.decisions` with the alternatives rejected — universal gate U4 requires it, and this
@@ -223,7 +232,7 @@ Evaluate against `11-Quality-Gate.md` and universal gates U1–U7.
 
 **Stop. This is mandatory.**
 
-Present §12 of the template:
+Present §13 of the template:
 
 1. What we propose to build — one sentence.
 2. What we are deliberately not doing.

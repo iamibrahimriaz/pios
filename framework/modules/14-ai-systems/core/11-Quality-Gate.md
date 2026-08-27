@@ -296,6 +296,8 @@ gate:
     data_availability_confirmed: pass | fail
     evaluation_defined_before_commitment: pass | fail
     failure_modes_and_fallback_specified: pass | fail
+    alternative_advocate_case: pass | fail
+    detectability_stated: pass | fail
   module_checks:
     data_rights_and_no_regulated_inputs: pass | fail
     detectability_governs_autonomy: pass | fail

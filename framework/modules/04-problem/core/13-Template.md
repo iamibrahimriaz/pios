@@ -79,6 +79,35 @@ Never blend them in prose. The separation is the point of the module.
 
 ---
 
+## 1a. Evidence Corpus
+
+<!-- Criterion 6. Written BEFORE the inventory, because the corpus determines the inventory
+     more than the coding does. See knowledge/Corpus-Selection.md. -->
+
+**Selection rule:** «a rule a stranger could apply and get the same set — not a list of
+sources assembled from memory»
+
+**What it excludes, and what that costs:** «the sources the rule cannot see, and what is
+likely to live in them»
+
+**Independence test — if the product hypothesis were different, would this still be the
+right place to look for this problem?** «yes, because… / no — and the corpus is therefore a
+description of the hypothesis, which is a finding»
+
+| Bias | Present? | What was done about it |
+| --- | --- | --- |
+| Selection — chosen for availability or fit to the hypothesis | «y/n» | «» |
+| Denominator — raw counts across populations of different sizes | «y/n» | «the denominator used, or why comparison was refused» |
+| Survivorship — only surviving products, active venues, remaining customers | «y/n» | «who left, and whether they were reachable» |
+| Venue — the venue shapes what gets said; check who is *authoring* | «y/n» | «venue types used, and their different incentives» |
+| Product size — biggest products read as the problem-heavy part of the market | «y/n» | «normalization applied» |
+| Confirmation — agreeing sources read closely, disagreeing ones read as noise | «y/n» | «what each source returned, including nothing» |
+
+**Normalized rate, where one could be computed:** «figure, per what, per what period» — or
+«none obtainable; no cross-source comparison is made below»
+
+---
+
 ## 2. Problem Inventory
 
 <!-- Stage 1. Every problem surfaced, before any filtering. Sources: workflow friction
@@ -88,6 +117,32 @@ Never blend them in prose. The separation is the point of the module.
 | --- | --- | --- |
 | P1 | «raw statement» | «workflow step 3 friction / review / forum» |
 | P2 | «raw statement» | «source» |
+
+---
+
+## 2a. Substitute Workflows
+
+<!-- Stage 1, and it is a research step rather than a recall step. What do people do INSTEAD?
+     Not competing products in this category — the things people use who use nothing in this
+     category at all. Section 4's workaround column is scored against this table, so an empty
+     row here means that column was scored from impression. -->
+
+| Substitute | Class | Who uses it | Scale, where measurable | Residual friction | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| «named thing» | by hand | «segment» | «n, or NOT MEASURABLE» | «what it still costs them» | `[verified: source]` |
+| «named thing» | general-purpose tool bent to the job | | | | |
+| «named thing» | built it themselves | | | «does it travel? does it break?» | |
+| «named thing» | adjacent product, different moment | | | | |
+| Tolerating it | nothing | | | | |
+
+**Largest substitute by scale:** «name it, with the figure»
+
+**Is any substitute larger than this entire product category?** «yes / no — and if yes, that
+is a finding for the operator before anything is scored, not a footnote»
+
+**What the silent majority does:** «the people who never adopted anything here. If this row
+cannot be filled, say so — every other source in section 2 is a complaint, and complaints only
+come from people who adopted something and were disappointed»
 
 ---
 
@@ -267,6 +322,7 @@ Zero in the roadmap, validate before building»
 | --- | --- | --- |
 | `ranked_problems` | «ordered list with scores» | 05, 07, 08 |
 | `problem_inventory` | «full list including excluded» | 07 |
+| `substitute_workflows` | «named substitutes with scale and residual friction» | 05, 07 — **05-competition treats these as competitors, not adjacencies** |
 | `validation_plan` | «ordered tests» | 07, 09-Roadmap |
 | Sharpest problem | «P«n»» | 07-strategy — the product is built around this |
 

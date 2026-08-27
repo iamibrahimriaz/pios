@@ -8,6 +8,6 @@ feeds_deliverables: [architecture, build-handoff, engineering-setup, roadmap, ux
 gate:
   - Critical user paths mapped end to end
   - Work broken into sequenced, independently shippable milestones
-  - Build handoff readable by an agent with no prior context
+  - Build sequence and blocked work specified well enough for the handoff to be written from them alone
   - Definition of done stated per milestone
 on_fail: return to 09-technology

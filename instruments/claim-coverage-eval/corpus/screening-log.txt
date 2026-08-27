@@ -1,0 +1,77 @@
+13448589 | iScience | KEEP | words=5863 claims=4
+13448191 | iScience | reject | highlights=0
+13448187 | iScience | KEEP | words=4424 claims=4
+13446196 | iScience | KEEP | words=3639 claims=4
+13446199 | iScience | KEEP | words=5599 claims=4
+13446342 | iScience | reject | journal-cap-full
+13446309 | iScience | reject | journal-cap-full
+13446293 | iScience | reject | journal-cap-full
+13446308 | iScience | reject | journal-cap-full
+13446351 | iScience | reject | journal-cap-full
+13444672 | iScience | reject | journal-cap-full
+13446361 | iScience | reject | journal-cap-full
+13444461 | iScience | reject | journal-cap-full
+13446338 | iScience | reject | journal-cap-full
+13446202 | iScience | reject | journal-cap-full
+13446209 | iScience | reject | journal-cap-full
+13444472 | iScience | reject | journal-cap-full
+13444477 | iScience | reject | journal-cap-full
+13444625 | iScience | reject | journal-cap-full
+13444251 | iScience | reject | journal-cap-full
+13444443 | iScience | reject | journal-cap-full
+13444644 | iScience | reject | journal-cap-full
+13444440 | iScience | reject | journal-cap-full
+13444261 | iScience | reject | journal-cap-full
+13430198 | iScience | reject | journal-cap-full
+11909433 | Heliyon | KEEP | words=5460 claims=5
+11908583 | Heliyon | KEEP | words=5232 claims=4
+11908581 | Heliyon | KEEP | words=6919 claims=5
+11909423 | Heliyon | reject | highlights=0
+11908571 | Heliyon | reject | highlights=0
+11908576 | Heliyon | reject | highlights=0
+11908564 | Heliyon | reject | highlights=0
+11908580 | Heliyon | KEEP | words=3708 claims=5
+11908584 | Heliyon | reject | journal-cap-full
+11908569 | Heliyon | reject | journal-cap-full
+11908567 | Heliyon | reject | journal-cap-full
+11909432 | Heliyon | reject | journal-cap-full
+11908559 | Heliyon | reject | journal-cap-full
+11909442 | Heliyon | reject | journal-cap-full
+11908552 | Heliyon | reject | journal-cap-full
+11908558 | Heliyon | reject | journal-cap-full
+11908563 | Heliyon | reject | journal-cap-full
+11908585 | Heliyon | reject | journal-cap-full
+11908575 | Heliyon | reject | journal-cap-full
+11909477 | Heliyon | reject | journal-cap-full
+11959653 | Heliyon | reject | journal-cap-full
+11909435 | Heliyon | reject | journal-cap-full
+11908554 | Heliyon | reject | journal-cap-full
+11908573 | Heliyon | reject | journal-cap-full
+11909429 | Heliyon | reject | journal-cap-full
+13451992 | Cell Reports | reject | highlights=0
+13449096 | Cell Reports | reject | highlights=0
+13446462 | Cell Reports | reject | highlights=0
+13430566 | Cell Reports | reject | highlights=0
+13430976 | Cell Reports | reject | highlights=0
+13426065 | Cell Reports | reject | highlights=0
+13426489 | Cell Reports | reject | highlights=0
+13427246 | Cell Reports | reject | highlights=0
+13419430 | Cell Reports | reject | highlights=0
+13421843 | Cell Reports | reject | highlights=0
+13415681 | Cell Reports | KEEP | words=6031 claims=4
+13415678 | Cell Reports | KEEP | words=9590 claims=4
+13411304 | Cell Reports | reject | highlights=0
+13404931 | Cell Reports | reject | highlights=0
+13398178 | Cell Reports | reject | highlights=0
+13397322 | Cell Reports | reject | highlights=0
+7619264 | Cell Reports | reject | highlights=0
+13387423 | Cell Reports | reject | highlights=0
+13387492 | Cell Reports | reject | highlights=0
+13383355 | Cell Reports | reject | highlights=0
+13384433 | Cell Reports | reject | highlights=0
+13384758 | Cell Reports | reject | highlights=0
+13383808 | Cell Reports | reject | highlights=0
+13383671 | Cell Reports | reject | highlights=0
+13382931 | Cell Reports | reject | highlights=0
+13400140 | Cell Reports Medicine | KEEP | words=8674 claims=3
+13400184 | Cell Reports Medicine | KEEP | words=6892 claims=4

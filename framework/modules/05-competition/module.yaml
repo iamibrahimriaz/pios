@@ -2,7 +2,7 @@ id: 05-competition
 name: Competition
 purpose: Map who already solves this, how well, and where the opening is.
 depends_on: [02-market, 03-user, 04-problem]
-consumes: [market_definition, market_gaps, trends, segments, ranked_problems]
+consumes: [market_definition, market_gaps, trends, segments, ranked_problems, substitute_workflows]
 produces: [competitor_matrix, feature_comparison, pricing_comparison, gap_analysis, positioning]
 feeds_deliverables: [executive-summary, growth-plan, prd, research-dossier]
 gate:

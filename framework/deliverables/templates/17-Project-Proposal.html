@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="«language»">
+<head>
+<meta charset="utf-8">
+<!-- fill: the viewport tag is not optional. Without it every mobile browser lays the page
+     out at ~980px and scales it down, and its absence is invisible on a desktop. -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Proposal — «product name»</title>
+<style>
+/* ============================================================================
+   LAYER 1 — PRINT / PAPER.
+   Authored in pt and mm against a fixed page. This layer IS the paginated
+   artifact. Nothing in @media screen below may alter it.
+   ========================================================================= */
+
+@page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: "Iowan Old Style", Palatino, Georgia, "Times New Roman", serif;
+  font-size: 10pt; line-height: 1.45; color: #1a1a1a; margin: 0; padding: 0;
+}
+
+h1, h2, h3, h4, .label, .kicker, th, .badge, .num {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 { font-size: 22pt; line-height: 1.15; margin: 0 0 4mm 0; font-weight: 700; }
+h2 { font-size: 13pt; margin: 9mm 0 3mm 0; font-weight: 700; padding-bottom: 1.5mm;
+     border-bottom: 1.2pt solid #1a1a1a; break-after: avoid; }
+h3 { font-size: 10.5pt; margin: 6mm 0 2mm 0; font-weight: 700; break-after: avoid; }
+
+p { margin: 0 0 2.5mm 0; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 2.5mm 0; padding-left: 5mm; }
+li { margin-bottom: 1.2mm; }
+
+code, .mono { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 8.5pt; }
+
+.kicker { font-size: 7.5pt; letter-spacing: 1.6pt; text-transform: uppercase; color: #666;
+          font-weight: 700; margin: 0 0 3mm 0; }
+.page-break { break-before: page; }
+
+/* The verdict block. It goes on page one and it says what the run said. */
+.verdict { border: 1.5pt solid #1a1a1a; border-left: 5pt solid #1a1a1a;
+           padding: 5mm; margin: 0 0 5mm 0; break-inside: avoid; }
+.verdict .headline { font-size: 16pt; font-weight: 700; line-height: 1.2; margin: 0 0 2.5mm 0;
+           font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/* The four-up status rail: confidence, validation status, the number that decides it,
+   and whether development has started. */
+.rail { display: table; width: 100%; border-collapse: collapse; margin: 0 0 4mm 0;
+        break-inside: avoid; }
+.rail > div { display: table-cell; width: 25%; border: 0.8pt solid #ccc; padding: 3mm;
+        vertical-align: top; }
+.rail .label { font-size: 7pt; letter-spacing: 1pt; text-transform: uppercase; color: #666;
+        font-weight: 700; display: block; margin-bottom: 1.5mm; }
+.rail .val { font-size: 12pt; font-weight: 700; display: block;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.rail .sub { font-size: 7.5pt; color: #555; display: block; margin-top: 1.5mm; line-height: 1.3; }
+
+.badge { display: inline-block; font-size: 7pt; font-weight: 700; letter-spacing: 0.8pt;
+         text-transform: uppercase; border: 0.8pt solid #1a1a1a; padding: 0.8mm 2mm; }
+.badge.stop { background: #1a1a1a; color: #fff; }
+
+.note { border-left: 2.5pt solid #999; padding-left: 4mm; margin: 0 0 3mm 0; color: #333;
+        font-style: italic; break-inside: avoid; }
+.callout { border: 0.8pt solid #1a1a1a; background: #f2f2f2; padding: 3.5mm 4mm;
+        margin: 0 0 3.5mm 0; break-inside: avoid; }
+.callout p:last-child { margin-bottom: 0; }
+
+.tablewrap { margin: 0 0 3.5mm 0; }
+table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+caption { caption-side: top; text-align: left; font-size: 8pt; color: #666; padding-bottom: 1.5mm;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+th { text-align: left; font-size: 7.5pt; letter-spacing: 0.6pt; text-transform: uppercase;
+     font-weight: 700; border-bottom: 1.2pt solid #1a1a1a; padding: 1.8mm 2mm 1.8mm 0;
+     vertical-align: bottom; }
+td { padding: 1.8mm 2mm 1.8mm 0; border-bottom: 0.5pt solid #ddd; vertical-align: top; }
+tr { break-inside: avoid; }
+.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+pre.diagram { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 7.5pt;
+        line-height: 1.35; border: 0.8pt solid #ccc; padding: 3.5mm; margin: 0 0 3.5mm 0;
+        white-space: pre; break-inside: avoid; }
+
+.doc-footer { margin-top: 10mm; padding-top: 3mm; border-top: 0.8pt solid #ccc;
+        font-size: 7.5pt; color: #666; }
+
+/* ============================================================================
+   LAYER 2 — SCREEN.
+   Relative units against an unknown viewport. Added AFTER the print rules and
+   never mixed into them, so a later change here cannot alter the pagination —
+   which is verifiable rather than hoped for.
+   ========================================================================= */
+
+@media screen {
+  html { background: #e8e8e6; }
+  body { font-size: 16px; line-height: 1.6; max-width: 46rem; margin: 0 auto;
+         padding: 3rem 1.5rem 4rem; background: #fff; overflow-wrap: break-word; }
+
+  h1 { font-size: 2.1rem; } h2 { font-size: 1.25rem; margin: 3rem 0 1rem; }
+  h3 { font-size: 1.05rem; margin: 2rem 0 0.6rem; }
+  p, li { margin-bottom: 0.7rem; }
+
+  .verdict { border-width: 2px; border-left-width: 8px; padding: 1.5rem; margin-bottom: 1.75rem; }
+  .verdict .headline { font-size: 1.6rem; }
+
+  .rail { display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 1.5rem; }
+  .rail > div { display: block; width: auto; border-width: 1px; padding: 0.9rem; }
+  .rail > div + div { border-left: none; }
+  .rail .val { font-size: 1.15rem; }
+
+  .callout, .note { margin-bottom: 1rem; }
+
+  /* Wide content scrolls inside its own box. Without this a table wider than a phone
+     makes the WHOLE PAGE scroll sideways and every line of prose becomes unreadable. */
+  .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 1.25rem; }
+  table { font-size: 0.85rem; min-width: 30rem; }
+  pre.diagram { font-size: 0.75rem; overflow-x: auto; }
+
+  .page-break { break-before: auto; }
+}
+
+@media screen and (max-width: 40rem) {
+  body { font-size: 15px; padding: 1.75rem 1rem 3rem; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; }
+  .verdict { padding: 1.1rem; } .verdict .headline { font-size: 1.25rem; }
+
+  /* Every multi-column group stacks. They do not do so by themselves. */
+  .rail { grid-template-columns: 1fr; }
+  .rail > div + div { border-left: 1px solid #ccc; border-top: none; }
+  table { min-width: 26rem; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     PAGE ONE — THE DECISION.
+     Everything on this page exists because it is what gets dropped when a
+     proposal is assembled by hand under time pressure.
+     ================================================================== -->
+
+<p class="kicker">Project Proposal · Run «slug» · «date»</p>
+
+<h1>«product name»<br>«jurisdiction»</h1>
+
+<p>«one paragraph: what this is, and that the document requests a decision»</p>
+
+<div class="verdict">
+  <p class="headline">«the run's recommendation, verbatim — build, build with changes, or do not build»</p>
+  <p>«the conditions attached to it. If the run reached "do not build", this block proposes not
+  building, or the cheapest test that would change the verdict»</p>
+</div>
+
+<div class="rail">
+  <div><span class="label">Confidence</span><span class="val">«high | medium | low»</span>
+       <span class="sub">«what would raise it, in one line»</span></div>
+  <div><span class="label">Validation status</span><span class="val">«what has actually been tested»</span>
+       <span class="sub">«what primary research was and was not conducted»</span></div>
+  <div><span class="label">«the number that decides it»</span><span class="val">«figure»</span>
+       <span class="sub">«against what threshold»</span></div>
+  <div><span class="label">Development</span><span class="val">«started | not started»</span>
+       <span class="sub">«why»</span></div>
+</div>
+
+<h2>The decision requested</h2>
+
+<!-- fill: an approver handed only a recommendation is being asked to agree, not to decide.
+     Give the real options and say when each is the right call. Mark one recommended. -->
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Option</th><th>What it commits</th><th>When it is the right call</th></tr></thead>
+  <tbody>
+    <tr><td>«approve with conditions» <span class="badge">Recommended</span></td><td>«cost»</td><td>«when»</td></tr>
+    <tr><td>«approve in full»</td><td>«cost»</td><td>«when»</td></tr>
+    <tr><td>Defer</td><td>Nothing.</td><td>«when»</td></tr>
+    <tr><td>Reject</td><td>Nothing.</td><td>«when»</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>The recommendation, and the conditions attached to it</h3>
+<p>«the run's recommendation, unchanged, with every qualifier it carried»</p>
+
+<h3>The major assumptions</h3>
+<!-- fill: the load-bearing ones only — the assumptions that would invalidate the product.
+     Each with what happens if it is false and the cheapest test that settles it. -->
+<div class="tablewrap">
+<table>
+  <thead><tr><th>#</th><th>Assumption</th><th>If false</th><th>Cheapest test</th></tr></thead>
+  <tbody><tr><td>«id»</td><td>«assumption»</td><td>«consequence»</td><td>«test, and its cost»</td></tr></tbody>
+</table>
+</div>
+
+<h3>«the validation step being approved — e.g. Milestone Zero»</h3>
+<h3>Why development has not started</h3>
+<div class="callout">
+  <p>«the reasons, plainly. If development HAS started, say so instead and say what has been
+  built. Never leave the reader to infer which.»</p>
+</div>
+
+<!-- =====================================================================
+     THE BODY. Each section stands alone — "see the PRD" is never the whole
+     answer to anything, because the reader has not read the PRD and will not.
+     The working test for every section: WHAT DECISION DOES THIS CHANGE?
+     A section that changes no decision is background, and background belongs
+     in the artifact set this document points at.
+     ================================================================== -->
+
+<h2 class="page-break">1 · Problem statement</h2>
+<p>«the problem, what is verified about it, and what is assumed»</p>
+
+<h2>2 · Research findings</h2>
+<p>«the findings that changed the shape of the product, and what each changed»</p>
+<h3>What the research could not establish</h3>
+<p>«the gaps, why desk research cannot close them, and the cheapest method for each»</p>
+
+<h2>3 · Market analysis</h2>
+<p>«sizing with its derivation and standing; trends, including the ones working against this»</p>
+
+<h2>4 · Competitor summary</h2>
+<p>«including the status quo as a competitor, and the defensibility verdict stated plainly»</p>
+
+<h2>5 · Recommended strategy</h2>
+<p>«the options compared, the one selected, and what would change it»</p>
+
+<h2>6 · MVP scope</h2>
+<!-- fill: what is in, what is deferred, and what is PERMANENTLY excluded and why.
+     The permanent exclusions matter most — they are the ones someone will later
+     propose adding, and a reason attached now is what survives that conversation. -->
+<p>«in / deferred / permanently excluded»</p>
+
+<h2>7 · Technical architecture</h2>
+<!-- fill: the level is "enough to judge the risk", not "enough to build".
+     INCLUDE: the stack and why each piece, with the trade-off accepted; the constraints
+     that are not negotiable, each with what breaks if it is broken; the scale it is built
+     for and deliberately not built for; a diagram a non-specialist can follow.
+     EXCLUDE: schemas, endpoint lists, code, config, directory layouts. Reference the
+     artifact by name for depth. Paraphrasing one into readable prose creates a second
+     source of truth, and the two disagree within a week. -->
+<pre class="diagram">«a diagram a non-specialist can follow»</pre>
+<h3>The non-negotiable constraints, each with its consequence</h3>
+<p>«a rule whose reason is absent gets traded away by an approver looking for schedule»</p>
+
+<h2 class="page-break">8 · Business model</h2>
+<!-- fill: unit economics, running cost, and break-even against what is attainable.
+     Where the run could not establish a figure, KEEP THE ROW and say so. Omitting it
+     reads as though it was not needed. -->
+<p>«the model, and the sensitivity that is the honest output»</p>
+
+<h2>9 · Timeline</h2>
+<!-- fill: milestones, what each proves, what gates the next. If the run did not estimate
+     durations, say why rather than inventing them. A date in a proposal becomes a
+     commitment regardless of the caveat next to it. -->
+<p>«milestones and gates»</p>
+
+<h2>10 · Quality and release</h2>
+<p>«how correctness is verified, and what is deliberately not tested»</p>
+<h3>Team and skills required</h3>
+<p>«per area, with the level and the reason — including what is explicitly NOT required»</p>
+
+<h2>11 · Success metrics</h2>
+<p>«the north star, and the metric that tests the business rather than the product»</p>
+
+<h2 class="page-break">12 · Risks</h2>
+<p>«likelihood, impact, mitigation, and the early warning sign for each»</p>
+<h3>Stop conditions — binding on approval</h3>
+<div class="callout">
+  <p><strong>Approving this proposal is approving these thresholds.</strong> «the stop conditions,
+  as agreed in advance»</p>
+</div>
+
+<h2>13 · Open decisions and blocked work</h2>
+<p>«each with an owner and the moment it bites»</p>
+
+<h2>14 · Evidence standing</h2>
+<!-- fill: counts of verified, inferred and open claims; gate failures NAMED, not summarized
+     into a risk; and any primary research that was not conducted. -->
+<p>«the standing, and the confidence level restated with what would raise it»</p>
+
+<h2>15 · Next steps</h2>
+<p>«who does what, when, starting from the day this is approved»</p>
+
+<h2>16 · The artifact set behind this proposal</h2>
+<p><strong>This document selects and arranges; it does not establish.</strong> «index of the
+artifact set, by filename, with one line each»</p>
+
+<div class="doc-footer">
+  <p>«framework, run, date, confidence, validator result»</p>
+  <p>«a line stating the document was derived from the artifact set and has not been softened
+  for its audience»</p>
+</div>
+
+<!-- =====================================================================
+     ACCEPTANCE — remove this block before delivery.
+
+     [ ] Self-contained: no external stylesheet, font, script or image
+     [ ] Viewport meta tag present
+     [ ] Confidence and the decision requested both on the first page
+     [ ] Why development has not started is answered on the first page
+     [ ] Any failed gate NAMED, not summarized into a risk
+     [ ] Permanent exclusions carry their reasons
+     [ ] Non-negotiable constraints carry their consequences
+     [ ] Stop conditions stated as binding on approval
+     [ ] Open decisions listed with owners and the moment each bites
+     [ ] Evidence standing present, including primary research not conducted
+     [ ] Every figure traces to a deliverable — checked, not assumed
+     [ ] Nothing in deliverables/ was edited to match this document
+     [ ] The PDF was opened and looked at, page by page
+     [ ] Opened at desktop, tablet and phone widths
+     [ ] No horizontal page scroll at a phone width — MEASURED, not eyeballed
+     ================================================================== -->
+
+</body>
+</html>

@@ -101,6 +101,69 @@ No module operates outside these principles.
 
 ---
 
+# Where This Framework Stops
+
+**Product Intelligence OS produces the pre-development package — research, specification,
+proposal, and handoff — and stops there.**
+
+**Development, testing, deployment and release belong to the project that receives the package,
+not to this framework.** A completed run hands over a folder; what happens inside that folder
+afterwards is a different discipline with different evidence standards. Research grades claims by
+the sources behind them. Engineering grades work by tests that pass. Neither standard can judge the
+other's output, and a framework that tried to hold both would enforce whichever was more convenient
+at the time.
+
+## The handoff is the last research artifact, not the first build step
+
+This distinction is easy to lose, because the handoff exists precisely to make the folder usable by
+whoever builds next. **Its purpose is to make the specification legible to a builder. Its purpose is
+not to begin building**, and the moment it is treated as an on-ramp, the framework acquires scope it
+cannot govern.
+
+| In scope | Out of scope |
+| --- | --- |
+| Establishing what is true, and what is assumed | Writing application code |
+| Specifying what should be built and why | Scaffolding a repository or configuring an environment |
+| Sequencing the work and naming what blocks it | Implementing a requirement, or verifying that one was implemented |
+| Producing a handoff a builder can start from | Anything downstream of that first line of code |
+
+**The natural request after every completed run is "now build it."** It is a reasonable thing to
+want and it is not what this framework does. A run that drifts past the handoff stops being
+auditable, because nothing downstream of the handoff is gated by anything in here.
+
+---
+
+# Every Completed Run Speaks To Three Audiences
+
+**A completed run has to be understood by three different readers, and no single document serves
+all three.**
+
+| Audience | Deciding | Served by |
+| --- | --- | --- |
+| **Business decision makers** — founder, management, investor, approver | Whether this is approved, deferred or rejected | The project proposal |
+| **Engineering teams** — manager, tech lead, engineers, QA, product | How to build it, and what not to build | The engineering presentation, and the specification behind it |
+| **AI implementation agents** | What to read first, what to do next, and what not to touch | The entry file at the run root |
+
+**The framework produces a dedicated artifact for each, and expects none of them to substitute
+for another.** This is a principle rather than a packaging convenience, because the failure it
+prevents is specific and it recurred until the artifacts were separated.
+
+**Expecting one artifact set to serve every reader does not produce a document that serves them
+all. It produces a document written for one of them, which the other two are then asked to work
+around.** The specification is written for the builder; an approver handed sixteen files
+assembles a proposal by hand, under time pressure, and **what gets dropped in that assembly is
+predictable** — the confidence level, the open decisions, the stop conditions, the gate that
+failed. Exactly the parts that make an approval honest, and exactly the parts that feel least
+helpful to include when asking for money.
+
+**Each artifact is derived, never re-researched.** They select and arrange what the run
+established; they do not establish anything themselves. **None of them may read more confidently
+than the research it was drawn from**, and a verdict is not softened for the audience receiving
+it. A framework whose output changes depending on who is reading has given up the only thing that
+made it worth running.
+
+---
+
 # What This Document Is Not
 
 This document is **not**:

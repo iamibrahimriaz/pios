@@ -170,6 +170,9 @@ Tags:
 - [ ] Criterion 2 — price justified three ways
 - [ ] Criterion 3 — economics with assumptions surfaced
 - [ ] Criterion 4 — path to first 10 customers
+- [ ] Criterion 5 — willingness to pay carries its own evidence, or is recorded as unestablished with the test that would settle it
+- [ ] The rung on the ladder is named — a stated price and an authorized card are not the same evidence
+- [ ] No sentence moves from problem severity or competitor pricing to demand without a new tag
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 

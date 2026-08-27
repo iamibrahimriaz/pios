@@ -137,12 +137,15 @@ thought through. This field is what makes the register operational.
 
 ---
 
-# Criterion 6 — The expected winner recorded before scoring begins
+# Criterion 6 — The expected winner recorded before scoring begins, with its independence marked
 
 **Passes when:** the option the author expected to win is written down before any score is
-assigned.
+assigned, **and `independence` is set to `independent` or `contaminated` in the same
+entry** — with `independence_reason` naming what pre-committed the answer whenever it is
+`contaminated`.
 
-**Fails when:** it is added afterward.
+**Fails when:** the expectation is added afterward, or `independence` is left unset, or a
+contamination is recorded after the result is known.
 
 **What this is for.** Confidence laundering cannot be detected in a single document — the
 laundered and honest versions are identical. It can be detected across runs. If the
@@ -151,6 +154,20 @@ one, and this field is what makes that pattern visible.
 
 A pre-registered expectation that turns out wrong is the strongest evidence available that
 the comparison did real work.
+
+**Why independence is part of the criterion.** The common case is not a clean prediction.
+It is a prediction the run had already been pushed toward — by four upstream modules that
+converged on the answer, by an operator instruction that pre-committed the direction, or by
+the agent's own previous run reaching a conclusion it found easy to defend. **A contaminated
+expectation that is confirmed looks identical, in the state file, to an independent one that
+is confirmed**, and a reader comparing runs cannot tell them apart.
+
+**Mark it `contaminated` when you are unsure.** The cost of a false `contaminated` is that
+one honest prediction is discounted. The cost of a false `independent` is that the only
+cross-run check in the framework reports a clean record it has not earned.
+
+**It is recorded now, not later.** A contamination noticed after the scoring is an excuse
+written by whoever disliked the result, and it is worth nothing as a control.
 
 ---
 
@@ -169,6 +186,105 @@ leaving the criterion unaddressed.
 mechanism and its value depends entirely on something happening here. A shortfall declared
 and then ignored is worse than one never declared — it produces documentation of rigor
 without the rigor.
+
+---
+
+# Criterion 8 — Each option marked carried_from_research or generated_here, and a generated winner states what its missing research would have tested
+
+**Passes when:** every entry in `state.outputs.solution_options` carries `provenance`, and
+any option marked `generated_here` lists under `unresearched` which modules never examined
+it and what each would have tested.
+
+**Fails when:** provenance is absent, or when a generated option is scored alongside
+researched ones with no statement of the asymmetry.
+
+## What this criterion is protecting
+
+**Modules 02–06 research one direction.** This module then generates options — and sometimes
+the option that wins is one it invented, because the evidence pointed somewhere the earlier
+modules never looked.
+
+> **That is the framework working.** A run whose recommendation cannot change under evidence
+> decided before it started, and the whole point of generating options here is to let the
+> answer move.
+
+**What must not happen is the comparison pretending to be even.** A researched option arrives
+with a market, a competitor set, a segment and a problem ranking. A generated option arrives
+with whatever was found while writing this module — frequently two data points. **Scoring
+them side by side produces a table in which those two things look identical**, because a
+score is a number either way.
+
+**On the run that produced this criterion it happened twice**: the winning option was
+generated inside this module, and a later validation test overturned the problem ranking and
+produced a second winner that had never been researched at all. **Both redirections were
+correct.** Neither was comparably evidenced, and nothing required anyone to say so.
+
+## The re-score test, when a generated option wins
+
+**Mechanical, and it takes a minute.** Re-score the generated option with every criterion it
+was never researched on set to **the lowest value any researched option scored on that
+criterion.**
+
+| Result | What to record in `asymmetry_effect` |
+| --- | --- |
+| It still wins | The win is robust to the missing research. Say so — this is a strong result |
+| It no longer wins | **The win rests on the gap, not on the evidence.** Say that, plainly, in the section that presents the scores |
+
+**Then choose a path and record which:** either a research pass through the modules it
+skipped before the recommendation stands, or **a validation milestone that closes its
+specific unresearched claims, placed first in the roadmap and blocking the first build
+milestone.** The second is usually correct and always cheaper. It is a choice that gets
+named, not a default.
+
+## Two arguments that are not arguments
+
+**"It fits the evidence better."** It was written after the evidence. Fit is not
+independent confirmation, and a generated option will always fit better for that reason
+alone.
+
+**"The researched options are refuted anyway."** Then say which of their evidence still
+stands. **Evidence does not stop being true because the recommendation moved**, and a
+refuted option's market sizing, competitor set and user research frequently survive intact
+and apply to whatever replaced it.
+
+| Fails | Passes |
+| --- | --- |
+| Four options scored, no provenance recorded | Each marked; B and D `generated_here` |
+| "Option D wins on every criterion" with D generated here | "Option D wins at 4.20. **It was generated in this module and has no market research behind it** — 02 and 05 examined a different product. Re-scored with its unresearched criteria at the lowest observed value it scores 3.6 and still leads. Path: Milestone Zero closes its distribution claim before any build" |
+
+---
+
+# Criterion 9 — If 01-idea recorded stance `category`, the option supplying the differentiation is named, or the research is stated to have found none
+
+**Passes when:** `state.project.differentiation_stance` is `category` and
+`differentiation_resolved_by` is set — either to the option that supplies the position, or
+to `not found` with the finding stated.
+
+**Not applicable when:** the stance was `committed`. Record it as not applicable rather than
+as a pass; the two mean different things and the verdict should say which.
+
+**Fails when:** the stance was `category` and this module ends without addressing it.
+
+## Why it lands here and not earlier
+
+**An operator is allowed to say "I don't know the differentiation yet; find it."** `01-idea`
+records that as a valid starting state rather than a defective idea. **What makes it valid is
+that something eventually closes it** — otherwise it is a deferral that no gate ever collects,
+and the run delivers a recommendation for a product with no stated reason to exist.
+
+**This is the module that can close it**, because it is the first one holding options,
+competitors and a problem ranking at the same time.
+
+## "The research found none" is a pass, and often the most valuable one
+
+**A category with no available differentiating position is a real finding**, and it is the
+finding that saves the most money. It must be stated as a conclusion with its evidence — not
+left as an empty field.
+
+| Fails | Passes |
+| --- | --- |
+| Stance was `category`; module ends, nobody mentions it | "Stance was `category`. Option C supplies it: no competitor reconciles X against Y — 211 products searched, zero. `differentiation_resolved_by: 07-strategy`" |
+| "The differentiation is that we execute better" | "`not found`. Four incumbents hold the positions this category supports and all four are adequately executed. **Recorded as a finding, and it is the reason the recommendation is not to build**" |
 
 ---
 
@@ -220,7 +336,8 @@ U1–U7 apply. Most relevant here:
 3. Walk the workflow for the end-to-end test.
 4. Check Milestone Zero against the inherited evidence standing.
 5. Compare confidence language against source modules.
-6. Evaluate universal gates and criteria 1–5.
+6. Evaluate universal gates and criteria 1–9. **All of them.** The count here must equal the
+   number in `module.yaml`; `validate.py` fails the build when it does not.
 7. Record the verdict.
 
 ```yaml
@@ -237,6 +354,10 @@ gate:
     mvp_cut_with_reasoning: fail
     non_goals_explicit: pass
     risks_rated_and_mitigated: pass
+    expected_winner_pre_registered: pass
+    shortfall_weight_named: pass
+    option_provenance_marked: pass
+    differentiation_resolved: not_applicable   # stance was `committed`, not `category`
   milestone_zero_present: pass
   confidence_laundering: none detected
   verdict: fail

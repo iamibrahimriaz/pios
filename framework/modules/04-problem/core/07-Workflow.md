@@ -77,11 +77,25 @@ Producing that finding cleanly is the module working correctly.
 
 1. `engine/evidence-policy.md`
 2. `04-problem/core/03-Core-Principles.md`
-3. `04-problem/core/06-Framework.md` — the Six Stages
+3. `04-problem/core/06-Framework.md` — the stages, starting at Stage 0
 4. `04-problem/core/09-Research-Methodology.md`
 5. `04-problem/core/08-Questions-To-Answer.md`
 6. `04-problem/knowledge/` — Severity, Frequency, Root-Cause, Problem-Tree
 7. `04-problem/knowledge/validation/` — Interviews, Surveys, Prototype, Success-Criteria
+
+---
+
+# Step 3a — Frame the corpus, before reading anything
+
+Work `06-Framework.md` Stage 0. Write §1a of the template: the **selection rule**, what it
+excludes, the **independence test** answered in writing, and the denominator you will
+normalize by — or a statement that none is obtainable and no cross-source comparison will be
+made.
+
+**Do this before Step 3, not after it.** Once sources have been read, the rule that gets
+written is a description of what was already collected.
+
+Writes: the corpus frame into the module document; nothing to `state` yet.
 
 ---
 

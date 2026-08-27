@@ -214,6 +214,7 @@ Privacy:
 - [ ] Criterion 2 — definitions, sources and targets
 - [ ] Criterion 3 — leading and lagging distinguished, with bases
 - [ ] Criterion 4 — event-level instrumentation
+- [ ] Criterion 5 — every metric states what someone optimizing it without caring about the outcome would do
 - [ ] Privacy check — no regulated property
 - [ ] Confidence separation check
 - [ ] Counter-metric check

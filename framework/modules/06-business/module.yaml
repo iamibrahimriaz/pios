@@ -10,4 +10,5 @@ gate:
   - Price point justified against competitor pricing and value delivered
   - Unit economics stated with assumptions surfaced
   - Path to first 10 customers described
+  - Willingness to pay carries its own evidence, or is recorded as unestablished with the test that would settle it
 on_fail: return to 05-competition

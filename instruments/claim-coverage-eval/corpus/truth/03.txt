@@ -1,0 +1,4 @@
+1. • Ferroptosis is activated in OA cartilage and promotes degeneration
+2. • p53 drives chondrocyte ferroptosis and OA progression
+3. • RORα aggravates OA via p53-dependent ferroptotic signaling
+4. • RORα recruits HAUSP to stabilize p53 through deubiquitination

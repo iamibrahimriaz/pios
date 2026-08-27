@@ -303,6 +303,8 @@ gate:
     criteria_testable: pass | fail
     edge_states_complete: pass | fail
     nothing_dropped_silently: pass | fail
+    reversibility_stated: pass | fail
+    derived_figures_state_scope: pass | fail
   module_checks:
     boundary_no_laundering: pass | fail
     two_builder: pass | fail

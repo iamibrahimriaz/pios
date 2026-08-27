@@ -182,6 +182,7 @@ Per candidate loop:
 - [ ] Criterion 2 — at least one loop, with a closure verdict
 - [ ] Criterion 3 — retention mechanism located in the product
 - [ ] Criterion 4 — time to first value in minutes
+- [ ] Criterion 5 — every conversion figure carries the market it was measured in, or is tagged [assumption]
 - [ ] Payback check
 - [ ] Growth laundering check
 - [ ] Sequence check — spend gated on validation

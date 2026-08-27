@@ -60,6 +60,70 @@ Rules:
 - `on_fail` names a real module, or `halt and request input from the human operator`.
 - Every name in `feeds_deliverables` must exist in `deliverables/manifest.yaml`.
 
+### The manifest has two lists, and they are not interchangeable
+
+`artifacts:` is the specification — markdown, written into a folder under
+`projects/<slug>/deliverables/`, fed by named modules, scanned for evidence tags and leftover
+scaffolding.
+
+`completion_artifacts:` is one artifact per audience — the decision report, the project proposal,
+the engineering presentation, the phase plan, the AI entry file, and the Milestone Zero package
+where the run committed to one. They are written **outside** `deliverables/`, at a `path`
+relative to the run root; not all of them are markdown; and they are **derived** from the
+artifact set rather than fed by a module. Each names a `template` under `deliverables/templates/`
+and a `method` under `engine/`, and the validator checks both exist.
+
+**Adding a module never adds a completion artifact.** They are not produced by the run's method;
+they are produced from its output, once, at the end.
+
+**Bump the manifest `version` when you add a required completion artifact**, and leave completed
+runs alone. `state.project.framework_version` records the version a run was produced under, and
+`validate-run.py` skips checks introduced after it. A completed run is a historical record;
+rewriting one to satisfy a validator that grew afterwards destroys the property that makes the
+record worth keeping.
+
+**Bump `engine/state-schema.yaml`'s own `version` when a new state key becomes REQUIRED.** It
+is a second, independent era marker — the manifest version governs the deliverables contract,
+the schema version governs the state contract, and conflating them makes one bump silently
+skip the other's checks. Gate new required checks in `validate-run.py` on `state.version`.
+Optional keys need no bump. **Checks that fire only when a mechanism is actually used are not
+gated at all**, because a run using a mechanism wrongly is wrong whenever it was made.
+
+### Every artifact declares the folder it lives in
+
+`folder_layout` groups the artifact set by **when it is read**, not by which module produced it,
+and every artifact carries a `folder` key naming one of those groups. `validate.py` fails the
+build on a folder that no artifact uses, an artifact naming a folder the layout does not define,
+and a folder that states no purpose or no reader.
+
+**Filenames and their global numbering never change when you add a folder.** `03-PRD.md` is the
+document's identity in every cross-reference the framework carries; renumbering per folder makes
+one name mean two things depending on where it was cited. Uniqueness is enforced across the whole
+set, not per folder, for that reason.
+
+**Adding a folder is a bigger change than it looks.** Each one gets an `_acceptance.md` copied
+from the manifest, so it adds a file to every run — and `final_gate` requires that no artifact
+contradicts another, which is a cost that grows with the square of the artifact count, not with
+the folder count. **Splitting an artifact to fill a new folder is the change to argue hardest
+against**, and `12-Build-Handoff.md` may not be split at all: its acceptance says an agent could
+open it and start writing code today, and no fragment of it can pass that.
+
+### The manifest owns every path it declares
+
+**No two artifacts may claim the same file, and no completion artifact may sit on a
+deliverable's path.** `validate.py` fails the build on either.
+
+This is cheap here and unrepairable in a run: run directories are not under version control,
+so a filename collision destroys the earlier artifact with no way back. A completed run lost a
+deliverable exactly this way, one step after the agent asserted that no filenames collided.
+
+**Presence is tested against the declared `format`.** A `format: directory` artifact is
+checked as a directory and its text files are walked; testing one with `os.path.isfile` can
+never pass, and the only two ways to satisfy such a check are to fake a file or to collapse
+the package against its own format declaration — both of which satisfy the check by damaging
+the artifact. **A validator that cannot be satisfied by correct work teaches operators to
+ignore validators**, which is the one outcome it cannot survive.
+
 ---
 
 ## `core/` — the eleven operative files
@@ -283,6 +347,59 @@ principles that do not connect to anything the engine consumes.
 
 ---
 
+## Two defects that survive being described
+
+Both were found by writing a rule, watching it fail, writing it again more forcefully, and
+watching it fail identically. Neither is fixed by more prose, and an author who reaches for
+more prose is about to reproduce them.
+
+### A rule stated twice in one document is a rule that contradicts itself somewhere
+
+**The failure:** the run skill's reply contract opened *"applies to every reply you send during
+a run, without exception"* and listed an approved ending for *"you are mid-run and nothing is
+needed from them."* Three hundred lines below, continuous mode banned exactly that ending. An
+agent reading top to bottom obeyed both, stopped constantly, and reported itself as running
+continuously. Two operators complained in the same words, one of them after the fix that was
+supposed to have closed it.
+
+**Why the second attempt failed:** it added a stronger statement of the intended behavior next
+to the mode, and left the contradicting instruction in place at the top. **The forceful rule
+that is read first wins, and both rules were forceful.**
+
+**What to do instead:** find the instruction that authorizes the behavior and remove it. If a
+mode forbids something, the general rule must name the exception at the point where it is
+stated — not three hundred lines later, and not by implication.
+
+> **The test:** search the document for the behavior you are prohibiting. If some other passage
+> permits, models or requires it, prose is not going to settle which one governs.
+
+### Two homes for one record means the unchecked one goes empty
+
+**The failure:** universal gate U4 requires decisions to be recorded. `state.decisions` existed
+for exactly that, and the gate verdict had a free-text field where a module could write *"U4:
+pass — decisions recorded."* Fourteen consecutive modules took the second path. The list stayed
+empty, the run validated, and the operator had named decision logging as one of the mechanisms
+most worth keeping.
+
+**Nothing was dishonest.** The prose entries were accurate. They were simply not queryable,
+not comparable across runs, and not checked — and the unchecked home is the one that goes
+empty, every time, without anyone choosing it.
+
+**What to do instead:** pick one home and make the other a reference into it. `gate_verdicts[]
+.decisions` names ids; `validate-run.py` resolves them. Where a value must be stated even when
+empty, make the empty case a **written value** (`none`) rather than a blank — a module that
+recorded nothing and a module that said nothing are different states, and only one is worth
+investigating.
+
+**This applies to controlled vocabularies too.** `gates.yaml` owns the failure classes and the
+question classes; the skills quote them so an operator meets them in plain language. That
+quotation is a second copy, so `validate.py` checks forward — every declared value must reach a
+skill. **Check forward, not backward:** scanning the skills for unknown tokens looks equivalent
+and is not, because `gates.yaml` names its own classes in prose and a renamed class stays
+"known" via the sentence warning against confusing it with another.
+
+---
+
 ## Before Submitting a Module
 
 - [ ] `module.yaml` complete; every `produces` name used by a downstream `consumes` or deliverable
@@ -295,6 +412,12 @@ principles that do not connect to anything the engine consumes.
 - [ ] No empty directories
 - [ ] American spelling throughout
 - [ ] Nothing in `learn/` that an agent needs to execute correctly
+- [ ] **Every gate criterion requiring a recorded output has a section in `13-Template.md` to record it.** A criterion with no home is one an agent satisfies the template and still fails — `validate.py` reports suspected gaps as a note, but the wording match is approximate and it does not catch synonyms
+- [ ] **Adding a gate criterion means editing four places, not two.** `module.yaml`, the `# Criterion N` section, **the Evaluation Procedure's "Evaluate criteria 1–N" line, and the worked verdict block's `criteria:` mapping.** Ten of fourteen modules were once short in the last two, because adding a criterion updates the heading — you write a section to explain it — and silently leaves the other two behind. An agent following the Evaluation Procedure literally evaluates the range it names and records a pass; the skipped criteria are assessed by nobody. `validate.py` now fails the build on both
+- [ ] **No filename collides.** No two manifest artifacts claim the same path, no two share a bare filename across folders, and no completion artifact sits on a deliverable's path
+- [ ] **Every artifact names a folder `folder_layout` defines**, and every declared folder receives at least one artifact and states its purpose and its reader
+- [ ] **A new required state key bumped `engine/state-schema.yaml`'s `version`**, and the check that requires it is gated on `state.version`
+- [ ] **A new `engine/` method file is referenced from something an agent reads.** An unrouted method is authored work that never executes, and `validate.py` fails the build on one
 - [ ] `python3 framework/engine/validate.py` exits 0
 
 ---

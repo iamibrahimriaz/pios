@@ -164,6 +164,8 @@ Switching cost, all five dimensions:
 - [ ] Criterion 2 — jobs not features
 - [ ] Criterion 3 — workflow with named tools
 - [ ] Criterion 4 — switching cost named
+- [ ] Criterion 5 — every user finding marked observed, reported or reconstructed, with its basis
+- [ ] Criterion 6 — switching cost broken into its five components, not carried as one figure
 - [ ] Evidence honesty checks
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`

@@ -125,6 +125,84 @@ absorbs assumed problems as established ones, however carefully each sentence wa
 
 ---
 
+# Criterion 5 — Substitute workflows enumerated by name, including what people do who use nothing in this category
+
+**Passes when:** the module lists the specific things people do *instead* — by hand, with a
+general-purpose tool, with something they built themselves, with an adjacent product, or by
+tolerating the problem — each named, and each carrying a measure of scale where one exists.
+
+**Fails when:** the substitutes section lists only competing products in the same category,
+or lists "manual process" as a single undifferentiated row, or is absent because every
+source consulted was a complaint about an existing tool.
+
+**How to test it:** take the workaround score of the highest-ranked problem and ask which
+named substitute justifies it. If the answer is "nothing in particular", the column was
+scored from impression.
+
+> **Why this is a gate and not a suggestion.** `09-Research-Methodology.md` ranks a widely
+> shared workaround as **rank 1** — the strongest evidence class this module recognizes — and
+> Stage 3 multiplies every score by the workaround dimension. The module was therefore scoring
+> against, and reasoning from, something it never required anyone to collect.
+
+**The most common failure is structural, not lazy.** Complaint sources — reviews, trackers,
+forums — only contain people who adopted something and were disappointed. **The people using a
+substitute successfully are silent by construction**, and a module that harvests only
+complaints will conclude that every problem is unsolved.
+
+---
+
+# Criterion 6 — The evidence corpus states its selection rule and is justified independently of the product hypothesis
+
+**Passes when:** the module names **where the problem evidence was read from**, states the
+**rule** that selected those sources, and answers the independence test in writing.
+
+**Fails when:** the corpus is described as a list of sources with no rule behind it, or when
+the justification for the sources is the product hypothesis itself.
+
+## The rule, not the list
+
+**A rule is reproducible.** *"Every product in the category above 2,000 installs with at least
+20 reviews"* can be applied by a stranger who gets the same set. *"The main products"* is a
+list assembled from memory, and it contains the ones the hypothesis already had in mind.
+
+**State what the rule excludes and what that costs.** A rule that can only see one directory
+cannot see the commercial products sold direct — often exactly where the paying customers are.
+
+## The independence test, applied literally
+
+> **If the product hypothesis were different, would this still be the right place to look for
+> this problem?**
+
+**If the honest answer is no, the corpus is a description of the hypothesis** and cannot be
+evidence for it.
+
+## Where this fails in practice
+
+**A corpus drawn from the largest products in a category is not evidence that those products
+are problem-heavy.** Raw complaint volume follows install base. On the run that produced this
+criterion, the two products the entire problem inventory was read from turned out — once
+complaints were normalized per active install per year — to be among the **least**
+complained-about in their category, one of them the lowest of any established entrant. **The
+corpus had been selected for size and then read as though it had been selected for severity.**
+
+**The repair was not a correction. It was a re-rank**, which changed the sharpest problem,
+which changed the strategy scoring, which changed the recommendation.
+
+**Normalize, or refuse the comparison.** Any stated denominator beats none. Where none is
+obtainable, say so and stop comparing across sources — an unnormalized cross-source comparison
+is not a weak finding, it is a wrong one.
+
+`knowledge/Corpus-Selection.md` carries the six biases this criterion tests for — selection,
+denominator, survivorship, venue, product size and confirmation — and what each looks like.
+
+| Fails | Passes |
+| --- | --- |
+| "Problems drawn from user reviews of «the two biggest products»" | "Rule: every product in the category above «n» installs with at least «n» reviews — 8 qualified, listed. Complaints normalized per 10,000 active installs per year. The two largest rank 5th and 7th of 8, so the corpus is not size-weighted" |
+| "We looked at the forums" | "Two venue types with different incentives: support threads (collect failures) and reviews (collect sentiment). Issue trackers excluded — 63% of issues in the sample were authored by vendor accounts, so it is a backlog rather than a user corpus" |
+| Justification: "these are the products our idea competes with" | Justification: "these are the products in which this problem class would appear if it exists, whatever we end up building" |
+
+---
+
 # Universal Gates
 
 U1–U7 apply. Most often missed here:
@@ -143,7 +221,7 @@ U1–U7 apply. Most often missed here:
 2. Verify every `[verified]` problem sits at evidence ladder rank 1–3.
 3. Verify validated and assumed sections are structurally separate.
 4. Evaluate universal gates U1–U7.
-5. Evaluate criteria 1–4.
+5. Evaluate criteria 1–6. **All of them.**
 6. Record the verdict.
 
 ```yaml
@@ -157,6 +235,8 @@ gate:
     shortfall_declared: true          # verified count 1, stated plainly
     sharpest_identified_defended: pass
     unvalidated_listed_separately: pass
+    substitutes_enumerated: pass
+    corpus_selection_justified: pass
   universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass, U7 pass]
   verdict: pass_with_declared_shortfall
   note: "Only P1 reaches verified. Milestone Zero required before build."

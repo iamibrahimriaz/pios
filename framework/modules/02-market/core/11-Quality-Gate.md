@@ -95,7 +95,7 @@ trend is favorable did not research the market; it researched the idea.
 
 ---
 
-# Criterion 4 — Regulatory constraints for the named jurisdiction identified
+# Criterion 4 — Regulatory constraints for the named jurisdiction identified, including its general data-protection regime
 
 **Passes when:** the jurisdiction came from `idea_brief` (never inferred), applicable
 regimes are named with their triggers, and each states **concrete obligations** rather
@@ -107,6 +107,34 @@ compliant data model? If it says "HIPAA applies" and nothing more, no.
 **Also required:** an explicit answer to *does regulation exclude a segment named in the
 idea brief?* Silence fails the criterion — that question can end the run early and must
 be answered rather than skipped.
+
+## The general data-protection regime is named separately, or the criterion fails
+
+**Sector regulation is what a market search returns. Data-protection law is not, and it is
+the regime most likely to apply.** Searching a market's regulatory landscape surfaces the
+things that regulate *that industry* — licensing, accreditation, professional bodies, tax.
+A jurisdiction's general personal-data statute regulates **software that stores names and
+phone numbers**, which is nearly every product this framework will ever size, and it is
+almost never returned by the same search.
+
+**So it is asked as its own question, in these words:** *does this jurisdiction have a
+general personal-data or data-protection statute, is it in force, and from what date?*
+
+| Answer | What the module records |
+| --- | --- |
+| A statute exists and is in force | Name it with its citation, its commencement or enforcement date, and the obligations it creates for a product holding personal data |
+| A statute is enacted but not yet enforced | Name it **and the enforcement date**. A product built now will launch into it |
+| No such statute was located | Record it as an explicit finding with the sources searched — **not as silence** |
+
+**Why this is a gate criterion and not advice.** A run passed this gate having researched
+only its sector's regulation. The jurisdiction's general data-protection act — in force,
+and applicable to the product from its first stored record — was missed entirely, and
+surfaced three modules later only because writing a security model forces the question.
+**In a run that never reached a security model it would not have been caught at all**, and
+the whole downstream package would have specified a product that could not legally launch.
+
+Sector silence is not the same as regulatory silence. This criterion exists because a
+module can satisfy every other word of it and still miss the regime that actually binds.
 
 ---
 
@@ -140,7 +168,7 @@ signal that they are stale.
 1. Run the four passes of `engine/review-loop.md`.
 2. Verify every `[verified]` tag resolves to a row in the Sources table.
 3. Evaluate universal gates U1–U7.
-4. Evaluate criteria 1–4.
+4. Evaluate criteria 1–5.
 5. Record the verdict in `state.run`.
 
 ```yaml
@@ -152,6 +180,7 @@ gate:
     sizing_sourced: fail
     three_trends_with_direction: pass
     regulatory_identified: pass
+    claims_dated: pass
   universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass, U7 pass]
   verdict: fail
   reason: "SAM adopted from an analyst report; its boundary was never compared to §1."

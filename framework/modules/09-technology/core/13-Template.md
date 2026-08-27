@@ -252,6 +252,34 @@ the choice and why»
 
 ---
 
+## 6a. External Integration Contracts
+
+<!-- Criterion 7. Every contract with a system this run does not control. An inferred
+     signature and a documented one are the same three lines on the page — the Standing
+     column is the only thing that distinguishes them. -->
+
+| Integration | Contract | Standing | Source, or the step that verifies it |
+| --- | --- | --- | --- |
+| «system» | «endpoint, method, table or format» | `verified` | «named documentation, accessed «date»» |
+| «system» | «...» | `inferred` | «what it was reconstructed from — and the verification step below» |
+
+**Verification step, where anything is `inferred`:**
+
+> «Verify every `[assumption]` above against the vendor's source or published documentation,
+> and correct this document, **before any implementation of the affected component.**»
+
+| | |
+| --- | --- |
+| Where it sits | «the milestone, and that it blocks the ones after it» |
+| Cost | «days» |
+| **If verification finds no usable interface** | «this returns to `07-strategy` as a scope decision, not worked around by whoever hits it» |
+
+**Carried to the handoff:** «yes — `engine/handoff.md` requires inferred contracts to be named
+in the entry file's own text. A tag on page nine is invisible to a builder told the package is
+complete»
+
+---
+
 ## 7. Capability Coverage
 
 <!-- MANDATORY, and a gate criterion. Both directions. -->

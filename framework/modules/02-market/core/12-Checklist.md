@@ -71,6 +71,8 @@ through **before** reaching the gate, so the gate confirms rather than discovers
 - [ ] Data residency and cross-border constraints checked
 - [ ] Direction of travel assessed
 - [ ] **Explicitly answered:** does regulation exclude a segment from the brief?
+- [ ] **Asked as its own question:** does this jurisdiction have a general personal-data
+      statute, is it in force, and from what date? Sector regulation does not surface it
 - [ ] Written so module 09 can act on it without re-reading this document
 
 ---
@@ -154,7 +156,8 @@ through **before** reaching the gate, so the gate confirms rather than discovers
 - [ ] Criterion 1 — boundary, not adjective
 - [ ] Criterion 2 — sizing sourced or explicitly assumed
 - [ ] Criterion 3 — three trends with direction, including one unfavorable
-- [ ] Criterion 4 — regulatory constraints identified concretely
+- [ ] Criterion 4 — regulatory constraints identified concretely, data-protection regime named
+- [ ] Criterion 5 — every regulatory and pricing claim carries the date it was checked
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 

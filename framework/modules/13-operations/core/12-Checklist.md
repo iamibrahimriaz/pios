@@ -240,6 +240,11 @@ Coverage:
 - [ ] Criterion 2 — incident path documented, runbooks pass the 3am test
 - [ ] Criterion 3 — obligations owned, scheduled, producing evidence
 - [ ] Criterion 4 — running cost estimated, including support and compliance
+- [ ] Criterion 5 — a breach is resolved by a recorded change, OR the residual gap is stated as a figure and escalated
+- [ ] What each regress actually bought is recorded, not only the final position
+- [ ] No third narrowing round unless it targets a named cost driver the first two did not touch
+- [ ] The viability decision is raised as a blocking, premise-bearing operator question with each option's consequence
+- [ ] An unresolved gap appears in the Executive Summary's opening and the decision report, not only here
 - [ ] Rota check
 - [ ] Untested-assumption check
 - [ ] Owner reality check

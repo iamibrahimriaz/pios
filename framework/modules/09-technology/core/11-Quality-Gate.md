@@ -181,6 +181,60 @@ wrote down.
 
 ---
 
+# Criterion 7 — Every external integration contract marked verified or inferred, and each inferred one names the verification step that blocks implementation
+
+**Passes when:** every contract with a system this run does not control — a third-party API,
+a plugin's data model, a partner's webhook, an export format — is marked **`[verified: named
+documentation or source]`** or **`[assumption: needs validation]`**, and each inferred one
+names the step that must confirm it **before** implementation.
+
+**Fails when:** an inferred contract is written in the same voice as a verified one, or when
+the verification step exists but is not stated to block.
+
+## Why an inferred contract reads exactly like a verified one
+
+**A method signature reconstructed from an error message on a support forum and a method
+signature copied from vendor documentation are the same three lines of code on the page.**
+Nothing about the artifact distinguishes them, and the builder has no reason to suspect one.
+
+**This is where a specification's confidence is most easily overstated and least visible.**
+Every other section carries prose that can hedge. An interface definition cannot hedge —
+which is exactly why the tag has to be on it.
+
+## What "blocks implementation" means here
+
+**The framework does not build and does not verify.** What this criterion produces is a
+**disclosure** carried into the handoff: which parts of the specification are assumptions,
+and what would settle each one.
+
+**Name it as a step with a position**, so it survives contact with a delivery plan:
+
+> **Verify every `[assumption]` in the integration contracts against the vendor's source or
+> documentation, and correct this document, before any implementation of the affected
+> component.**
+
+**Where verification turns out to be impossible** — no public API, no documentation, no
+readable source — **that is a scope decision, not an implementation detail**, and it goes
+back to `07-strategy` rather than being worked around by whoever hits it first.
+
+## The failure this prevents
+
+**Building an adapter on an unverified assumption is a defect the specification can catch and
+the code cannot.** By the time the code exists, the assumption has been implemented, tested
+against itself, and is indistinguishable from a requirement.
+
+**Burying it is the same as omitting it.** An `[assumption]` tag on page nine of an interface
+document is invisible to a builder who was told the package is complete. `engine/handoff.md`
+requires it in the entry file's own text.
+
+| Fails | Passes |
+| --- | --- |
+| `POST /v2/enroll {user_id, course_id}` with no tag, taken from a forum thread | `POST /v2/enroll {user_id, course_id}` [assumption: needs validation — reconstructed from error strings in «source», not vendor documentation]. **Verified in M0 against the vendor's published client, before any implementation** |
+| "We will confirm the API during development" | "M0, three days, blocking: verify all six inferred signatures against source. If any has no public interface, it returns to 07-strategy as a scope decision" |
+| A verified and an inferred endpoint in the same table, undifferentiated | A `Standing` column on every row: `verified` / `inferred`, with the source or the verification step |
+
+---
+
 # Module-Specific Checks
 
 Not in `module.yaml`. Each fails the gate independently, because each is a way a design can
@@ -278,6 +332,9 @@ gate:
     capability_coverage: pass | fail
     obligations_traced_to_mechanisms: pass | fail
     stack_tradeoffs_stated: pass | fail
+    regulatory_in_security_model: pass | fail
+    regulated_columns_named: pass | fail
+    integration_contracts_marked: pass | fail
   module_checks:
     cost_within_ceiling: pass | fail
     load_matches_projections: pass | fail

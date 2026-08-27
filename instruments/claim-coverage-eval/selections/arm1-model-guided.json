@@ -1,0 +1,86 @@
+{
+ "01": [
+  "Here, we present magnetically actuated miniature bamboo-fiber robots (MBFRs) for the efficient removal of antibiotics in complex freshwater systems.",
+  "Moreover, we develop a geometry-resolved dynamic model to predict the dominant propulsion trend of these non-standard helical MRs under rotating magnetic actuation.",
+  "As shown in Figure 4C, the adsorption efficiencies of MBFRs toward NOR, ciprofloxacin (CIP), OTC, TC, and sulfamethoxazole (SMX) were 98%, 98.8%, 96.2%, 95%, and 92.5%, respectively.",
+  "The Langmuir maximum adsorption capacities were calculated to be 435.60 ± 9.54 mg/g for NOR and 391.69 ± 8.55 mg/g for OTC.",
+  "MBFRs retained 90.3%–95.0% NOR removal after 20 adsorption-desorption cycles in DI water and natural-water matrices, and remained effective under mixed-interference conditions."
+ ],
+ "02": [
+  "Longitudinal salinization and nitrogen accumulation drove a deterministic decline in bacterial α-diversity and a succession from nutrient-responsive Pseudomonadota to stress-tolerant Chloroflexota and Actinomycetota.",
+  "In contrast, fungal diversity remained decoupled from linear gradients, driven by local heterogeneity.",
+  "Contrary to the expectation that extreme stress enforces strict deterministic filtering, community assembly was primarily governed by stochastic processes (44%), specifically ecological drift.",
+  "The transition to the desert reach significantly intensified dispersal limitation, particularly for fungi.",
+  "Compared to the oasis section, desert section networks for both kingdoms exhibited markedly denser topologies with increased edge numbers (Figure 6)."
+ ],
+ "03": [
+  "We demonstrate that ferroptosis is markedly activated in OA, that p53 functions as a key executor of chondrocyte ferroptosis, and that RORα promotes OA progression by stabilizing p53 through HAUSP-dependent deubiquitination.",
+  "Transcriptomic profiling of normal chondrocytes and OA chondrocytes revealed a distinct ferroptosis-associated gene signature (Figure 1A).",
+  "Chondrocyte-specific RORα cKO mice exhibited marked protection against cartilage degeneration following DMM surgery (Figure 3C).",
+  "Together, these data indicate that RORα functions as a scaffold to recruit HAUSP, promoting p53 deubiquitination and stabilization, thereby driving ferroptosis.",
+  "Conversely, p53 knockdown attenuated erastin-induced ferroptosis, restoring GPX4 and COL2A1 expression and reducing lipid peroxidation (Figures 2G–2I)."
+ ],
+ "04": [
+  "In this context, the primary objective of this study was to compare and integrate the phenotypic and functional alterations of iNKT, γδT, and MAIT cells in adult T1D patients at different disease stages (recent-onset [RO] vs. long-term [LT]) in peripheral blood, using a cross-sectional design.",
+  "In adults with LT T1D, the three innate-like T cell populations displayed an exhaustion-like profile with PD-1 upregulation associated with impaired Th1 cytokine production and increased proliferation (Figures 1B and 3B; Table 1).",
+  "Therefore, loss of Th1 cytokine production is shared across all innate-like T cells and is more pronounced in patients with longer disease duration.",
+  "Altogether, in patients with T1D, innate-like T cells showed more marked phenotypic alterations than conventional T cells.",
+  "Both models suggested that MAIT cells may be among the variables contributing most to the classification between patients with LT T1D and healthy controls, and particularly PD-1+ MAIT cells and CD127+ MAIT cells."
+ ],
+ "05": [
+  "First, relative to the sober state, cannabis use increased both deliberate and spontaneous mind-wandering, with a much larger increase in spontaneous than deliberate mind-wandering.",
+  "Second, we found relative to the sober state, cannabis use reduced people's ability to modulate their deliberate mind-wandering levels to match instructed amounts, without noticeably influencing instruction-related modulation of spontaneous mind-wandering.",
+  "Third, we consistently showed cannabis use led to increased response time variability during the attention task, which supports prior studies demonstrating a strong link between increases in mind-wandering and poorer performance on attention tasks [[33], [34], [35],57].",
+  "During the cannabis sessions we estimate participants self-administered an average dose of 83.45 mg ± 47.24 (3.01–246.12) of THC, and 0.52 mg ± 1.31 (0–8.50) of CBD.",
+  "In summary it appears that the relationship between poorer task performance and increased mind-wandering reports is maintained when participants are under the influence of cannabis."
+ ],
+ "06": [
+  "A total of 79 prototype components and 527 metabolites were detected in serum samples collected at 10 different time points, including flavonoids, terpenoids, volatile oils, organic acids, alkaloids, coumarins, etc.",
+  "Flavonoids and terpenoids were consistently detected at all the assay time points and were more abundant relative to the other components, indicating that these two groups of compounds may be the key active ingredients in exerting the pharmacological effects of SGD.",
+  "The highest number of prototype components was detected in 20 min of drug-containing serum, suggesting a high bioavailability and rapid absorption characteristics of SGD effective components that could be absorbed by the body and enter the blood circulation quickly.",
+  "This study utilized the UPLC-Q-TOF-MS/MS method in positive and negative ion modes to analyze serum samples collected at ten time points (12 h) after oral administration of SGD in rats.",
+  "Unlike previous studies on the bioavailable components of SGD, vitexin has been largely overlooked."
+ ],
+ "07": [
+  "To address this gap, this paper proposes a quality-centric data evaluation framework for a fast and simple multi-stage approach to DQ evaluation.",
+  "The proposed framework is built on unsupervised learning to address quality issues before training and evaluating the ML model.",
+  "The proposed framework is validated on three datasets, consisting of anti-sense oligonucleotide (ASO) samples and their experimentally observed retention times.",
+  "In summary, the results of the experiments show that high-quality ASO data are characterized by lack of or low modification, relatively long, express low values of skewness, and high values of SNR during a chromatography experiment.",
+  "The framework integrates unsupervised learning to generate quality-sensitive clusters and predictive ML to validate and analyze the results."
+ ],
+ "08": [
+  "This study presents the development and characterization of polycaprolactone (PCL) nanoparticles (NPs) functionalized with α-amylase, specifically designed for the degradation of Staphylococcus aureus biofilms in hospital environments.",
+  "As we can see from the graph in Fig. 5, fresh α-amylase conjugated NPs showed a biofilm degradation of (37.5 ± 10.8)%, comparable to that one of (46.4 ± 12.2)% obtained by the fresh free enzyme molecules, confirming a successful immobilization.",
+  "As we can see from the percentage values, one week old α-amylase conjugated NPs show an activity loss corresponding to (18.7 ± 6.6) %, while α-amylase in its free form undergo to a statistically significant activity loss of (40.1 ± 9.6)% of its degradation activity (p < 0.01).",
+  "Overall, the results confirmed that the developed nanoplatform successfully degraded nosocomial S. aureus biofilms while significantly improving the thermal stability of the enzyme molecules.",
+  "Again, compared to the pre-treated biofilm (Fig. 8 A, B, C PRE) the post-treated biofilm structure (Fig. 8 D, E, F POST) appear noticeably altered, with a considerable decrease of bacterial density, confirming the effectiveness of this simple nanoformulation among different strains."
+ ],
+ "09": [
+  "Here we show that GABAergic striatal MSNs derived from C9ORF72RE patient iPSCs are electro physiologically hypoexcitable.",
+  "Compared to both healthy and isogenic controls, C9ORF72RE MSNs exhibit reduced action potential (AP) firing and disturbed post-threshold properties, a phenotype not observed in MNs derived from the same patient lines.",
+  "Quantitative analysis revealed a significant reduction in AIS length, but not distance away from the soma, in C9-MSNs compared to control MSNs (Figures 6E and 6F), indicating a structurally diminished AP initiation site, confirming the phase plot data.",
+  "Together, these findings indicate coordinated reduction of multiple slow-activating Kv conductance’s in C9-MSNs, consistent with a broader remodeling of repolarizing mechanisms that contributes to altered spike waveform repolarization dynamics.",
+  "Specifically, synaptic latency, the interval between the presynaptic AP peak and the onset of the induced postsynaptic current, was significantly prolonged in C9-MSN pairs compared to controls (Figures 7A and 7D)."
+ ],
+ "10": [
+  "In this study, we present a high-quality chromosomal-level genome assembly of C. lanceolata, which was scaffolded using high-throughput chromosome conformation capture (Hi-C) data.",
+  "The final assembled genome of C. lanceolata stood at 11.24 Gb, with repetitive sequences accounting for 10.38 Gb, predominantly comprised of LTR elements.",
+  "The larger genome size of C. lanceolata can be attributed to longer introns, specific LTR accumulation, and the lack of an efficient LTR elimination mechanism.",
+  "Phylogenomic analyses confirmed the clustering of Ginkgo and Cycads as a sister group to all other extant gymnosperms.",
+  "Furthermore, we found that certain embryos of C. lanceolata begin to abort 95–105 days after pollination, being replaced by flavonoids and forming astringent seeds (non-fertile) that are visually indistinguishable from healthy seeds."
+ ],
+ "11": [
+  "We designed and synthesized 59 compounds by integrating P-glycoprotein (P-gp) substrate motifs into known α2AAR agonist scaffolds.",
+  "Among them, CC10137 emerged as an orally bioavailable lead, demonstrating potent α2AAR agonist activity coupled with a high P-gp efflux potential.",
+  "Critically, CC10137 did not induce sedation, hypotension, and hypothermia or impair spinal nociceptive reflex, a profile that marks a significant safety improvement over current systemic α2AAR agonists.",
+  "Importantly, it demonstrated potent, dose-dependent anti-allodynia effects across eight murine pain models with different etiologies, including neuropathic pain induced by spared nerve injury (SNI), chemotherapy-induced peripheral neuropathy (CIPN), diabetic peripheral neuropathy (DPN), and postherpetic neuralgia (PHN); bone cancer pain induced by mouse NCTC-2572 cells and rat Walker 256 cells; inflammatory pain induced by complete Freund’s adjuvant (CFA); and postoperative pain (POP).",
+  "Furthermore, CC10137 not only demonstrated robust standalone anti-allodynic efficacy but also revealed a synergistic anti-allodynic effect when co-administered with morphine or pregabalin."
+ ],
+ "12": [
+  "In this study, we developed two 3A11 ADCs by using two different linkers and payloads, one with a protease-cleavable VC-PABC linker conjugated to MMAE (α-FGFR4-vc-MMAE), and the other with a legumain-cleavable mpGlyAsnAsn (βAla) linker14 conjugated to exatecan (α-FGFR4-NNβA-exatecan).",
+  "We evaluated the efficacy of these FGFR4 ADCs in several RMS models in vitro and in vivo and found that it correlated with FGFR4 expression and 3A11-mediated internalization.",
+  "While both ADCs exhibited comparable in vitro efficacy, the exatecan-based ADC demonstrated better anti-tumor activity in multiple aggressive FN RMS mouse models, including an RMS559 cell line-derived xenograft (CDX), FP RMS RH4 CDX, and an FP-RMS patient-derived-xenograft (PDX) model.",
+  "At 11 nM (1.67 μg/mL), α-FGFR4-vc-MMAE exhibited clear bystander killing that suppressed the growth of FGFR4 KO cells, whereas neither α-FGFR4-NNβA-exatecan at 22 nM (3.33 μg/mL) nor control ADCs showed any significant growth suppression of FGFR4 KO cells (Figure 3F), demonstrating the dependence of FGFR4 expression for the bystander activity of α-FGFR4-vc-MMAE ADC.",
+  "Notably, the exatecan-based ADC provided additional prolonged tumor suppression in breast cancer models expressing high FGFR4, supporting its potential clinical utility in other malignancies with high FGFR4 expression."
+ ]
+}

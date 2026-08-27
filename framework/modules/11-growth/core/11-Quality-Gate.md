@@ -242,6 +242,7 @@ gate:
     loop_described_with_closure_verdict: pass | fail
     retention_mechanism_located: pass | fail
     time_to_first_value_stated: pass | fail
+    conversion_figures_carry_market: pass | fail
   module_checks:
     payback: pass | fail
     no_growth_laundering: pass | fail

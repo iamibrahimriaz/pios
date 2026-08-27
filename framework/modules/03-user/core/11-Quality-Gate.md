@@ -113,16 +113,33 @@ entirely predictable at this stage.
 
 ---
 
-# Criterion 5 — Each user finding marked observed or reported
+# Criterion 5 — Each user finding marked observed, reported or reconstructed, with its basis
 
-**Passes when:** every workflow and behavior claim states whether it was watched or
-described.
+**Passes when:** every workflow and behavior claim carries one of three marks.
 
-**Fails when:** interview statements and observations are formatted identically. They are
-not equivalent evidence, and module 04 currently weights them the same.
+| Mark | Means | Evidence tag it maps to |
+| --- | --- | --- |
+| `observed` | Someone watched it happen | `[verified: <source>]` |
+| `reported` | Someone described it | `[verified: <source>]` |
+| **`reconstructed`** | **Assembled from regulation, statistics, published material or competitor behavior. Nobody described it and nobody watched it** | **`[inferred: <basis>]` — never `[verified]`** |
 
-**Note.** Marking everything `reported` is a passing answer. It is also a finding about the
-run's evidence base, which is the point.
+**`reconstructed` requires its basis to be named.** "Reconstructed from the registration rules
+and the published fee schedule" passes. "Reconstructed" alone does not, and is the way this
+third state would otherwise become a place to put weak evidence.
+
+**Fails when:** interview statements and observations are formatted identically, or a
+reconstruction is presented as either. They are not equivalent evidence, and module 04 weights
+them.
+
+**Why a third state exists.** A desk-stage run frequently has no user contact at all, and its
+workflow claims are genuinely neither observed nor reported. Forcing them into `reported`
+overstates them; forcing them into `observed` is worse. **A binary here does not make the run
+more rigorous — it makes the record less true**, and every downstream module inherits the
+overstatement.
+
+**Note.** Marking everything `reconstructed` is a passing answer. It is also the clearest
+possible finding about the run's evidence base, and it should drive `remote-validation.md`'s
+limit output rather than being quietly accepted.
 
 ---
 
@@ -174,7 +191,7 @@ U1–U7 apply. Most often missed here:
 2. Verify every quote resolves to a source.
 3. Verify the segment sits inside the market boundary.
 4. Evaluate universal gates U1–U7.
-5. Evaluate criteria 1–4 and the evidence honesty checks.
+5. Evaluate criteria 1–6 and the evidence honesty checks.
 6. Record the verdict.
 
 ```yaml
@@ -187,6 +204,8 @@ gate:
     jobs_not_features: fail
     workflow_with_named_tools: pass
     switching_cost_named: pass
+    findings_marked_by_basis: pass
+    switching_cost_decomposed: pass
   evidence_honesty:
     mode_declared: pass
     no_invented_quotes: pass

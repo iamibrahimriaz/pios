@@ -137,6 +137,47 @@ The last row deserves attention when module 04 declared a shortfall. An approach
 retains some value even if the central problem turns out to be less severe than believed
 is worth more than its raw score suggests.
 
+## Mark what you generated, and price the asymmetry
+
+**Modules 02–06 researched one direction.** Options that survived from that work arrive with
+a market, a competitor set, a segment and a problem ranking. **Options you invented in Move 1
+arrive with whatever you found while writing this module** — frequently two data points.
+
+**Score is a number either way, and the table makes them look identical.** That is the whole
+problem, and it is invisible from inside the table.
+
+| Provenance | What it means |
+| --- | --- |
+| `carried_from_research` | Modules 02–06 examined this |
+| `generated_here` | Invented in this module, or later, in response to the evidence |
+
+> **A generated option winning is the framework working**, not failing. A run whose
+> recommendation cannot change under evidence decided before it started. What must not
+> happen is the comparison pretending to be even.
+
+**If a generated option wins, run the re-score test** — mechanical, one minute. Re-score it
+with every criterion it was never researched on set to **the lowest value any researched
+option scored on that criterion.**
+
+- **Still wins** → the win is robust to the missing research. Record that; it is a strong
+  result.
+- **No longer wins** → **the win rests on the gap.** Say so in the section that presents the
+  scores.
+
+**Then choose a path and name it:** a research pass through the skipped modules before the
+recommendation stands, or **a validation milestone closing its specific unresearched claims,
+placed first in the roadmap and blocking the first build milestone.** The second is usually
+correct and always cheaper — it is a choice, not a default.
+
+**Two arguments that are not arguments.** *"It fits the evidence better"* — it was written
+after the evidence, so fit is not independent confirmation. *"The other options are refuted
+anyway"* — then say which of their evidence still stands. **Evidence does not stop being true
+because the recommendation moved**, and a displaced option's market sizing and competitor set
+frequently survive intact and apply to whatever replaced it.
+
+**Produces:** `provenance`, `unresearched` and `asymmetry_effect` on every entry in
+`state.outputs.solution_options`.
+
 ---
 
 # Move 3 — Choose

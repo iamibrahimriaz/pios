@@ -97,6 +97,20 @@ a section to hide a gap, and never write filler to occupy one.
 | --- | --- | --- | --- |
 | «name» | «trigger» | «obligations» | «design consequence» [tag] |
 
+**General data-protection regime** — asked separately, because a search for a market's
+regulation returns what regulates the *industry*, and this regulates *any software holding
+a name or a phone number*. The two searches do not overlap.
+
+| | |
+| --- | --- |
+| Statute | «name and citation, or "none located"» [tag] |
+| In force? | «yes / enacted, enforcement from «date» / no» |
+| Applies to this product because | «what personal data it stores» |
+| Obligations it creates | «consent, retention, erasure, localization, breach notice» |
+
+<!-- "None located" is a finding and must name the sources searched. Silence here is not
+     the same as absence, and a run that leaves this blank has not answered the criterion. -->
+
 **Barriers to entry created by regulation**
 
 | Barrier | Type | Cost to clear | Time to clear |
@@ -208,7 +222,31 @@ distribution, data access, or incentive» [tag]
 
 ---
 
-## 8. Handoff
+## 8. Findings That Invalidate an Earlier Framing
+
+<!-- This module is the first to meet the market, and it regularly discovers that a term,
+     category or boundary carried in from 01-idea does not exist as described. That is a
+     RESULT, not a failure of this module's gate — but without a home it gets softened into
+     a footnote, and every later module inherits a framing the evidence already contradicted.
+
+     Leave empty and say so if nothing was invalidated. Do not manufacture an entry. -->
+
+| # | What 01-idea assumed | What the evidence shows | Source | Consequence |
+| --- | --- | --- | --- | --- |
+| 1 | «the framing, quoted from the earlier module» | «what is actually the case» | [tag] | «what must change downstream» |
+
+**Does this force a re-derivation, or a rewording?**
+«Re-derivation if a conclusion rested on the old framing; rewording if only the label changes.
+Say which, and name the conclusions affected. A re-derivation is recorded in
+`state.rederivations` — a find-and-replace is not one.»
+
+**Does the operator need to confirm the new framing before research continues?**
+«yes/no — if the product's category or buyer has changed, the answer is usually yes, and it
+belongs at the next human checkpoint rather than in a later summary»
+
+---
+
+## 9. Handoff
 
 | Field | Value | Consumed by |
 | --- | --- | --- |
@@ -222,7 +260,7 @@ distribution, data access, or incentive» [tag]
 
 ---
 
-## 9. Sources
+## 10. Sources
 
 | # | Source | Type | Accessed | Used for |
 | --- | --- | --- | --- | --- |
@@ -230,7 +268,7 @@ distribution, data access, or incentive» [tag]
 
 ---
 
-## 10. Evidence Standing
+## 11. Evidence Standing
 
 | | Count |
 | --- | --- |

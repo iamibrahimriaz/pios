@@ -188,12 +188,23 @@ the user's» [tag]
 
 **Cost to serve, per customer per year**
 
+**Scope of this cost model:** «the full product as modelled here, with every component below»
+
 | Component | Cost | Basis |
 | --- | --- | --- |
 | Infrastructure | «figure» | «from 07-Architecture estimate, if available» [tag] |
 | Support | «figure» | «tickets × time × rate» [tag] |
 | Third-party / AI costs | «figure» | «per-operation × volume» [tag] |
-| **Total** | «figure» | |
+| **Total** | «figure» | **for the scope named above** |
+
+> **Name the scope, and keep naming it downstream.** This module costs the product it is
+> modeling — the one with the revenue in it. `07-strategy` may then cut a whole cost line
+> out of the MVP: no backend, no accounts, no paid tier. **Both figures are correct and they
+> cost different products**, and a run that publishes them side by side without a scope label
+> will eventually set this module's revenue against the MVP's cost. That comparison is wrong
+> by exactly the line 07-strategy removed, and it reads as a favorable number.
+>
+> **Every later document that repeats a cost figure repeats its scope with it.**
 
 **The load-bearing assumption:** «which input, if wrong by 50%, changes the verdict»
 
@@ -285,6 +296,31 @@ the user's» [tag]
 **Where the model breaks:** «the first threshold to fail as assumptions worsen»
 
 **What would have to be true for this to work:** «stated plainly»
+
+---
+
+## 9a. Willingness to Pay
+
+<!-- Criterion 5. A SEPARATE claim from everything above. Sections 3, 4 and 9 establish what
+     the value is worth and what the market bears. This section establishes whether anyone
+     will actually pay — and "unestablished" is a pass. -->
+
+| | |
+| --- | --- |
+| **Standing** | «evidenced / unestablished» |
+| **Rung on the ladder** | «stated interest / stated price / registration with friction / refundable reservation / uncaptured card authorization / real purchase» — `engine/instrument-substitution.md` |
+| **Evidence** | «what was actually observed, tagged» |
+| **n** | «how many people, and how they were reached» |
+
+**What this does NOT rest on:** «problem severity from 04, competitor pricing from 05, or the
+value figure in §3. Those are different claims — see `engine/evidence-policy.md`»
+
+**If unestablished:** «the test that would settle it, its threshold, and the fact that it
+becomes a Milestone Zero ahead of any build. From a public corpus this claim can never be
+established, and saying so is the correct output»
+
+**If stated and revealed figures both exist and disagree:** «revealed governs — recorded
+before the result, not chosen after it»
 
 ---
 
