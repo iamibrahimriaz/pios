@@ -17,6 +17,67 @@ historical record; a validator that grew later must not be able to fail one retr
 
 ---
 
+## Releasing
+
+**An installed plugin is cached by version, not by commit.** `claude plugin install` unpacks
+the repository into `~/.claude/plugins/cache/pios/pios/<version>/` and reads from there. So a
+`git push` alone reaches nobody: the cache key did not change, and every existing install keeps
+serving the files it already has.
+
+**That makes the version bump the release, and pushing merely the delivery.** Ship a framework
+change without bumping and installs silently continue on the old method — the worst kind of
+failure here, because the operator gets a complete, confident run produced by a version you
+believed you had replaced.
+
+### The ritual
+
+```bash
+# 1. The framework must be sound before the version claims anything about it.
+python3 framework/engine/validate.py            # must exit 0
+
+# 2. Bump all four manifests to the same version. They are checked, not trusted —
+#    `install manifests agree on one version` fails if you miss one.
+#      .claude-plugin/plugin.json       version
+#      .claude-plugin/marketplace.json  plugins[0].version
+#      package.json                     version
+#      gemini-extension.json            version
+
+# 3. Move the Unreleased section under the new number, with today's date.
+#    Write what changed for an operator, not what changed in the diff.
+
+python3 framework/engine/validate.py            # again, after the bump
+
+# 4. Commit, tag, push. The tag and the manifests must agree.
+git commit -am "Release vX.Y.Z: <one line>"
+git tag -a vX.Y.Z -m "vX.Y.Z"
+git push && git push --tags
+gh release create vX.Y.Z --notes-from-tag
+```
+
+### Verifying the release actually shipped
+
+**Do this from a directory that is not the repository.** A release that only works where you
+built it is not a release.
+
+```bash
+claude plugin marketplace update pios     # refresh the clone
+claude plugin update pios@pios            # move to the new version
+claude plugin list                        # must print the new version
+```
+
+Then confirm the framework travelled with it, which is the failure that looks like success:
+
+```bash
+P=~/.claude/plugins/cache/pios/pios/<version>
+find "$P/framework" -type f | wc -l       # expect the full framework, not a handful
+ls "$P/skills"                            # pios · pios-author
+```
+
+**A version bump with no framework change is still a release**, and is the right move whenever
+a skill, template or check changes — those are the method too.
+
+---
+
 ## [0.1.0] — Unreleased
 
 First public release. The framework is complete and structurally validated; **no claim about

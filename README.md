@@ -1,593 +1,310 @@
 # Product Intelligence OS
 
-> **An AI-first Product Research & Discovery Framework that transforms ideas into implementation-ready product blueprints.**
+> **The research stage before the code.**
+>
+> AI made building cheap. It made building the wrong thing cheap too.
+
+[![validate](https://github.com/iamibrahimriaz/pios/actions/workflows/validate.yml/badge.svg)](https://github.com/iamibrahimriaz/pios/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+You describe a product idea in one sentence. PIOS researches it, argues with it, specifies it,
+and hands you the documents an engineer or a coding agent starts building from.
+
+**Or it tells you not to build it — and that is a complete, successful result.**
 
 ---
 
-# What is Product Intelligence OS?
-
-Product Intelligence OS (PIOS) is an open, structured framework that trains AI agents to perform professional product research.
-
-Instead of giving AI dozens of custom prompts for every new idea, Product Intelligence OS teaches AI **how to think**, **how to research**, **how to evaluate**, and **how to deliver**.
-
-The goal is simple:
-
-> Give AI an idea.
-
-> Receive a complete product blueprint.
-
----
-
-# Why This Project Exists
-
-Modern AI can generate documents.
-
-Great product managers generate decisions.
-
-Most AI assistants can write.
-
-Few AI assistants know **how to discover products**.
-
-Product Intelligence OS bridges that gap.
-
-It provides a repeatable methodology that teaches AI to work like an experienced:
-
-- Product Manager
-- Product Researcher
-- Business Analyst
-- UX Strategist
-- Solution Architect
-- Technical Consultant
-
-Every research project follows the same principles, standards, and quality gates.
-
----
-
-# Vision
-
-Build the world's best open framework for AI-driven product discovery.
-
-Every idea should become:
-
-- Validated
-- Well researched
-- User focused
-- Technically feasible
-- Business viable
-- AI ready
-- Implementation ready
-
-without requiring dozens of custom prompts.
-
----
-
-# Mission
-
-Create a reusable knowledge framework that enables AI to independently perform professional product research using standardized methodologies, structured reasoning, quality evaluation, and continuous learning.
-
----
-
-# Philosophy
-
-Product Intelligence OS is not a prompt library.
-
-It is not a documentation repository.
-
-It is not a collection of templates.
-
-It is a learning system.
-
-Every module teaches AI:
-
-- Why something matters
-- How experts think
-- Which questions to ask
-- Which mistakes to avoid
-- How to evaluate itself
-- How to improve continuously
-
-The objective is not better documents.
-
-The objective is better decisions.
-
----
-
-# What Can It Do?
-
-Starting from only a product idea:
-
-```
-Idea
-
-↓
-
-Understand
-
-↓
-
-Research
-
-↓
-
-Analyze
-
-↓
-
-Challenge Assumptions
-
-↓
-
-Discover Opportunities
-
-↓
-
-Validate
-
-↓
-
-Design
-
-↓
-
-Review
-
-↓
-
-Deliver
-```
-
-Product Intelligence OS enables AI to generate:
-
-- Product Vision
-- Market Research
-- Competitor Analysis
-- User Research
-- Problem Analysis
-- Solution Exploration
-- Business Strategy
-- Product Requirements
-- Feature Specifications
-- UX Strategy
-- AI Opportunities
-- Technical Research
-- Architecture
-- Database Design
-- API Design
-- Security Analysis
-- Scalability Planning
-- Pricing Strategy
-- Product Roadmap
-- Risk Analysis
-- Validation Plan
-- Executive Summary
-
-Everything required before development begins.
-
----
-
-# Repository Structure
-
-```
-pios/
-
-AGENTS.md                 how an agent executes a run — start here
-
-framework/                ships to users; read-only during a run
-
-  constitution/           governing principles — how to think
-
-  engine/                 how a run executes
-    run-order.yaml          module sequence and stages
-    gates.yaml              how a module passes or fails
-    evidence-policy.md      verified / inferred / assumption
-    state-schema.yaml       the carry-forward project state
-    review-loop.md          the four-pass self review
-
-  deliverables/           THE OUTPUT SPECIFICATION
-    manifest.yaml           15 artifacts with acceptance criteria
-
-  modules/                the 14 lifecycle domains
-    01-idea/  02-market/  03-user/  04-problem/  05-competition/
-    06-business/  07-strategy/  08-product/  09-technology/
-    10-execution/  11-growth/  12-metrics/  13-operations/
-    14-ai-systems/
-
-  packs/                  optional vertical knowledge — planned, not yet built
-
-.claude-plugin/           plugin.json + marketplace.json — the install manifests
-skills/                   /pios and /pios-author — the agent interface
-scripts/install-skill.sh  install /pios globally, for use from other projects
-projects/<slug>/          one run — state.yaml, research/, deliverables/
-
-examples/                 your own finished runs — local only, never committed
-```
-
-Each module contains four layers:
-
-| Layer | Teaches | Read by |
-| --- | --- | --- |
-| `core/` | How to think — frameworks, workflow, questions, quality gates | the agent |
-| `knowledge/` | What to know — concepts, terminology, methods | the agent |
-| `resources/` | Templates, examples, anti-examples | the agent |
-| `learn/` | Curriculum — why it matters, objectives, reflection | humans |
-
-Every module also carries a `module.yaml` — its machine-readable contract:
-what it depends on, what it consumes, what it produces, and the gate it must
-pass before the run continues.
-
----
-
-# Status
-
-**Complete and structurally validated. Not yet proven by use.**
+## What it actually is
+
+PIOS is **not a program.** It is a body of method — 623 markdown files and 18 YAML files —
+that an AI coding agent reads and executes. You supply the agent; this repository supplies the
+discipline.
+
+It runs **14 gated research modules** in sequence: market, users, problem, competition,
+business, strategy, then product and technical specification. Every factual claim it writes
+carries a source tag. Every module has a gate it must pass before the next one starts. When a
+gate cannot be passed honestly, the run stops rather than proceeding on a guess.
 
 | | |
 | --- | --- |
-| Framework | Complete — 14 modules, 4 layers each, 15 required deliverables |
-| Structural checks | 22, all passing (`framework/engine/validate.py`) |
-| Reference runs | **Not published.** Runs are private — see [`examples/`](examples/) |
-| Vertical packs | Planned, not built |
-
-The honest position: every claim about *structure* in this README is verified.
-No claim about *outcomes* has been tested by a published run.
-
-**Completed runs are not published here, and will not be.** A run carries real
-market research, named customers, pricing and unreleased strategy — the framework
-is open, but what people put through it is theirs. Runs stay on the machine that
-produced them; `.gitignore` enforces it and so does a structural check.
-
-What crosses back into the framework is the *defect*, never the project. If you
-run it and something broke, [describe the defect](CONTRIBUTING.md) — a gate you
-could not pass honestly, a template you could not fill. That is the most valuable
-contribution available, and it needs none of your research to be useful.
+| **Input** | One idea, loosely described |
+| **Process** | 14 modules · gated · evidence-bound · 3 human checkpoints |
+| **Output** | 15–17 documents in `./pios/<slug>/`, or a documented "not yet" |
+| **Time** | Hours across several sessions. It was not designed to be fast |
 
 ---
 
-# Install
+## Install
 
-Product Intelligence OS is **not a program.** It is a body of method that an AI
-agent reads and executes. You supply the agent; this repository supplies the
-discipline.
-
-## Claude Code
+### Claude Code
 
 ```bash
 claude plugin marketplace add iamibrahimriaz/pios
 claude plugin install pios@pios
 ```
 
-Then, from **any** project directory:
+That is the whole install. No clone, no environment variable, no Python.
 
-```
-/pios   an app that helps small gyms manage memberships
-```
-
-The run lands in `./pios/<slug>/` — beside the code it describes. Nothing to clone,
-no environment variable, no Python.
-
-## Gemini CLI
+### Gemini CLI
 
 ```bash
 gemini extensions install https://github.com/iamibrahimriaz/pios
 ```
 
-## Any other agent
+### Any other agent
 
-Point it at this repository and tell it to read [`AGENTS.md`](AGENTS.md) — the complete
-operating manual: startup sequence, per-module loop, the rules it may not break, and how
-to know when it is finished.
-
-Clone the repository beside your project so the agent can read `framework/`. An
-`npx` installer is planned and not yet built.
+Clone this repository beside your project and tell the agent to read [`AGENTS.md`](AGENTS.md).
+That file is the complete operating manual — startup sequence, per-module loop, the rules it
+may not break, and how to know when it is finished.
 
 **Requirements:** an AI coding agent that can read and write files.
-[Claude Code](https://claude.com/claude-code) is the reference implementation.
-**Python is not required to run PIOS** — it is needed only by the two validators,
-covered under [Checking the output](#checking-the-output).
+**Python is not required to run PIOS** — only for the two optional validators.
 
 ---
 
-# Running It
+## Use it
 
-**Full instructions: [USAGE.md](USAGE.md)** — every install mode, moving the output
-into your build, and troubleshooting.
+From **any** project directory:
 
 ```
-Input:   one idea, loosely described
-Process: 14 modules, gated, evidence-bound
-Output:  a build-ready blueprint in ./pios/<slug>/
+/pios   an app that helps small gyms manage memberships
 ```
 
-A full run does not fit in one session. Invoke `/pios` again to resume — it finds the
-existing `state.yaml` and continues from the next unpassed module.
+The run lands in `./pios/gym-memberships/` — beside the code it describes.
 
-| Skill | For |
+```
+/pios                          resume where you left off
+/pios   what stage am I at?    status only, no work
+```
+
+A full run does not fit in one session. Invoking `/pios` again finds the existing `state.yaml`
+and continues from the next unpassed module.
+
+### It is an interview, not a button
+
+**The run stops three times and hands control back to you.** This is the design, not a
+malfunction — an agent that guesses your jurisdiction produces a confident plan for the wrong
+country.
+
+| Stop | What it asks |
 | --- | --- |
-| `/pios` | Running a research session on an idea. Start, resume or status |
-| `/pios-author` | Extending the framework itself — a new module, a vertical pack, a gate change |
+| After module 01 | At least five clarifying questions. Jurisdiction, who pays and delivery surface are not optional — it is forbidden from guessing them |
+| After module 07 | Confirm the MVP cut. That is a commercial commitment, not a research finding |
+| Before delivery | Review the artifact set and the stated confidence |
 
-## Working inside the repository instead
+Between those, when something is genuinely undecidable, it stops and asks rather than picking a
+plausible answer.
 
-Cloning still works and is how you develop the framework itself. Inside the repo, runs
-land in `projects/<slug>/`, and `PIOS_HOME` remains supported for agents without a
-plugin system:
+---
 
-```bash
-git clone https://github.com/iamibrahimriaz/pios.git
-cd pios && python3 framework/engine/validate.py
+## What you get
+
+```
+./pios/<slug>/
+├── DECISION.md              one page — read this first
+├── CLAUDE.md                what an AI agent reads to start building
+│
+├── 00-decision/             the recommendation and what it rests on
+│     00-Executive-Summary.md
+├── 01-research/             the evidence base, and the limits of it
+│     01-Research-Dossier.md · 02-Problem-Validation.md · 10-Risks-and-Assumptions.md
+├── 02-product/              what it is, who for, how it wins
+│     03-PRD.md · 04-Feature-Spec.md · 08-UX-Flows.md · 15-AI-Strategy.md
+├── 03-technical/            how it is built
+│     05-Data-Model.md · 06-API-Contract.md · 07-Architecture.md
+├── 04-delivery/             how it ships, and how it is run afterwards
+│     09-Roadmap.md · 11-Success-Metrics.md · 12-Build-Handoff.md
+│     13-Growth-Plan.md · 14-Operations-Plan.md · 16-Engineering-Setup.md
+│
+├── proposal/                proposal.html — send this to get a yes
+├── presentation/            engineering-kickoff.pptx
+├── phases/                  the board: what may be started now
+└── milestone-zero/          only when the strategy says validate first
 ```
 
-## What it is like to use
+**The two a builder actually works from:**
 
-It is an interview, not a button. The run **stops three times** and hands control
-back to you:
+- **`12-Build-Handoff.md`** — what to build, in what order, and what "correct" means. It stands
+  completely alone; it assumes no access to the research conversation.
+- **`16-Engineering-Setup.md`** — how to run, test and ship it. Environment, secrets, seed data,
+  test strategy, CI, deployment, pre-launch checklist.
 
-1. **After `01-idea`** — at least five clarifying questions. Jurisdiction and
-   payer are not optional, and the agent is forbidden from guessing them.
-2. **After `07-strategy`** — confirm the MVP cut. It is a commercial commitment,
-   not a research finding.
-3. **Before delivery** — review the artifact set and the stated confidence.
+Together they take a coding agent from an empty directory to a verified deploy. From there,
+`14-Operations-Plan.md` takes over.
 
-Between those, if something is genuinely undecidable, it stops and asks rather
-than picking a plausible answer.
+**Four audiences, four documents.** The specification is written for the builder. The person
+deciding whether it gets funded will not read sixteen files — they get `DECISION.md` and the
+proposal. An agent opening the folder cold gets `CLAUDE.md`. None is optional, and a run that
+concludes *do not build* still produces every one.
 
-Expect hours of agent work rather than seconds. Fourteen gated modules with an
-adversarial review pass each is not a fast process, and was not designed to be.
+### Then hand it to your builder
+
+```
+Read pios/gym-memberships/12-Build-Handoff.md and start Phase 1.
+```
+
+**PIOS never writes application code.** The handoff is the last research artifact, not the
+first build step — pair it with [Superpowers](https://github.com/obra/superpowers), spec-kit,
+or whatever you already build with.
+
+---
+
+## How it works
+
+```
+   frame          research              decide          specify       operationalise    deliver
+ ┌────────┐  ┌──────────────────┐  ┌─────────────┐  ┌───────────┐  ┌──────────────┐  ┌────────┐
+ │01 idea │─▶│02 market         │─▶│06 business  │─▶│08 product │─▶│10 execution  │─▶│ 15–17  │
+ │        │  │03 user           │  │07 strategy  │  │09 tech    │  │11 growth     │  │ docs   │
+ │ ▲ asks │  │04 problem        │  │ ▲ confirm   │  │14 ai      │  │12 metrics    │  │ ▲      │
+ │        │  │05 competition    │  │             │  │           │  │13 operations │  │ review │
+ └────────┘  └──────────────────┘  └─────────────┘  └───────────┘  └──────────────┘  └────────┘
+```
+
+A module may not start until every module it depends on has **passed its gate**. A failed gate
+stops the run. Three failures on one module halt it and escalate to you.
+
+Each of the 14 modules carries four layers:
+
+| Layer | Teaches | Read by |
+| --- | --- | --- |
+| `core/` | How to think — frameworks, workflow, questions, quality gate | the agent |
+| `knowledge/` | What to know — concepts, terminology, methods | the agent |
+| `resources/` | Templates, examples, **anti-examples** | the agent |
+| `learn/` | Curriculum — why it matters, reflection | humans only |
+
+Plus a `module.yaml` — its machine-readable contract: what it depends on, what it consumes,
+what it produces, and the gate it must pass.
+
+---
+
+## What makes it different is what it refuses to do
+
+Plenty of tools will write you a PRD. These are the rules that make this one worth the hours:
+
+**Every claim carries exactly one tag.**
+
+```
+[verified: <source>]              checked against a named, retrievable source
+[inferred: <basis>]               reasoned from something verified
+[assumption: needs validation]    believed, not established
+```
+
+An untagged claim is a defect. **An assumption is never smoothed into a fact** — a blueprint
+that states what it assumed is useful; one that silently asserts it is a liability.
+
+**Gates fail.** Uncertainty about a gate is a fail, not a pass. A gate that never fails is not
+a gate.
+
+**Six claims about a problem are never collapsed into one.** Existence · frequency · severity ·
+business impact · solution demand · willingness to pay. Evidence for one is not evidence for
+another. *A problem can be real, recurring and expensively documented, and people will still
+not pay to prevent it.*
+
+**"Insufficient evidence" is never reported as "failed validation."** The error always runs in
+that direction, and it converts *we did not ask* into *they said no*. Six failure classes keep
+them apart.
+
+**A late answer forces a re-derivation, not a find-and-replace.** If an early premise changes
+after that module passed, every conclusion since is retested to a verdict — survived, changed,
+or withdrawn.
+
+**Engineering-ready is not development-authorized.** No run sets it. A count of ticked
+engineering boxes says the product is specified; it says nothing about whether anyone will pay
+for it.
+
+**Runs are private.** Yours never leave your machine. `.gitignore`, a structural check and a CI
+step all enforce it.
+
+---
 
 ## Checking the output
 
+Optional, and the only thing that needs Python:
+
 ```bash
-python3 framework/engine/validate-run.py projects/<slug>
+pip3 install -r requirements.txt
+python3 framework/engine/validate-run.py ./pios/<slug>
 ```
 
-This lints a finished run rather than the framework — dropped evidence tags,
-`«placeholder»` scaffolding left in a delivered artifact, an empty evidence log,
-assumptions with no validation method, unrecorded confidence, and whether the
-two chains were actually carried. A non-zero exit means the run is not
-deliverable.
+This lints a **finished run** for what a tired agent stops doing: dropped evidence tags,
+`«placeholder»` scaffolding left in a delivered artifact, an empty evidence log, assumptions
+with no validation method, confidence still `unknown`, an identifier a code block operates on
+that no code block defines. **A non-zero exit means the run is not deliverable.**
 
-The run produces, among others: a Research Dossier, Problem Validation, a full
-PRD, Feature Spec, Data Model, API Contract, Architecture, UX Flows, Roadmap,
-Risks and Assumptions and Success Metrics — then the two documents a builder
-actually works from:
+To check the **framework** instead:
 
-- **Build Handoff** — what to build, in what order, and what "correct" means.
-  Standalone; assumes no access to the research conversation.
-- **Engineering Setup** — how to run, test and ship it. Environment and secrets,
-  local development, seed data, test strategy (including what *not* to test),
-  CI, deployment, and a pre-launch readiness checklist.
-
-Together they take a coding agent from an empty directory to a verified
-production deploy. From there, the **Operations Plan** takes over.
-
----
-
-# The Evidence Rule
-
-Every factual claim in every output carries exactly one tag:
-
-- `[verified: <source>]` — checked against a named, retrievable source
-- `[inferred: <basis>]` — reasoned from something verified
-- `[assumption: needs validation]` — believed, not established
-
-**An assumption is never smoothed into a fact.** A blueprint that openly states
-what it assumed is useful. One that silently asserts it is a liability. See
-`framework/engine/evidence-policy.md`.
-
----
-
-# Research Lifecycle
-
-Every project follows the same lifecycle.
-
-```
-Receive Idea
-
-↓
-
-Clarify Requirements
-
-↓
-
-Research Market
-
-↓
-
-Research Competitors
-
-↓
-
-Research Users
-
-↓
-
-Discover Problems
-
-↓
-
-Generate Solutions
-
-↓
-
-Validate Business
-
-↓
-
-Design Product
-
-↓
-
-Research Technology
-
-↓
-
-Design Architecture
-
-↓
-
-Design Database
-
-↓
-
-Design APIs
-
-↓
-
-Evaluate Security
-
-↓
-
-Plan Scalability
-
-↓
-
-Validate Findings
-
-↓
-
-Generate Documentation
-
-↓
-
-Review Quality
-
-↓
-
-Deliver Final Blueprint
+```bash
+python3 framework/engine/validate.py       # 40 structural checks
 ```
 
-No steps are skipped.
+---
+
+## Status
+
+**Complete and structurally validated. Not yet proven by use.**
+
+| | |
+| --- | --- |
+| Framework | Complete — 14 modules, 4 layers each, 15 required deliverables |
+| Structural checks | 40, all passing |
+| Plugin install | Verified working from a directory outside the repository |
+| Reference runs | **Not published** — see below |
+| Vertical packs | Planned, not built |
+
+Every claim about *structure* here is verified. **No claim about *outcomes* has been tested by
+a published run.**
+
+**Completed runs are not published here, and will not be.** A run carries real market research,
+named customers, pricing and unreleased strategy — the framework is open; what people put
+through it is theirs.
+
+What crosses back into the framework is **the defect, never the project.** If you run it and
+something broke — a gate you could not pass honestly, a template you could not fill — that is
+the most valuable contribution available, and it needs none of your research to be useful.
 
 ---
 
-# Design Principles
+## Repository layout
 
-Every research project should be:
+```
+framework/          ships to users; read-only during a run
+  constitution/       governing principles — how to think
+  engine/             how a run executes — order, gates, evidence, state, review
+  deliverables/       manifest.yaml — THE OUTPUT SPECIFICATION
+  modules/            the 14 lifecycle domains
+  packs/              optional vertical knowledge — planned, not yet built
 
-- Evidence based
-- User centered
-- Business driven
-- Technology aware
-- AI first
-- Practical
-- Maintainable
-- Reusable
-- Explainable
-- Reviewable
-
----
-
-# Quality Standards
-
-Every output should answer:
-
-- Is the problem real?
-- Is the research complete?
-- Are assumptions clearly identified?
-- Are sources trustworthy?
-- Is the recommendation justified?
-- Are alternatives explored?
-- Is the solution technically feasible?
-- Is it commercially viable?
-- Can another AI reproduce the work?
-
-If not,
-
-the research is incomplete.
+skills/             /pios (run a session) · /pios-author (extend the framework)
+commands/           /pios-learn — contribute a defect back as a pull request
+.claude-plugin/     plugin.json + marketplace.json — the install manifests
+AGENTS.md           how an agent executes a run — start here
+```
 
 ---
 
-# Who Is This For?
+## Contributing
 
-This framework is designed for:
+| | |
+| --- | --- |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to add or improve a module, gate or template |
+| [CLAUDE.md](CLAUDE.md) | Read this first if you are an AI agent |
+| [framework/AUTHORING.md](framework/AUTHORING.md) | The specification for framework changes |
+| [CHANGELOG.md](CHANGELOG.md) | Release history, and the release ritual |
+| [USAGE.md](USAGE.md) | Every install mode, and troubleshooting |
 
-- AI Agents
-- Founders
-- Product Managers
-- Startup Teams
-- Software Engineers
-- Researchers
-- Consultants
-- UX Designers
-- Business Analysts
+Run `/pios-learn` after a session to turn its friction log into a proposal and a pull request.
+It writes nothing under `framework/`, and strips every project detail before anything leaves
+your machine.
 
-Anyone responsible for turning ideas into successful products.
-
----
-
-# Continuous Learning
-
-Every completed project should improve Product Intelligence OS.
-
-Every lesson learned becomes documentation.
-
-Every mistake becomes a best practice.
-
-Every successful product strengthens the framework.
-
-The framework should continuously evolve as more products are researched.
+**All pull requests are reviewed and merged by the maintainer.**
 
 ---
 
-# Long-Term Vision
+## Guiding principle
 
-Imagine an AI that receives only this:
+> **Don't teach AI what to write. Teach AI how to think.**
 
-> "Build an AI-powered Pharmacy Management System."
+The objective is not better documents. It is better decisions.
 
-Without additional prompts, it should be able to:
-
-- Ask intelligent questions
-- Discover unknown requirements
-- Research the market
-- Compare competitors
-- Analyze users
-- Validate opportunities
-- Design the product
-- Recommend technologies
-- Create implementation-ready documentation
-- Review its own work
-- Suggest future improvements
-
-That is the purpose of Product Intelligence OS.
-
----
-
-# Contributing
-
-Product Intelligence OS is designed as a living knowledge system.
-
-Contributions should improve:
-
-- Research quality
-- Decision quality
-- AI reasoning
-- Documentation standards
-- Templates
-- Playbooks
-- Examples
-- Evaluation methods
-
-Every contribution should make future research better.
-
----
-
-# Guiding Principle
-
-> **Don't teach AI what to write.**
->
-> **Teach AI how to think.**
-
-Everything in this repository exists to make AI a better product researcher, strategist, and decision-maker.
-
----
-
-## Future Vision
-
-Product Intelligence OS aims to become the open standard for AI-powered product discovery.
-
-A framework where one well-described idea can become a complete, validated, implementation-ready product blueprint.
-
-Not through prompts.
-
-Through structured intelligence.
+MIT © [Ibrahim Riaz](https://github.com/iamibrahimriaz)
