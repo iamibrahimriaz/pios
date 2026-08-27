@@ -258,8 +258,45 @@ deployed to staging, reviewed».
 
 ---
 
+## 16. Specification Coverage
+
+<!-- fill: ONE ROW PER SUBJECT IN manifest.yaml's `build_coverage`. Do not delete a row.
+
+     This table is not a summary — it is the standalone test above, made checkable.
+     Every other acceptance criterion in this run asks whether one artifact is good.
+     This one asks whether the set is enough to build from, which is a different
+     question and the only one nothing else was asking.
+
+     Each row is answered EXACTLY ONE of two ways:
+       - the artifact and section that specifies it, e.g. `03-PRD.md` §5.1
+       - "Not applicable" AND the reason, in the same cell
+
+     "Not applicable" with no reason is the failure this table exists to catch: it is
+     indistinguishable from having forgotten.
+
+     THESE SUBJECTS TRACE TO NO RANKED PROBLEM. That is why they are listed here and
+     why they are easy to miss — nobody complains about needing to log in, and
+     §1's requirement that features trace to problems quietly excludes them. -->
+
+| Subject | The question | Specified in |
+| --- | --- | --- |
+| **Account and identity** | How is an account created, signed in to, recovered, and deleted? | «artifact §section, or Not applicable — reason» |
+| **Authorization** | Who may act on what, and where is that decided? | «...» |
+| **Money** | Prices, plans, entitlements, and what happens when someone stops paying | «...» |
+| **Non-functional targets** | Latency, availability, durability, capacity, recovery — as numbers | «...» |
+| **Data lifecycle** | Retention, deletion, export, and who can trigger each | «...» |
+| **Failure behavior** | Errors, limits, and how the system degrades rather than stops | «...» |
+| **Environments and configuration** | Every value the system reads, and where it comes from | «...» |
+| **Test, QA and release** | What must be true before a change ships, every time | «...» |
+
+> **A row pointing at an artifact that does not cover the subject is worse than a blank
+> one.** The blank gets noticed; the pointer gets believed.
+
+---
+
 <!-- ACCEPTANCE — remove before delivery
 - [ ] STANDALONE TEST: an agent with no other context could start writing code from this file
+- [ ] §16 has a row for every `build_coverage` subject, each naming a section or a reason
 - [ ] States what to build first, and why, as a concrete end-to-end slice
 - [ ] Data model and API for milestone 1 carried INLINE, not only by reference
 - [ ] Stack, versions and repo layout named

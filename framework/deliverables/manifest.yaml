@@ -41,7 +41,7 @@
 # whenever the strategy commits to Milestone Zero, and absent otherwise.
 # ---------------------------------------------------------------------------
 
-version: 4
+version: 5
 
 output_dir: projects/<slug>/deliverables/
 templates_dir: framework/deliverables/templates/
@@ -104,6 +104,63 @@ folder_layout:
       purpose: How it ships, in what order, and how it is run afterwards
       reader: whoever builds it and whoever operates it after launch
 
+# ---------------------------------------------------------------------------
+# BUILD COVERAGE — WHAT THE ARTIFACT SET MUST ACCOUNT FOR, NOT WHAT IT MUST CONTAIN
+#
+# Every artifact's acceptance criteria test that artifact against the research.
+# Nothing tested the artifact set against the act of building from it, and the two
+# are not the same check. A package can satisfy every criterion above while having
+# no way for a user to sign up and no statement of what "fast enough" means.
+#
+# The gap is structural rather than careless. `03-PRD.md` requires that every
+# requirement trace to a ranked problem — so the requirements that trace to NO
+# ranked problem become invisible. Nobody files a complaint about needing to log in;
+# the product simply does not work without it. Account lifecycle, authorization,
+# money and the non-functional targets all sit in that blind spot together.
+#
+# THIS LIST IS NOT A SCOPE REQUIREMENT. A subject that does not apply is recorded as
+# not applicable WITH THE REASON, and that satisfies the check. A CLI tool with no
+# accounts writes one line and moves on. What is refused is silence, because silence
+# and "deliberately excluded" are indistinguishable to the person building.
+#
+# Keep this list short. Every entry costs a row in every run's handoff forever, and
+# a long list gets filled in by rote, which teaches the opposite of what it is for.
+# ---------------------------------------------------------------------------
+
+build_coverage:
+
+  - id: accounts
+    subject: Account and identity
+    question: How is an account created, signed in to, recovered, and deleted?
+
+  - id: authorization
+    subject: Authorization
+    question: Who may act on what, and where is that decided?
+
+  - id: money
+    subject: Money
+    question: Prices, plans, entitlements, and what happens when someone stops paying.
+
+  - id: non-functional
+    subject: Non-functional targets
+    question: Latency, availability, durability, capacity, recovery — as numbers.
+
+  - id: data-lifecycle
+    subject: Data lifecycle
+    question: Retention, deletion, export, and who can trigger each.
+
+  - id: failure
+    subject: Failure behavior
+    question: Errors, limits, and how the system degrades rather than stops.
+
+  - id: configuration
+    subject: Environments and configuration
+    question: Every value the system reads, and where it comes from.
+
+  - id: release
+    subject: Test, QA and release
+    question: What must be true before a change ships, every time.
+
 # Each artifact's template is templates_dir + its `file` value.
 # Templates carry three conventions:
 #   <!-- fill: ... -->   agent-only guidance. MUST be removed before delivery.
@@ -161,6 +218,15 @@ artifacts:
     acceptance:
       - Problem, users, jobs, scope, and explicit non-goals
       - Every requirement traces to a ranked problem
+      - >-
+        Requirements that trace to NO ranked problem are present and marked as such —
+        account lifecycle, authorization, money, and the non-functional targets exist
+        because the product must work, not because a user complained. The tracing rule
+        above makes them structurally easy to omit and it does not excuse omitting them
+      - >-
+        Non-functional requirements stated as numbers a builder can test against —
+        latency, availability, durability, capacity, recovery — or the artifact states
+        which do not apply to this product and why
       - Acceptance criteria testable, not aspirational
       - Edge cases and failure states specified
       - Success metrics defined with targets
@@ -198,8 +264,16 @@ artifacts:
     acceptance:
       - Endpoints, methods, request and response shapes
       - Auth and authorization model
+      - >-
+        The account lifecycle has endpoints, not only a model — how an account is created,
+        signed in to, recovered, and deleted. A credential table describes the mechanism;
+        it does not let anyone sign up
       - Error taxonomy
       - Every product capability has a supporting endpoint
+      - >-
+        "Capability" above includes the ones carrying no feature number — sign-in, billing,
+        account deletion. They serve no ranked problem, so a capability list built from the
+        feature set will not contain them
 
   - id: architecture
     file: 07-Architecture.md
@@ -274,6 +348,11 @@ artifacts:
       - References the data model, API contract and acceptance criteria directly
       - Names the stack, the repo layout and the first milestone
       - Contains no unresolved [assumption] in a build-blocking position
+      - >-
+        Carries the specification-coverage table: every subject in the manifest's
+        `build_coverage` list names the artifact and section that specifies it, or is
+        recorded as not applicable with the reason. This is what makes the standalone
+        test below testable rather than asserted
       - "An agent could open this file and start writing code today"
 
   - id: engineering-setup

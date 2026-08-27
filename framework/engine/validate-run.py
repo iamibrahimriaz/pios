@@ -952,6 +952,62 @@ else:
         check("the entry file points nowhere outside the run directory",
               not escapes, sorted(set(escapes))[:6])
 
+# ------------------------------------------------------------------ build coverage
+# Every other check in this file asks whether ONE artifact is good. This one asks whether the
+# SET is enough to build from, and nothing was asking it.
+#
+# The gap that produced this check is structural, not careless. `03-PRD.md`'s acceptance
+# requires that every requirement trace to a ranked problem — so requirements tracing to NO
+# ranked problem are the ones the method quietly excludes. Nobody files a complaint about
+# needing to sign in. Account lifecycle, authorization, money and the non-functional targets
+# sit in that blind spot together, and a package missing all four can pass every gate, satisfy
+# every acceptance criterion, and reach an engineer who cannot build a signup form from it.
+#
+# THIS IS A DISCLOSURE CHECK, NOT A SCOPE REQUIREMENT. It does not require the product to have
+# accounts or to charge money. It requires the handoff to SAY, per subject, where it is
+# specified or why it does not apply. A run is free to write "Not applicable — no user
+# accounts"; what it may not do is stay silent, because silence and deliberate exclusion look
+# identical to the person building.
+#
+# It is a presence test on the subject labels the template supplies verbatim. That makes it
+# satisfiable by copying the template's table and answering it, and it cannot judge whether an
+# answer is TRUE — a row pointing at an artifact that does not cover the subject passes here
+# and fails a reader. Stated plainly so nobody mistakes this for a coverage guarantee.
+COVERAGE_ERA = 5  # the manifest version that introduced build_coverage
+subjects = man.get("build_coverage") or []
+if run_version >= COVERAGE_ERA and subjects:
+    handoff = next((a for a in man["artifacts"] if a.get("id") == "build-handoff"), None)
+    hp = os.path.join(dl_dir, rel(handoff)) if handoff else None
+    if hp and os.path.isfile(hp):
+        raw = open(hp, encoding="utf8").read()
+        # Scoped to the coverage section, not the whole document. Searching the file at large
+        # passes a subject on any incidental mention — "money" occurs in a sentence about a
+        # customer's revenue — and a check that can be satisfied by coincidence reports
+        # coverage the run does not have.
+        m = re.search(r"^#{1,6}[^\n]*?Specification Coverage[^\n]*$(.*?)(?=^#{1,6}\s|\Z)",
+                      raw, re.M | re.S | re.I)
+        section = (m.group(1) if m else "").lower()
+        check("the build handoff carries a specification-coverage section", bool(m),
+              "no 'Specification Coverage' heading in " + rel(handoff) + ". It is the only "
+              "check asking whether the artifact SET is enough to build from, rather than "
+              "whether one artifact is good — copy the table from the template")
+        missing = [s["subject"] for s in subjects
+                   if s.get("subject", "").lower() not in section]
+        check("the build handoff accounts for every build-coverage subject", not missing,
+              f"{missing} appear nowhere in {rel(handoff)}. These subjects trace to no ranked "
+              "problem, which is exactly why they go missing — the PRD's tracing rule excludes "
+              "them and nothing else asks for them. Add the specification-coverage table from "
+              "the template: one row per subject, each naming the artifact and section that "
+              "specifies it, or 'Not applicable' WITH THE REASON. A subject that genuinely "
+              "does not apply is one line, and that line is the whole point")
+    elif hp:
+        notes.append("12-Build-Handoff.md is absent, so build coverage was not checked. It is "
+                     "reported by the required-artifact check above, not silently skipped here.")
+elif subjects and run_version < COVERAGE_ERA:
+    notes.append(f"This run was produced under manifest v{run_version}; build coverage arrived "
+                 f"in v{COVERAGE_ERA} and is not required of it. A completed run is a record, "
+                 "not a draft to be brought up to a later standard.")
+
 # ------------------------------------------------------------------ phase plan
 # The board is what a builder works from, which makes it where drift from the roadmap does the
 # most damage and is least visible. A milestone with no phase document is not reported by
