@@ -29,6 +29,16 @@ change without bumping and installs silently continue on the old method — the 
 failure here, because the operator gets a complete, confident run produced by a version you
 believed you had replaced.
 
+**And the bump is mandatory, not good practice.** `claude plugin update` compares version
+numbers and nothing else: run it against an unchanged version and it prints *"already at the
+latest version"* and refreshes no files, even after `claude plugin marketplace update` has
+pulled the new commit. This was found the hard way — a README rewrite and this very section
+were pushed, CI went green, and the installed plugin kept serving the previous README until
+the version moved.
+
+**There is no way to force a refresh without a bump** short of uninstalling and reinstalling.
+Treat every push that changes what an operator reads or what an agent executes as a release.
+
 ### The ritual
 
 ```bash
@@ -62,8 +72,11 @@ built it is not a release.
 ```bash
 claude plugin marketplace update pios     # refresh the clone
 claude plugin update pios@pios            # move to the new version
-claude plugin list                        # must print the new version
+claude plugin list                        # must print the NEW version, not the old one
 ```
+
+If `claude plugin list` still shows the old number, the bump did not land in all four
+manifests — or did not reach the remote. It is not a caching problem to wait out.
 
 Then confirm the framework travelled with it, which is the failure that looks like success:
 
@@ -78,9 +91,33 @@ a skill, template or check changes — those are the method too.
 
 ---
 
-## [0.1.0] — Unreleased
+## [0.1.1] — 2026-08-27
 
-First public release. The framework is complete and structurally validated; **no claim about
+### Changed
+
+- **README rewritten around what PIOS does.** It opened with Vision, Mission and Philosophy
+  and did not reach an install command until line 246 of 593. Now: what it is, install, how
+  to use it, what you get, how it works, then the rules it refuses to break. The output tree
+  moved near the top, because the folder of documents is the product. 593 lines to 310.
+- **The release ritual is documented above**, including the finding that forced this release:
+  a plugin is cached by version, and `claude plugin update` without a bump refreshes nothing.
+
+### Fixed
+
+- **Prerequisites now resolve with the strictest filesystem's case rules.** Four paths in
+  `01-idea` named `01-Idea/README.md`; macOS and Windows resolve that against `01-idea`,
+  Linux does not. Every local check passed and CI failed on the first push. `exists_exact()`
+  walks each path component against the real directory listing, so the author finds their own
+  defect instead of the Ubuntu runner finding it.
+- Structural check count corrected from 41 to 40 in the README and CONTRIBUTING.
+- Removed `npx pios-framework init` from the install docs — `package.json` declares no `bin`,
+  so the command did not exist.
+
+---
+
+## [0.1.0] — 2026-08-27
+
+Initial packaging. The framework is complete and structurally validated; **no claim about
 outcomes has been tested by a published run.**
 
 ### Added

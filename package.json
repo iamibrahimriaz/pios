@@ -1,7 +1,7 @@
 {
   "name": "pios-framework",
-  "version": "0.1.0",
-  "description": "Product Intelligence OS — the research stage that runs before your coding agent. Turns one product idea into a build-ready blueprint of gated, evidence-tagged artifacts, or a documented \"not yet\".",
+  "version": "0.1.1",
+  "description": "Product Intelligence OS \u2014 the research stage that runs before your coding agent. Turns one product idea into a build-ready blueprint of gated, evidence-tagged artifacts, or a documented \"not yet\".",
   "license": "MIT",
   "author": {
     "name": "Ibrahim Riaz",
@@ -12,11 +12,27 @@
     "type": "git",
     "url": "git+https://github.com/iamibrahimriaz/pios.git"
   },
-  "bugs": { "url": "https://github.com/iamibrahimriaz/pios/issues" },
-  "files": ["framework/", "skills/", "AGENTS.md", "LICENSE", "README.md", "USAGE.md"],
+  "bugs": {
+    "url": "https://github.com/iamibrahimriaz/pios/issues"
+  },
+  "files": [
+    "framework/",
+    "skills/",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md",
+    "USAGE.md"
+  ],
   "keywords": [
-    "product-discovery", "product-research", "prd", "specification",
-    "market-research", "validation", "agent-skills", "claude-code",
-    "ai-agents", "planning"
+    "product-discovery",
+    "product-research",
+    "prd",
+    "specification",
+    "market-research",
+    "validation",
+    "agent-skills",
+    "claude-code",
+    "ai-agents",
+    "planning"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "pios",
-  "description": "Product Intelligence OS — the research stage that runs before your coding agent.",
+  "description": "Product Intelligence OS \u2014 the research stage that runs before your coding agent.",
   "owner": {
     "name": "Ibrahim Riaz",
     "url": "https://github.com/iamibrahimriaz"
@@ -11,8 +11,8 @@
       "name": "pios",
       "displayName": "Product Intelligence OS",
       "source": "./",
-      "description": "Turn one product idea into a build-ready blueprint — or a documented \"not yet\". 14 gated research modules, evidence-tagged claims, and an artifact set a builder can start from without asking a follow-up question.",
-      "version": "0.1.0",
+      "description": "Turn one product idea into a build-ready blueprint \u2014 or a documented \"not yet\". 14 gated research modules, evidence-tagged claims, and an artifact set a builder can start from without asking a follow-up question.",
+      "version": "0.1.1",
       "category": "productivity",
       "homepage": "https://github.com/iamibrahimriaz/pios",
       "author": {

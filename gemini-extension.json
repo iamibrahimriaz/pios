@@ -1,6 +1,6 @@
 {
   "name": "pios",
-  "version": "0.1.0",
-  "description": "Product Intelligence OS — the research stage before the code. One product idea in; a build-ready blueprint out, or a documented \"not yet\".",
+  "version": "0.1.1",
+  "description": "Product Intelligence OS \u2014 the research stage before the code. One product idea in; a build-ready blueprint out, or a documented \"not yet\".",
   "contextFileName": "AGENTS.md"
 }
