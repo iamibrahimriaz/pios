@@ -416,6 +416,33 @@ check("every engine method file is referenced from somewhere an agent reads",
 # of the form "<module> gate passed". Paths resolve relative to modules/,
 # constitution/, the framework root, or the citing file's own directory.
 SEMANTIC = re.compile(r"gate[s]? passed")
+def exists_exact(path):
+    """os.path.isfile with the case sensitivity of the strictest filesystem.
+
+    macOS and Windows resolve `01-Idea/README.md` against a directory named
+    `01-idea`; Linux does not. So a reference authored on a laptop passes every
+    local check and fails in CI — or, worse, fails for a user on Linux while the
+    maintainer cannot reproduce it. Four Prerequisites shipped with exactly this
+    defect and only the Ubuntu runner ever saw them.
+
+    Checked here rather than trusted to CI, because the point of a local
+    validator is that the author finds their own defect.
+    """
+    if not os.path.isfile(path):
+        return False
+    cur = os.path.abspath(path)
+    stop = os.path.abspath(ROOT)
+    while cur != stop and os.path.dirname(cur) != cur:
+        parent, name = os.path.split(cur)
+        try:
+            if name not in os.listdir(parent):
+                return False
+        except OSError:
+            return False
+        cur = parent
+    return True
+
+
 unresolved, vague, semantic_count = [], [], 0
 stale_ids = []
 
@@ -438,7 +465,7 @@ for f in glob.glob("**/*.md", recursive=True):
                 vague.append(f"{f} -> {p}")
             continue
         bases = ("modules", ".", "constitution", here)
-        if not any(os.path.isfile(os.path.normpath(os.path.join(b, p))) for b in bases):
+        if not any(exists_exact(os.path.normpath(os.path.join(b, p))) for b in bases):
             unresolved.append(f"{f} -> {p}")
 
 check(f"all path Prerequisites resolve ({semantic_count} semantic preconditions)",

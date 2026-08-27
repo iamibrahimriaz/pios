@@ -16,7 +16,7 @@ Audience:
   - Business Analysts
 Prerequisites:
   - ../constitution/core/00-Purpose.md
-  - 01-Idea/README.md
+  - modules/01-idea/learn/README.md
 Outputs:
   - Consistent idea evaluation
   - Structured ideation methodology
