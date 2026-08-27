@@ -40,7 +40,8 @@ That is the whole install. The framework travels with the plugin; the run lands 
 
 **Gemini CLI:** `gemini extensions install https://github.com/iamibrahimriaz/pios`
 
-**Any other agent:** `npx pios-framework init`, then point it at `AGENTS.md`.
+**Any other agent:** clone the repository and point it at `AGENTS.md` — the complete
+operating manual. An `npx` installer is planned and not yet built.
 
 ---
 

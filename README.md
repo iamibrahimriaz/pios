@@ -277,9 +277,8 @@ Point it at this repository and tell it to read [`AGENTS.md`](AGENTS.md) — the
 operating manual: startup sequence, per-module loop, the rules it may not break, and how
 to know when it is finished.
 
-```bash
-npx pios-framework init     # framework/ + AGENTS.md into your project
-```
+Clone the repository beside your project so the agent can read `framework/`. An
+`npx` installer is planned and not yet built.
 
 **Requirements:** an AI coding agent that can read and write files.
 [Claude Code](https://claude.com/claude-code) is the reference implementation.
