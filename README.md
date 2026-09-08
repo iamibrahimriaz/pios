@@ -293,9 +293,15 @@ python3 framework/engine/validate.py       # 40 structural checks
 Every claim about *structure* here is verified. **No claim about *outcomes* has been tested by
 a published run.**
 
-**Completed runs are not published here, and will not be.** A run carries real market research,
-named customers, pricing and unreleased strategy — the framework is open; what people put
-through it is theirs.
+**Your completed runs are not published here, and will not be.** A run carries real market
+research, named customers, pricing and unreleased strategy — the framework is open; what people
+put through it is theirs. `projects/` and `examples/` are gitignored, and a structural check
+plus a CI step fail the build if run content is ever tracked in them.
+
+**One exception, and it is not yours:** [`reference-run/`](reference-run/) holds a single run on
+an **invented** operator in a real market, published deliberately so a reader can see the output
+before spending hours producing their own. It has no owner to protect. The rules it has to meet —
+including publishing whatever verdict it reached — are in that directory's README.
 
 What crosses back into the framework is **the defect, never the project.** If you run it and
 something broke — a gate you could not pass honestly, a template you could not fill — that is
@@ -315,6 +321,7 @@ framework/          ships to users; read-only during a run
 
 skills/             /pios:research (run a session) · /pios:author (extend the framework)
 commands/           /pios:learn — contribute a defect back as a pull request
+reference-run/      one published run on an invented product — see the output before you install
 .claude-plugin/     plugin.json + marketplace.json — the install manifests
 AGENTS.md           how an agent executes a run — start here
 ```

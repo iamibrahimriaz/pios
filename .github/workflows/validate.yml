@@ -30,6 +30,23 @@ jobs:
       # The `no run content tracked by git` check above already fails on this.
       # This repeats it as its own step so a leaked run is unmistakable in the
       # checks list rather than one line inside a passing-looking validator run.
+      # The reference run is documentation, and documentation that is wrong is worse
+      # than absent. It is linted with the framework's own run linter, so a reference
+      # run that would not pass as a delivered run cannot sit here teaching otherwise.
+      # Skips cleanly while no run has been produced yet.
+      - name: Reference run is still deliverable
+        run: |
+          shopt -s nullglob
+          runs=(reference-run/*/)
+          if [ ${#runs[@]} -eq 0 ]; then
+            echo "No reference run present yet — nothing to validate."
+            exit 0
+          fi
+          for r in "${runs[@]}"; do
+            echo "Validating $r"
+            python3 framework/engine/validate-run.py "$r"
+          done
+
       - name: No run content in the repository
         run: |
           leaked=$(git ls-files projects examples | grep -v 'README.md$' || true)
