@@ -136,14 +136,17 @@ advice that would apply to any framework.
 
 ## How changes get in
 
-**Every change arrives as a pull request, including the maintainer's.** `main` is
-protected: no direct pushes, review required, and the validator must pass before
-merge is available. Nothing bypasses that, which is the point — a rule the owner
-can step around is not a rule.
+**Every contribution arrives as a pull request.** You do not need write access to
+contribute, and you will not be given it. Fork the repository, branch, and open a
+pull request against `main`.
 
-You do not need write access to contribute, and you will not be given it. Fork the
-repository, branch, and open a pull request. Merging is the maintainer's, and only
-the maintainer's.
+`main` is protected: the validator must pass before a pull request can be merged,
+and force pushes and branch deletion are refused. Merging is the maintainer's, and
+only the maintainer's.
+
+**The maintainer keeps direct push, and it is used for releases.** Stating that
+plainly is better than claiming a rule that does not bind the one person who could
+step around it.
 
 ---
 
