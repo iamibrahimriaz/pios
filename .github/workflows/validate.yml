@@ -27,9 +27,9 @@ jobs:
       - name: Validate the framework
         run: python3 framework/engine/validate.py
 
-      # Check 22 above already fails if run content is tracked. This repeats it
-      # as its own step so a leaked run is unmistakable in the checks list rather
-      # than one line inside a passing-looking validator run.
+      # The `no run content tracked by git` check above already fails on this.
+      # This repeats it as its own step so a leaked run is unmistakable in the
+      # checks list rather than one line inside a passing-looking validator run.
       - name: No run content in the repository
         run: |
           leaked=$(git ls-files projects examples | grep -v 'README.md$' || true)

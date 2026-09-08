@@ -103,24 +103,31 @@ plausible answer.
 ./pios/<slug>/
 ├── DECISION.md              one page — read this first
 ├── CLAUDE.md                what an AI agent reads to start building
+├── state.yaml               the audit trail — evidence, assumptions, decisions
+├── research/                module working notes
 │
-├── 00-decision/             the recommendation and what it rests on
-│     00-Executive-Summary.md
-├── 01-research/             the evidence base, and the limits of it
-│     01-Research-Dossier.md · 02-Problem-Validation.md · 10-Risks-and-Assumptions.md
-├── 02-product/              what it is, who for, how it wins
-│     03-PRD.md · 04-Feature-Spec.md · 08-UX-Flows.md · 15-AI-Strategy.md
-├── 03-technical/            how it is built
-│     05-Data-Model.md · 06-API-Contract.md · 07-Architecture.md
-├── 04-delivery/             how it ships, and how it is run afterwards
-│     09-Roadmap.md · 11-Success-Metrics.md · 12-Build-Handoff.md
-│     13-Growth-Plan.md · 14-Operations-Plan.md · 16-Engineering-Setup.md
+├── deliverables/            the specification, grouped by when it is read
+│   ├── 00-decision/         the recommendation and what it rests on
+│   │     00-Executive-Summary.md
+│   ├── 01-research/         the evidence base, and the limits of it
+│   │     01-Research-Dossier.md · 02-Problem-Validation.md · 10-Risks-and-Assumptions.md
+│   ├── 02-product/          what it is, who for, how it wins
+│   │     03-PRD.md · 04-Feature-Spec.md · 08-UX-Flows.md · 15-AI-Strategy.md
+│   ├── 03-technical/        how it is built
+│   │     05-Data-Model.md · 06-API-Contract.md · 07-Architecture.md
+│   └── 04-delivery/         how it ships, and how it is run afterwards
+│         09-Roadmap.md · 11-Success-Metrics.md · 12-Build-Handoff.md
+│         13-Growth-Plan.md · 14-Operations-Plan.md · 16-Engineering-Setup.md
 │
 ├── proposal/                proposal.html — send this to get a yes
 ├── presentation/            engineering-kickoff.pptx
 ├── phases/                  the board: what may be started now
 └── milestone-zero/          only when the strategy says validate first
 ```
+
+Every folder that receives an artifact also carries `_acceptance.md` — that folder's criteria,
+copied from the manifest. **Filenames keep their global numbering wherever they sit**, so
+`03-PRD.md` means the same document in every cross-reference.
 
 **The two a builder actually works from:**
 
@@ -140,7 +147,7 @@ concludes *do not build* still produces every one.
 ### Then hand it to your builder
 
 ```
-Read pios/gym-memberships/12-Build-Handoff.md and start Phase 1.
+Read pios/gym-memberships/deliverables/04-delivery/12-Build-Handoff.md and start Phase 1.
 ```
 
 **PIOS never writes application code.** The handoff is the last research artifact, not the

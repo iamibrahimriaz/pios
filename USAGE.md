@@ -8,7 +8,7 @@ If you only read one section, read [Which mode do you want](#which-mode-do-you-w
 
 ## What you are installing
 
-Product Intelligence OS is **not a program.** It is a body of method — 611 markdown
+Product Intelligence OS is **not a program.** It is a body of method — 623 markdown
 files and 18 YAML files — that an AI agent reads and executes. It has no runtime of its
 own.
 
@@ -95,7 +95,7 @@ lands in the project you are working on.
 ~/Projects/my-app/
   pios/my-app/                         the run lives here
     state.yaml
-    deliverables/                      the 15 artifacts
+    deliverables/                      15 required artifacts, 17 at most
   src/
 ```
 
@@ -220,27 +220,41 @@ modules, each with an adversarial review pass. It was not designed to be fast.
 
 Fifteen required artifacts, plus two more when the scope calls for them.
 
+They are grouped by **when they are read**, not by the module that produced them.
+
 ```
 <run>/deliverables/
-  00-Executive-Summary.md      opens with: build, adjust, or do not build
-  01-Research-Dossier.md
-  02-Problem-Validation.md
-  03-PRD.md
-  04-Feature-Spec.md
-  05-Data-Model.md
-  06-API-Contract.md
-  07-Architecture.md
-  08-UX-Flows.md
-  09-Roadmap.md
-  10-Risks-and-Assumptions.md
-  11-Success-Metrics.md
-  12-Build-Handoff.md          what to build, in what order
-  16-Engineering-Setup.md      how to run, test and ship it
-  14-Operations-Plan.md        who is awake, what it costs, whose name is on it
+  00-decision/
+    00-Executive-Summary.md      opens with: build, adjust, or do not build
+  01-research/
+    01-Research-Dossier.md
+    02-Problem-Validation.md
+    10-Risks-and-Assumptions.md
+  02-product/
+    03-PRD.md
+    04-Feature-Spec.md
+    08-UX-Flows.md
+    15-AI-Strategy.md            when the scope calls for it
+  03-technical/
+    05-Data-Model.md
+    06-API-Contract.md
+    07-Architecture.md
+  04-delivery/
+    09-Roadmap.md
+    11-Success-Metrics.md
+    12-Build-Handoff.md          what to build, in what order
+    13-Growth-Plan.md            when the scope calls for it
+    14-Operations-Plan.md        who is awake, what it costs, whose name is on it
+    16-Engineering-Setup.md      how to run, test and ship it
 ```
 
-The last three are what a builder actually works from, and they hand over to each other
-in that order.
+**Filenames keep their global numbering wherever they sit** — `03-PRD.md` is the
+document's identity in every cross-reference the framework carries, so it is never
+renumbered to match its folder. Each folder also gets an `_acceptance.md` holding that
+folder's criteria, copied from the manifest.
+
+`12-Build-Handoff.md`, `16-Engineering-Setup.md` and `14-Operations-Plan.md` are what a
+builder actually works from, and they hand over to each other in that order.
 
 ### Checking the output
 
@@ -269,15 +283,17 @@ In workspace mode, copy the artifacts to wherever you are building:
 
 ```bash
 mkdir -p ~/Projects/my-app/docs/product
-cp projects/<slug>/deliverables/*.md ~/Projects/my-app/docs/product/
+cp -R projects/<slug>/deliverables/ ~/Projects/my-app/docs/product/
 ```
+
+`-R`, because `deliverables/` is a tree of five folders rather than a flat list of files.
 
 In external mode they are already in the project.
 
 Then, in that repository, point your coding agent at them:
 
-> Read `docs/product/12-Build-Handoff.md` and `docs/product/16-Engineering-Setup.md`,
-> then start on milestone 1.
+> Read `docs/product/04-delivery/12-Build-Handoff.md` and
+> `docs/product/04-delivery/16-Engineering-Setup.md`, then start on milestone 1.
 
 The Build Handoff is written to be read with no other context — that is its first
 acceptance criterion.
@@ -340,7 +356,7 @@ and use `/pios:author`.
 
 ## A note on where this stands
 
-The framework is complete and structurally validated — 22 checks, all passing — and
+The framework is complete and structurally validated — 40 checks, all passing — and
 **has not yet been proven by a published run.**
 
 **Your runs stay yours.** Nothing under `projects/` or `examples/` is ever

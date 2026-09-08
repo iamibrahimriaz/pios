@@ -123,6 +123,26 @@ a skill, template or check changes — those are the method too.
   say. As a plugin it is `/pios:research`; installed globally or run from inside the repository
   it is a plain `/research`. Same file, same behaviour, different prefix.
 
+### Fixed
+
+- **The documented output tree did not match the one a run produces.** README omitted the
+  `deliverables/` level entirely and USAGE showed the artifacts as a flat list, so neither
+  matched `manifest.yaml`, which groups them into `00-decision/` · `01-research/` ·
+  `02-product/` · `03-technical/` · `04-delivery/`. The worst of it was a copy-paste line in
+  the README — `Read pios/<slug>/12-Build-Handoff.md` — that pointed at a path no run ever
+  creates. Both trees now match the manifest, and both say that filenames keep their global
+  numbering wherever they sit.
+
+- **`cp .../deliverables/*.md` cannot copy a tree of five folders.** USAGE's "moving the output
+  into your build" step now uses `cp -R`, and the agent prompt that follows it points at
+  `04-delivery/12-Build-Handoff.md` rather than a flat filename.
+
+- **Two stale counts in USAGE**: 611 markdown files (it is 623) and 22 structural checks (it is
+  40). README and CONTRIBUTING already had both right, which is how they were caught.
+
+- **A CI comment referred to "Check 22 above"** by position in a list that has since grown. It
+  now names the check instead.
+
 ---
 
 ## [0.1.1] — 2026-08-27
