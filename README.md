@@ -1,6 +1,6 @@
 # Product Intelligence OS
 
-> **The research stage before the code.**
+> **Research that can say no.**
 >
 > AI made building cheap. It made building the wrong thing cheap too.
 

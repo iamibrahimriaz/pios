@@ -91,6 +91,49 @@ a skill, template or check changes — those are the method too.
 
 ---
 
+## [0.2.1] — 2026-09-08
+
+Documentation only. No module, gate, template or check changed, so a run written against
+0.2.0 is unaffected.
+
+### Added
+
+- **A tagline: "Research that can say no."** Every tool in this space will write you a
+  specification. The one that will also tell you not to build is the thing worth leading with,
+  and it claims a behavior that can be checked in the code rather than an outcome that cannot.
+
+- **A "Who this is for" section**, between what-it-is and Install, so the decision happens
+  before the two commands rather than after the first checkpoint. Someone who cannot yet name
+  their buyer or jurisdiction will hit module 01 and conclude the tool is broken, when the
+  refusal to guess is the design.
+
+- **`reference-run/`** — the home for one published run on an invented operator in a real
+  market, so a reader can see the output before spending hours producing their own. The run
+  itself is not produced yet and the directory says so. Its README carries the rules,
+  including the one that has to be decided in advance: the verdict published is whatever the
+  run reached, `do not build` included.
+
+- **A CI step that lints any reference run** with `validate-run.py`, skipping cleanly while
+  none exists. A reference run that would not pass as a delivered run cannot sit in the
+  repository teaching otherwise.
+
+### Changed
+
+- **The privacy paragraph now separates the two cases it was collapsing.** Your runs are never
+  published; a synthetic reference run is published deliberately and has no owner to protect.
+  `projects/` and `examples/` stay gitignored with the structural check and the CI step intact.
+
+### Fixed
+
+- **CONTRIBUTING claimed a branch protection rule that was not enforced** — "no direct pushes,
+  review required... nothing bypasses that." Protection cannot be enabled on a private
+  repository on a free plan, and the 0.2.0 release went straight to `main`. The repository is
+  public now and protection is on: the validator must pass before a pull request merges, force
+  pushes and branch deletion are refused. The maintainer keeps direct push for releases, and
+  the paragraph now says so rather than describing a stricter rule nobody was held to.
+
+---
+
 ## [0.2.0] — 2026-09-08
 
 ### Changed

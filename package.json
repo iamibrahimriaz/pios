@@ -1,6 +1,6 @@
 {
   "name": "pios-framework",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Product Intelligence OS \u2014 the research stage that runs before your coding agent. Turns one product idea into a build-ready blueprint of gated, evidence-tagged artifacts, or a documented \"not yet\".",
   "license": "MIT",
   "author": {
