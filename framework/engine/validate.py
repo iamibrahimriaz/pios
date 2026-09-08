@@ -609,7 +609,7 @@ check("every framework path is written repo-relative (portable to plugin install
 # The resolution rule itself must reach an agent, in both places one starts reading.
 # Without it, the canonical form above is a convention nobody was told how to apply.
 rule_missing = []
-for f, label in (("../AGENTS.md", "AGENTS.md"), ("../skills/pios/SKILL.md", "skills/pios")):
+for f, label in (("../AGENTS.md", "AGENTS.md"), ("../skills/research/SKILL.md", "skills/research")):
     if not os.path.isfile(f):
         rule_missing.append(f"{label}: missing")
         continue

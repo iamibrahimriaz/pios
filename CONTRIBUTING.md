@@ -20,7 +20,7 @@ and the modules agree, prerequisites resolve, skills are valid and do not
 self-modify, no run content is tracked, spelling is American, every framework path
 is portable to a plugin install, and the four install manifests agree on one version.
 
-If you use Claude Code, the `/pios-author` skill loads the authoring rules for
+If you use Claude Code, the `/pios:author` skill loads the authoring rules for
 you. Otherwise read [`framework/AUTHORING.md`](framework/AUTHORING.md) — it is
 the specification, and this file does not repeat it.
 

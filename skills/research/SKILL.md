@@ -1,5 +1,5 @@
 ---
-name: pios
+name: research
 description: >
   Run a Product Intelligence OS research session — turn one loosely described product
   idea into a build-ready blueprint of 15 gated, evidence-tagged artifacts, plus a one-page
@@ -62,7 +62,7 @@ this framework cannot afford to lose, because a run's output is only auditable i
 that produced it is the same method everyone else is running.
 
 **Lessons from a run cross into the framework deliberately**, through `state.friction_log`
-and `/pios-author`, generalized so the project does not travel with them. Never by a file
+and `/pios:author`, generalized so the project does not travel with them. Never by a file
 editing itself while the operator is not looking.
 
 ---
@@ -229,7 +229,7 @@ set at all, in that session.
 > `claude plugin marketplace add iamibrahimriaz/pios`
 > `claude plugin install pios@pios`
 >
-> Then run `/pios` again from this directory. If you would rather work from a clone, run
+> Then run `/pios:research` again from this directory. If you would rather work from a clone, run
 > this from inside the repository, or point `PIOS_HOME` at it. See `USAGE.md`.
 
 Do not guess a location, and do not proceed without the framework. Every module's method
@@ -412,7 +412,7 @@ append it to `state.friction_log` before moving on. Mark it `operator_visible: t
 hit it rather than you.
 
 **Do not stop to discuss it, and do not fix the framework.** The framework is read-only
-during a run; `/pios-author` is where changes are made, afterwards and deliberately. Note it
+during a run; `/pios:author` is where changes are made, afterwards and deliberately. Note it
 and keep going.
 
 > **Written at the end, this list is worthless.** By then every rough edge has been worked
@@ -561,7 +561,7 @@ all about which properties are load-bearing. **A mechanism that costs effort in 
 and appears in no friction entry looks exactly like a candidate for deletion.**
 
 Write the answers to **`state.confirmed_value`** — one entry per mechanism, with what it cost
-and what it bought. `/pios-author` reads that key as a do-not-remove list.
+and what it bought. `/pios:author` reads that key as a do-not-remove list.
 
 **Do not solicit praise, and do not argue with the answer to question 1.** Record it and move
 on. A run that defends itself at the checkpoint gets a shorter answer next time.
@@ -781,7 +781,7 @@ still open, and **"Tell me which of these you want to resolve and I'll pick it u
 
 **If `state.friction_log` is not empty, add one short paragraph before the closing line** —
 not a section, a paragraph. Name the two or three places the framework itself got in the way
-during this run, in plain language, and say that `/pios-author` is where they get fixed. The
+during this run, in plain language, and say that `/pios:author` is where they get fixed. The
 operator does not have to act on it and should not be asked to; they are being told the list
 exists so it is not lost.
 
@@ -819,7 +819,7 @@ operator.
 for concepts, `resources/` for worked examples and anti-examples.
 
 **Never write inside `<FRAMEWORK>` or its repository.** The framework is read-only during a run. If you
-believe the framework itself needs changing, say so and stop — that is the `/pios-author`
+believe the framework itself needs changing, say so and stop — that is the `/pios:author`
 skill's job, not this one.
 
 ---

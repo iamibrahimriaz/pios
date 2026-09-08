@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# Install the /pios skill globally, so it works in any project on this machine.
+# Install the /research skill globally, so it works in any project on this machine.
 #
 #   ./scripts/install-skill.sh
 #
 # You do NOT need this to use the framework. Working inside the framework
-# repository already gives you /pios. This is only for running research from
+# repository already gives you /research. This is only for running research from
 # some other project directory.
 #
 # See USAGE.md.
@@ -21,20 +21,20 @@ if [ ! -f "$REPO/framework/engine/run-order.yaml" ]; then
 fi
 
 echo "Framework:  $REPO"
-echo "Installing: $DEST/pios"
+echo "Installing: $DEST/research"
 echo
 
 mkdir -p "$DEST"
 
-if [ -e "$DEST/pios" ] && [ ! -L "$DEST/pios" ]; then
-  echo "error: $DEST/pios already exists and is not a symlink." >&2
+if [ -e "$DEST/research" ] && [ ! -L "$DEST/research" ]; then
+  echo "error: $DEST/research already exists and is not a symlink." >&2
   echo "Remove or rename it, then run this again." >&2
   exit 1
 fi
 
 # A symlink rather than a copy, so `git pull` updates the installed skill too.
-ln -sfn "$REPO/skills/pios" "$DEST/pios"
-echo "Linked $DEST/pios -> $REPO/skills/pios"
+ln -sfn "$REPO/skills/research" "$DEST/research"
+echo "Linked $DEST/research -> $REPO/skills/research"
 echo
 
 # Work out which profile to suggest.
@@ -66,5 +66,5 @@ echo "Verify with:"
 echo "    echo \$PIOS_HOME"
 echo "    python3 \"$REPO/framework/engine/validate.py\""
 echo
-echo "Then, from any project directory, invoke /pios in Claude Code."
+echo "Then, from any project directory, invoke /research in Claude Code."
 echo "Runs will be written to ./pios/<slug>/ in whichever project you are in."

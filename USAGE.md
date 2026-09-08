@@ -32,7 +32,7 @@ claude plugin install pios@pios
 Then, from any project directory:
 
 ```
-/pios   an app that helps small gyms manage memberships
+/pios:research   an app that helps small gyms manage memberships
 ```
 
 That is the whole install. The framework travels with the plugin; the run lands in
@@ -124,7 +124,7 @@ shell profile.
 
 ```bash
 # 1. make the skill available everywhere
-ln -s ~/Projects/pios/skills/pios ~/.claude/skills/pios
+ln -s ~/Projects/pios/skills/research ~/.claude/skills/research
 
 # 2. tell it where the framework lives  (add to ~/.zshrc or ~/.bashrc)
 export PIOS_HOME="$HOME/Projects/pios"
@@ -137,19 +137,23 @@ echo $PIOS_HOME
 python3 "$PIOS_HOME/framework/engine/validate.py"
 ```
 
-### Two things to know about the global install
+### Three things to know about the global install
 
-**Inside the framework repository, `/pios` exists twice** — once project-scoped, once
+**Inside the framework repository, `/research` exists twice** — once project-scoped, once
 global. They are the same file, because the installer creates a symlink rather than a
 copy, so whichever loads behaves identically. It is only ever a duplicate listing, never
 a conflict.
 
-**The symlink points at your clone.** If you move or delete the repository, `/pios`
+**The symlink points at your clone.** If you move or delete the repository, `/research`
 breaks. Re-run `./scripts/install-skill.sh` from the new location. The upside of a link
 over a copy is that `git pull` updates your installed skill automatically.
 
+**The command is named differently in plugin mode.** Installed as a plugin it is
+`/pios:research`, namespaced under the plugin. Installed globally or run from inside the
+repository it is a plain `/research`. Same skill, same behaviour — only the prefix differs.
+
 **Windows:** the installer is a bash script. Use WSL, or do it manually — create the
-`~/.claude/skills/pios` link (or copy the folder) and set `PIOS_HOME` in your environment
+`~/.claude/skills/research` link (or copy the folder) and set `PIOS_HOME` in your environment
 variables.
 
 ### How the skill decides which mode it is in
@@ -181,16 +185,16 @@ checks enforce it.
 From either mode, in Claude Code:
 
 ```
-/pios   an app that helps small gyms manage memberships
+/pios:research   an app that helps small gyms manage memberships
 ```
 
 That is the whole interface. To pick a run back up later — a full run does **not** fit
-in one session — invoke `/pios` again in the same directory. It finds the existing
+in one session — invoke `/pios:research` again in the same directory. It finds the existing
 `state.yaml` and resumes from the next unpassed module.
 
 ```
-/pios                          continue where I left off
-/pios   what stage am I at?    status only, no work
+/pios:research                          continue where I left off
+/pios:research   what stage am I at?    status only, no work
 ```
 
 ### What actually happens
@@ -285,7 +289,7 @@ acceptance criterion.
 A second skill, for changing the framework rather than using it:
 
 ```
-/pios-author   add a vertical pack for healthcare
+/pios:author   add a vertical pack for healthcare
 ```
 
 This one only runs **inside** the repository, since it edits the framework. See
@@ -311,9 +315,9 @@ rules it may not break, and how to know when it is finished.
 `PIOS_HOME` is unset or wrong. `echo $PIOS_HOME` and check the path contains
 `framework/engine/run-order.yaml`. If you set it in a profile, restart the terminal.
 
-**`/pios` does not appear.**
+**The skill does not appear.**
 In workspace mode, confirm you opened Claude Code at the repository root — the skill is
-project-scoped. In external mode, confirm `~/.claude/skills/pios/SKILL.md` exists and
+project-scoped. In external mode, confirm `~/.claude/skills/research/SKILL.md` exists and
 restart the session.
 
 **`ModuleNotFoundError: No module named 'yaml'`**
@@ -330,7 +334,7 @@ reports this project can receive.
 
 **The agent wants to change the framework mid-run.**
 It should not. The framework is read-only during a run. If it is genuinely wrong, stop
-and use `/pios-author`.
+and use `/pios:author`.
 
 ---
 

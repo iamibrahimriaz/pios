@@ -84,7 +84,7 @@ reason, so the operator sees the whole log was read.
 
 ### 1. Locate the run and read its friction log
 
-Resolve `<RUNS>` exactly as `/pios` does — plugin, in-repo, then `PIOS_HOME`. Read
+Resolve `<RUNS>` exactly as `/pios:research` does — plugin, in-repo, then `PIOS_HOME`. Read
 `state.friction_log` from the run the operator named, or the only run present.
 
 **An empty friction log is a valid result.** Say so and stop. Do not go looking through the
@@ -132,7 +132,7 @@ merge your own.
 ### 6. Record what was contributed
 
 Append the proposal path to `state.friction_log[].contributed` on each entry that went in, so
-a later `/pios-learn` on the same run does not propose it twice.
+a later `/pios:learn` on the same run does not propose it twice.
 
 This is the only write this command makes, and it is inside the run — never the framework.
 

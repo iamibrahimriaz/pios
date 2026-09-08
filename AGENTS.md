@@ -278,7 +278,7 @@ framework/            ships to users — treat as read-only
   modules/            14 domain modules, each with module.yaml + core/knowledge/resources/learn
   packs/              optional vertical knowledge — planned, not yet built
 
-skills/               /pios (run a session) · /pios-author (extend the framework)
+skills/               /pios:research (run a session) · /pios:author (extend the framework)
 .claude-plugin/       plugin.json + marketplace.json — installable as a plugin
 projects/<slug>/      this run — see below
 examples/             finished runs kept locally — gitignored, never published

@@ -60,7 +60,7 @@ a market size figure, a screenshot, or a sentence lifted from a deliverable.
 Anti-examples in `resources/` are written from scratch, not harvested from someone
 else's run.
 
-Then make the change deliberately with `/pios-author`, and let the commit message
+Then make the change deliberately with `/pios:author`, and let the commit message
 explain the defect — not the project that revealed it.
 
 > **Learn from every run. Publish none of them.**

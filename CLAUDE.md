@@ -100,7 +100,7 @@ python3 framework/engine/validate.py    # must exit 0
 
 If you are changing the framework itself, read
 [`framework/AUTHORING.md`](framework/AUTHORING.md) — it is the specification, and the
-`/pios-author` skill loads it for you.
+`/pios:author` skill loads it for you.
 
 **All PRs are reviewed and merged by the maintainer.** Fork, branch, open a PR against `main`.
 

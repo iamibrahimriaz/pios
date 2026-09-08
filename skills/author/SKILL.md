@@ -1,5 +1,5 @@
 ---
-name: pios-author
+name: author
 description: >
   Extend or modify the Product Intelligence OS framework itself — write a new module,
   add a vertical pack, add or change a gate criterion, add a deliverable template, or
@@ -7,7 +7,7 @@ description: >
   test, frontmatter and gate parity rules, and runs the structural validator. Invoke for
   "add a module", "write a pack for healthcare", "change this gate", "add a deliverable",
   "edit the constitution", or any contribution to the framework. Do NOT use this for
-  running a research session on a product idea — that is the `pios` skill.
+  running a research session on a product idea — that is the `research` skill.
 ---
 
 # Product Intelligence OS — Authoring
@@ -21,7 +21,7 @@ file does not repeat it. What follows is the part that is easiest to get wrong.
 
 ## Before you start — you must be inside the repository
 
-Authoring edits the framework itself, so unlike `/pios` it cannot run from another
+Authoring edits the framework itself, so unlike `/pios:research` it cannot run from another
 project. Check:
 
 ```bash
@@ -31,7 +31,7 @@ test -f framework/AUTHORING.md && echo "ok" || echo "not in the framework reposi
 If you are not, stop and tell the operator:
 
 > Authoring changes the framework itself, so it has to run from inside the Product
-> Intelligence OS repository. `cd` there and invoke `/pios-author` again — if `PIOS_HOME`
+> Intelligence OS repository. `cd` there and invoke `/pios:author` again — if `PIOS_HOME`
 > is set, that is where it lives.
 
 Then, before changing anything:

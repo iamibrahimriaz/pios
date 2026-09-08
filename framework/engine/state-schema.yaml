@@ -438,7 +438,7 @@ remote_validation_limit: []
 # framework OBSTRUCTED a run; nothing else records what it got RIGHT, so an author reading a
 # run sees only a list of failures and no signal about which properties are load-bearing.
 #
-# /pios-author reads this as a do-not-remove list. It is a record of confirmation, not a
+# /pios:author reads this as a do-not-remove list. It is a record of confirmation, not a
 # prohibition: a mechanism here may still be changed, but the change must state what replaces
 # the property it was providing.
 #
@@ -564,7 +564,7 @@ validation:
 #
 # `now_caught_by` is the field that matters. A correction without it fixes one run; with
 # it, the defect class is closed for every run afterwards. If nothing catches it yet, say
-# so — that entry is a candidate for /pios-author, and naming the gap is the point.
+# so — that entry is a candidate for /pios:author, and naming the gap is the point.
 corrections:
   # - at: ""
   #   found_by: review        # review | checkpoint | operator | later module
@@ -581,7 +581,7 @@ corrections:
 # annoyed them at module 04. The run notices, records, and hands the list back at delivery.
 #
 # It is run content: private, gitignored, and never published. A lesson crosses into the
-# framework through /pios-author, generalized so the project does not travel with it.
+# framework through /pios:author, generalized so the project does not travel with it.
 friction_log:
   # - at: 01-idea
   #   kind: gate            # gate | template | question | checkpoint | tooling | unclear

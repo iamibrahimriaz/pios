@@ -67,17 +67,17 @@ may not break, and how to know when it is finished.
 From **any** project directory:
 
 ```
-/pios   an app that helps small gyms manage memberships
+/pios:research   an app that helps small gyms manage memberships
 ```
 
 The run lands in `./pios/gym-memberships/` — beside the code it describes.
 
 ```
-/pios                          resume where you left off
-/pios   what stage am I at?    status only, no work
+/pios:research                          resume where you left off
+/pios:research   what stage am I at?    status only, no work
 ```
 
-A full run does not fit in one session. Invoking `/pios` again finds the existing `state.yaml`
+A full run does not fit in one session. Invoking `/pios:research` again finds the existing `state.yaml`
 and continues from the next unpassed module.
 
 ### It is an interview, not a button
@@ -275,8 +275,8 @@ framework/          ships to users; read-only during a run
   modules/            the 14 lifecycle domains
   packs/              optional vertical knowledge — planned, not yet built
 
-skills/             /pios (run a session) · /pios-author (extend the framework)
-commands/           /pios-learn — contribute a defect back as a pull request
+skills/             /pios:research (run a session) · /pios:author (extend the framework)
+commands/           /pios:learn — contribute a defect back as a pull request
 .claude-plugin/     plugin.json + marketplace.json — the install manifests
 AGENTS.md           how an agent executes a run — start here
 ```
@@ -293,7 +293,7 @@ AGENTS.md           how an agent executes a run — start here
 | [CHANGELOG.md](CHANGELOG.md) | Release history, and the release ritual |
 | [USAGE.md](USAGE.md) | Every install mode, and troubleshooting |
 
-Run `/pios-learn` after a session to turn its friction log into a proposal and a pull request.
+Run `/pios:learn` after a session to turn its friction log into a proposal and a pull request.
 It writes nothing under `framework/`, and strips every project detail before anything leaves
 your machine.
 

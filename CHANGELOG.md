@@ -83,11 +83,45 @@ Then confirm the framework travelled with it, which is the failure that looks li
 ```bash
 P=~/.claude/plugins/cache/pios/pios/<version>
 find "$P/framework" -type f | wc -l       # expect the full framework, not a handful
-ls "$P/skills"                            # pios · pios-author
+ls "$P/skills"                            # author · research
 ```
 
 **A version bump with no framework change is still a release**, and is the right move whenever
 a skill, template or check changes — those are the method too.
+
+---
+
+## [0.2.0] — 2026-09-08
+
+### Changed
+
+- **The commands lost their stutter.** A plugin already namespaces everything it ships, so
+  prefixing each skill and command with `pios-` applied the name twice and the palette read
+  `/pios:pios`, `/pios:pios-author`, `/pios:pios-learn`. The prefix is gone:
+
+  | Was | Now |
+  | --- | --- |
+  | `/pios:pios` | `/pios:research` |
+  | `/pios:pios-author` | `/pios:author` |
+  | `/pios:pios-learn` | `/pios:learn` |
+
+  **This renames the commands you type.** The old names no longer resolve. Nothing about a
+  run changes — `state.yaml`, the artifact set and the gates are untouched, and a run written
+  against 0.1.x still validates — so this is a minor bump under the scheme above, not a major
+  one. Update any notes, aliases or scripts that invoke the old names.
+
+- **The main skill is `research`, not `run`.** Claude Code ships a built-in skill named `run`.
+  Namespaced as `/pios:run` there would have been no conflict, but the global install
+  (`scripts/install-skill.sh`) symlinks the skill unnamespaced into `~/.claude/skills/`, where
+  it would have collided. `research` also says what the skill does.
+
+- **The global install now links to `~/.claude/skills/research`.** Re-run
+  `./scripts/install-skill.sh` after updating, then remove the stale `~/.claude/skills/pios`
+  symlink by hand — the installer creates the new link but will not delete the old one.
+
+- **The command name now differs by install mode**, which USAGE.md did not previously have to
+  say. As a plugin it is `/pios:research`; installed globally or run from inside the repository
+  it is a plain `/research`. Same file, same behaviour, different prefix.
 
 ---
 
