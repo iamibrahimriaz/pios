@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIOS — Product Intelligence OS</title>
+<meta name="description" content="The research stage before the code. Turn one product idea into a build-ready blueprint — PRD, roadmap, data model, architecture and build handoff — or a documented &quot;not yet&quot;.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="PIOS — Product Intelligence OS">
+<meta property="og:description" content="Research that can say no. Turn one product idea into a build-ready blueprint, or a documented &quot;not yet&quot;.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://raw.githubusercontent.com/iamibrahimriaz/pios/main/landing/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PIOS — Know what’s worth building. Research that can say no.">
+<meta property="og:site_name" content="PIOS">
+<meta property="og:url" content="https://github.com/iamibrahimriaz/pios">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/iamibrahimriaz/pios/main/landing/assets/og.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080D18" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PIOS — Product Intelligence OS",
+  "alternateName": "PIOS",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "softwareVersion": "0.2.1",
+  "description": "A body of method an AI coding agent reads and executes: 14 gated research modules that turn one product idea into a build-ready blueprint of evidence-tagged documents, or a documented \"not yet\".",
+  "url": "https://github.com/iamibrahimriaz/pios",
+  "codeRepository": "https://github.com/iamibrahimriaz/pios",
+  "license": "https://opensource.org/licenses/MIT",
+  "author": { "@type": "Person", "name": "Ibrahim Riaz", "url": "https://github.com/iamibrahimriaz" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" aria-label="Main">
+  <div class="nav-prog" id="navProg" aria-hidden="true"></div>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <img src="assets/logo.svg" alt="" width="30" height="31">
+      <span>PIOS</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#output">Output</a>
+      <a href="#rules">Rules</a>
+      <a href="#status">Status</a>
+    </div>
+    <div class="nav-act">
+      <button class="icon-btn nav-toggle" id="navToggle" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <svg class="i-bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <button class="icon-btn" id="theme" type="button" aria-label="Theme: follow system. Switch to light.">
+        <svg class="i-system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="4" width="18.4" height="12.4" rx="2"/><path d="M8.6 20.4h6.8M12 16.4v4"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4 8.4 8.4 0 1 0 20 14.5z"/></svg>
+      </button>
+      <a class="btn btn-ghost btn-sm" href="https://github.com/iamibrahimriaz/pios">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+      <div class="lockup">
+        <img class="mark" src="assets/logo.svg" alt="" width="64" height="67">
+        <span class="wordmark">PIOS</span>
+      </div>
+
+      <h1>Know what&rsquo;s <em>worth</em> building.</h1>
+
+      <p class="hero-sub">
+        Describe a product idea in one sentence. PIOS researches it, argues with it, specifies
+        it, and hands you the documents an engineer or a coding agent starts building from.
+      </p>
+
+      <p class="hook">
+        AI made building cheap. It made building the <strong>wrong thing</strong> cheap too.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#install">
+          Install &amp; run
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/iamibrahimriaz/pios">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 .5C5.7.5.7 5.6.7 11.9c0 5 3.3 9.3 7.8 10.8.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6a11.4 11.4 0 0 0 7.8-10.8C23.3 5.6 18.3.5 12 .5z"/></svg>
+          View source
+        </a>
+      </div>
+
+      <div class="tagline"><span class="rule" aria-hidden="true"></span> Research that can say no.</div>
+    </div>
+
+    <!-- dependency graph -->
+    <figure class="graph-card">
+      <figcaption class="graph-head">
+        <span class="graph-title">Run order &mdash; 14 gated modules</span>
+        <span class="graph-live" aria-hidden="true"><i class="dot"></i><span id="gState">01-idea</span></span>
+      </figcaption>
+      <canvas id="graph" class="graph-canvas" width="1120" height="840" role="img"
+        aria-label="Dependency graph of the fourteen PIOS research modules across five stages: frame, research, decide, specify and operationalise. Each module depends on earlier modules and cannot start until every one of them has passed its gate."></canvas>
+      <div class="graph-foot">
+        <span class="lg"><i class="lg-pend"></i> not started</span>
+        <span class="lg"><i class="lg-pass"></i> gate passed</span>
+        <span class="lg"><i class="lg-stop"></i> human checkpoint</span>
+      </div>
+    </figure>
+
+  </div>
+</header>
+
+<!-- ================= STEPS ================= -->
+<section aria-labelledby="h-how" class="ruled" id="how">
+  <div class="wrap">
+    <p class="eyebrow">The shape of a run</p>
+    <h2 id="h-how">Four moves, in order. None of them optional.</h2>
+    <p class="lede measure">
+      Fourteen gated modules sit underneath these four. A module may not start until every
+      module it depends on has passed its gate.
+    </p>
+
+    <div class="steps">
+      <article class="step s1">
+        <div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+        <h3 class="step-name">Research</h3>
+        <p>Market, users, problem, competition &mdash; every claim carrying a source tag.</p>
+      </article>
+      <article class="step s2">
+        <div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3 class="step-name">Validate</h3>
+        <p>Six problem claims kept apart. Insufficient evidence never reported as failure.</p>
+      </article>
+      <article class="step s3">
+        <div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M9 12h6M9 16h6"/></svg></div>
+        <h3 class="step-name">Plan</h3>
+        <p>PRD, data model, API contract, architecture, roadmap, build handoff.</p>
+      </article>
+      <article class="step s4">
+        <div class="step-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.6 2.6L16 9.5"/></svg></div>
+        <h3 class="step-name">Decide</h3>
+        <p>Build, adjust, or do not build &mdash; and the last one is a complete result.</p>
+      </article>
+    </div>
+
+    <p class="gatebar">
+      <strong>It is an interview, not a button.</strong> The run stops three times and hands
+      control back to you &mdash; after module 01 with at least five clarifying questions, after
+      module 07 to confirm the MVP cut, and before delivery to review the artifact set.
+      Jurisdiction and who pays are not optional; the agent is forbidden from guessing them.
+    </p>
+  </div>
+</section>
+
+<!-- ================= WHAT IT IS ================= -->
+<section aria-labelledby="h-what" class="ruled">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">What it actually is</p>
+      <h2 id="h-what">Not a program. A body of method.</h2>
+      <p class="lede">
+        623 markdown files and 18 YAML files that an AI coding agent reads and executes.
+        You supply the agent; PIOS supplies the discipline. No runtime, no API key, no build step.
+      </p>
+      <p class="lede">
+        Every claim on this page carries the same evidence tag a run would put on its own
+        findings &mdash; including the ones further down that say
+        <span class="tag tag-a">assumption</span>
+      </p>
+    </div>
+    <div>
+      <dl class="factlist">
+        <div class="fact"><dt>Input</dt><dd>one idea, loosely described</dd></div>
+        <div class="fact"><dt>Gated research modules</dt><dd data-count="14">14</dd></div>
+        <div class="fact"><dt>Dependency edges enforced</dt><dd data-count="30">30</dd></div>
+        <div class="fact"><dt>Documents produced</dt><dd>15&ndash;17</dd></div>
+        <div class="fact"><dt>Human checkpoints</dt><dd data-count="3">3</dd></div>
+        <div class="fact"><dt>Structural checks, all passing</dt><dd data-count="40">40</dd></div>
+        <div class="fact"><dt>Time</dt><dd>hours, across sessions</dd></div>
+        <div class="fact"><dt>Licence</dt><dd>MIT</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OUTPUT ================= -->
+<section aria-labelledby="h-output" class="ruled" id="output">
+  <div class="wrap">
+    <p class="eyebrow">What you get</p>
+    <h2 id="h-output">One folder, beside the code it describes.</h2>
+    <p class="lede measure">
+      Fifteen required documents, seventeen at most, grouped by <em>when they are read</em>
+      rather than by the module that produced them. A run that concludes <em>do not build</em>
+      still produces every one of them.
+    </p>
+
+    <div class="amap">
+      <div class="amap-col f0">
+        <h3>00-decision</h3>
+        <ul><li><b>00</b> Executive-Summary</li></ul>
+      </div>
+      <div class="amap-col f1">
+        <h3>01-research</h3>
+        <ul>
+          <li><b>01</b> Research-Dossier</li>
+          <li><b>02</b> Problem-Validation</li>
+          <li><b>10</b> Risks-and-Assumptions</li>
+        </ul>
+      </div>
+      <div class="amap-col f2">
+        <h3>02-product</h3>
+        <ul>
+          <li><b>03</b> PRD</li>
+          <li><b>04</b> Feature-Spec</li>
+          <li><b>08</b> UX-Flows</li>
+          <li class="opt"><b>15</b> AI-Strategy</li>
+        </ul>
+      </div>
+      <div class="amap-col f3">
+        <h3>03-technical</h3>
+        <ul>
+          <li><b>05</b> Data-Model</li>
+          <li><b>06</b> API-Contract</li>
+          <li><b>07</b> Architecture</li>
+        </ul>
+      </div>
+      <div class="amap-col f4">
+        <h3>04-delivery</h3>
+        <ul>
+          <li><b>09</b> Roadmap</li>
+          <li><b>11</b> Success-Metrics</li>
+          <li><b>12</b> Build-Handoff</li>
+          <li class="opt"><b>13</b> Growth-Plan</li>
+          <li><b>14</b> Operations-Plan</li>
+          <li><b>16</b> Engineering-Setup</li>
+        </ul>
+      </div>
+    </div>
+    <p class="micro">Faded entries are produced only when the scope calls for them. Filenames keep their global numbering wherever they sit, so <code>03-PRD.md</code> means the same document in every cross-reference.</p>
+
+    <div class="tree">
+<pre><span class="d">./pios/&lt;slug&gt;/</span>
+  DECISION.md          <span class="n">one page &mdash; read this first</span>
+  CLAUDE.md            <span class="n">what an AI agent reads to start building</span>
+  state.yaml           <span class="n">the audit trail &mdash; evidence, assumptions, decisions</span>
+  <span class="d">deliverables/</span>        <span class="n">the five folders above</span>
+  <span class="d">phases/</span>              <span class="n">the board: what may be started now</span>
+  <span class="d">proposal/</span>            <span class="n">proposal.html &mdash; send this to get a yes</span>
+  <span class="d">presentation/</span>        <span class="n">engineering-kickoff.pptx</span></pre>
+    </div>
+
+    <p class="lede measure">
+      <strong>Two of them are what a builder actually works from.</strong>
+      <code>12-Build-Handoff.md</code> states what to build, in what order, and what
+      &ldquo;correct&rdquo; means &mdash; readable with no access to the research conversation.
+      <code>16-Engineering-Setup.md</code> covers environment, seed data, test strategy, CI,
+      deployment and rollback. PIOS never writes application code.
+    </p>
+  </div>
+</section>
+
+<!-- ================= READINESS ================= -->
+<section aria-labelledby="h-ready" class="ruled">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Readiness</p>
+      <h2 id="h-ready">A complete specification is not permission to build.</h2>
+      <p class="lede">
+        These get confused every time, because they arrive together: the package is finished,
+        it looks finished, and finished reads as authorized.
+      </p>
+      <p class="lede">
+        A run can and often should deliver <code>engineering_ready: true</code> alongside
+        <code>commercially_validated: false</code>. That is a complete, honest result &mdash;
+        not an unfinished one.
+      </p>
+    </div>
+    <div>
+      <div class="ladder">
+        <div class="rung">
+          <span class="flag"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg></span>
+          <span class="name">research_ready</span><span class="who">the run&rsquo;s</span>
+        </div>
+        <div class="rung">
+          <span class="flag"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg></span>
+          <span class="name">product_definition_ready</span><span class="who">the run&rsquo;s</span>
+        </div>
+        <div class="rung">
+          <span class="flag"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg></span>
+          <span class="name">engineering_ready</span><span class="who">the run&rsquo;s</span>
+        </div>
+
+        <div class="ladder-break">not the run&rsquo;s to set</div>
+
+        <div class="rung no">
+          <span class="flag"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg></span>
+          <span class="name">commercially_validated</span><span class="who">a validation result</span>
+        </div>
+        <div class="rung no">
+          <span class="flag"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg></span>
+          <span class="name">development_authorized</span><span class="who">yours, on the record</span>
+        </div>
+      </div>
+      <p class="micro">A count of ticked engineering boxes says the product is specified. It says nothing about whether anyone will pay for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RULES ================= -->
+<section aria-labelledby="h-rules" class="ruled" id="rules">
+  <div class="wrap">
+    <p class="eyebrow">The rules it will not bend</p>
+    <h2 id="h-rules">What makes it different is what it refuses to do.</h2>
+
+    <div class="rules">
+      <article class="rule-row">
+        <h3>Every claim carries exactly one tag</h3>
+        <p>
+          An untagged claim is a defect. An assumption is never smoothed into a fact &mdash; a
+          blueprint that states what it assumed is useful; one that silently asserts it is a
+          liability.
+        </p>
+        <div class="tagset">
+          <span class="tag tag-v">verified: source</span>
+          <span class="tag tag-i">inferred: basis</span>
+          <span class="tag tag-a">assumption: needs validation</span>
+        </div>
+      </article>
+
+      <article class="rule-row">
+        <h3>Six claims about a problem are never collapsed into one</h3>
+        <p>
+          Evidence for one is not evidence for another. A problem can be real, recurring and
+          expensively documented, and people will still not pay to prevent it.
+        </p>
+        <div class="claims">
+          <div class="claim"><b>01</b><span>Existence</span></div>
+          <div class="claim"><b>02</b><span>Frequency</span></div>
+          <div class="claim"><b>03</b><span>Severity</span></div>
+          <div class="claim"><b>04</b><span>Business impact</span></div>
+          <div class="claim"><b>05</b><span>Solution demand</span></div>
+          <div class="claim"><b>06</b><span>Willingness to pay</span></div>
+        </div>
+      </article>
+
+      <article class="rule-row">
+        <h3>&ldquo;Insufficient evidence&rdquo; is never reported as &ldquo;failed validation&rdquo;</h3>
+        <p>
+          The error always runs in that direction, and it converts <em>we did not ask</em> into
+          <em>they said no</em>. Six failure classes keep them apart.
+        </p>
+      </article>
+
+      <article class="rule-row">
+        <h3>A late answer forces a re-derivation, not a find-and-replace</h3>
+        <p>
+          If an early premise changes after that module passed, every conclusion since is
+          retested to a verdict &mdash; survived, changed, or withdrawn.
+        </p>
+      </article>
+
+      <article class="rule-row">
+        <h3>Your runs are private</h3>
+        <p>
+          They never leave your machine. A gitignore rule, a structural check and a CI step all
+          enforce it. The framework is open; what people put through it is theirs.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIT ================= -->
+<section aria-labelledby="h-fit" class="ruled">
+  <div class="wrap">
+    <p class="eyebrow">Before you install</p>
+    <h2 id="h-fit">PIOS asks you questions it refuses to answer for you.</h2>
+    <p class="lede measure">
+      That makes the fit narrower than most tools, and it is worth checking now rather than at
+      the first checkpoint.
+    </p>
+
+    <div class="fit">
+      <div class="fit-col fit-yes">
+        <h3>It fits if</h3>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg><span>You can say <strong>who pays</strong> and <strong>in which country</strong></span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg><span>You will still be working on this in six months</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg><span>You want a verdict that is allowed to say no</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg><span>You have a capable coding agent</span></li>
+        </ul>
+      </div>
+      <div class="fit-col fit-no">
+        <h3>Skip it if</h3>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg><span>You need a PRD in ten minutes</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg><span>You cannot yet name the buyer or the jurisdiction</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg><span>You have already decided to build regardless</span></li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l10 10M15 5L5 15"/></svg><span>You want the agent to make the commercial call</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATUS ================= -->
+<section aria-labelledby="h-status" class="ruled status" id="status">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Status &mdash; v0.2.1</p>
+      <h2 id="h-status">Complete and validated. Not yet proven by use.</h2>
+      <p class="lede">
+        Every claim about <em>structure</em> here is verified. No claim about <em>outcomes</em>
+        has been tested by a published run &mdash; and a framework that will not smooth an
+        assumption into a fact does not get to make an exception for its own landing page.
+      </p>
+    </div>
+    <div>
+      <div class="status-grid">
+        <div class="status-row"><span>Framework &mdash; 14 modules, 4 layers each</span><span class="tag tag-v">verified</span></div>
+        <div class="status-row"><span>40 structural checks, all passing in CI</span><span class="tag tag-v">verified</span></div>
+        <div class="status-row"><span>Plugin install works outside the repository</span><span class="tag tag-v">verified</span></div>
+        <div class="status-row"><span>Runs stay private &mdash; enforced three ways</span><span class="tag tag-v">verified</span></div>
+        <div class="status-row"><span>Portable to any file-writing agent</span><span class="tag tag-i">inferred</span></div>
+        <div class="status-row"><span>Reference runs published</span><span class="tag tag-a">none yet</span></div>
+        <div class="status-row"><span>Produces better product decisions</span><span class="tag tag-a">assumption</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTALL ================= -->
+<section aria-labelledby="h-install" class="ruled close" id="install">
+  <div class="wrap">
+    <p class="eyebrow">Install</p>
+    <h2 id="h-install">Two commands, then one sentence.</h2>
+    <p class="lede">
+      Claude Code is the reference implementation. Any agent that reads and writes files can run
+      it from <code>AGENTS.md</code> instead.
+    </p>
+
+    <div class="term">
+      <div class="term-bar">
+        <i></i><i></i><i></i>
+        <span>~/projects/my-app</span>
+        <button class="copy" type="button" data-copy="claude plugin marketplace add iamibrahimriaz/pios&#10;claude plugin install pios@pios">Copy</button>
+      </div>
+<pre><span class="c"># install once</span>
+<span class="p">$</span> claude plugin marketplace add iamibrahimriaz/pios
+<span class="p">$</span> claude plugin install pios@pios
+
+<span class="c"># then, from any project directory</span>
+<span class="p">$</span> <span class="k">/pios:research</span>  an app that helps small gyms manage memberships
+
+<span class="c"># resume later &mdash; a full run does not fit in one session</span>
+<span class="p">$</span> <span class="k">/pios:research</span>
+<span class="p">$</span> <span class="k">/pios:research</span>  what stage am I at?</pre>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/iamibrahimriaz/pios">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M12 .5C5.7.5.7 5.6.7 11.9c0 5 3.3 9.3 7.8 10.8.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6a11.4 11.4 0 0 0 7.8-10.8C23.3 5.6 18.3.5 12 .5z"/></svg>
+        iamibrahimriaz/pios
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/iamibrahimriaz/pios/blob/main/USAGE.md">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <img src="assets/logo.svg" alt="" width="24" height="25">
+      <span>Don&rsquo;t teach AI what to write. Teach AI how to think.</span>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="https://github.com/iamibrahimriaz/pios">GitHub</a>
+      <a href="https://github.com/iamibrahimriaz/pios/blob/main/USAGE.md">Usage</a>
+      <a href="https://github.com/iamibrahimriaz/pios/blob/main/CONTRIBUTING.md">Contributing</a>
+      <a href="https://github.com/iamibrahimriaz/pios/blob/main/LICENSE">MIT</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
