@@ -34,6 +34,37 @@ gate cannot be passed honestly, the run stops rather than proceeding on a guess.
 
 ---
 
+## Who this is for
+
+PIOS asks you questions it refuses to answer for you. That makes the fit narrower than most
+tools, and it is worth checking before you spend the hours rather than after.
+
+**It fits if:**
+
+| | |
+| --- | --- |
+| You can say **who pays** and **in which country** | Module 01 stops until you do. It is forbidden from guessing either |
+| You will still be working on this in six months | A weekend project does not need a specification, and will not repay one |
+| You want a verdict that is allowed to say no | If the answer cannot change your plan, the gates only cost you time |
+| You have a capable coding agent | Claude Code is the reference implementation and the only one it has been run on |
+
+**Skip it if:**
+
+- **You need a PRD in ten minutes.** This is hours of agent work across several sessions.
+  Nothing in it was designed to be fast.
+- **You cannot yet name the buyer or the jurisdiction.** PIOS will stop and ask, and it will
+  not take a guess in place of an answer. That is the feature, and it is also the wall people
+  hit first.
+- **You have already decided to build.** A gate that is not permitted to change the outcome is
+  an expensive formality.
+- **You want the agent to make the commercial call.** It will set `engineering_ready`. It never
+  sets `development_authorized` — that one is yours, recorded with your name on it.
+
+> **A framework that cannot tell you to stop is not validating anything.** What that costs is
+> the hours, and the questions you have to answer yourself.
+
+---
+
 ## Install
 
 ### Claude Code
