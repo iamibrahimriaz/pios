@@ -1,10 +1,10 @@
 id: 08-product
 name: Product
 purpose: Specify the product precisely enough to be built.
-depends_on: [03-user, 07-strategy]
-consumes: [mvp_definition, chosen_approach, personas, jobs_to_be_done]
-produces: [prd_body, feature_spec, acceptance_criteria, prioritization, edge_cases]
-feeds_deliverables: [build-handoff, feature-spec, prd]
+depends_on: [01-idea, 03-user, 07-strategy]
+consumes: [mvp_definition, chosen_approach, personas, jobs_to_be_done, delivery_surface]
+produces: [prd_body, feature_spec, acceptance_criteria, prioritization, edge_cases, interface_requirements]
+feeds_deliverables: [build-handoff, feature-spec, prd, interface-requirements]
 gate:
   - Every feature traces to a ranked problem
   - Acceptance criteria testable, not aspirational
@@ -12,4 +12,5 @@ gate:
   - Anything out of MVP scope moved to roadmap, not dropped silently
   - Every state-changing requirement states whether it is reversible
   - Every derived or aggregated figure states which records it includes and excludes
+  - Interface and non-functional requirements stated for the delivery surface named at 01-idea, or recorded as not applicable and why
 on_fail: return to 07-strategy

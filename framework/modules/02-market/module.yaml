@@ -11,4 +11,5 @@ gate:
   - ">= 3 trends with direction and evidence"
   - Regulatory constraints for the named jurisdiction identified, including its general data-protection regime
   - Every regulatory and pricing claim carries the date it was checked
+  - Search vocabulary recorded, and where the category has no established name, at least two independent vocabularies were searched
 on_fail: return to 01-idea

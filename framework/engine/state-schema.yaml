@@ -85,11 +85,24 @@ project:
   # failing a run that was correct under the contract it was produced against.
   #
   # Absent means "produced before this field existed" — treated as version 1.
-  framework_version: 3
+  framework_version: 5
 
 run:
   current_stage: frame
   completed_modules: []
+
+  # module id -> ISO date the module's gate passed. Written alongside completed_modules.
+  #
+  # This exists so a strategy re-entry can be detected as invalidating. When 07-strategy is
+  # re-entered and returns a DIFFERENT chosen option, every module that consumed the old one
+  # is stale — its outputs specify a direction the run has abandoned. Nothing detected that:
+  # run-order.yaml has no concept of downstream invalidation, and a run could carry a complete
+  # specification of a product it had already discarded, past every gate, into the handoff.
+  #
+  # Absent means "produced before this field existed". validate-run.py then reports the risk
+  # as a note rather than failing a run that was correct under its own contract.
+  module_completions: {}
+
   confidence: unknown           # high | medium | low | unknown
 
   # interactive | continuous. Asked ONCE at the frame checkpoint, never again.
@@ -313,6 +326,18 @@ outputs: {}
 #                                         # examined this option, and what each would have tested
 #     asymmetry_effect: ""                # REQUIRED when generated_here and it WINS: whether
 #                                         # the win survives the missing research, or rests on it
+#
+# chosen_approach:
+#   option: ""                    # the id of the option carrying chosen: true
+#   decided_at: ""                # ISO date the CURRENT direction was settled. On a re-entry
+#                                 # this MOVES to the re-entry date — that is the whole point
+#                                 # of the field. Every module completed before it consumed a
+#                                 # direction the run no longer holds, and validate-run.py
+#                                 # fails the run until those modules are re-run or their
+#                                 # outputs are confirmed still correct against the new choice.
+#   superseded_option: ""         # set when a re-entry replaced an earlier choice
+#   superseded_reason: ""         # why — retained rather than overwritten, so the correction
+#                                 # can be checked rather than taken on trust
 
 # Every claim the run depends on, tagged per engine/evidence-policy.md.
 #
@@ -340,6 +365,17 @@ evidence_log:
   #   mode: null             # observed | reported | reconstructed — user and workflow claims
   #   strength: null         # strong | moderate | weak — the author's own read
   #   load_bearing: true
+  #   corroborated_by: ""    # REQUIRED in spirit when load_bearing and the source is an
+  #                          # external page: a SECOND independent read of the same figure —
+  #                          # a different URL on the same site, or a different source.
+  #                          #
+  #                          # A single automated read of a marketing or pricing page satisfies
+  #                          # every check this framework performs, and a misread of it is
+  #                          # indistinguishable from a correct one. An order-of-magnitude error
+  #                          # survives review whenever it happens to look internally coherent;
+  #                          # the ones that get caught are caught by accident, because a number
+  #                          # contradicted itself. checked_on records WHEN a figure was read.
+  #                          # This records that it was read TWICE.
 
 # Things believed but not established. Carried into the final deliverables.
 assumptions:

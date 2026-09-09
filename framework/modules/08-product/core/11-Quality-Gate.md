@@ -293,6 +293,50 @@ anything. Every sentence requiring context that exists only in the run is a defe
 
 ---
 
+# Criterion 7 — Interface and non-functional requirements stated for the delivery surface named at 01-idea, or recorded as not applicable and why
+
+**Passes when** the delivery surface recorded at `01-idea` has been read, and either the
+requirements it implies are specified, or a sentence states that this surface implies none
+and names the surface as the reason.
+
+**Fails when** the surface was named at `01-idea` and never consulted again.
+
+**Why this criterion exists.** The operator is asked, at the first gate, what the product is
+delivered through. Before this criterion existed nothing consumed the answer, so a run could
+name "web" in module 01 and hand a builder a specification containing no layout behavior, no
+accessibility target, no performance budget and no supported-client policy — and pass every
+gate on the way. **The question was asked, recorded, and dropped.**
+
+**What the surface implies.** The mapping is in
+`08-product/knowledge/Interface-Requirements.md`. In outline:
+
+| Surface | Implies at minimum |
+| --- | --- |
+| Anything a person looks at | Interaction states · layout across the supported range · an accessibility conformance target · perceived-performance budgets · a supported-client policy |
+| Anything reachable by a crawler | Which surfaces are indexable and which are not, stated separately |
+| API, CLI, library, batch job | **Frequently none of the above.** Say so — that is a pass |
+
+**How to evaluate.** Read `state.project.delivery_surface`. For each row of the mapping that
+the surface triggers, find the requirement or find the sentence recording that it does not
+apply. **A missing row is a fail; an "not applicable, because the product has no human
+interface" row is a pass.**
+
+**These are requirements, not verification.** How a requirement is checked — a test suite, a
+pipeline gate, a review step — belongs to whoever builds the product. **This framework
+specifies what must be true, and stops.** A criterion here that reads "run an automated
+accessibility scan in CI" has crossed the boundary in `constitution/core/00-Purpose.md`; one
+that reads "conformance target: WCAG 2.2 AA, measured against the criteria listed in §4" has
+not.
+
+| Fails | Passes |
+| --- | --- |
+| "The interface will be modern and accessible" | "Conformance target WCAG 2.2 AA. The listed criteria are the ones this product can fail: 1.4.11, 2.4.11, 2.5.8, 3.3.7" |
+| "Responsive design" | "Supported from 320 CSS pixels. At the narrowest supported width no view scrolls horizontally, and «component» reflows to «stated behavior»" |
+| "Fast" | "«view» renders its first meaningful content within «n» seconds at the «n»th percentile, measured on «named client class and network»" |
+| Surface named "web" at 01-idea, nothing downstream | "Delivery surface is a public API only. No interface requirements apply, and no view exists to state them for" |
+
+---
+
 # Verdict
 
 ```yaml
@@ -305,6 +349,7 @@ gate:
     nothing_dropped_silently: pass | fail
     reversibility_stated: pass | fail
     derived_figures_state_scope: pass | fail
+    interface_requirements_stated_or_na: pass | fail
   module_checks:
     boundary_no_laundering: pass | fail
     two_builder: pass | fail

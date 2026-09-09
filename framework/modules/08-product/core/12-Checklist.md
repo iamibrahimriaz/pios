@@ -177,6 +177,7 @@ For every MUST requirement:
 - [ ] Confidence check
 - [ ] Invented-number check
 - [ ] Implementation-leak check
+- [ ] Criterion 7 — interface and non-functional requirements stated for the delivery surface, or recorded as not applicable and why
 - [ ] Budget check — a stated limit and a required content list can both hold
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`

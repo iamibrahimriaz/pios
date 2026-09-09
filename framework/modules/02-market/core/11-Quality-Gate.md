@@ -163,12 +163,53 @@ signal that they are stale.
 
 ---
 
+# Criterion 6 — Search vocabulary recorded, and where the category has no established name, at least two independent vocabularies were searched
+
+**Passes when** the terms used to search the market are written down, **and** where the module
+itself concludes that the category has no settled name, the search was run again under a
+genuinely different vocabulary and both sets are recorded.
+
+**Fails when** the module records that the category is unnamed and then searches it once.
+
+**Why this criterion exists.** A module can state "this category has no established name" as a
+finding and, three sections later, present a competitive field and a price anchor derived from a
+single vocabulary. **Both facts sit in the same document and nothing connects them.** The gate
+passes, because every individual claim is sourced and dated — and the market analysis is wrong
+about who the competitors are and what the price is, for a reason the document already
+contained.
+
+**What makes a second vocabulary independent.** Not a synonym and not a plural. **A different
+mental model of what the thing is**, taken from a different party:
+
+| Source of the vocabulary | Example of the shift |
+| --- | --- |
+| What a **buyer** would type | The problem, in their words, with no product category in it |
+| What a **vendor** calls itself | The category label the sellers chose for themselves |
+| What an **adjacent discipline** calls it | The same job, named from a neighboring field |
+| What the thing is **a substitute for** | The manual method, the spreadsheet, the incumbent |
+
+**Two vocabularies that return the same set are a result worth recording** — it is evidence the
+category is more settled than the module concluded. **Two that return disjoint sets mean the
+first search defined the market, and the sizing built on it inherits that.**
+
+**How to evaluate.** Find the recorded vocabulary. If the module claims the category is unnamed,
+find the second set and the searches run under it. **A module that cannot show the second set
+has not established its competitive field — it has established the field its first guess
+described.**
+
+| Fails | Passes |
+| --- | --- |
+| "The category has no agreed name." … competitors found under one term | "No agreed name. Searched as «vendor label» and as «the manual method it replaces»; the second surfaced «n» vendors the first did not" |
+| A vocabulary list with three synonyms of one word | Two lists that a reader can see come from different parties |
+
+---
+
 # Evaluation Procedure
 
 1. Run the four passes of `engine/review-loop.md`.
 2. Verify every `[verified]` tag resolves to a row in the Sources table.
 3. Evaluate universal gates U1–U7.
-4. Evaluate criteria 1–5.
+4. Evaluate criteria 1–6.
 5. Record the verdict in `state.run`.
 
 ```yaml
@@ -181,6 +222,7 @@ gate:
     three_trends_with_direction: pass
     regulatory_identified: pass
     claims_dated: pass
+    vocabulary_recorded_and_widened: pass
   universal: [U1 pass, U2 pass, U3 pass, U4 pass, U5 pass, U6 pass, U7 pass]
   verdict: fail
   reason: "SAM adopted from an analyst report; its boundary was never compared to §1."

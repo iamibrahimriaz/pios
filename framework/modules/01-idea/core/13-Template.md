@@ -124,7 +124,19 @@ research found none.** Note it in the handoff so the obligation travels.
      buys, the person who produces the thing, the person who consumes it — and they overlap
      only partly. One row forces the distinction into prose, where no gate reads it and
      03-user inherits a single merged persona. Where there is genuinely one role, write
-     "none — single user role" in the second row rather than deleting it. -->
+     "none — single user role" in the second row rather than deleting it.
+
+     THE DATA SUBJECT ROW IS NOT A USER ROW. Some products process data about a person who
+     never sees the product, never pays for it, and is not a user in any sense — the party
+     measured by an analytics tool, the patient in a clinical system, the applicant in a
+     hiring tool, the employee in a monitoring product. Their consent is frequently the
+     entire supply of the thing being sold, and their interests are the ones nobody in the
+     purchase conversation represents.
+
+     Before this row existed they were written into a spare User row and explained in prose,
+     where no gate reads it — and a different run would have put them somewhere else or
+     omitted them, with nothing noticing either way. Where the user is genuinely the only
+     data subject, write that rather than deleting the row. -->
 
 | Dimension | Value | Source |
 | --- | --- | --- |
@@ -133,6 +145,7 @@ research found none.** Note it in the handoff so the obligation travels.
 | Surface order | «which ships first, then what — or "single surface"» | operator / **ASKED** |
 | Segment | «who specifically» | operator / stated in idea / **ASKED** |
 | User | «who uses it» | operator / stated in idea / **ASKED** |
+| **Data subject, if not the user or buyer** | «whose data this product processes, where that is a third party — or "none, the user is the only data subject"» | operator / stated in idea / **ASKED** |
 | User (2nd role) | «the other role, or "none — single user role"» | operator / stated in idea / **ASKED** |
 | Buyer | «who pays» | operator / stated in idea / **ASKED** |
 | Incumbent | «what they use today» | operator / stated in idea / **ASKED** |

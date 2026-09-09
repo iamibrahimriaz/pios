@@ -3,8 +3,8 @@ name: Idea
 purpose: Turn a vague idea into a precise, testable premise.
 depends_on: []
 consumes: [state.raw_idea]
-produces: [idea_brief, clarifying_questions, initial_assumptions, scope_boundaries]
-feeds_deliverables: [research-dossier, prd, executive-summary]
+produces: [idea_brief, clarifying_questions, initial_assumptions, scope_boundaries, delivery_surface]
+feeds_deliverables: [research-dossier, prd, executive-summary, interface-requirements]
 gate:
   - Raw idea restated in one sentence naming who it is for, what it does and what changes
   - Geography / market and regulatory jurisdiction named

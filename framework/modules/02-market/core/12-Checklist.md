@@ -158,6 +158,7 @@ through **before** reaching the gate, so the gate confirms rather than discovers
 - [ ] Criterion 3 — three trends with direction, including one unfavorable
 - [ ] Criterion 4 — regulatory constraints identified concretely, data-protection regime named
 - [ ] Criterion 5 — every regulatory and pricing claim carries the date it was checked
+- [ ] Criterion 6 — search vocabulary recorded; a second, independent vocabulary searched where the category is unnamed
 - [ ] Universal gates U1–U7
 - [ ] Verdict recorded in `state.run`
 

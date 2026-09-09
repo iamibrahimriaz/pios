@@ -119,6 +119,37 @@ For each module in run order:
 5. Write outputs to `state.outputs`. Append to `state.evidence_log`.
 6. Run the review loop. All four passes. The adversarial pass is not optional.
 7. Evaluate the gate. If it fails, follow `on_fail`. Do not proceed.
+8. On pass, append the module to `state.run.completed_modules` **and record the date in
+   `state.run.module_completions`**.
+
+> ### Writing to `state.yaml` safely
+>
+> **It is one file, it grows past four thousand lines on a full run, and it is the only copy
+> of the audit trail.** There is no history and no snapshot behind it.
+>
+> **Anchor every edit on something unique, and prove it is unique before writing.** A bare
+> substring that also appears in a nested block will match the wrong one — an id like
+> `- id: V6` occurs at two indent levels, and the shallower match is not the one you want.
+>
+> **After every write: re-parse the file and check the counts you expected to change.** A
+> corrupted write leaves valid YAML that is missing half the run, and nothing downstream
+> notices until a gate reads something that is no longer there. The date is what makes a later strategy re-entry
+   detectable — see below.
+
+### When a module is re-entered and the answer changes
+
+**`07-strategy` can be re-entered, and it can return a different chosen option.** When it
+does, set `state.outputs.chosen_approach.decided_at` to that date.
+
+> **Every module completed before that date consumed a direction the run no longer holds.**
+> Its outputs are stale, and stale outputs do not look wrong — they are complete, internally
+> consistent, and describe a product the run has abandoned.
+
+**Re-run them, or re-read each against the new choice and record that it was confirmed
+unchanged.** `validate-run.py` fails the run while any module downstream of `07-strategy`
+carries a completion date earlier than `decided_at`. **Nothing detected this before the check
+existed, and a run can otherwise carry a full specification of a discarded product into the
+build handoff — the one artifact somebody builds from without re-reading the research.**
 
 ---
 
@@ -143,6 +174,16 @@ assumes where the person is standing, competition assumes where rivals are found
 assumes a billing rail, product assumes whether offline is a requirement, and growth assumes
 a channel. **None of them re-examines it**, so an unstated surface is not discovered — it is
 inherited.
+
+**And `08-product` is now gated on it.** Criterion 7 requires the interface and non-functional
+requirements the surface implies — interaction states, layout across the supported range, an
+accessibility conformance target, performance budgets, supported clients, and which surfaces a
+crawler may reach — **or one sentence recording that this surface implies none, and naming the
+surface as the reason.** Before that criterion existed the question was asked at module 01,
+recorded in state, and consumed by nothing: a run could answer "web" and hand a builder a
+specification with no layout, accessibility or performance requirement in it, passing every
+gate on the way. **See `08-product/knowledge/Interface-Requirements.md` for the mapping, and for
+the line where requirements stop and verification begins.**
 
 **End every reply by telling the operator what to do next.** A question they can answer, a
 decision to confirm, or "nothing needed — type `continue`." Number questions, one idea each,

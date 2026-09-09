@@ -54,10 +54,25 @@ believe they have met.
 cut, this module specifies it faithfully and the gate passes. The framework relies on the
 specifier noticing and reporting back.
 
-**Non-functional requirements have no home.** Performance, availability, accessibility
-and data-retention expectations all shape requirements, and the module has no structure
-for them — they land in module 09 as architecture concerns, which is too late for
-several of them.
+**Non-functional requirements had no home. Partly addressed, and the remainder is
+narrower.** Performance, availability, accessibility and data-retention expectations all
+shape requirements, and they used to land in module 09 as architecture concerns — too late
+for the ones that change what gets specified. Criterion 7 and the `interface-requirements`
+artifact now give the interface-facing subset a home at this module: interaction states,
+layout across the supported range, an accessibility conformance target, perceived-performance
+budgets, supported clients, and crawlable surfaces.
+
+**What is still missing.** Availability, durability and data-retention expectations have no
+home here and still arrive at module 09. They are less damaging there than the interface ones
+were — an availability target does not change which components exist — but they do change what
+a requirement can promise, and a requirement written without knowing them can promise something
+the architecture will not support.
+
+**Criterion 7 cannot detect a lazy pass.** A run may write "not applicable" against a surface
+that plainly has an interface, and the criterion has no way to contradict it. What it prevents
+is the silent omission — the surface named at module 01 and never consulted again — which was
+the actual failure. **A false "not applicable" is at least a sentence somebody wrote and can be
+challenged.**
 
 ---
 

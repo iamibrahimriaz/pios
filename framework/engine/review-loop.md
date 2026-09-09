@@ -50,6 +50,21 @@ The most valuable pass. Argue against the module's own conclusion:
 - Which competitor or incumbent already tried this, and what happened?
 - What is being assumed about user behavior that has never been observed?
 - If this recommendation is wrong, which claim was the weak link?
+- **Does any source cited here contradict a conclusion drawn here?**
+
+**That last question is not the same as checking whether a claim was sourced.** Pass 2 asks
+whether a citation exists. This asks whether the cited thing, read on its own terms, agrees
+with what the module concluded from it.
+
+> **The failure it catches:** a source is cited for one narrow fact — a count, a price, a
+> date — while a conclusion is drawn about the same subject that the source's own description
+> of itself falsifies. **Both halves are in the document, the citation is real, the figure is
+> correct, and the conclusion is wrong.** Nothing in Pass 2 looks at it, because the claim it
+> checks is the figure.
+
+**How to run it.** List every source cited more than once, and every source cited for a fact
+about a subject the module also reaches a conclusion about. For each, **read what the source
+says about itself** — not the sentence quoted from it — and confirm the conclusion survives.
 
 If the adversarial pass produces nothing, it was not performed honestly. Every real
 conclusion has a case against it.

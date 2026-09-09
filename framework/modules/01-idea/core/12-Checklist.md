@@ -73,6 +73,7 @@ Before starting:
 - [ ] Jurisdiction — answered or asked
 - [ ] Segment — answered or asked
 - [ ] Buyer vs user — answered or asked
+- [ ] Data subject who is neither user nor buyer — named, or recorded as none
 - [ ] Incumbent system — answered or asked
 - [ ] Operational setting — answered or asked
 - [ ] Regulated domain — answered or asked

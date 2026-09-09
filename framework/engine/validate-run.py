@@ -139,7 +139,56 @@ def rel(a):
 
 
 dl_dir = os.path.join(RUN, "deliverables")
-required = [a for a in man["artifacts"] if a.get("required")]
+
+# An artifact may carry `since: <manifest version>` — the version that introduced it. A run
+# produced before that version is not owed it. Without this, adding an artifact to the manifest
+# retroactively fails every completed run, which is the property state.framework_version exists
+# to protect; the alternative is a hardcoded era constant per artifact, and there is already one
+# of those (PHASES_ERA) that this generalizes.
+#
+# `required: conditional` means the artifact is owed only when the run's own state says it is —
+# the same rule the completion artifacts use. It must be EVALUATED, not merely truthy: the
+# string "conditional" is truthy in Python, so a bare `if a.get("required")` demands every
+# conditional artifact of every run, which is the opposite of what the field means.
+_surface = str((state.get("project") or {}).get("delivery_surface") or "").lower()
+
+# Owed UNLESS the surface is unambiguously one with no view. The default runs toward asking,
+# because the two errors are not symmetric: a false positive costs one sentence recording that
+# nothing applies, and a false negative is the whole defect this artifact exists to close — a
+# surface named at 01-idea, never consulted, and a specification handed over with no layout,
+# accessibility or performance requirement in it.
+#
+# "other" and blank therefore trigger it. A run that answered the delivery-surface question
+# with "other" has told us less than nothing about whether a person looks at this product.
+_NO_VIEW = ("api", "cli", "library", "sdk", "batch", "daemon", "service", "headless", "protocol")
+ARTIFACT_CONDITIONS = {
+    "interface-requirements": not (
+        _surface and all(w in _NO_VIEW for w in _surface.replace("/", " ").replace(",", " ").split())
+    ),
+}
+
+
+def owed(a):
+    """Is this artifact required of THIS run, under the manifest version it was produced against?"""
+    if a.get("since") and run_version < a["since"]:
+        return False
+    r = a.get("required")
+    if r is True:
+        return True
+    if r == "conditional":
+        return bool(ARTIFACT_CONDITIONS.get(a.get("id"), False))
+    return False
+
+
+required = [a for a in man["artifacts"] if owed(a)]
+
+for a in man["artifacts"]:
+    if a.get("since") and run_version < a["since"]:
+        notes.append(f"Artifact '{a['id']}' was introduced at manifest v{a['since']}; this run "
+                     f"declares v{run_version}. Not required of it, and its absence is not a gap.")
+    elif a.get("required") == "conditional" and not ARTIFACT_CONDITIONS.get(a.get("id"), False):
+        notes.append(f"Artifact '{a['id']}' is conditional and its condition is not met in this "
+                     "run — not required, and its absence is not a gap.")
 
 missing = [rel(a) for a in required if not os.path.isfile(os.path.join(dl_dir, rel(a)))]
 
@@ -919,6 +968,50 @@ else:
         check("the entry file points nowhere outside the run directory",
               not escapes, sorted(set(escapes))[:6])
 
+# -------------------------------------------------- downstream invalidation on re-entry
+# When 07-strategy is re-entered and returns a DIFFERENT chosen option, every module that
+# consumed the old one is stale. Its outputs specify a direction the run has abandoned, and
+# they look exactly like outputs that were never wrong: the documents are complete, internally
+# consistent, and describe a product nobody is building any more.
+#
+# run-order.yaml has no concept of downstream invalidation. Nothing in the engine compared a
+# module's completion against the date the direction changed, so a run could carry a full
+# specification of a discarded product past every gate and into the build handoff — which is
+# the single most expensive artifact in the package to get wrong, because it is the one
+# somebody builds from without re-reading the research.
+#
+# Backwards compatible by construction: a run that records neither field is reported as a note.
+_ca = outputs.get("chosen_approach") or {}
+_decided_at = str(_ca.get("decided_at") or "").strip() if isinstance(_ca, dict) else ""
+_completions = (state.get("run") or {}).get("module_completions") or {}
+_superseded = str(_ca.get("superseded_option") or "").strip() if isinstance(_ca, dict) else ""
+
+try:
+    _order = yaml.safe_load(open(os.path.join(FRAMEWORK, "engine", "run-order.yaml"),
+                                 encoding="utf8")) or {}
+    _seq = [m for st in (_order.get("stages") or []) for m in (st.get("modules") or [])]
+except Exception:
+    _seq = []
+_downstream = _seq[_seq.index("07-strategy") + 1:] if "07-strategy" in _seq else []
+
+if _decided_at and isinstance(_completions, dict) and _completions:
+    stale = sorted(m for m in _downstream
+                   if str(_completions.get(m, "")).strip()
+                   and str(_completions[m]).strip() < _decided_at)
+    check("no module downstream of 07-strategy predates the current chosen approach",
+          not stale,
+          f"{stale} completed before chosen_approach.decided_at ({_decided_at}). The strategy "
+          "changed after these modules ran, so their outputs specify a direction the run no "
+          "longer holds. Re-run them, or record in state that each was re-read against the new "
+          "choice and confirmed unchanged.")
+elif _superseded:
+    notes.append(
+        "A strategy re-entry is recorded (chosen_approach.superseded_option is set) but this run "
+        "does not carry chosen_approach.decided_at and run.module_completions, so downstream "
+        "staleness cannot be checked. Confirm by hand that every module after 07-strategy was "
+        "re-run or re-read against the current choice — the specification and technical modules "
+        "are the ones that silently describe the abandoned option.")
+
 # ------------------------------------------------------------------ phase plan
 # The board is what a builder works from, which makes it where drift from the roadmap does the
 # most damage and is least visible. A milestone with no phase document is not reported by
@@ -1072,6 +1165,41 @@ if validations:
     check("every substituted instrument carries its equivalence argument", not no_equiv,
           f"{no_equiv[:5]} replaced the specified instrument with no equivalence_argument — "
           "engine/instrument-substitution.md")
+
+    # The argument must be written BEFORE the substitute runs, and nothing could detect that it
+    # was not. An agent that collects first and argues equivalence afterwards produces a
+    # document indistinguishable from one that did it in the right order — and the argument is
+    # then silently shaped by what was found, which is the one thing the ordering exists to
+    # prevent. Requiring the field forces it to be a separate, earlier write.
+    #
+    # Gated on manifest v5: a run produced before the field existed cannot be failed for
+    # lacking it.
+    if run_version >= 5:
+        no_order = [v.get("id", "?") for v in validations
+                    if isinstance(v, dict) and str(v.get("substituted_for") or "").strip()
+                    and str(v.get("recorded_before") or "").strip() != "execution"]
+        check("every equivalence argument was recorded before the substitute ran", not no_order,
+              f"{no_order[:5]} substituted an instrument without `recorded_before: execution`. "
+              "An equivalence argument written after collection is shaped by what was found, "
+              "and is indistinguishable from one written before — which is why the ordering "
+              "has to be claimed at the time rather than asserted in the write-up.")
+
+    # A load-bearing figure taken from an external page and read once. checked_on proves when
+    # it was read; nothing proved it was read twice, and a misread page is indistinguishable
+    # from a correct one unless the number happens to contradict itself. Reported rather than
+    # failed: whether a claim is a FIGURE is a judgement no validator can make from a string.
+    single_read = [e.get("claim", "?")[:60] for e in log
+                   if isinstance(e, dict) and e.get("load_bearing")
+                   and e.get("tag") == "verified"
+                   and any(t in str(e.get("source") or "").lower()
+                           for t in ("http", "www.", ".com", ".io", ".dev", ".org", ".net"))
+                   and not str(e.get("corroborated_by") or "").strip()]
+    if single_read:
+        notes.append(
+            f"{len(single_read)} load-bearing claim(s) rest on a single read of an external "
+            f"page with no `corroborated_by`: {single_read[:3]}. Where any of these is a FIGURE "
+            "— a price, a count, a rate — read it a second time from a different surface. A "
+            "misread page passes every check this framework performs.")
 
     # Criteria that can fire independently need a precedence rule fixed in advance. Two firing
     # with opposite implications is ordinary; without a rule, which governs is settled in the

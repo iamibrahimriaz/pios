@@ -41,7 +41,7 @@
 # whenever the strategy commits to Milestone Zero, and absent otherwise.
 # ---------------------------------------------------------------------------
 
-version: 4
+version: 5
 
 output_dir: projects/<slug>/deliverables/
 templates_dir: framework/deliverables/templates/
@@ -224,6 +224,41 @@ artifacts:
       - The primary job completable in a stated number of steps
       - Empty, error and edge states specified
       - Time to first value stated in minutes
+
+  - id: interface-requirements
+    file: 23-Interface-Requirements.md
+    folder: 02-product
+    template: 23-Interface-Requirements.md
+    since: 5
+    required: conditional
+    required_when: >-
+      project.delivery_surface names something a person looks at — web, mobile, desktop, or any
+      surface with a rendered interface. Absent for an API-only, CLI-only, library or batch
+      product, and its absence is then correct rather than a gap.
+    audience: design, engineering
+    fed_by: [01-idea, 03-user, 08-product]
+    acceptance:
+      - >-
+        Every component class the product ships enumerates its interaction states, including the
+        states that are not the happy path
+      - >-
+        Layout behavior is stated across the supported range, including at the narrowest width
+        the product supports, and that width is named
+      - >-
+        An accessibility conformance target is named with its standard, version and level, and
+        the specific criteria this product can fail are listed rather than the standard cited whole
+      - >-
+        Performance is stated as budgets with a measurement condition — the client class, the
+        network, and the percentile — and never as an adjective
+      - >-
+        The supported client versions are stated as a policy with the evidence or the assumption
+        behind them, or recorded as unknown with the date the question reopens
+      - >-
+        Where any surface is reachable by a crawler, the indexable and non-indexable surfaces are
+        listed separately, and no authenticated path appears in the indexable list
+      - >-
+        Every entry is a requirement rather than a verification method — what must be true, not
+        how it will be checked, which belongs to whoever builds it
 
   - id: roadmap
     file: 09-Roadmap.md

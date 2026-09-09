@@ -646,6 +646,31 @@ if len(set(found.values())) > 1:
 check(f"install manifests agree on one version ({sorted(set(found.values()))[0] if len(set(found.values())) == 1 else 'drift'})",
       not version_problems, version_problems)
 
+# ------------------------------------------- state-schema tracks the manifest version
+#
+# state-schema.yaml's `framework_version` default is documented as being set "from that
+# file's version when the run is created" — that file being deliverables/manifest.yaml.
+# It was a hardcoded literal, and it drifted: the schema shipped 3 while the manifest was
+# 4. validate-run.py derives the folder layout from the run's declared version, so a run
+# that correctly wrote the v4 grouped layout was reported as missing every artifact, and
+# the remediation text told the operator to move them OUT of their folders — the opposite
+# of the fix. Nothing detected the drift, because nothing compared the two numbers.
+schema_default = None
+manifest_version = None
+try:
+    _sch = yaml.safe_load(open("engine/state-schema.yaml", encoding="utf8")) or {}
+    schema_default = (_sch.get("project") or {}).get("framework_version")
+    manifest_version = (yaml.safe_load(
+        open("deliverables/manifest.yaml", encoding="utf8")) or {}).get("version")
+except Exception as e:
+    check("state-schema framework_version tracks the manifest", False, f"could not read: {e}")
+else:
+    check("state-schema framework_version tracks the manifest",
+          schema_default == manifest_version,
+          f"state-schema.yaml default is {schema_default!r} but "
+          f"deliverables/manifest.yaml is version {manifest_version!r}. A new run would "
+          "declare the wrong contract, and validate-run.py derives the folder layout from it.")
+
 # ---------------------------------------------------------------- result
 print()
 for n in notes:
