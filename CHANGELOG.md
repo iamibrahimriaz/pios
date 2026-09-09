@@ -91,6 +91,68 @@ a skill, template or check changes — those are the method too.
 
 ---
 
+## [0.3.0] — 2026-09-09
+
+Ten defects found by auditing one completed run against the framework that produced it. Nine
+are fixed here. **Every new check is gated on the version a run was written against, so a run
+produced under 0.2.x is not failed by any rule added in this release.**
+
+### Added
+
+- **`23-Interface-Requirements.md`, a conditional artifact fed by `08-product`.** The delivery
+  surface has been asked at `01-idea` since 0.1.0 and, until now, consumed by nothing. A run
+  could answer "web" at the first gate and hand a builder a specification with no layout
+  behavior, no interaction states beyond the happy path, no accessibility target, no
+  performance budget and no supported-client policy — and pass all fourteen gates on the way,
+  because no gate criterion mentioned any of them.
+
+  **A product with no rendered interface passes the new criterion on one sentence** naming the
+  surface and saying no view exists. That is a pass, not a gap, and the template says so.
+
+  The accompanying method draws the boundary the constitution draws: **a conformance target is
+  a requirement; a pipeline scan is verification** and belongs to whoever receives the package.
+
+- **A downstream-invalidation check.** Modules completed before a strategy change were silently
+  stale. Runs now record when each module completed, and a run does not pass while a module's
+  outputs predate the chosen approach they were supposed to serve.
+
+- **A second search vocabulary, required at `02-market`.** A run could record that a category
+  has no established name and then search it with one set of words — which is the situation
+  where a single vocabulary is least trustworthy.
+
+- **A source-contradiction question in the adversarial review pass.** Nothing previously asked
+  whether a cited source contradicts the conclusion drawn from it.
+
+- **A data-subject row in `01-idea`'s context table**, for a person whose data the product uses
+  but who is neither the user nor the buyer. A product built on other people's data recorded
+  them nowhere.
+
+- **Corroboration for single-read external figures.** A load-bearing number could rest on one
+  read of one page. Three misreads occurred in a single run; one was caught only because a
+  monthly price exceeded the annual one.
+
+- **`recorded_before: execution` on a substituted instrument's equivalence argument.** The rule
+  that the argument comes first was unenforceable after the fact.
+
+- **A structural check that `state-schema.yaml` and `manifest.yaml` agree on the version.**
+  They had drifted, with nothing watching.
+
+### Changed
+
+- **`AGENTS.md` gains a re-entry subsection and a `state.yaml` editing procedure.** The state
+  file is large, single, and has no structural protection against a bad edit anchor; one such
+  edit removed roughly 1,950 lines. The procedure is to back up, anchor on a line that is
+  unique, and parse before writing.
+
+### Known limitations
+
+- **`01-idea` records `verdict: fail` on every correct first run.** It grades itself before the
+  operator has answered the questions only they can answer. Nothing downstream is harmed, but
+  the first line of every project's history reads as a failure that did not occur. The fix
+  touches either gate vocabulary or gate evaluation order and is deferred rather than rushed.
+
+---
+
 ## [0.2.1] — 2026-09-08
 
 Documentation only. No module, gate, template or check changed, so a run written against

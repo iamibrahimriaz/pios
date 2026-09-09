@@ -12,7 +12,7 @@
       "displayName": "Product Intelligence OS",
       "source": "./",
       "description": "Turn one product idea into a build-ready blueprint \u2014 or a documented \"not yet\". 14 gated research modules, evidence-tagged claims, and an artifact set a builder can start from without asking a follow-up question.",
-      "version": "0.2.1",
+      "version": "0.3.0",
       "category": "productivity",
       "homepage": "https://github.com/iamibrahimriaz/pios",
       "author": {
