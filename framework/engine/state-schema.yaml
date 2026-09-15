@@ -609,6 +609,37 @@ corrections:
   #   fix: ""
   #   now_caught_by: "validate-run.py identifier check"   # or: nothing yet
 
+# Whether this package is still a description of the thing it specified. OPTIONAL, and
+# absent on every run that has not been overtaken.
+#
+# `corrections` and `rederivations` both handle change INSIDE a live run: a defect found by
+# review, or a premise that moved at a checkpoint and sent modules back to be re-run. Neither
+# reaches the case this key exists for, and the reason is structural rather than an oversight
+# — after delivery nobody is re-running modules, so "retest the conclusions" is the wrong
+# response. The right one is to stop the package being read as current.
+#
+# The cost of not having this: a completed run reads as current forever. A reader opening the
+# entry documents has no signal that the specification and reality have parted, and the more
+# confident the run's prose, the more convincingly it misleads. A document asserting that a
+# property holds BY CONSTRUCTION is precisely the one nobody thinks to verify.
+#
+# `authority_now` is a POINTER and never content. It names where the current description
+# lives; it does not import it. Widening it to carry as-built detail turns a research record
+# into engineering documentation, which is the boundary in constitution/core/00-Purpose.md.
+#
+# Not gated on state.version: the key is optional, so no older run can fail for lacking it.
+superseded:
+  # recorded: ""                  # ISO date the supersession was noticed, not when it happened
+  # by: development               # development | market | operator_decision | external_event
+  # summary: >-
+  #   One paragraph, written so a reader knows what NOT to rely on. State the reversal, not
+  #   the replacement.
+  # no_longer_current: []         # deliverable ids a reader must not build from
+  # still_current: []             # optional. Empty asserts nothing, which is the safe default
+  # authority_now: ""             # where the current description lives, if anywhere. A path
+  #                               # or a name — never a summary of what it says
+
+
 # Where the framework got in the run's way. Appended during the run, at the moment it
 # happens — not reconstructed at the end, when the friction has been worked around and
 # forgotten.
