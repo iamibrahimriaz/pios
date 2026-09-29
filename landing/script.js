@@ -134,6 +134,62 @@
   })();
 
   /* ------------------------------------------------------------------
+     Built-with slider — native scroll-snap does the swiping; this only
+     adds the arrow buttons and the position bar.
+     ------------------------------------------------------------------ */
+  (function () {
+    var track = document.getElementById('bwTrack');
+    var bar = document.getElementById('bwBar');
+    if (!track) return;
+    var btns = document.querySelectorAll('.bw-btn');
+
+    function step() {
+      var card = track.querySelector('.bw-card');
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var max = track.scrollWidth - track.clientWidth;
+      var x = Math.max(0, Math.min(max, track.scrollLeft));
+      Array.prototype.forEach.call(btns, function (b) {
+        var dir = Number(b.getAttribute('data-dir'));
+        b.disabled = max <= 1 || (dir < 0 ? x <= 1 : x >= max - 1);
+      });
+      if (bar) {
+        var size = track.scrollWidth ? track.clientWidth / track.scrollWidth : 1;
+        var pos = max > 0 ? x / max : 0;
+        bar.style.width = (size * 100).toFixed(2) + '%';
+        bar.style.transform = 'translateX(' + (pos * (1 / size - 1) * 100).toFixed(2) + '%)';
+      }
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener('click', function () {
+        track.scrollBy({ left: Number(b.getAttribute('data-dir')) * step(), behavior: reduced ? 'auto' : 'smooth' });
+      });
+    });
+    track.addEventListener('keydown', function (e) {
+      if (e.target !== track) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        track.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * step(), behavior: reduced ? 'auto' : 'smooth' });
+      }
+    });
+    track.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
+  /* ------------------------------------------------------------------
      Copy the install commands
      ------------------------------------------------------------------ */
   Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (btn) {
